@@ -1,3 +1,3 @@
-# Welcome to New Worlds: Mercadia!
+# Welcome to Living Worlds: Mercadia!
 
 More to come.
