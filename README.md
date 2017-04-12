@@ -12,4 +12,6 @@ the guilds for the most part will represent a character class but also set a cer
 
 all players will start their characters as a commoner class, and must seek out one of the various guilds of their nation to eventually be able to move forward past a certain point.
 
+joining a guild then opens up otions to the character such as taking on an profession, things such as the newspaper or a member of the legal system, part of the military or even an enforcer of the law.
+
 more to come.
