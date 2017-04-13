@@ -14,4 +14,4 @@ all players will start their characters as a commoner class, and must seek out o
 
 joining a guild then opens up otions to the character such as taking on an profession, things such as the newspaper or a member of the legal system, part of the military or even an enforcer of the law.
 
-more to come.
+in the folder called ideas there will be text files for things that need to be worked on.
