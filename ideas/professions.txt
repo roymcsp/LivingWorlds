@@ -1,0 +1,28 @@
+Professions
+
+each nation will have four basic professions and maybe more in the future, while basically the same, the differences of each will be based on the nation in which they live but fall under the following four categories
+
+Law enforcement
+Legal
+Military
+News
+
+listed are the nation unique terms for them. 
+Kingdom 
+Sheriff 
+Judicial 
+Garrison 
+News 
+
+Caliphate 
+Wardens 
+Tribune 
+Militia 
+News 
+
+Empire 
+News 
+Military 
+Judicial 
+Gumi 
+
