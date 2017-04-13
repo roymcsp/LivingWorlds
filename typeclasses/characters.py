@@ -36,8 +36,8 @@ class Character(DefaultCharacter):
         super(Character, self).at_object_creation()
         self.db.gender = 'neutral'
         self.db.nation = None
-        self.db.background = None
         self.db.race = None
+        self.db.background = None
         self.db.guild = None
         self.db.level = None
         self.db.clan = None

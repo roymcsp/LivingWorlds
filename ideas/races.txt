@@ -1,0 +1,49 @@
+Races
+
+for the most part all races except certain ones  which have the parenthesis next to them are bipedal
+
+Nation specific as follows
+
+Kingdom Races 
+Human 
+Elf 
+Dwarf 
+Gnome 
+Centaur (part man, part horse)
+Ogryn 
+
+Caliphate Races 
+Human 
+Dark Elf 
+Dark Dwarf 
+Deep gnome 
+Wemic (like a centaur only the bottom part is like a tiger or lion or other wild cat)
+Drakkari 
+
+Empire Races 
+Human 
+Ursine 
+Lupine 
+Feline 
+Vulpine 
+Naga (upper body like a human from the waist up, snake tail from the waist down)
+
+
+races need to have body parts for equipment and clothing
+head 
+neck
+torso
+waist
+legs
+feet
+arms
+hands
+fingers
+
+races need a racial ability for example drakkar breath weapon
+
+races need racial stat bonuses  and drawbacks for example elves get dex + 2 but con -2
+
+racial language
+character1 says to character 2 in Vulpine, “blah blah blah”
+

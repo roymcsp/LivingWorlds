@@ -1,0 +1,66 @@
+Guilds
+
+characters will start in one of the commoner guilds unique to their nation, upon meeting certain criteria they will be allowed to advance to the serf class that will allow entry into one of the guilds
+
+Commoner guilds
+Kingdom
+Peasant
+
+ 
+Caliphate
+Servant
+Slave (all promote to serf after release by owner)
+  Gladiator
+  Performer
+  Worker
+  Teacher
+Conscript
+
+
+Empire
+  Peon
+
+guilds that can be joined upon serfdom
+
+Universal Guilds
+Cleric of “faith”
+Paladin of “faith”
+
+Kingdom
+Fighter 
+Mage 
+Merchant 
+Rogue 
+
+Calipahte
+Warrior
+Sorcerer
+Trader
+Rogue
+
+Empire
+Samurai
+Shaman
+Artisan
+Monk
+
+
+
+
+Guild needs:
+
+Each guild will have their own powers list, 
+a way to induct new members
+a guildhall that only member or someone with a special pass can access
+a channel to speak on
+guilds will also determine what weapons and armor can be used
+guilds will have a set of skills that the allow training in at the guild hall
+
+a guild master and assistant master and a treasurer, armorer, other ranks and titles on a guild by guild basis.
+
+each guild will have a treasury
+each guild will have a armory
+
+each guild will have a message board
+
+
