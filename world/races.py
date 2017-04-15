@@ -14,21 +14,21 @@ class Race(object):
             'waist':None,
             'wrists': None,
             'hands': None,
-            'ringer1': None,
+            'finger1': None,
             'finger2': None,        
         }
         
         self.limbs = (
             ('r_hand', ('wield1',)),
             ('l_hand', ('wield2',)),
-            ('', ('',)),
-            ('', ('',)),
-            ('', ('',)),
-            ('', ('',)),
-            ('', ('',)),
-            ('', ('',)),
-            ('', ('',)),
-            ('', ('',)),
+            ('head', ('head',)),
+            ('neck', ('neck',)),
+            ('torso', ('torso',)),
+            ('waist', ('waist',)),
+            ('wrists', ('wrists',)),
+            ('hands', ('hands',)),
+            ('finger1', ('finger1',)),
+            ('finger2', ('finger2',)),
         )
         
         self.bonuses = {}
