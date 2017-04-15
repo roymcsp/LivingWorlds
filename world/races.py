@@ -34,3 +34,23 @@ class Race(object):
         self.bonuses = {}
         self.language = {}
         
+class Human(Race):
+    """Class representing human attributes."""
+    def __init__(self):
+        super(Human, self).__init__()
+        self.name = "Human"
+        self.plural = "Humans"
+        self.size = "medium"
+        self.language = "common"
+        
+class Elf(Race):
+    """Class reresenting elven attributes."""
+    def __init__(self):
+        super(Human, self).__init__()
+        self.name = "Elf"
+        self.plural = "Elves"
+        self.size = "medium"
+        self.bonuses = {'Dexterity': 2,
+                        'Constitution': -2}
+        self.language = "Elven"
+        
