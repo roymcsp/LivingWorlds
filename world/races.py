@@ -39,7 +39,7 @@ class RaceException(Exception):
     def __init__(self, msg):
         self.msg = msg
 
-# ALL_RACES = ('Human', 'Elf', 'Dwarf','Gnome', 'Centaur', 'Ogryn', 'Drow', 'Duergar', 'Svirfneblin', 'Wemic', 'Drakkar', 'Ursine','Feline', 'Lupine', 'Vulpine', 'Naga')
+ALL_RACES = ('Human', 'Elf', 'Dwarf','Gnome', 'Centaur', 'Ogryn', 'Drow', 'Duergar', 'Svirfneblin', 'Wemic', 'Drakkar', 'Ursine','Feline', 'Lupine', 'Vulpine', 'Naga')
 KINGDOM_RACES = ('Human', 'Elf', 'Dwarf','Gnome', 'Centaur', 'Ogryn')
 CALIPHATE_RACES = ('Human', 'Drow', 'Duergar', 'Svirfneblin', 'Wemic', 'Drakkar')
 EMPIRE_RACES = ('Human', 'Ursine','Feline', 'Lupine', 'Vulpine', 'Naga')
@@ -63,7 +63,7 @@ def apply_race(character, race):
         char (Character): the character object becoming a member of race
         race (str, Race): the name of the race to apply, or the
         """
-    # if objects are passed in, reload Race and Focus objects
+    # if objects are passed in, reload Race objects
     # by name to ensure we have un-modified versions of them
     if isinstance(race, Race):
         race = race.name
@@ -142,7 +142,9 @@ class Human(Race):
         self.plural = "Humans"
         self.size = "medium"
         self.language = "common"
+        
 #Kingdom Races         
+
 class Elf(Race):
     """Class reresenting elven attributes."""
     def __init__(self):
@@ -257,7 +259,8 @@ class Drakkar(Race):
         self.language = "Drakkonic"
 
 
-#Empire Races 
+#Empire Races
+ 
 class Ursine(Race): 
     """Class reresenting elven attributes."""
     def __init__(self):
