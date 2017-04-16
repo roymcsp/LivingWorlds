@@ -1,3 +1,100 @@
+"""
+Races module.
+This module contains data and functions relating to Races. Its
+public module functions are to be used primarily during the character
+creation process.
+
+Classes:
+
+    `Race`: base class for all races
+    `Human`: human race class
+    `Elf`: elf race class
+    `Dwarf`: dwarf race class
+    `Gnome`: gnome race class
+    `Centaur`: centaur race class
+    `Drow`: drow race class
+    `Duergar`: duergar race class
+    `Svirfneblin`: svirfneblein race class
+    `Wemic`: wemic race class
+    `Drakkar`: drakkar race class
+    `Ursine`: ursine race class
+    `Feline`: feline race class
+    `Lupine`: lupine race class
+    `Vulpine`: vulpine race class
+    `Naga`: naga race class
+
+Module Functions
+
+    - `load_race(str)`:
+       loads an instance of the named Race class
+
+    - `apply_race(char, race, focus)`:
+        have a character "become" a member of the specified race with
+        the specified focus
+        
+    """
+
+class RaceException(Exception):
+    """Base exception class for races module."""
+    def __init__(self, msg):
+        self.msg = msg
+
+# ALL_RACES = ('Human', 'Elf', 'Dwarf','Gnome', 'Centaur', 'Ogryn', 'Drow', 'Duergar', 'Svirfneblin', 'Wemic', 'Drakkar', 'Ursine','Feline', 'Lupine', 'Vulpine', 'Naga')
+KINGDOM_RACES = ('Human', 'Elf', 'Dwarf','Gnome', 'Centaur', 'Ogryn')
+CALIPHATE_RACES = ('Human', 'Drow', 'Duergar', 'Svirfneblin', 'Wemic', 'Drakkar')
+EMPIRE_RACES = ('Human', 'Ursine','Feline', 'Lupine', 'Vulpine', 'Naga')
+
+def load_race(race):
+    """Returns an instance of the named race class.
+    Args:
+        race (str): case-insensitive name of race to load
+    Returns:
+        (Race): instance of the appropriate subclass of `Race`
+    """
+    race = race.capitalize()
+    if race in ALL_RACES:
+        return globals()[race]()
+    else:
+        raise RaceException("Invalid race specified.")
+
+def apply_race(character, race):
+    """Causes a Character to "become" the named race.
+    Args:
+        char (Character): the character object becoming a member of race
+        race (str, Race): the name of the race to apply, or the
+        """
+    # if objects are passed in, reload Race and Focus objects
+    # by name to ensure we have un-modified versions of them
+    if isinstance(race, Race):
+        race = race.name
+
+    race = load_race(race)
+
+    # make sure the race is allowed for the nation
+    if character.db.nation == 'Kingdom' and race.name not in (r.name for r in KINGDOM_RACES):
+        raise RaceException(
+            'Invalid race specified. '
+            'Race {} is not available to nation {}.'.format(race.name, nation.name)
+        )
+    elif if character.db.nation == 'Calipahte' and race.name not in (r.name for r in CALIPHATE_RACES):
+        raise RaceException(
+            'Invalid race specified. '
+            'Race {} is not available to nation {}.'.format(race.name, nation.name)
+        )    
+    elif if character.db.nation == 'Empire' and race.name not in (r.name for r in EMPIRE_RACES):
+        raise RaceException(
+            'Invalid race specified. '
+            'Race {} is not available to nation {}.'.format(race.name, nation.name)
+        )    
+        
+    # set race and related attributes on the character
+    character.db.race = race.name
+    character.db.slots = race.slots
+    character.db.limbs = race.limbs
+
+    # apply race-based bonuses
+    for trait, bonus in race.bonuses.iteritems():
+        char.traits[trait].mod += bonus
 
 class Race(object):
     """Base class for race attributes"""
@@ -103,7 +200,7 @@ class Ogryn(Race):
           
 
 #Calipahte Races
-Dark Elf 
+
 class Drow(Race): 
     """Class reresenting Drow attributes."""
     def __init__(self):
@@ -136,7 +233,7 @@ class Svirfneblin(Race):
         self.bonuses = {'': 2,
                         '': -2}
         self.language = "Svirfneblin"
-Deep gnome 
+ 
 class Wemic(Race): 
     """Class reresenting Wemic attributes."""
     def __init__(self):
@@ -215,4 +312,3 @@ class Naga(Race):
         self.bonuses = {'': 2,
                         '': -2}
         self.language = "Nagan"
-        
