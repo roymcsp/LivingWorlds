@@ -25,6 +25,7 @@ class CmdSetStats(MuxCommand):
     locks = "cmd:all()"
 
     def func(self):
+        char = self.caller.character
         mesg = ("Runaria uses a method of rolling the dice to create player attributes. "
                 "These attributes are: strength, dexterity, constitution, intelligence, "
                 "wisdom, and charisma. Choose the order of your attributes from the most "
@@ -33,8 +34,8 @@ class CmdSetStats(MuxCommand):
                 "wisdom charisma\n\n"
                 "You will only be able to roll up to 25 times, so when you see a decent "
                 "roll, you should accept it.", "You may only roll your stats once.")
-        if self.traits.STR or self.traits.INT or self.traits.WIS or self.traits.DEX or\
-                self.traits.CON or self.traits.CHA:
+        if char.traits.STR or char.traits.INT or char.traits.WIS or char.traits.DEX or\
+                char.traits.CON or char.traits.CHA:
             return self.caller.msg(mesg[1])
         else:
             self.caller.msg(mesg[0])
