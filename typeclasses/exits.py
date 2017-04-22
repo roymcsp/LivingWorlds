@@ -36,8 +36,7 @@ class Exit(DefaultExit):
     pass
     
 class NationExit(DefaultExit):
- 
+    
     """ an exit that applies something to the traverser after traversing """
     def at_after_traverse(self,traverser,source_location):
         traverser.db.nation = str(self.db.nation)
-        

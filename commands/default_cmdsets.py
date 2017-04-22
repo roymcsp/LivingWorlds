@@ -16,6 +16,11 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 
 from evennia import default_cmds
 from evennia import CmdSet
+from commands import chargen
+from commands import movecommands
+from commands import sensorycommands
+from commands import extendedcommands
+from world import raceswip
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
     """
@@ -33,7 +38,26 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
-
+        self.add(movecommands.CmdExitErrorNorth())
+        self.add(movecommands.CmdExitErrorEast())
+        self.add(movecommands.CmdExitErrorSouth())
+        self.add(movecommands.CmdExitErrorWest())
+        self.add(movecommands.CmdExitErrorNortheast())
+        self.add(movecommands.CmdExitErrorNorthwest())
+        self.add(movecommands.CmdExitErrorSoutheast())
+        self.add(movecommands.CmdExitErrorSouthwest())
+        self.add(movecommands.CmdExitErrorUp())
+        self.add(movecommands.CmdExitErrorDown())
+        self.add(sensorycommands.CmdRead())
+        self.add(sensorycommands.CmdTaste())
+        self.add(sensorycommands.CmdFeel())
+        self.add(sensorycommands.CmdSmell())
+        self.add(extendedcommands.CmdExtendedLook())
+        self.add(extendedcommands.CmdExtendedDesc())
+        self.add(extendedcommands.CmdGameTime())
+        
+        
+        
 
 class PlayerCmdSet(default_cmds.PlayerCmdSet):
     """
@@ -90,12 +114,21 @@ class SessionCmdSet(default_cmds.SessionCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
-class ChargenCmdset(CmdSet):
+class ChargenWelcomeCmdset(CmdSet):
     """
     This cmdset is used in character generation areas.
     """
     
     key = "Chargen"
     def at_cmdset_creation(self):
-        "this is called at initialization"
-        
+        """this is called at initialization"""
+        self.add(chargen.CmdRules())
+
+class ChargenRaceGenderCmdset(CmdSet):
+    """
+    This cmdset is used in character generation to set gender and race
+    """
+    key = "Chargen"
+    def at_cmdset_creation(self):
+        self.add(chargen.CmdGender())
+        self.add(raceswip.CmdRace())

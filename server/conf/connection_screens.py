@@ -20,14 +20,14 @@ from evennia import utils
 quit
 CONNECTION_SCREEN = """
 
- Welcome to |g{}|n, version {}!
-
-  Warning!!! Logging in to this game expresses a commitment to 
-  follow all the rules.
-  
-  If you have problems you may contact the administration at: 
-  Email Address Needed.
-  
-  Enter your character name or enter quit to quit.
+    |_|_|_|_Welcome to |g{}|n, version {}!
+    
+    Warning!!! Logging in to this game expresses a commitment to
+    follow all the rules.
+    
+    If you have problems you may contact the administration at:
+    Email Address Needed.
+    
+    Enter your character name or enter quit to quit.
 """ \
     .format(settings.SERVERNAME, utils.get_evennia_version())

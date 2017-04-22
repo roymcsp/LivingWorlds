@@ -11,8 +11,10 @@ from evennia import DefaultCharacter
 from evennia.utils import lazy_property, utils
 from world.equip import EquipHandler
 from world.traits import TraitHandler
+from evennia.contrib.rpsystem import ContribRPCharacter
+from evennia.contrib.gendersub import GenderCharacter
 
-class Character(DefaultCharacter):
+class Character(ContribRPCharacter, GenderCharacter):
     """
     The Character defaults to reimplementing some of base Object's hook methods with the
     following functionality:
@@ -33,10 +35,10 @@ class Character(DefaultCharacter):
 
     """
     def at_object_creation(self):
-        super(Character, self).at_object_creation()
-        self.db.gender = 'neutral'
+                                                                                       
+        self.db.gender = 'ambiguous'
         self.db.nation = None
-        self.db.race = None
+        self.db.race = 'wisp'
         self.db.background = None
         self.db.guild = None
         self.db.level = None
@@ -44,10 +46,13 @@ class Character(DefaultCharacter):
         self.db.title = None
         self.db.faith = None
         self.db.devotion = None
-        
+        self.db.desc = "  A small wisp of energy lacking in any descernable features, all that is missing is the spark of creation."
+        self.db.smellable_text = "  You don't smell anything special."
+        self.db.feelable_text = "  You don't feel anything special."
+        self.db.tasteable_text = "  You don't taste anything special."
         self.db.wallet = {'GP':0,'SP':0,'CP':0}
         
-        @lazy_property
-        def traits(self):
-            return TraitHandler(self)
+    @lazy_property
+    def traits(self):
+        return TraitHandler(self)
         

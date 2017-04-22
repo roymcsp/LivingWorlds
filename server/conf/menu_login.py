@@ -64,7 +64,7 @@ def start(caller):
 
     """
     text = random_string_from_module(CONNECTION_SCREEN_MODULE)
-    text += "\n\nEnter your character name:."
+    text += "\n\n|_Enter your character name: "
     options = (
         {   "key": "",
             "goto": "start",
@@ -88,21 +88,21 @@ def username(caller, string_input):
     move to the next node (enter password).
 
     """
-	string_input = string_input.strip()
+    string_input = string_input.strip()
     player = managers.players.get_player_from_name(string_input)
     if player is None:
         text = dedent("""
-        |rLiving Worlds is an Intense Roleplaying environment and as such it is 
-expected that your name complies with our genre. The following rules apply:
-
-1. Modern names like Robert, David, Julie, or Angela are not allowed.
-2. Names that are well known in books, games, or movies are not allowed.
-3. Names that are dictionary words like Blade, Death, Wild are not allowed.
-4. Names of Mythological characters or Gods are not allowed.
-		
-Try to choose a name that is unique for your character and unique to this world.
-		
-Did you enter the name correctly and does this name comply with the rules (y/n)?|n
+        |r   Living Worlds is an Intense Roleplaying environment and as such it is
+        |_|_expected that your name complies with our genre. The following rules apply:
+        
+        |_|_1. Modern names like Robert, David, Julie, or Angela are not allowed.
+        |_|_2. Names that are well known in books, games, or movies are not allowed.
+        |_|_3. Names that are dictionary words like Blade, Death, Wild are not allowed.
+        |_|_4. Names of Mythological characters or Gods are not allowed.
+        
+        |_|_Try to choose a name that is unique for your character and unique to this world.
+        
+        |_|_Did you enter the name correctly and does this name comply with the rules (y/n)?|n
         """.strip("\n")).format(string_input)
         options = (
             {
