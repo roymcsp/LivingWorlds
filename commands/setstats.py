@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-=======
 # -*- coding: UTF-8 -*-
->>>>>>> origin/master
+
 from evennia import CmdSet
 from commands.command import MuxCommand
 from evennia.utils.evmenu import EvMenu
@@ -28,19 +26,9 @@ class CmdSetStats(MuxCommand):
     locks = "cmd:all()"
 
     def func(self):
-<<<<<<< HEAD
-<<<<<<< HEAD
         player_caller = True
         char = self.caller
         mesg = ("Mercadia uses a method of rolling the dice to create player attributes. "
-=======
-        mesg = ("Runaria uses a method of rolling the dice to create player attributes. "
->>>>>>> origin/master
-=======
-        player_caller = True
-        char = self.caller
-        mesg = ("Mercadia uses a method of rolling the dice to create player attributes. "
->>>>>>> origin/master
                 "These attributes are: strength, dexterity, constitution, intelligence, "
                 "wisdom, and charisma. Choose the order of your attributes from the most "
                 "important to your character to the least important.\n\n"
@@ -48,31 +36,17 @@ class CmdSetStats(MuxCommand):
                 "wisdom charisma\n\n"
                 "You will only be able to roll up to 25 times, so when you see a decent "
                 "roll, you should accept it.", "You may only roll your stats once.")
-<<<<<<< HEAD
-<<<<<<< HEAD
         if char.traits.STR or char.traits.INT or char.traits.WIS or char.traits.DEX or\
                 char.traits.CON or char.traits.CHA:
-=======
         if self.traits.STR or self.traits.INT or self.traits.WIS or self.traits.DEX or\
                 self.traits.CON or self.traits.CHA:
->>>>>>> origin/master
-=======
         if char.traits.STR or char.traits.INT or char.traits.WIS or char.traits.DEX or\
                 char.traits.CON or char.traits.CHA:
->>>>>>> origin/master
             return self.caller.msg(mesg[1])
         else:
             self.caller.msg(mesg[0])
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         EvMenu(self.caller, "commands.setstats", startnode="menu_start",
-=======
-        EvMenu(self.caller.character, "commands.stats", startnode="menu_start",
->>>>>>> origin/master
-=======
-        EvMenu(self.caller, "commands.setstats", startnode="menu_start",
->>>>>>> origin/master
                cmd_on_exit=None, persistent=False,
                stats={"STR": "Strength", "INT": "Intelligence", "WIS": "Wisdom",
                       "DEX": "Dexterity", "CON": "Constitution", "CHA": "Charisma"},
@@ -129,15 +103,7 @@ def make_rolls(caller):
                      "key": "E", "goto": "make_rolls"},)
         options += ({"key": "_default", "goto": "make_rolls"},)
     else:  # All rolls have been used.
-<<<<<<< HEAD
-<<<<<<< HEAD
         text += "Last roll completed. Press enter to continue."
-=======
-        text += "Last roll completed."
->>>>>>> origin/master
-=======
-        text += "Last roll completed. Press enter to continue."
->>>>>>> origin/master
         options = ({"key": "_default", "goto": "show_stats"},)
     menu.rolls = rolls
     menu.roll_count = roll_count
