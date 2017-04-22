@@ -25,7 +25,9 @@ class CmdSetStats(MuxCommand):
     locks = "cmd:all()"
 
     def func(self):
-        mesg = ("Runaria uses a method of rolling the dice to create player attributes. "
+        player_caller = True
+        char = self.caller
+        mesg = ("Mercadia uses a method of rolling the dice to create player attributes. "
                 "These attributes are: strength, dexterity, constitution, intelligence, "
                 "wisdom, and charisma. Choose the order of your attributes from the most "
                 "important to your character to the least important.\n\n"
@@ -33,13 +35,13 @@ class CmdSetStats(MuxCommand):
                 "wisdom charisma\n\n"
                 "You will only be able to roll up to 25 times, so when you see a decent "
                 "roll, you should accept it.", "You may only roll your stats once.")
-        if self.traits.STR or self.traits.INT or self.traits.WIS or self.traits.DEX or\
-                self.traits.CON or self.traits.CHA:
+        if char.traits.STR or char.traits.INT or char.traits.WIS or char.traits.DEX or\
+                char.traits.CON or char.traits.CHA:
             return self.caller.msg(mesg[1])
         else:
             self.caller.msg(mesg[0])
 
-        EvMenu(self.caller.character, "commands.stats", startnode="menu_start",
+        EvMenu(self.caller, "commands.setstats", startnode="menu_start",
                cmd_on_exit=None, persistent=False,
                stats={"STR": "Strength", "INT": "Intelligence", "WIS": "Wisdom",
                       "DEX": "Dexterity", "CON": "Constitution", "CHA": "Charisma"},
@@ -96,7 +98,7 @@ def make_rolls(caller):
                      "key": "E", "goto": "make_rolls"},)
         options += ({"key": "_default", "goto": "make_rolls"},)
     else:  # All rolls have been used.
-        text += "Last roll completed."
+        text += "Last roll completed. Press enter to continue."
         options = ({"key": "_default", "goto": "show_stats"},)
     menu.rolls = rolls
     menu.roll_count = roll_count
