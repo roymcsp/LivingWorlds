@@ -23,6 +23,7 @@ class CmdSetStats(MuxCommand):
     """
     key = "setstats"
     locks = "cmd:all()"
+    player_caller = True
 
     def func(self):
         mesg = ("Runaria uses a method of rolling the dice to create player attributes. "
