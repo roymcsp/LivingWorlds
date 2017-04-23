@@ -36,8 +36,10 @@ Module Functions
 
 from evennia import Command
 from evennia.utils.evmenu import get_input   
-    
+
+
 class CmdRace(Command):
+
     """
     command for setting the race on the character
     takes one arg in the form of the race name
@@ -51,33 +53,37 @@ class CmdRace(Command):
     key = "select"
     locks = "cmd:all()"
     
-    def func (self):
+    def func(self):
         caller = self.caller
         args = self.args.strip().lower()
-        if args in caller.db.race:
+        race = caller.db.race
+        if race in ALL_RACES:
         
-           get_input(caller, "You have already selected your race, do you wish to change it? (Yes/No)?", choice)
+            get_input(caller, "You have already selected your race, do you wish to change it? (Yes/No)?", self.choice)
            
         else:
-           apply_race(caller, args)
-    
-    def choice(self, caller, prompt, choice):
-        if result.lower() in ("y","yes"):
-            caller.msg('Your race has been changed to %s.'% args)
             apply_race(caller, args)
-            
-        if result.lower() in ("n","no"):
+
+    def choice(self, caller, prompt, result):
+        if result.lower() in ("y", "yes"):
+            caller.msg('Your race has been changed to %s.' % self.args)
+            apply_race(caller, self.args)
+
+        if result.lower() in ("n", "no"):
             caller.msg('No changes made')
+
 
 class RaceException(Exception):
     """Base exception class for races module."""
     def __init__(self, msg):
         self.msg = msg
 
-ALL_RACES = ('Human', 'Elf', 'Dwarf','Gnome', 'Centaur', 'Ogryn', 'Drow', 'Duergar', 'Svirfneblin', 'Wemic', 'Drakkar', 'Ursine','Feline', 'Lupine', 'Vulpine', 'Naga')
-KINGDOM_RACES = ('Human', 'Elf', 'Dwarf','Gnome', 'Centaur', 'Ogryn')
+ALL_RACES = ('Human', 'Elf', 'Dwarf', 'Gnome', 'Centaur', 'Ogryn', 'Drow', 'Duergar', 'Svirfneblin', 'Wemic', 'Drakkar',
+             'Ursine', 'Feline', 'Lupine', 'Vulpine', 'Naga')
+KINGDOM_RACES = ('Human', 'Elf', 'Dwarf', 'Gnome', 'Centaur', 'Ogryn')
 CALIPHATE_RACES = ('Human', 'Drow', 'Duergar', 'Svirfneblin', 'Wemic', 'Drakkar')
-EMPIRE_RACES = ('Human', 'Ursine','Feline', 'Lupine', 'Vulpine', 'Naga')
+EMPIRE_RACES = ('Human', 'Ursine', 'Feline', 'Lupine', 'Vulpine', 'Naga')
+
 
 def load_race(race):
     """Returns an instance of the named race class.
@@ -92,10 +98,11 @@ def load_race(race):
     else:
         raise RaceException("Invalid race specified.")
 
+
 def apply_race(character, race):
     """Causes a Character to "become" the named race.
     Args:
-        char (Character): the character object becoming a member of race
+        character: the character object becoming a member of race
         race (str, Race): the name of the race to apply
         """
     # if objects are passed in, reload Race objects
@@ -106,16 +113,18 @@ def apply_race(character, race):
     race = load_race(race)
 
     # make sure the race is allowed for the nation
-    if character.db.nation == 'kingdom' and race.name not in (r.name for r in KINGDOM_RACES):
-        raise RaceException('Race {} is not available to nation {}.'.format(race.name, nation.name))
-        
-    elif character.db.nation == 'calipahte' and race.name not in (r.name for r in CALIPHATE_RACES):
-        raise RaceException('Race {} is not available to nation {}.'.format(race.name, nation.name))
-        
-    elif character.db.nation == 'empire' and race.name not in (r.name for r in EMPIRE_RACES):
-        raise RaceException('Race {} is not available to nation {}.'.format(race.name, nation.name))   
-        
-        
+    if character.db.nation == 'kingdom' and race not in KINGDOM_RACES:
+        character.msg('Race {} is not available to the kingdom.'.format(race.name))
+        return
+
+    elif character.db.nation == 'caliphate' and race not in CALIPHATE_RACES:
+        character.msg('Race {} is not available to the caliphate.'.format(race.name))
+        return
+
+    elif character.db.nation == 'empire' and race not in EMPIRE_RACES:
+        character.msg('Race {} is not available to the empire.'.format(race.name))
+        return
+
     # set race and related attributes on the character
     character.db.race = race.name
     character.db.slots = race.slots
@@ -123,8 +132,9 @@ def apply_race(character, race):
     character.msg('You become {}.' .format(race.name))
     
     # apply race-based bonuses
-    #for trait, bonus in race.bonuses.iteritems():
+    # for trait, bonus in race.bonuses.iteritems():
     #    char.traits[trait].mod += bonus
+
 
 class Race(object):
     """Base class for race attributes"""
@@ -138,7 +148,7 @@ class Race(object):
             'helm': None,
             'necklace': None,
             'armor': None,
-            'belt':None,
+            'belt': None,
             'bracers': None,
             'gloves': None,
             'ring1': None,
@@ -157,7 +167,7 @@ class Race(object):
             ('hands', ('gloves',)),
             ('finger1', ('ring1',)),
             ('finger2', ('ring2',)),
-            ('feet' , ('boots',)),
+            ('feet', ('boots',)),
         )
         
         self.bonuses = {}
@@ -173,10 +183,11 @@ class Human(Race):
         self.size = "medium"
         self.language = "common"
         
-#Kingdom Races         
+# Kingdom Races
+
 
 class Elf(Race):
-    """Class reresenting elven attributes."""
+    """Class representing elven attributes."""
     def __init__(self):
         super(Elf, self).__init__()
         self.name = "Elf"
@@ -186,9 +197,10 @@ class Elf(Race):
                         'Constitution': -2
                         }
         self.language = "Elven"
-        
+
+
 class Dwarf(Race): 
-    """Class reresenting dwarven attributes."""
+    """Class representing dwarven attributes."""
     def __init__(self):
         super(Dwarf, self).__init__()
         self.name = "Dwarf"
@@ -198,9 +210,10 @@ class Dwarf(Race):
                         'Charisma': -2
                         }
         self.language = "Dwarven"
-        
+
+
 class Gnome(Race): 
-    """Class reresenting gnomish attributes."""
+    """Class representing gnomish attributes."""
     def __init__(self):
         super(Gnome, self).__init__()
         self.name = "Gnome"
@@ -211,8 +224,9 @@ class Gnome(Race):
                         }
         self.language = "Gnomish"
 
+
 class Centaur(Race): 
-    """Class reresenting centaur attributes."""
+    """Class representing centaur attributes."""
     def __init__(self):
         super(Centaur, self).__init__()
         self.name = "Centaur"
@@ -223,10 +237,11 @@ class Centaur(Race):
                         }
         self.language = "Centaur" 
 
+
 class Ogryn(Race): 
-    """Class reresenting Ogryn attributes."""
+    """Class representing Ogryn attributes."""
     def __init__(self):
-        super(Dwarf, self).__init__()
+        super(Ogryn, self).__init__()
         self.name = "Ogryn"
         self.plural = "Ogryn"
         self.size = "medium"
@@ -236,10 +251,10 @@ class Ogryn(Race):
         self.language = "Ogryn"
           
 
-#Calipahte Races
+# Caliphate Races
 
 class Drow(Race): 
-    """Class reresenting Drow attributes."""
+    """Class representing Drow attributes."""
     def __init__(self):
         super(Drow, self).__init__()
         self.name = "Drow"
@@ -247,10 +262,11 @@ class Drow(Race):
         self.size = "medium"
         self.bonuses = {'Dexterity': 2,
                         'Intelligence': 2,
-                        'Charisma':2,
+                        'Charisma': 2,
                         'Constitution': -2
                         }
         self.language = "Drow"
+
 
 class Duergar(Race): 
     """Class reresenting elven attributes."""
@@ -265,6 +281,7 @@ class Duergar(Race):
                         }
         self.language = "Duergar"        
 
+
 class Svirfneblin(Race): 
     """Class reresenting Svirfneblin attributes."""
     def __init__(self):
@@ -278,7 +295,8 @@ class Svirfneblin(Race):
                         'Charisma': -2
                         }
         self.language = "Svirfneblin"
- 
+
+
 class Wemic(Race): 
     """Class reresenting Wemic attributes."""
     def __init__(self):
@@ -292,6 +310,7 @@ class Wemic(Race):
                         'Charisma': -2
                         }
         self.language = "Wemic"
+
 
 class Drakkar(Race): 
     """Class reresenting Drakkari attributes."""
@@ -308,12 +327,12 @@ class Drakkar(Race):
         self.language = "Drakkonic"
 
 
-#Empire Races
+# Empire Races
  
 class Ursine(Race): 
     """Class reresenting elven attributes."""
     def __init__(self):
-        super(Dwarf, self).__init__()
+        super(Ursine, self).__init__()
         self.name = "Ursine"
         self.plural = "Ursine"
         self.size = "large"
@@ -321,7 +340,8 @@ class Ursine(Race):
                         'Dexterity': -2
                         }
         self.language = "Ursine"
- 
+
+
 class Lupine(Race): 
     """Class reresenting lupine attributes."""
     def __init__(self):
@@ -334,6 +354,7 @@ class Lupine(Race):
                         }
         self.language = "Lupine"
 
+
 class Feline(Race): 
     """Class reresenting feline attributes."""
     def __init__(self):
@@ -345,7 +366,8 @@ class Feline(Race):
                         'Strength': -2
                         }
         self.language = "Feline"
- 
+
+
 class Vulpine(Race): 
     """Class reresenting vulpine attributes."""
     def __init__(self):
@@ -357,6 +379,7 @@ class Vulpine(Race):
                         'Wisdom': -2
                         }
         self.language = "Vulpine"
+
 
 class Naga(Race): 
     """Class reresenting nagan attributes."""

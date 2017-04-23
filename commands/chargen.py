@@ -32,9 +32,6 @@ class CmdRules(Command):
             caller.msg('You must read the rules and agree to them before proceeding')
             caller.db.rules = False
 
-        #caller.msg(result)
-        
-
 class CmdGender(Command):
     """
     Sets gender on yourself
