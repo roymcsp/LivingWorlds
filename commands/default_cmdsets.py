@@ -20,7 +20,7 @@ from commands import chargen
 from commands import movecommands
 from commands import sensorycommands
 from commands import extendedcommands
-from world import raceswip
+from world import races
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
     """
@@ -131,4 +131,4 @@ class ChargenRaceGenderCmdset(CmdSet):
     key = "Chargen"
     def at_cmdset_creation(self):
         self.add(chargen.CmdGender())
-        self.add(raceswip.CmdRace())
+        self.add(races.CmdRace())

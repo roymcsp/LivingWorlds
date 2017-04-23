@@ -114,8 +114,6 @@ def apply_race(character, race):
     race = load_race(race)
 
     # make sure the race is allowed for the nation
-    print race
-    print character.db.nation
 
     if character.db.nation == 'kingdom' and race.name not in KINGDOM_RACES:
         character.msg('Race {} is not available to the kingdom.'.format(race.name))
