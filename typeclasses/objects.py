@@ -160,4 +160,5 @@ class Object(ContribRPObject):
                                  object speaks
 
      """
+
     pass

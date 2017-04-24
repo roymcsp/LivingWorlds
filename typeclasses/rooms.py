@@ -78,6 +78,7 @@ from evennia import gametime
 from evennia import default_cmds
 from evennia import utils
 from evennia.contrib.rpsystem import ContribRPRoom
+from evennia import create_object
 
 # error return function, needed by Extended Look command
 _AT_SEARCH_RESULT = utils.variable_from_module(*settings.SEARCH_AT_RESULT.rsplit('.', 1))
@@ -503,5 +504,8 @@ class ChargenRoom(Room):
     def at_object_creation(self):
         super(ChargenRoom, self).at_object_creation()
         "this is called only at first creation"
-        #self.cmdset.add(ChargenCmdset, permanent=True)
+
+    def at_object_receive(self, character, source_location):
+        if self.tags.get("item"):
+            create_object(typeclass='typeclasses.sorcobjects.CursedBone')
 
