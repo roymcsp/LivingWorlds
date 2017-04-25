@@ -8,7 +8,7 @@ class Currency(Item):
 class CopperPiece(Currency):
 
     value = 1
-    weight = 0.01
+    weight = 0.33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -23,7 +23,7 @@ class CopperPiece(Currency):
 class SilverPiece(Currency):
 
     value = 10
-    wieght = .01
+    wieght = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -38,7 +38,7 @@ class SilverPiece(Currency):
 class GoldPiece(Currency):
 
     value = 100
-    wieght = .01
+    wieght = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -53,7 +53,7 @@ class GoldPiece(Currency):
 class PlatinumPiece(Currency):
 
     value = 1000
-    weight = .01
+    weight = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -68,7 +68,7 @@ class PlatinumPiece(Currency):
 
 class BronzeBit(Currency):
     value = 1
-    weight = 0.01
+    weight = 0.33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -83,7 +83,7 @@ class BronzeBit(Currency):
 
 class BronzeDrachma(Currency):
     value = 10
-    weight = .01
+    weight = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -98,7 +98,7 @@ class BronzeDrachma(Currency):
 
 class SilverDirhim(Currency):
     value = 100
-    weight = .01
+    weight = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -113,7 +113,7 @@ class SilverDirhim(Currency):
 
 class GoldDinar(Currency):
     value = 1000
-    weight = .01
+    weight = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -128,7 +128,7 @@ class GoldDinar(Currency):
 
 class TsuhoCoin(Currency):
     value = 1
-    weight = .01
+    weight = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -143,7 +143,7 @@ class TsuhoCoin(Currency):
 
 class GenboCoin(Currency):
     value = 10
-    weight = .01
+    weight = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -158,7 +158,7 @@ class GenboCoin(Currency):
 
 class ShohoCoin(Currency):
     value = 100
-    weight = .01
+    weight = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -173,7 +173,7 @@ class ShohoCoin(Currency):
 
 class MonCoin(Currency):
     value = 1000
-    weight = .01
+    weight = .33
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
