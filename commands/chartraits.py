@@ -15,8 +15,6 @@ class CharTraitCmdSet(CmdSet):
     def at_cmdset_creation(self):
         """Populate CmdSet"""
         self.add(CmdSheet())
-        self.add(CmdTraits())
-        self.add(CmdSkills())
         self.add(CmdWealth())
 
 class CmdSheet(MuxCommand):
@@ -39,7 +37,7 @@ class CmdSheet(MuxCommand):
             return
 
         form = EvForm('commands.templates.charsheet', align='r')
-        tr = self.caller.db.traits
+        tr = self.caller.traits
         fields = {
             'A': self.caller.name,
             'B': self.caller.db.race,
@@ -84,147 +82,6 @@ class CmdSheet(MuxCommand):
     def _format_trait_val(self, val):
         """Format trait values as bright white."""
         return "|w{}|n".format(val)
-
-
-class CmdTraits(MuxCommand):
-    """
-    view character status
-    Usage:
-      traits <traitgroup>
-    Args:
-        traitgroup - one of pri[mary], sec[ondary], sav[es],
-                     com[bat], enc[umbrance], or car[ry]
-    Displays a summary of your character's traits by group.
-    """
-    key = "traits"
-    aliases = ["trait", "tr", "tra"]
-    locks = "cmd:all()"
-    arg_regex = r"\s.+|"
-
-    def func(self):
-        from world import archetypes
-        # make sure the char has traits - only possible for superuser
-        if len(self.caller.traits.all) == 0:
-            self.caller.msg("You don't have any traits.")
-            return
-
-        table = None
-        tr = self.caller.traits
-        traits = []
-        if self.args.startswith('pri'):
-            title = 'Primary Traits'
-            traits = archetypes.PRIMARY_TRAITS
-        elif self.args.startswith('sav'):
-            title = 'Save Rolls'
-            traits = archetypes.SAVE_ROLLS
-        elif self.args.startswith('com'):
-            title = 'Combat Stats'
-            traits = archetypes.COMBAT_TRAITS
-        elif self.args.startswith('sec'):
-            title = 'Secondary Traits'
-            data = [["|C{:<29.29}|n : |w{:>4}|n".format(
-                        tr[t].name, tr[t].actual)
-                    for t in ('HP', 'SP')],
-                    ["|C{:<28.28}|n : |w{:>4}|n".format(
-                        tr[t].name, tr[t].actual)
-                    for t in ('BM', 'WM')]]
-            table = EvTable(header=False, table=data)
-        elif self.args.startswith('enc') or self.args.startswith('car'):
-            title = 'Encumbrance'
-            data = [["|C{:<30.30s}|n : |w{:>4}|n / |w{:>5}|n".format(
-                        tr.ENC.name, tr.ENC.actual, tr.ENC.max
-                     ),
-                     "|C{:30.30s}|n : |w{:>+12}|n".format(
-                         'Encumbrance Penalty', tr.MV.mod
-                     ),
-                     "|C{:30.30s}|n : |w{:>12}|n".format(
-                         tr.MV.name, tr.MV.actual
-                     )]]
-            table = EvTable(header=False, table=data)
-        else:
-            self.caller.msg("Usage: traits <traitgroup>")
-            return
-        if not table:
-            data = []
-            for i in xrange(3):
-                data.append([self._format_trait_3col(tr[t])
-                             for t in traits[i::3]])
-            table = EvTable(header=False, table=data)
-
-        self.caller.msg("  |Y{}|n".format(title))
-        self.caller.msg(unicode(table))
-
-    def _format_trait_3col(self, trait):
-        """Return a trait : value pair formatted for 3col layout"""
-        return "|C{:<16.16}|n : |w{:>4}|n".format(
-                    trait.name, trait.actual)
-
-
-class CmdSkills(MuxCommand):
-    """
-    view character skills
-    Usage:
-      skills <skillgroup>
-    Args:
-        skillgroup - one of str[ength], per[ception], int[elligence],
-                     dex[terity], or cha[risma]
-    Displays a summary of your character's skills by group.
-    """
-    key = "skills"
-    aliases = ["skill", "sk"]
-    locks = "cmd:all()"
-    arg_regex = r"\s.+|"
-
-    def func(self):
-        from world import skills
-        # make sure the char has skills
-        if len(self.caller.skills.all) == 0:
-            self.caller.msg("You don't have any skills.")
-            return
-
-        sk = self.caller.skills
-        sk_list = []
-
-        if len(self.args.strip()) > 0:
-            if self.args.lower().startswith('str'):
-                title = 'Strength Based Skills'
-                sk_list = skills.STR_SKILLS
-            elif self.args.lower().startswith('per'):
-                title = 'Perception Based Skills'
-                sk_list = skills.PER_SKILLS
-            elif self.args.lower().startswith('int'):
-                title = 'Intelligence Based Skills'
-                sk_list = skills.INT_SKILLS
-            elif self.args.lower().startswith('dex'):
-                title = 'Dexterity Based Skills'
-                sk_list = skills.DEX_SKILLS
-            elif self.args.lower().startswith('cha'):
-                title = 'Charisma Based Skills'
-                sk_list = skills.CHA_SKILLS
-            else:
-                self.msg('Usage: skills [<skillgroup>]')
-                return
-
-            table = EvTable(header=False,
-                            table=[[self._format_skill_3col(sk[s])]
-                                  for s in sk_list])
-        else:
-            title = 'Skills'
-            data = []
-            for i in xrange(3):
-                data.append([self._format_skill_3col(sk[s])
-                             for s in skills.ALL_SKILLS[i::3]])
-
-            table = EvTable(header=False, table=data)
-
-        self.caller.msg("  |Y{}|n".format(title))
-        self.caller.msg(unicode(table))
-
-    def _format_skill_3col(self, skill):
-        """Return a trait : value pair formatted for 3col layout"""
-        return "|M{:<16.16}|n : |w{:>4}|n".format(
-                    skill.name, skill.actual)
-
 
 class CmdWealth(MuxCommand):
     """

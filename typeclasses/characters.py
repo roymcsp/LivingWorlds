@@ -148,7 +148,7 @@ class Character(ContribRPCharacter, GenderCharacter):
         self.db.feelable_text = "  You don't feel anything special."
         self.db.tasteable_text = "  You don't taste anything special."
         self.db.wallet = {'PP': 0, 'GP': 0, 'SP': 0, 'CP': 0}
-        self.db.traits = {
+        self.traits = {
             # primary
             'STR': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Strength'},
             'DEX': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Dexterity'},
