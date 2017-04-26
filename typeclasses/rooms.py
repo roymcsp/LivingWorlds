@@ -505,5 +505,5 @@ class ChargenRoom(Room):
         "this is called only at first creation"
 
     def at_object_receive(self, character, source_location):
-        if self.tags.get("item"):
-            spawn(HAND_AXE)
+        if self.tags.get("item",category = 'chargen'):
+            spawn('HAND_AXE')

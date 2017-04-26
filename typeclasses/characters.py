@@ -148,7 +148,7 @@ class Character(ContribRPCharacter, GenderCharacter):
         self.db.smellable_text = "  You don't smell anything special."
         self.db.feelable_text = "  You don't feel anything special."
         self.db.tasteable_text = "  You don't taste anything special."
-        self.db.wallet = {'GP': 0, 'SP': 0, 'CP': 0}
+        self.db.wallet = {'PP': 0, 'GP': 0, 'SP': 0, 'CP': 0}
 
     @lazy_property
     def traits(self):
