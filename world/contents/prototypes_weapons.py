@@ -4,18 +4,18 @@ Prototype module containing weapons and shields.
 
 from evennia.utils import fill
 from world.economy import PP, GP, SP, CP
-from random import randint
-## Weapons from D&D
+
+# Weapons from D&D
 
 # One-handed Melee Weapons
 HAND_AXE = {
-    "key": "Hand axe",
+    "key": "Hand Axe",
     "aliases": ["hand axe", "axe"],
     "typeclass": "typeclasses.weapons.Weapon",
-    "desc": "The blade of this axe appears well-used and slightly "
-            "tarnished, but its handle is straight and sturdy.",
+    "desc": "this small axe has a short wood handle and sharp single blade "
+            "on one side of the head with a thick heavy sledge on the other. ",
     "weight": 2,
-    "value": 60*CP,
+    "value": 600*CP,
     "damage_roll": "1d4",
     "range": "melee"
 }
@@ -24,34 +24,34 @@ BATTLE_AXE = {
     "key": "Battle axe",
     "aliases": ["battleaxe", "axe"],
     "typeclass": "typeclasses.weapons.Weapon",
-    "desc": "The blade of this axe appears well-used and slightly "
-            "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "desc": "Sturdy and with significant heft, this axe has a menacingly "
+            "large blade, and a hard swing of it can send enemies flying. ",
+    "weight": 6,
+    "value": 1000*CP,
+    "damage_roll": "1d8",
     "range": "melee"
 }
 
-CLUB ={
+CLUB = {
     "key": "Club",
     "aliases": ["club"],
     "typeclass": "typeclasses.weapons.Weapon",
-    "desc": "The blade of this axe appears well-used and slightly "
-            "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "desc": "Roughly whittled from some dense wood, this club features "
+            "a large round head that tapers to a narrow handle. ",
+    "weight": 3,
+    "value": 200*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 DAGGER = {
     "key": "Dagger",
-    "aliases": ["axe"],
+    "aliases": ["dagger"],
     "typeclass": "typeclasses.weapons.Weapon",
-    "desc": "The blade of this axe appears well-used and slightly "
-            "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
+    "desc": "This dagger consists of a double edged and razor sharp blade "
+            "expertly mounted onto a simple leather-wrapped hilt.",
+    "weight": 1,
+    "value": 200*CP,
     "damage_roll": "1d4",
     "range": "melee"
 }
@@ -60,316 +60,316 @@ FLAIL = {
     "key": "Flail",
     "aliases": ["flail"],
     "typeclass": "typeclasses.weapons.Weapon",
-    "desc": "The blade of this axe appears well-used and slightly "
-            "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "desc": "the flail has a single spiked ball connected to a slender wooden "
+            "leather wrapped handle with a foot of chain.",
+    "weight": 5,
+    "value": 800*CP,
+    "damage_roll": "1d8",
     "range": "melee"
 }
 
-HAMMER_LIGHT ={
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+HAMMER_LIGHT = {
+    "key": "Light hammer",
+    "aliases": ["light hammer", "hammer"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
     "weight": 2,
-    "value": 60*CP,
+    "value": 100*CP,
     "damage_roll": "1d4",
     "range": "melee"
 }
 
 KAMA = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Kama",
+    "aliases": ["kama"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
     "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "value": 200*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 KATANA = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Katana",
+    "aliases": ["katana"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 10,
+    "value": 4000*CP,
+    "damage_roll": "1d10",
     "range": "melee"
 }
 
 MACE_HEAVY = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Heavy mace",
+    "aliases": ["heavy mace", "mace"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 8,
+    "value": 1200*CP,
+    "damage_roll": "1d8",
     "range": "melee"
 }
 
 MACE_LIGHT = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Light mace",
+    "aliases": ["light mace", "mace"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 4,
+    "value": 500*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 MORNINGSTAR = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Morningstar",
+    "aliases": ["morningstar"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 6,
+    "value": 200*CP,
+    "damage_roll": "1d8",
     "range": "melee"
 }
 
 NAGE_YARI = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Yari",
+    "aliases": ["yari"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 3,
+    "value": 300*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 NUNCHAKU = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Nunchaku",
+    "aliases": ["Nunchaku"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
     "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "value": 200*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
-PICK_HEAVY ={
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+PICK_HEAVY = {
+    "key": "Heavy pick",
+    "aliases": ["heavy pick", "pick"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 6,
+    "value": 800*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 PICK_LIGHT = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Light pick",
+    "aliases": ["light pick", "pick"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
+    "weight": 3,
+    "value": 400*CP,
     "damage_roll": "1d4",
     "range": "melee"
 }
 
 RAPIER = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Rapier",
+    "aliases": ["rapier"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
     "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "value": 2000*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 SAI = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Sai",
+    "aliases": ["sai"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
+    "weight": 1,
+    "value": 100*CP,
     "damage_roll": "1d4",
     "range": "melee"
 }
 
 SCIMITAR = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Scimitar",
+    "aliases": ["scimitar"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 4,
+    "value": 1500*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 SICKLE = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Sickle",
+    "aliases": ["sickle"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
     "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "value": 600*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 SPEAR = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Spear",
+    "aliases": ["Spear"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 6,
+    "value": 200*CP,
+    "damage_roll": "1d8",
     "range": "melee"
 }
 
 SPEAR_SHORT = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Short spear",
+    "aliases": ["short spear", "spear"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 3,
+    "value": 100*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 SWORD_LONG = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Longsword",
+    "aliases": ["longsword", "sword"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 4,
+    "value": 1500*CP,
+    "damage_roll": "1d8",
     "range": "melee"
 }
 
 SWORD_SHORT = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Short sword",
+    "aliases": ["short sword", "sword"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
     "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "value": 1000*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 TANTO = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Tanto",
+    "aliases": ["tanto"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
+    "weight": 1,
+    "value": 300*CP,
     "damage_roll": "1d4",
     "range": "melee"
 }
 
 TRIDENT = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Trident",
+    "aliases": ["trident"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 4,
+    "value": 1500*CP,
+    "damage_roll": "1d8",
     "range": "melee"
 }
 
 WAKAZASHI = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Wakazashi",
+    "aliases": ["wakazashi"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 3,
+    "value": 3000*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 WAR_FAN = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "War fan",
+    "aliases": ["War fan", "fan"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 3,
+    "value": 3000*CP,
+    "damage_roll": "1d6",
     "range": "melee"
 }
 
 WAR_HAMMER = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Warhammer",
+    "aliases": ["warhammer", "hammer"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 3,
+    "value": 1200*CP,
+    "damage_roll": "1d8",
     "range": "melee"
 }
 
 WHIP = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Whip",
+    "aliases": ["whip"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
     "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "value": 100*CP,
+    "damage_roll": "1d3",
     "range": "melee"
 }
 
 YARI = {
-    "key": "hand axe",
-    "aliases": ["hand axe", "axe"],
+    "key": "Yari",
+    "aliases": ["yari"],
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "The blade of this axe appears well-used and slightly "
             "tarnished, but its handle is straight and sturdy.",
-    "weight": 2,
-    "value": 60*CP,
-    "damage_roll": "1d4",
+    "weight": 5,
+    "value": 500*CP,
+    "damage_roll": "1d8",
     "range": "melee"
 }
 
 
-#Two-Handed Melee Weapons
+# Two-Handed Melee Weapons
 SWORD_BASTARD = {}
 DIE_TSUCHI = {}
 FALCHION = {}
@@ -452,4 +452,3 @@ THROWING_AXE = {
     "range": "reach",
     "ammunition": "throwing axe"
 }
-
