@@ -23,10 +23,8 @@ class CmdSheet(MuxCommand):
     """
     view character status
     Usage:
-      sheet[/skills]
-    Switch:
-      sk[ills] - also display a summary of all character skills
-    Displays a detailed summary of your character's information.
+      sheet
+
     """
     key = "sheet"
     aliases = ["sh"]
@@ -82,9 +80,6 @@ class CmdSheet(MuxCommand):
         form.map(tables={1: gauges})
 
         self.caller.msg(unicode(form))
-
-        if any(sw.startswith('sk') for sw in self.switches):
-            self.caller.execute_cmd('skills')
 
     def _format_trait_val(self, val):
         """Format trait values as bright white."""
