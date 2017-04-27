@@ -36,7 +36,7 @@ class CmdSheet(MuxCommand):
         if len(self.caller.traits.all) == 0:
             return
 
-        form = EvForm('commands.templates.charsheet', align='r')
+        form = EvForm('commands.templates.charsheet', align='l')
         tr = self.caller.traits
         fields = {
             'A': self.caller.name,
@@ -57,25 +57,16 @@ class CmdSheet(MuxCommand):
             'P': tr.WIS.actual,
             'Q': tr.CHA.actual,
             'R': tr.XP.actual,
-            'S': tr.XP.level_boundaries[tr.LV.actual],
-            'T': tr.ENC.actual,
-            'U': tr.ENC.max,
+            'S': tr.ENC.actual,
+            'T': tr.ENC.max,
+            'U': tr.HP.actual,
+            'V': tr.HP.max,
+            'W': tr.SP.actual,
+            'X': tr.SP.max,
+            'Y': tr.EP.actual,
+            'Z': tr.EP.max,
         }
         form.map({k: self._format_trait_val(v) for k, v in fields.iteritems()})
-
-        gauges = EvTable(
-            "|CHP|n", "|CSP|n", "|CEP|n",
-            table=[["{} / {}".format(self._format_trait_val(tr.HP.actual),
-                                     self._format_trait_val(tr.HP.max))],
-                   ["{} / {}".format(self._format_trait_val(tr.SP.actual),
-                                     self._format_trait_val(tr.SP.max))],
-                   ["{} / {}".format(self._format_trait_val(tr.EP.actual),
-                                     self._format_trait_val(tr.EP.max))]],
-            align='c',
-            border="incols"
-        )
-
-        form.map(tables={1: gauges})
 
         self.caller.msg(unicode(form))
 

@@ -14,7 +14,36 @@ from world.equip import EquipHandler
 from world.traits import TraitHandler
 from evennia.contrib.rpsystem import ContribRPCharacter
 from evennia.contrib.gendersub import GenderCharacter
+from commands import chartraits, equip
 
+traits = {
+    # primary
+    'STR': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Strength'},
+    'DEX': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Dexterity'},
+    'CON': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Constitution'},
+    'INT': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Intelligence'},
+    'WIS': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Wisdom'},
+    'CHA': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Charisma'},
+    # secondary
+    'HP': {'type': 'gauge', 'base': 100, 'mod': 0, 'name': 'Health'},
+    'SP': {'type': 'gauge', 'base': 100, 'mod': 0, 'name': 'Spell Power'},
+    # saves
+    'FORT': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Fortitude Save'},
+    'REFL': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Reflex Save'},
+    'WILL': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Will Save'},
+    # combat
+    'ATKM': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Melee Attack'},
+    'ATKR': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Ranged Attack'},
+    'ATKU': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Unarmed Attack'},
+    'PDEF': {'type': 'static', 'base': 10, 'mod': 0, 'name': 'Physical Defense'},
+    'MDEF': {'type': 'counter', 'base': 10, 'mod': 0, 'min': 0, 'name': 'Magical Defense'},
+    # misc
+    'ENC': {'type': 'counter', 'base': 0, 'mod': 0, 'min': 0, 'name': 'Carry Weight'},
+    'EP': {'type': 'gauge', 'base': 6, 'mod': 0, 'min': 0, 'name': 'Endurance Points'},
+    'LVL': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Level'},
+    'XP': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Experience',
+           'extra': {'level_boundaries': (500, 2000, 4500, 'unlimited')}},
+    }
 
 class Character(ContribRPCharacter, GenderCharacter):
     """
@@ -148,34 +177,13 @@ class Character(ContribRPCharacter, GenderCharacter):
         self.db.feelable_text = "  You don't feel anything special."
         self.db.tasteable_text = "  You don't taste anything special."
         self.db.wallet = {'PP': 0, 'GP': 0, 'SP': 0, 'CP': 0}
-        self.traits = {
-            # primary
-            'STR': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Strength'},
-            'DEX': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Dexterity'},
-            'CON': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Constitution'},
-            'INT': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Intelligence'},
-            'WIS': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Wisdom'},
-            'CHA': {'type': 'static', 'base': 3, 'mod': 0, 'name': 'Charisma'},
-            # secondary
-            'HP': {'type': 'gauge', 'base': 100, 'mod': 0, 'name': 'Health'},
-            'SP': {'type': 'gauge', 'base': 100, 'mod': 0, 'name': 'Spell Power'},
-            # saves
-            'FORT': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Fortitude Save'},
-            'REFL': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Reflex Save'},
-            'WILL': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Will Save'},
-            # combat
-            'ATKM': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Melee Attack'},
-            'ATKR': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Ranged Attack'},
-            'ATKU': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Unarmed Attack'},
-            'PDEF': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Physical Defense'},
-            'MDEF': {'type': 'counter', 'base': 0, 'mod': 0, 'min': 0, 'name': 'Magical Defense'},
-            # misc
-            'ENC': {'type': 'counter', 'base': 0, 'mod': 0, 'min': 0, 'name': 'Carry Weight'},
-            'EP': {'type': 'gauge', 'base': 6, 'mod': 0, 'min': 0, 'name': 'Endurance Points'},
-            'LVL': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Level'},
-            'XP': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Experience',
-                   'extra': {'level_boundaries': (500, 2000, 4500, 'unlimited')}},
-        }
+
+        for key, kwargs in traits.iteritems(): self.traits.add(key, **kwargs)
+
+        # cmdsets
+        self.add(chartraits.CharTraitCmdSet())
+        self.add(equip.EquipCmdSet())
+
     @lazy_property
     def traits(self):
         return TraitHandler(self)

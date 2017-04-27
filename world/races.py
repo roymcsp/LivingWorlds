@@ -145,6 +145,7 @@ class Race(object):
         self.plural = ""
         self.size = ""
         self.slots = {
+            # armor slots
             'wield1': None,
             'wield2': None,
             'helm': None,
@@ -155,21 +156,33 @@ class Race(object):
             'gloves': None,
             'ring1': None,
             'ring2': None,
-            'boots': None,            
+            'boots': None,
+            # clothing slots
+            'hat':None,
+            'accessory': None,
+            'top': None,
+            'fullbody': ['top','bottom'],
+            'bottom': None,
+            'belt2': None,
+            'accessory2':None,
+            'gloves2': None,
+            'accessory3': None,
+            'accessory4': None,
+            'shoes': None,
+
         }
-        
         self.limbs = (
             ('r_hand', ('wield1',)),
             ('l_hand', ('wield2',)),
-            ('head', ('helm',)),
-            ('neck', ('necklace',)),
-            ('torso', ('armor',)),
-            ('waist', ('belt',)),
-            ('wrists', ('bracers',)),
-            ('hands', ('gloves',)),
-            ('finger1', ('ring1',)),
-            ('finger2', ('ring2',)),
-            ('feet', ('boots',)),
+            ('head', ('helm','hat')),
+            ('neck', ('necklace', 'accessory')),
+            ('torso', ('armor', 'top', 'fullbody')),
+            ('waist', ('belt','belt2', 'bottom')),
+            ('wrists', ('bracers', 'accessory2')),
+            ('hands', ('gloves', 'gloves2')),
+            ('finger1', ('ring1', 'accessory3')),
+            ('finger2', ('ring2', 'accessory4')),
+            ('feet', ('boots', 'shoes')),
         )
         
         self.bonuses = {}
