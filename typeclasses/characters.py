@@ -9,12 +9,13 @@ creation commands.
 """
 
 
-from evennia.utils import lazy_property, utils
+from evennia.utils import lazy_property
 from world.equip import EquipHandler
 from world.traits import TraitHandler
 from evennia.contrib.rpsystem import ContribRPCharacter
 from evennia.contrib.gendersub import GenderCharacter
 from commands import chartraits, equip
+
 
 traits = {
     # primary
@@ -44,6 +45,7 @@ traits = {
     'XP': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Experience',
            'extra': {'level_boundaries': (500, 2000, 4500, 'unlimited')}},
     }
+
 
 class Character(ContribRPCharacter, GenderCharacter):
     """
@@ -178,7 +180,8 @@ class Character(ContribRPCharacter, GenderCharacter):
         self.db.tasteable_text = "  You don't taste anything special."
         self.db.wallet = {'PP': 0, 'GP': 0, 'SP': 0, 'CP': 0}
 
-        for key, kwargs in traits.iteritems(): self.traits.add(key, **kwargs)
+        for key, kwargs in traits.iteritems():
+            self.traits.add(key, **kwargs)
 
         # cmdsets
         self.add(chartraits.CharTraitCmdSet())

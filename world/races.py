@@ -134,8 +134,8 @@ def apply_race(character, race):
     character.msg('You become {}.' .format(race.name))
     
     # apply race-based bonuses
-    # for trait, bonus in race.bonuses.iteritems():
-    #    char.traits[trait].mod += bonus
+    for trait, bonus in race.bonuses.iteritems():
+        char.traits[trait].mod += bonus
 
 
 class Race(object):
