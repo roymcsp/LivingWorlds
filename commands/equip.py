@@ -5,7 +5,7 @@ from evennia import CmdSet
 from commands.command import MuxCommand
 from evennia.utils.evtable import EvTable, fill
 from typeclasses.weapons import Weapon
-from typeclasses.armors import Armor, Shield
+from typeclasses.armors import Torso, Shield, Helm, Boots, Gloves, Necklace, Belt, Bracers, Ring
 
 
 __all__ = ('CmdInventory', 'CmdEquip',
@@ -14,6 +14,7 @@ __all__ = ('CmdInventory', 'CmdEquip',
 
 _INVENTORY_ERRMSG = "You don't have '{}' in your inventory."
 _EQUIP_ERRMSG = "You do not have '{}' equipped."
+
 
 class EquipCmdSet(CmdSet):
     """CmdSet for item / equip commands."""
@@ -31,9 +32,11 @@ class EquipCmdSet(CmdSet):
 class CmdInventory(MuxCommand):
     """
     view inventory
+    
     Usage:
       inventory
       inv
+    
     Shows your inventory.
     """
     key = "inventory"
@@ -47,15 +50,17 @@ class CmdInventory(MuxCommand):
         if not items:
             string = "You are not carrying anything."
         else:
-            data = [[],[],[]]
+            data = [[], [], []]
             for item in items:
                 data[0].append("|C{}|n".format(item.name))
                 data[1].append(fill(item.db.desc or "", 50))
                 stat = " "
                 if item.attributes.has('damage'):
                     stat += "(|rDamage: {:>2d}|n) ".format(item.db.damage)
-                if item.attributes.has('toughness'):
-                    stat += "(|yToughness: {:>2d}|n)".format(item.db.toughness)
+                if item.attributes.has('physical_bonus'):
+                    stat += "(|yPhysical_bonus: {:>2d}|n)".format(item.db.physical_bonus)
+                if item.attributes.has('magical_bonus'):
+                    stat += "(|yMagical_bonus: {:>2d}|n)".format(item.db.magical_bonus)
                 if item.attributes.has('range'):
                     stat += "(|G{}|n) ".format(item.db.range.capitalize())
                 data[2].append(stat.strip())
@@ -100,7 +105,7 @@ class CmdEquip(MuxCommand):
                 else:
                     if any(isinstance(obj, i) for i in (Weapon, Shield)):
                         action = 'wield'
-                    elif isinstance(obj, Armor):
+                    elif any(isinstance(obj, i) for i in (Torso, Helm, Boots, Gloves, Necklace, Bracers, Belt, Ring)):
                         action = 'wear'
                     else:
                         caller.msg("You can't equip {}.".format(obj.get_display_name(caller)))
@@ -221,15 +226,14 @@ class CmdWear(MuxCommand):
         if not obj:
             return
 
-        elif obj.is_typeclass(Armor, exact=True):
+        elif any(obj.is_typeclass(i, exact=False) for i in (Torso, Helm, Boots, Gloves, Necklace, Bracers, Belt, Ring)):
             sw = ("/{}".format("/".join(self.switches))
                   if self.switches else "")
 
             caller.execute_cmd('equip',
                                args=' '.join((sw, args)),
                                item=obj,
-                               action='wear')
-
+                               action='wield')
         else:
             caller.msg("You can't wear {}.".format(
                 obj.get_display_name(caller)))

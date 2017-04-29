@@ -15,7 +15,7 @@ from world.traits import TraitHandler
 from evennia.contrib.rpsystem import ContribRPCharacter
 from evennia.contrib.gendersub import GenderCharacter
 from commands import chartraits, equip
-
+from world.traitcalcs import abilitymodifiers
 
 traits = {
     # primary
@@ -33,14 +33,14 @@ traits = {
     'REFL': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Reflex Save'},
     'WILL': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Will Save'},
     # combat
-    'ATKM': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Melee Attack'},
-    'ATKR': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Ranged Attack'},
-    'ATKU': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Unarmed Attack'},
+    'MAB': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Melee Attack Bonus'},
+    'RAB': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Ranged Attack Bonus'},
+    'UAB': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Unarmed Attack Bonus'},
     'PDEF': {'type': 'static', 'base': 10, 'mod': 0, 'name': 'Physical Defense'},
     'MDEF': {'type': 'counter', 'base': 10, 'mod': 0, 'min': 0, 'name': 'Magical Defense'},
     # misc
     'ENC': {'type': 'counter', 'base': 0, 'mod': 0, 'min': 0, 'name': 'Carry Weight'},
-    'EP': {'type': 'gauge', 'base': 6, 'mod': 0, 'min': 0, 'name': 'Endurance Points'},
+    'EP': {'type': 'gauge', 'base': 100, 'mod': 0, 'min': 0, 'name': 'Endurance Points'},
     'LVL': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Level'},
     'XP': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Experience',
            'extra': {'level_boundaries': (500, 2000, 4500, 'unlimited')}},
@@ -183,9 +183,26 @@ class Character(ContribRPCharacter, GenderCharacter):
         for key, kwargs in traits.iteritems():
             self.traits.add(key, **kwargs)
 
+        self.traits.HP.mod = abilitymodifiers[self.traits.CON.actual - 1]
+        self.traits.SP.mod = abilitymodifiers[self.traits.INT.actual - 1] + abilitymodifiers[self.traits.WIS.actual - 1]
+        self.traits.FORT.mod = abilitymodifiers[self.traits.CON.actual - 1]
+        self.traits.REFL.mod = abilitymodifiers[self.traits.DEX.actual - 1]
+        self.traits.WILL.mod = abilitymodifiers[self.traits.WIS.actual - 1]
+        self.traits.MAB.mod = abilitymodifiers[self.traits.STR.actual - 1]
+        self.traits.RAB.mod = abilitymodifiers[self.traits.DEX.actual - 1]
+        self.traits.UAB.mod = abilitymodifiers[self.traits.DEX.actual - 1]
+        self.traits.PDEF.mod = abilitymodifiers[self.traits.DEX.actual - 1]
+        self.traits.MDEF.mod = abilitymodifiers[self.traits.INT.actual - 1]
+
+        self.traits.STR.carry_factor = 10
+        self.traits.STR.lift_factor = 20
+        self.traits.STR.push_factor = 40
+        self.traits.ENC.max = self.traits.STR.lift_factor * self.traits.STR.actual
+
+
         # cmdsets
-        self.add(chartraits.CharTraitCmdSet())
-        self.add(equip.EquipCmdSet())
+        # self.add(chartraits.CharTraitCmdSet())
+        # self.add(equip.EquipCmdSet())
 
     @lazy_property
     def traits(self):

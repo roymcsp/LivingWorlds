@@ -11,23 +11,27 @@ class Armor(Equippable):
     Attributes:
         toughness (int): primary defensive stat
     """
-    toughness = 0
+    physical_bonus = 0
+    magical_bonus = 0
     slots = ['']
 
     def at_object_creation(self):
         super(Armor, self).at_object_creation()
-        self.db.toughness = self.toughness
+        self.db.physical_bonus = self.physical_bonus
+        self.db.magical_bonus = self.magical_bonus
 
     def at_equip(self, character):
-        character.traits.PDEF.mod += self.db.toughness
+        character.traits.PDEF.mod += self.db.physical_bonus
+        character.traits.MDEF.mod += self.db.magical_bonus
 
     def at_remove(self, character):
-        character.traits.PDEF.mod -= self.db.toughness
+        character.traits.PDEF.mod -= self.db.physical_bonus
+        character.traits.MDEF.mod -= self.db.magical_bonus
 
 
 class Torso(Armor):
     slots = ['armor']
-
+    multi_slot = False
 
 class Shield(Armor):
     """Typeclass for shield prototypes."""
@@ -38,27 +42,27 @@ class Shield(Armor):
 
 class Helm(Armor):
     slots = ['helm']
-
+    multi_slot = False
 
 class Boots(Armor):
     slots = ['boots']
-
+    multi_slot = False
 
 class Gloves(Armor):
     slots = ['gloves']
-
+    multi_slot = False
 
 class Necklace(Armor):
     slots = ['necklace']
-
+    multi_slot = False
 
 class Bracers(Armor):
     slots = ['bracers']
-
+    multi_slot = False
 
 class Belt(Armor):
     slots = ['belt']
-
+    multi_slot = False
 
 class Ring(Armor):
     slots = ['ring1', 'ring2']

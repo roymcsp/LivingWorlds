@@ -11,7 +11,7 @@ class Item(Object):
     """
     Typeclass for Items.
     Attributes:
-        value (int): monetary value of the item in CC
+        value (int): monetary value of the item in CP
         weight (float): weight of the item
     """
     value = 0
@@ -28,12 +28,12 @@ class Item(Object):
 
     def at_get(self, getter):
         getter.traits.ENC.current += self.db.weight
-        getter.traits.MV.mod = \
+        getter.traits.EP.mod = \
             int(-(getter.traits.ENC.actual // (2 * getter.traits.STR.actual)))
 
     def at_drop(self, dropper):
         dropper.traits.ENC.current -= self.db.weight
-        dropper.traits.MV.mod = \
+        dropper.traits.EP.mod = \
             int(-(dropper.traits.ENC.actual // (2 * dropper.traits.STR.actual)))
 
 
@@ -100,7 +100,7 @@ class Equippable(Item):
         self.locks.add("puppet:false();equip:true()")
         self.db.slots = self.slots
         self.db.multi_slot = self.multi_slot
-        self.db.used_by = None
+
 
     def at_equip(self, character):
         """

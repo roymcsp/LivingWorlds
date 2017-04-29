@@ -36,8 +36,8 @@ class CmdSetStats(MuxCommand):
                 "wisdom charisma\n\n"
                 "You will only be able to roll up to 25 times, so when you see a decent "
                 "roll, you should accept it.", "You may only roll your stats once.")
-        if char.traits.STR.actual > 3 or char.traits.INT.actual > 3 or char.traits.WIS.actual > 3 or \
-           char.traits.DEX.actual > 3 or char.traits.CON or char.traits.CHA.actual > 3:
+        if char.traits.STR.actual > 5 or char.traits.INT.actual > 5 or char.traits.WIS.actual > 5 or \
+           char.traits.DEX.actual > 5 or char.traits.CON or char.traits.CHA.actual > 5:
             return self.caller.msg(mesg[1])
         else:
             self.caller.msg(mesg[0])

@@ -36,7 +36,7 @@ Module Functions
 
 from evennia import Command
 from evennia.utils.evmenu import get_input   
-
+from world.traitcalcs import abilitymodifiers
 
 class CmdRace(Command):
 
@@ -135,7 +135,20 @@ def apply_race(character, race):
     
     # apply race-based bonuses
     for trait, bonus in race.bonuses.iteritems():
-        char.traits[trait].mod += bonus
+        character.traits[trait].mod += bonus
+
+    character.traits.HP.mod = abilitymodifiers[character.traits.CON.actual - 1]
+    character.traits.SP.mod = abilitymodifiers[character.traits.INT.actual - 1] + abilitymodifiers[character.traits.WIS.actual - 1]
+    character.traits.FORT.mod = abilitymodifiers[character.traits.CON.actual - 1]
+    character.traits.REFL.mod = abilitymodifiers[character.traits.DEX.actual - 1]
+    character.traits.WILL.mod = abilitymodifiers[character.traits.WIS.actual - 1]
+    character.traits.MAB.mod = abilitymodifiers[character.traits.STR.actual - 1]
+    character.traits.RAB.mod = abilitymodifiers[character.traits.DEX.actual - 1]
+    character.traits.UAB.mod = abilitymodifiers[character.traits.DEX.actual - 1]
+    character.traits.PDEF.mod = abilitymodifiers[character.traits.DEX.actual - 1]
+    character.traits.MDEF.mod = abilitymodifiers[character.traits.INT.actual - 1]
+    character.traits.ENC.max = character.traits.STR.lift_factor * character.traits.STR.actual
+
 
 
 class Race(object):
@@ -208,8 +221,8 @@ class Elf(Race):
         self.name = "Elf"
         self.plural = "Elves"
         self.size = "medium"
-        self.bonuses = {'Dexterity': 2,
-                        'Constitution': -2
+        self.bonuses = {'DEX': 2,
+                        'CON': -2
                         }
         self.language = "Elven"
 
@@ -221,8 +234,8 @@ class Dwarf(Race):
         self.name = "Dwarf"
         self.plural = "Dwarfs"
         self.size = "medium"
-        self.bonuses = {'Constitution': 2,
-                        'Charisma': -2
+        self.bonuses = {'CON': 2,
+                        'CHA': -2
                         }
         self.language = "Dwarven"
 
@@ -234,8 +247,8 @@ class Gnome(Race):
         self.name = "Gnome"
         self.plural = "Gnomes"
         self.size = "small"
-        self.bonuses = {'Constitution': 2,
-                        'Strength': -2
+        self.bonuses = {'CON': 2,
+                        'STR': -2
                         }
         self.language = "Gnomish"
 
@@ -247,8 +260,8 @@ class Centaur(Race):
         self.name = "Centaur"
         self.plural = "Centaur"
         self.size = "large"
-        self.bonuses = {'Wisdom': 2,
-                        'Intelligence': -2
+        self.bonuses = {'WIS': 2,
+                        'INT': -2
                         }
         self.language = "Centaur" 
 
@@ -260,8 +273,8 @@ class Ogryn(Race):
         self.name = "Ogryn"
         self.plural = "Ogryn"
         self.size = "medium"
-        self.bonuses = {'Strength': 2,
-                        'Intelligence': -2
+        self.bonuses = {'STR': 2,
+                        'INT': -2
                         }
         self.language = "Ogryn"
           
@@ -275,10 +288,10 @@ class Drow(Race):
         self.name = "Drow"
         self.plural = "Drow"
         self.size = "medium"
-        self.bonuses = {'Dexterity': 2,
-                        'Intelligence': 2,
-                        'Charisma': 2,
-                        'Constitution': -2
+        self.bonuses = {'DEX': 2,
+                        'INT': 2,
+                        'CHA': 2,
+                        'CON': -2
                         }
         self.language = "Drow"
 
@@ -290,9 +303,9 @@ class Duergar(Race):
         self.name = "Duergar"
         self.plural = "Duergar"
         self.size = "medium"
-        self.bonuses = {'Constitution': 2,
-                        'Wisdom': 2,
-                        'Charisma': -2
+        self.bonuses = {'CON': 2,
+                        'WIS': 2,
+                        'CHA': -2
                         }
         self.language = "Duergar"        
 
@@ -304,10 +317,10 @@ class Svirfneblin(Race):
         self.name = "Svirfneblin"
         self.plural = "Svirfneblin"
         self.size = "small"
-        self.bonuses = {'Dexterity': 2,
-                        'Wisdom': 2,
-                        'Strength': -2,
-                        'Charisma': -2
+        self.bonuses = {'DEX': 2,
+                        'WIS': 2,
+                        'STR': -2,
+                        'CHA': -2
                         }
         self.language = "Svirfneblin"
 
@@ -319,10 +332,10 @@ class Wemic(Race):
         self.name = "Wemic"
         self.plural = "Wemic"
         self.size = "large"
-        self.bonuses = {'Strength': 2,
-                        'Constitution': 2,
-                        'Wisdom': -2,
-                        'Charisma': -2
+        self.bonuses = {'STR': 2,
+                        'CON': 2,
+                        'WIS': -2,
+                        'CHA': -2
                         }
         self.language = "Wemic"
 
@@ -334,10 +347,10 @@ class Drakkar(Race):
         self.name = "Drakkar"
         self.plural = "Drakkari"
         self.size = "medium"
-        self.bonuses = {'Intelligence': 2,
-                        'Constitution': 2,
-                        'Charisma': 2,
-                        'Dexterity': -2
+        self.bonuses = {'INT': 2,
+                        'CON': 2,
+                        'CHA': 2,
+                        'DEX': -2
                         }
         self.language = "Drakkonic"
 
@@ -351,8 +364,8 @@ class Ursine(Race):
         self.name = "Ursine"
         self.plural = "Ursine"
         self.size = "large"
-        self.bonuses = {'Strength': 2,
-                        'Dexterity': -2
+        self.bonuses = {'STR': 2,
+                        'DEX': -2
                         }
         self.language = "Ursine"
 
@@ -364,8 +377,8 @@ class Lupine(Race):
         self.name = "Lupine"
         self.plural = "Lupine"
         self.size = "medium"
-        self.bonuses = {'Constitution': 2,
-                        'Intelligence': -2
+        self.bonuses = {'CON': 2,
+                        'INT': -2
                         }
         self.language = "Lupine"
 
@@ -377,8 +390,8 @@ class Feline(Race):
         self.name = "Feline"
         self.plural = "Feline"
         self.size = "medium"
-        self.bonuses = {'Dexterity': 2,
-                        'Strength': -2
+        self.bonuses = {'DEX': 2,
+                        'STR': -2
                         }
         self.language = "Feline"
 
@@ -390,8 +403,8 @@ class Vulpine(Race):
         self.name = "Vulpine"
         self.plural = "Vulpine"
         self.size = "small"
-        self.bonuses = {'Intelligence': 2,
-                        'Wisdom': -2
+        self.bonuses = {'INT': 2,
+                        'WIS': -2
                         }
         self.language = "Vulpine"
 
@@ -403,8 +416,8 @@ class Naga(Race):
         self.name = "Naga"
         self.plural = "Naga"
         self.size = "medium"
-        self.bonuses = {'Constitution': 2,
-                        'Wisdom': 2,
-                        'Charisma': -2
+        self.bonuses = {'CON': 2,
+                        'WIS': 2,
+                        'CHA': -2
                         }
         self.language = "Nagan"
