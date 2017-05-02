@@ -26,6 +26,7 @@ class CmdSetStats(MuxCommand):
     """
     key = "setstats"
     locks = "cmd:all()"
+    player_caller = True
 
     def func(self):
         player_caller = True
