@@ -1,4 +1,4 @@
-from evennia import default_cmds
+from evennia import default_cmds, CmdSet
 
 class CmdRead(default_cmds.MuxCommand):
     """
@@ -112,3 +112,15 @@ class CmdSmell(default_cmds.MuxCommand):
         self.caller.msg(string)
         
 
+class SensesCmdSet(CmdSet):
+    """
+       This stores the input command
+       """
+    key = "General"
+
+    def at_cmdset_creation(self):
+        """called once at creation"""
+        self.add(CmdRead())
+        self.add(CmdTaste())
+        self.add(CmdFeel())
+        self.add(CmdSmell())

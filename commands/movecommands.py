@@ -1,4 +1,4 @@
-from evennia import default_cmds
+from evennia import default_cmds, CmdSet
 
 class CmdExitError(default_cmds.MuxCommand):
     """Parent class for all exit errors."""
@@ -58,14 +58,26 @@ class CmdExitErrorDown(CmdExitError):
     key = "down"
     aliases = ["d"]
 
-class CmdExitErrorKingdom(CmdNationExitError):
-    key = "kingdom"
-    aliases = ["k"]
-    
-class CmdExitErrorCaliphate(CmdNationExitError):
-    key = "caliphate"
-    aliases = ["c"]
-    
-class CmdExitErrorEmpire(CmdNationExitError):
-    key = "empire"
-    aliases = ["e"]
+class CmdExitErrorIn(CmdExitError):
+    key = "in"
+
+
+class CmdExitErrorOut(CmdExitError):
+    key = "out"
+
+
+class ExitErrorCmdSet(CmdSet):
+
+    def at_cmdset_creation(self):
+        self.add(CmdExitErrorNorth())
+        self.add(CmdExitErrorEast())
+        self.add(CmdExitErrorSouth())
+        self.add(CmdExitErrorWest())
+        self.add(CmdExitErrorNortheast())
+        self.add(CmdExitErrorNorthwest())
+        self.add(CmdExitErrorSoutheast())
+        self.add(CmdExitErrorSouthwest())
+        self.add(CmdExitErrorUp())
+        self.add(CmdExitErrorDown())
+        self.add(CmdExitErrorIn())
+        self.add(CmdExitErrorOut())

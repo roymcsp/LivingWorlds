@@ -3,6 +3,8 @@
 from evennia import CmdSet
 from commands.command import MuxCommand
 from evennia.utils.evmenu import EvMenu
+from world import traitcalcs, rulebook
+
 from random import randint
 
 
@@ -37,7 +39,7 @@ class CmdSetStats(MuxCommand):
                 "You will only be able to roll up to 25 times, so when you see a decent "
                 "roll, you should accept it.", "You may only roll your stats once.")
         if char.traits.STR.actual > 5 or char.traits.INT.actual > 5 or char.traits.WIS.actual > 5 or \
-           char.traits.DEX.actual > 5 or char.traits.CON or char.traits.CHA.actual > 5:
+           char.traits.DEX.actual > 5 or char.traits.CON > 5 or char.traits.CHA.actual > 5:
             return self.caller.msg(mesg[1])
         else:
             self.caller.msg(mesg[0])
@@ -82,10 +84,7 @@ def make_rolls(caller):
     plural = "s" if roll_count != 1 else ""
     rolls = []
     for _ in range(6):
-        total = 0
-        for unused_inner_loop_value in range(3):  # rulebook.d_roll("5d6-2L") instead!
-            total += randint(1, 6)
-        rolls.append(total)
+        rolls.append(rulebook.d_roll('4d6-1L'))
     rolls.sort(reverse=True)
     show = []
     choice = menu.choice
@@ -116,8 +115,13 @@ def show_stats(caller):
     for index, each in enumerate(choice):
         if caller.traits[each] is None:
             caller.traits.add(each, menu.stats[each], "static", rolls[index])
+
+
         else:
             caller.traits[each].base = rolls[index]
-    text += "\n".join([str(caller.traits[each]) for each in menu.stats.keys()])
+
+        traitcalcs.calculate_secondary_traits(caller.traits)
+
+    text += "\n".join([str(caller.traits[each].base) for each in menu.stats.keys()])
     options = None
     return text, options
