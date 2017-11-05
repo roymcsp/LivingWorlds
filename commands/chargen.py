@@ -58,7 +58,7 @@ class CmdGender(Command):
 """
 Commands
  
-Commands describe the input the player can do to the game.
+Commands describe the input the account can do to the game.
  
 """
  
@@ -79,9 +79,9 @@ class CmdGetInput(Command):
         caller = self.caller
         try:
             getinput = caller.ndb._getinput
-            if not getinput and hasattr(caller, "player"):
-                getinput = caller.player.ndb._getinput
-                caller = caller.player
+            if not getinput and hasattr(caller, "account"):
+                getinput = caller.account.ndb._getinput
+                caller = caller.account
             callback = getinput._callback
  
             caller.ndb._getinput._session = self.session
@@ -130,7 +130,7 @@ def get_input(caller, prompt, callback, session=None, *args, **kwargs):
     the caller.
  
     Args:
-        caller (Player or Object): The entity being asked
+        caller (Account or Object): The entity being asked
             the question. This should usually be an object
             controlled by a user.
         prompt (str): This text will be shown to the user,
@@ -145,7 +145,7 @@ def get_input(caller, prompt, callback, session=None, *args, **kwargs):
             accept input.
         session (Session, optional): This allows to specify the
             session to send the prompt to. It's usually only
-            needed if `caller` is a Player in multisession modes
+            needed if `caller` is an Account in multisession modes
             greater than 2. The session is then updated by the
             command and is available (for example in callbacks)
             through `caller.ndb.getinput._session`.
@@ -164,7 +164,7 @@ def get_input(caller, prompt, callback, session=None, *args, **kwargs):
         `caller.ndb._getinput` is stored; this will be removed
         when the prompt finishes.
         If you need the specific Session of the caller (which
-        may not be easy to get if caller is a player in higher
+        may not be easy to get if caller is an account in higher
         multisession modes), then it is available in the
         callback through `caller.ndb._getinput._session`.
  

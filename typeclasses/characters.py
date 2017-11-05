@@ -1,7 +1,7 @@
 """
 Characters
 
-Characters are (by default) Objects setup to be puppeted by Players.
+Characters are (by default) Objects setup to be puppeted by Accounts.
 They are what you "see" in game. The Character class in this module
 is setup to be the "default" character type created by the default
 creation commands.
@@ -57,14 +57,14 @@ class Character(ContribRPCharacter, GenderCharacter):
                     and its commands only be called by itself, not anyone else.
                     (to change things, use at_object_creation() instead).
     at_after_move(source_location) - Launches the "look" command after every move.
-    at_post_unpuppet(player) -  when Player disconnects from the Character, we
+    at_post_unpuppet(account) -  when Account disconnects from the Character, we
                     store the current location in the pre_logout_location Attribute and
                     move it to a None-location so the "unpuppeted" character
-                    object does not need to stay on grid. Echoes "Player has disconnected" 
+                    object does not need to stay on grid. Echoes "Account has disconnected" 
                     to the room.
-    at_pre_puppet - Just before Player re-connects, retrieves the character's
+    at_pre_puppet - Just before Account re-connects, retrieves the character's
                     pre_logout_location Attribute and move it back on the grid.
-    at_post_puppet - Echoes "PlayerName has entered the game" to the room.
+    at_post_puppet - Echoes "AccountName has entered the game" to the room.
 
     """
 
@@ -129,8 +129,8 @@ class Character(ContribRPCharacter, GenderCharacter):
 
         """
 
-        if not source_location and self.location.has_player:
-            # This was created from nowhere and added to a player's
+        if not source_location and self.location.has_account:
+            # This was created from nowhere and added to an account's
             # inventory; it's probably the result of a create command.
             string = "You now have %s in your possession." % self.get_display_name(self.location)
             self.location.msg(string)

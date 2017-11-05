@@ -3,7 +3,7 @@ from evennia import Command, CmdSet
 
 class SetLong(Command):
     """
-    allows for the player to set the desc of their character to be be what they want
+    allows for the account to set the desc of their character to be be what they want
     
     usage: long <text>
     
@@ -24,7 +24,7 @@ class SetLong(Command):
 
 class SetHair(Command):
     """
-    Allows for the player to set the hairdesc of their character to be what they want other to see
+    Allows for the account to set the hairdesc of their character to be what they want other to see
     
     usage: hair <text>
     
@@ -46,7 +46,7 @@ class SetHair(Command):
 
 class SetEyes(Command):
     """
-    Allows for the player to set the eyedesc of their character to be what they want other to see
+    Allows for the account to set the eyedesc of their character to be what they want other to see
 
     usage: eyes <text>
 

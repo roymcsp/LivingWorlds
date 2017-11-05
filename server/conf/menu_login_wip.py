@@ -6,7 +6,7 @@ Contribution - Vincent-lg 2016
 This module contains the functions (nodes) of the EvMenu, with the
 CmdSet and UnloggedCommand called when a user logs in.  In other
 words, instead of using the 'connect' or 'create' commands once on the
-login screen, players navigates through a simple menu asking them to
+login screen, accounts navigates through a simple menu asking them to
 enter their username followed by password, or to type 'new' to create
 a new one. You will need to change update your login screen if you use
 this system.
@@ -18,8 +18,8 @@ CMDSET_UNLOGGEDIN = "contrib.menu_login.UnloggedinCmdSet"
 When you'll reload the server, new sessions will connect to the new
 login system, where they will be able to:
 
-* Enter their username, assuming they have an existing player.
-* Enter 'NEW' to create a new player.
+* Enter their username, assuming they have an existing account.
+* Enter 'NEW' to create a new account.
 
 The top-level functions in this file are menu nodes (as described in
 evennia.utils.evmenu.py). Each one of these functions is responsible
@@ -60,7 +60,7 @@ def start(caller):
     a session has been created OR if an error occurs further
     down the menu tree.  From there, users can either enter a
     username (if this username exists) or type NEW (capitalized
-    or not) to create a new player.
+    or not) to create a new account.
 
     """
     text = random_string_from_module(CONNECTION_SCREEN_MODULE)
@@ -80,7 +80,7 @@ def start(caller):
     return text, options
 
 def username(caller, string_input):
-    """Check that the username leads to an existing player.
+    """Check that the username leads to an existing account.
 
     Check that the specified username exists.  If the username doesn't
     exist, display an error message and ask the user to try again.  If
@@ -90,8 +90,8 @@ def username(caller, string_input):
     """
 	caller.ndb._menutree.new_user = string_input
     string_input = string_input.strip()
-    player = managers.players.get_player_from_name(string_input)
-    if player is None:
+    account = managers.accounts.get_account_from_name(string_input)
+    if account is None:
         text = dedent("""
         |rLiving Worlds is an Intense Roleplaying environment and as such it is 
 expected that your name complies with our genre. The following rules apply:
@@ -116,8 +116,8 @@ Did you enter the name correctly and does this name comply with the rules (y/n)?
             },
         )
     else:
-        caller.ndb._menutree.player = player
-        text = "Enter the password for the {} account.".format(player.name)
+        caller.ndb._menutree.account = account
+        text = "Enter the password for the {} account.".format(account.name)
         # Disables echo for the password
         caller.msg("", options={"echo": False})
         options = (
@@ -135,7 +135,7 @@ Did you enter the name correctly and does this name comply with the rules (y/n)?
     return text, options
 
 def ask_password(caller, string_input):
-    """Ask the user to enter the password to this player.
+    """Ask the user to enter the password to this account.
 
     This is assuming the user exists (see 'create_username' and
     'create_password').  This node "loops" if needed:  if the
@@ -149,14 +149,14 @@ def ask_password(caller, string_input):
 
     # Check the password and login is correct; also check for bans
 
-    player = menutree.player
+    account = menutree.account
     password_attempts = menutree.password_attempts \
                             if hasattr(menutree, "password_attempts") else 0
     bans = ServerConfig.objects.conf("server_bans")
-    banned = bans and (any(tup[0] == player.name.lower() for tup in bans) \
+    banned = bans and (any(tup[0] == account.name.lower() for tup in bans) \
             or any(tup[2].match(caller.address) for tup in bans if tup[2]))
 
-    if not player.check_password(string_input):
+    if not account.check_password(string_input):
         # Didn't enter a correct password
         password_attempts += 1
         if password_attempts > 2:
@@ -198,7 +198,7 @@ def ask_password(caller, string_input):
         text = ""
         options = {}
         caller.msg("", options={"echo": True})
-        caller.sessionhandler.login(caller, player)
+        caller.sessionhandler.login(caller, account)
 
     return text, options
 
@@ -230,10 +230,10 @@ def create_username(caller, string_input):
     """
     menutree = caller.ndb._menutree
     string_input = string_input.strip()
-    player = managers.players.get_player_from_name(string_input)
+    account = managers.accounts.get_account_from_name(string_input)
 
-    # If a player with that name exists, a new one will not be created
-    if player:
+    # If an account with that name exists, a new one will not be created
+    if account:
         text = dedent("""
             |rThe account {} already exists.|n
             Enter another username or leave blank to go back.
@@ -268,7 +268,7 @@ def create_username(caller, string_input):
         )
     else:
         # a valid username - continue getting the password
-        menutree.playername = string_input
+        menutree.accountname = string_input
         # Disables echo for entering password
         caller.msg("", options={"echo": False})
         # Redirects to the creation of a password
@@ -305,7 +305,7 @@ def create_password(caller, string_input):
     )
 
     password = string_input.strip()
-    playername = menutree.playername
+    accountname = menutree.accountname
 
     if len(password) < LEN_PASSWD:
         # The password is too short
@@ -314,20 +314,20 @@ def create_password(caller, string_input):
             Enter another password or leave it empty to go back.
         """.strip("\n")).format(LEN_PASSWD)
     else:
-        # Everything's OK.  Create the new player account and
+        # Everything's OK.  Create the new account account and
         # possibly the character, depending on the multisession mode
         from evennia.commands.default import unloggedin
         # We make use of the helper functions from the default set here.
         try:
-            permissions = settings.PERMISSION_PLAYER_DEFAULT
+            permissions = settings.PERMISSION_ACCOUNT_DEFAULT
             typeclass = settings.BASE_CHARACTER_TYPECLASS
-            new_player = unloggedin._create_player(caller, playername,
+            new_account = unloggedin._create_account(caller, accountname,
                     password, permissions)
-            if new_player:
+            if new_account:
                 if settings.MULTISESSION_MODE < 2:
                     default_home = ObjectDB.objects.get_id(
                             settings.DEFAULT_HOME)
-                    unloggedin._create_character(caller, new_player,
+                    unloggedin._create_character(caller, new_account,
                             typeclass, default_home, permissions)
         except Exception:
             # We are in the middle between logged in and -not, so we have
@@ -343,7 +343,7 @@ def create_password(caller, string_input):
             text = ""
             caller.msg("|gWelcome, your new account has been created!|n")
             caller.msg("", options={"echo": True})
-            caller.sessionhandler.login(caller, new_player)
+            caller.sessionhandler.login(caller, new_account)
 
     return text, options
 
@@ -378,7 +378,7 @@ class UnloggedinCmdSet(CmdSet):
 class CmdUnloggedinLook(Command):
     """
     An unloggedin version of the look command. This is called by the server
-    when the player first connects. It sets up the menu before handing off
+    when the account first connects. It sets up the menu before handing off
     to the menu's own look command.
     """
     key = syscmdkeys.CMD_LOGINSTART

@@ -28,9 +28,9 @@ class CmdSetStats(MuxCommand):
     locks = "cmd:all()"
 
     def func(self):
-        player_caller = True
+        account_caller = True
         char = self.caller
-        mesg = ("Mercadia uses a method of rolling the dice to create player attributes. "
+        mesg = ("Mercadia uses a method of rolling the dice to create account attributes. "
                 "These attributes are: strength, dexterity, constitution, intelligence, "
                 "wisdom, and charisma. Choose the order of your attributes from the most "
                 "important to your character to the least important.\n\n"
