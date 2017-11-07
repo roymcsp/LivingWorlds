@@ -12,7 +12,7 @@ creation commands.
 from evennia.utils import lazy_property
 from world.equip import EquipHandler
 from world.traits import TraitHandler
-from evennia.contrib.rpsystem import ContribRPCharacter
+#from evennia.contrib.rpsystem import ContribRPCharacter
 from evennia.contrib.gendersub import GenderCharacter
 from commands import chartraits, equip
 from world.traitcalcs import abilitymodifiers
@@ -47,7 +47,7 @@ traits = {
     }
 
 
-class Character(ContribRPCharacter, GenderCharacter):
+class Character(GenderCharacter):
     """
     The Character defaults to reimplementing some of base Object's hook methods with the
     following functionality:
