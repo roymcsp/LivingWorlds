@@ -493,7 +493,7 @@ class CmdGameTime(default_cmds.MuxCommand):
             prep = "a"
             if season == "autumn":
                 prep = "an"
-                self.caller.msg("It's %s %s day, in the %s. The time is %s:%s on %s, %s, %s" % (prep, season, timeslot, current_date.hour, current_date.minute, current_date.month, current_date.day, current_date.year))
+            self.caller.msg("It's %s %s day, in the %s. The time is %s:%s on %s, %s, %s" % (prep, season, timeslot, hour, minute, month, day, year))
 
 class ChargenRoom(Room):
     """
