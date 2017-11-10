@@ -506,4 +506,4 @@ class ChargenRoom(Room):
 
     def at_object_receive(self, character, source_location):
         if self.tags.get("item",category = 'chargen'):
-            spawn({"prototype": "DAGGER", "location": self})
+            spawn({"prototype": "HAND_AXE ", "location": self})

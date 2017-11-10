@@ -1,31 +1,25 @@
 # -*- coding: UTF-8 -*-
 """
 Equipment handler module.
-
-The `EquipHandler` provides an interface to manipulate a character's
+The `EquipHandler` provides an interface to maniplate a character's
 "equipped" or worn items. The handler is instantiated as a property on a
 character typeclass, with the character passed as an argument. It looks
 for certain properties in the character's db attributes handler to
 initialize itself and provide persistence.
-
 Config Properties:
     slots (dict): mapping of slots: equipped items
     limbs (tuple[tuple[str, tuple]]): nested tuple describing character
         limbs and which slots map to which limbs.
-
         This attribute should be of nested ordered types, preferably tuples.
         The format for its data is:
-
             limbs = (
                 (limb1, (slot1,)),
                 (limb2, (slot2, slot3)),
                 (limb3, (slot4, ...)
             )
-
         Slot names will be displayed in-game in the order they appear
         in the limbs attribute. If missing or empty, slots are displayed
         in alphabetical order.
-
 Setup:
     To use the EquipHandler, add it to a character typeclass as follows:
     ```python
@@ -35,18 +29,14 @@ Setup:
     def equip(self):
         return EquipHandler(self)
     ```
-
 Use:
     Equippable items are equipped and unequipped using the `add` and `remove`
     methods, respectively.
-    
     The EquipHandler can be iterated over to access the contents of its slots
     in an ordered fashion. It also supports `obj in character.equip` syntax
     to check whether an item is equipped
-
 Commands:
     See commands/equip.py for the commands related to this handler.
-
 Example usage:
     # Say obj is a hat.
     > obj in character.equip
@@ -65,27 +55,21 @@ Example usage:
 """
 from typeclasses.items import Equippable
 
-
 class EquipException(Exception):
     """Base exception class for EquipHandler."""
     def __init__(self, msg):
         self.msg = msg
 
-
 class EquipHandler(object):
     """Handler for a character's "equipped" items.
-    
     Args:
         obj (Character): parent character object. see module docstring
             for character attribute configuration info.
-    
     Properties
         slots (tuple): returns a tuple of all slots in order
         empty_slots (list): returns a list of empty slots
-    
     Note:
         Individual slots' items can be accessed as attributes
-    
     Methods:
         add (Equippable): "equip" an item from the character's inventory.
         remove (Equippable): "un-equip" an item and move it to inventory.
@@ -143,7 +127,9 @@ class EquipHandler(object):
 
     def __contains__(self, item):
         """Implement the __contains__ method."""
-        return item.id in (i.id for i in self.obj.db.slots.itervalues() if i)
+        return item.id in (i.id for i
+                           in self.obj.db.slots.itervalues()
+                           if i)
 
     @property
     def slots(self):
