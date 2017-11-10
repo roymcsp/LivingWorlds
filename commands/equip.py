@@ -3,7 +3,8 @@ Item and equipment-related command module.
 """
 from evennia import CmdSet
 from commands.command import MuxCommand
-from evennia.utils.evtable import fill, EvTable
+from evennia.utils.evtable import fill
+from evennia.utils.evtable import EvTable
 from typeclasses.weapons import Weapon
 from typeclasses.armors import *
 
