@@ -507,5 +507,5 @@ class ChargenRoom(Room):
     def at_object_receive(self, character, source_location):
         if utils.inherits_from(object, "typeclasses.character.Character") and self.tags.get("item",category = 'chargen'):
             spawn({"prototype": "DAGGER", "location": self})
-            spawn({"prototype": "SIMPLE_ROBE", "location": self})
+
 
