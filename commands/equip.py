@@ -53,7 +53,7 @@ class CmdInventory(MuxCommand):
         else:
             data = [[], [], []]
             for item in items:
-                data[0].append("|C{}|n".format(item.name))
+                data[0].append("|W{}|n".format(item.name))
                 #data[1].append(fill(item.db.desc or "", 50))
                 #stat = " "
                 #if item.attributes.has('damage_roll'):
