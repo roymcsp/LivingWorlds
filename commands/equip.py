@@ -63,7 +63,7 @@ class CmdInventory(MuxCommand):
                 #if item.attributes.has('magical_bonus'):
                 #    stat += "(|yMagical bonus: {:>2d}|n)".format(item.db.magical_bonus)
                 #if item.attributes.has('range'):
-                    stat += "(|G{}|n) ".format(item.db.range.capitalize())
+                #    stat += "(|G{}|n) ".format(item.db.range.capitalize())
                 #data[2].append(stat.strip())
             table = evtable.EvTable(header=False, table=data, border=None, valign='t')
             string = "|YYou are carrying:|n\n{}".format(table)
