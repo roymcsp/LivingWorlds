@@ -100,6 +100,7 @@ class Equippable(Item):
         self.locks.add("puppet:false();equip:true()")
         self.db.slots = self.slots
         self.db.multi_slot = self.multi_slot
+        self.db.used_by = None
 
 
     def at_equip(self, character):

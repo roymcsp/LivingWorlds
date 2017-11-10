@@ -8,7 +8,7 @@ FORMCHAR = "x"
 TABLECHAR = "o"
 
 FORM = """
-=-=-=-=-=-=-=-=-=-=-=-=-|C[ |rCharacter Sheet |C]|n-=-=-=-=-=-=-=-=-=-=-=-=-o
+=-=-=-=-=-=-=-=-=-=-=-=-|C[ |rInventory |C]|n-=-=-=-=-=-=-=-=-=-=-=-=-o
                                                                     ||
 Name : xAxxxxxxxx                          |CStrength|n     : xLxx      ||
 Race : xBxxxxxxxx                          |CDexterity|n    : xMxx      ||
@@ -21,5 +21,8 @@ Faith: xHxxxxxxxx                          |CSpellpower|n   : xWxx(xXx) ||
 Devotion: xIxxxxxxxx                       |CEndurance|n    : xYxx(xZx) ||
 Nation  : xJxxxxxxxx                       |CExperience|n   : xxRxx     ||
 Background: xKxxxxxxxx                     |CEncumbrance|n  : xSxx(xTxx)|| 
+                                                                    ||
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-o
+
 """
 FORM = re.sub(r'\|$', r'', FORM, flags=re.M)

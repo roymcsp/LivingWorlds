@@ -26,11 +26,11 @@ Module Functions
     """
 
 from evennia import Command
-
+from powers import bgpowers
 
 class CmdBackground(Command):
     """This is the command string that will assign a background onto a character,
-     and the cooresponding command set."""
+     and the cooresponding command set and skills."""
 
     key = "choose"
     locks = "cmd:all()"
@@ -38,8 +38,13 @@ class CmdBackground(Command):
     def func(self):
         caller = self.caller
         args = self.args.strip().lower
-
-        apply_background(caller, args)
+        background = caller.db.background
+        if background in ALL_BACKGROUNDS:
+            bgmsg = "You have aready chosen your background"
+            caller.msg(bgmsg)
+            return
+        else:
+            apply_background(caller, args)
 
 
 class BackgroundException(Exception):
@@ -92,39 +97,41 @@ class Urchin(Background):
     def __init__(self):
         super(Urchin, self).__init__()
         self.name = "Urchin"
-        # self.cmdset.add(CmdSetUrchin, permanent=True)
+        self.cmdset.add(bgpowers.CmdSetUrchin, permanent=True)
 
 
 class Noble(Background):
     def __init__(self):
         super(Noble, self).__init__()
         self.name = 'Noble'
-        # self.cmdset.add(CmdSetNoble, permanent=True)
+        self.cmdset.add(bgpowers.CmdSetNoble, permanent=True)
 
 
 class Nomad(Background):
     def __init__(self):
         super(Nomad, self).__init__()
         self.name = "Nomad"
-        # self.cmdset.add(CmdSetNoble, permanent=True)
+        self.cmdset.add(bgpowers.CmdSetNomad, permanent=True)
 
 
 class Gypsy(Background):
     def __init__(self):
         super(Gypsy, self). __init__()
         self.name = 'Gypsy'
-        # self.cmdset.add(CmdSetGpysy, permanent=True)
+        self.cmdset.add(bgpowers.CmdSetGpysy, permanent=True)
 
 
 class Farmer(Background):
     def __init__(self):
         super(Farmer, self). __init__()
         self.name = 'Farmer'
-        # self.cmdset.add(CmdSetFarmer, permanent=True)
+        self.cmdset.add(bgpowers.CmdSetFarmer, permanent=True)
 
 
 class Tradesman(Background):
     def __init__(self):
         super(Tradesman, self). __init__()
         self.name = 'Tradesman'
-        # self.cmdset.add(CmdSetTradesman, permanent=True)
+        self.cmdset.add(bgpowers.CmdSetTradesman, permanent=True)
+
+

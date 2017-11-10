@@ -163,7 +163,7 @@ class Character(GenderCharacter):
         destination.msg_contents(string, exclude=(self,), mapping=mapping)
 
     def at_object_creation(self):
-
+        super(Character, self).at_object_creation()
         self.db.gender = 'ambiguous'
         self.db.nation = None
         self.db.race = 'wisp'
@@ -173,7 +173,7 @@ class Character(GenderCharacter):
         self.db.title = None
         self.db.faith = None
         self.db.devotion = None
-        self.db.desc = "  A small wisp of energy lacking in any descernable features, all that is missing is the " \
+        self.db.desc = "  A small wisp of energy lacking in any discernible features, all that is missing is the " \
                        "spark of creation."
         self.db.smellable_text = "  You don't smell anything special."
         self.db.feelable_text = "  You don't feel anything special."
@@ -198,11 +198,6 @@ class Character(GenderCharacter):
         self.traits.STR.lift_factor = 20
         self.traits.STR.push_factor = 40
         self.traits.ENC.max = self.traits.STR.lift_factor * self.traits.STR.actual
-
-
-        # cmdsets
-        # self.add(chartraits.CharTraitCmdSet())
-        # self.add(equip.EquipCmdSet())
 
     @lazy_property
     def traits(self):

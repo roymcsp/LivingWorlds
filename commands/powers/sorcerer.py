@@ -62,6 +62,7 @@ class CmdSpellDeathSpike():
     locks ="cmd:attr(Level, '1')"
     help_category = "Sorcerer"
 
+
 class CmdSpellBodyToMind():
     """
     Spell Name: Body To Mind
@@ -79,6 +80,7 @@ class CmdSpellBodyToMind():
     key = "bodytomind"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellVampiricTouch():
     """
     Spell Name: Vampiric Touch
@@ -92,6 +94,7 @@ class CmdSpellVampiricTouch():
 
     key = "vampirictouch"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellWeakness():
     """
@@ -107,6 +110,7 @@ class CmdSpellWeakness():
     key = "weakness"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellCorpseDrain():
     """
     Spell Name: Corpse Drain
@@ -118,6 +122,7 @@ class CmdSpellCorpseDrain():
 
     key = "corpsedrain"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellPoison():
     """
@@ -133,6 +138,7 @@ class CmdSpellPoison():
     key = "poison"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellSummonCorruptedMan():
     """
     Spell Name: Summon Corrupted Man
@@ -146,6 +152,7 @@ class CmdSpellSummonCorruptedMan():
 
     key = "corruptedman"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellTransferPain():
     """
@@ -161,6 +168,7 @@ class CmdSpellTransferPain():
     key = "transferpain"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellBloodCloak():
     """
     Spell Name: Blood Cloak
@@ -174,6 +182,7 @@ class CmdSpellBloodCloak():
 
     key = "bloodcloak"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellCreateBloodGem():
     """
@@ -189,6 +198,7 @@ class CmdSpellCreateBloodGem():
     key = "bloodgem"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellCreateBoneDust():
     """
     Spell Name: Create Bone Dust
@@ -202,6 +212,7 @@ class CmdSpellCreateBoneDust():
 
     key = "bonedust"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellFamilier():
     """
@@ -217,6 +228,7 @@ class CmdSpellFamilier():
     key = "familier"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellSpectralHunter():
     """
     Spell Name: Summon: Spectral Hunter
@@ -230,6 +242,8 @@ class CmdSpellSpectralHunter():
 
     key = "spectralhunter"
     locks ="cmd:isSorcerer()"
+    
+    
 class CmdSpellVampiricClaw():
     """
     Spell Name: Vampiric Claw
@@ -243,6 +257,7 @@ class CmdSpellVampiricClaw():
 
     key = "vampiricclaw"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellCorpseBurst():
     """
@@ -258,6 +273,7 @@ class CmdSpellCorpseBurst():
     key = "corpseburst"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellCircleDeath():
     """
     Spell Name: Circle of Death
@@ -271,6 +287,7 @@ class CmdSpellCircleDeath():
 
     key = "circleofdeath"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellBloodShield():
     """
@@ -286,6 +303,7 @@ class CmdSpellBloodShield():
     key = "bloodshield"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellImbueDeath():
     """
     Spell Name: Imbue Death Magic
@@ -299,6 +317,7 @@ class CmdSpellImbueDeath():
 
     key = "imbuedeath"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellImbueBlood():
     """
@@ -314,6 +333,7 @@ class CmdSpellImbueBlood():
     key = "imbueblood"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellSleep():
     """
     Spell Name: Curse: Sleep
@@ -328,6 +348,7 @@ class CmdSpellSleep():
     key = "sleep"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellDeathRain():
     """
     Spell Name: Death Rain
@@ -341,6 +362,8 @@ class CmdSpellDeathRain():
 
     key = "deathrain"
     locks ="cmd:isSorcerer()"
+    
+    
 class CmdSpellDeathWard():
     """
     Spell Name: Death Ward
@@ -354,6 +377,7 @@ class CmdSpellDeathWard():
 
     key = "deathward" 
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellPoisonCloud():
     """
@@ -369,6 +393,7 @@ class CmdSpellPoisonCloud():
     key = "poisoncloud"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellBoneStaff():
     """
     Spell Name: Bone Staff
@@ -382,6 +407,7 @@ class CmdSpellBoneStaff():
 
     key = "bonestaff"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellTeleport():
     """
@@ -397,6 +423,7 @@ class CmdSpellTeleport():
     key = "teleport"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellTeleportOther():
     """
     Spell Name: Teleport Other
@@ -410,6 +437,7 @@ class CmdSpellTeleportOther():
 
     key = "teleportother"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellSummon():
     """
@@ -425,6 +453,7 @@ class CmdSpellSummon():
     key = "summon"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellBloodWard():
     """
     Spell Name: Blood Ward 
@@ -438,6 +467,7 @@ class CmdSpellBloodWard():
 
     key = "bloodward"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellSummonReanimatedMan():
     """
@@ -453,6 +483,7 @@ class CmdSpellSummonReanimatedMan():
     key = "reanimatedman"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellSummonCursedMan():
     """
     Spell Name: Summon: Cursed Man
@@ -466,6 +497,7 @@ class CmdSpellSummonCursedMan():
 
     key = "cursed"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellSummonCursedArmy():
     """
@@ -481,6 +513,7 @@ class CmdSpellSummonCursedArmy():
     key = "cursedarmy"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellSilence():
     """
     Spell Name: Curse: Silence
@@ -494,6 +527,7 @@ class CmdSpellSilence():
 
     key = "silence"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellMassSilence():
     """
@@ -509,6 +543,7 @@ class CmdSpellMassSilence():
     key = "masssilence"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellMassSleep():
     """
     Spell Name: Curse: Mass Sleep
@@ -522,6 +557,7 @@ class CmdSpellMassSleep():
 
     key = "masssleep"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellPlague():
     """
@@ -537,6 +573,7 @@ class CmdSpellPlague():
     key = "plague"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellDisease():
     """
     Spell Name: Curse: Disease
@@ -550,6 +587,7 @@ class CmdSpellDisease():
 
     key = "disease"
     locks ="cmd:isSorcerer()"
+
 
 class CmdSpellGloom():
     """
@@ -565,6 +603,7 @@ class CmdSpellGloom():
     key = "gloom"
     locks ="cmd:isSorcerer()"
 
+
 class CmdSpellAnchor():
     """
     Spell Name: Curse: Anchor
@@ -578,6 +617,7 @@ class CmdSpellAnchor():
 
     key = "anchor"
     locks ="cmd:isSorcerer()"
+    
 
 class CmdSpellCurseDeathLink():
     """

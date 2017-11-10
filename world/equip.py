@@ -2,7 +2,7 @@
 """
 Equipment handler module.
 
-The `EquipHandler` provides an interface to maniplate a character's
+The `EquipHandler` provides an interface to manipulate a character's
 "equipped" or worn items. The handler is instantiated as a property on a
 character typeclass, with the character passed as an argument. It looks
 for certain properties in the character's db attributes handler to
@@ -143,9 +143,7 @@ class EquipHandler(object):
 
     def __contains__(self, item):
         """Implement the __contains__ method."""
-        return item.id in (i.id for i
-                           in self.obj.db.slots.itervalues()
-                           if i)
+        return item.id in (i.id for i in self.obj.db.slots.itervalues() if i)
 
     @property
     def slots(self):

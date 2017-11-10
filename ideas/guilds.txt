@@ -23,8 +23,8 @@ Empire
 guilds that can be joined upon serfdom
 
 Universal Guilds
-Cleric of “faith”
-Paladin of “faith”
+Cleric of faith
+Paladin of faith
 
 Kingdom
 Fighter 

@@ -35,8 +35,8 @@ Module Functions
     """
 
 from evennia import Command
-from evennia.utils.evmenu import get_input   
 from world.traitcalcs import abilitymodifiers
+
 
 class CmdRace(Command):
 
@@ -58,18 +58,11 @@ class CmdRace(Command):
         args = self.args.strip().lower()
         race = caller.db.race
         if race in ALL_RACES:
-        
-            get_input(caller, "You have already selected your race, do you wish to change it? (Yes/No)?", self.choice)
-           
+            racemsg = 'You have already chosen your race'
+            caller.msg(racemsg)
+            return
         else:
             apply_race(caller, args)
-
-    def choice(self, caller, prompt, result):
-        if result.lower() in ("y", "yes"):
-            apply_race(caller, self.args)
-
-        if result.lower() in ("n", "no"):
-            caller.msg('No changes made')
 
 
 class RaceException(Exception):
@@ -131,14 +124,16 @@ def apply_race(character, race):
     character.db.race = race.name
     character.db.slots = race.slots
     character.db.limbs = race.limbs
-    character.msg('You become {}.' .format(race.name))
+    character.db.size = race.size
+    character.msg('You become the {} race.' .format(race.name))
     
     # apply race-based bonuses
     for trait, bonus in race.bonuses.iteritems():
         character.traits[trait].mod += bonus
 
     character.traits.HP.mod = abilitymodifiers[character.traits.CON.actual - 1]
-    character.traits.SP.mod = abilitymodifiers[character.traits.INT.actual - 1] + abilitymodifiers[character.traits.WIS.actual - 1]
+    character.traits.SP.mod = abilitymodifiers[character.traits.INT.actual - 1] \
+                              + abilitymodifiers[character.traits.WIS.actual - 1]
     character.traits.FORT.mod = abilitymodifiers[character.traits.CON.actual - 1]
     character.traits.REFL.mod = abilitymodifiers[character.traits.DEX.actual - 1]
     character.traits.WILL.mod = abilitymodifiers[character.traits.WIS.actual - 1]
@@ -148,7 +143,6 @@ def apply_race(character, race):
     character.traits.PDEF.mod = abilitymodifiers[character.traits.DEX.actual - 1]
     character.traits.MDEF.mod = abilitymodifiers[character.traits.INT.actual - 1]
     character.traits.ENC.max = character.traits.STR.lift_factor * character.traits.STR.actual
-
 
 
 class Race(object):
@@ -163,7 +157,7 @@ class Race(object):
             'wield2': None,
             'helm': None,
             'necklace': None,
-            'armor': None,
+            'torso': None,
             'belt': None,
             'bracers': None,
             'gloves': None,
@@ -171,13 +165,13 @@ class Race(object):
             'ring2': None,
             'boots': None,
             # clothing slots
-            'hat':None,
+            'hat': None,
             'accessory': None,
             'top': None,
-            'fullbody': ['top','bottom'],
+            'fullbody': ['top', 'bottom'],
             'bottom': None,
             'belt2': None,
-            'accessory2':None,
+            'accessory2': None,
             'gloves2': None,
             'accessory3': None,
             'accessory4': None,
@@ -187,15 +181,15 @@ class Race(object):
         self.limbs = (
             ('r_hand', ('wield1',)),
             ('l_hand', ('wield2',)),
-            ('head', ('helm','hat')),
-            ('neck', ('necklace', 'accessory')),
-            ('torso', ('armor', 'top', 'fullbody')),
-            ('waist', ('belt','belt2', 'bottom')),
-            ('wrists', ('bracers', 'accessory2')),
-            ('hands', ('gloves', 'gloves2')),
-            ('finger1', ('ring1', 'accessory3')),
-            ('finger2', ('ring2', 'accessory4')),
-            ('feet', ('boots', 'shoes')),
+            ('head', ('helm', 'hat')),
+            ('neck', ('necklace', 'accessory',)),
+            ('body', ('torso', 'top', 'fullbody',)),
+            ('waist', ('belt', 'belt2', 'bottom',)),
+            ('wrists', ('bracers', 'accessory2',)),
+            ('hands', ('gloves', 'gloves2',)),
+            ('finger1', ('ring1', 'accessory3',)),
+            ('finger2', ('ring2', 'accessory4',)),
+            ('feet', ('boots', 'shoes',)),
         )
         
         self.bonuses = {}

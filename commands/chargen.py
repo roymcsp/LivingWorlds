@@ -1,6 +1,3 @@
-from evennia import Command
-# from evennia.utils.evmenu import get_input
-from evennia import Command as BaseCommand
 from evennia.commands import cmdhandler
 from evennia.utils import logger
 from evennia import Command, CmdSet

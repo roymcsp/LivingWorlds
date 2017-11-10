@@ -3,9 +3,9 @@ Item and equipment-related command module.
 """
 from evennia import CmdSet
 from commands.command import MuxCommand
-from evennia.utils.evtable import EvTable, fill
+from evennia.utils import evtable
 from typeclasses.weapons import Weapon
-from typeclasses.armors import Torso, Shield, Helm, Boots, Gloves, Necklace, Belt, Bracers, Ring
+from typeclasses.armors import *
 
 
 __all__ = ('CmdInventory', 'CmdEquip',
@@ -55,16 +55,16 @@ class CmdInventory(MuxCommand):
                 data[0].append("|C{}|n".format(item.name))
                 data[1].append(fill(item.db.desc or "", 50))
                 stat = " "
-                if item.attributes.has('damage'):
-                    stat += "(|rDamage: {:>2d}|n) ".format(item.db.damage)
+                if item.attributes.has('damage_roll'):
+                    stat += "(|rDamage: {:>2d}|n) ".format(item.db.damage_roll)
                 if item.attributes.has('physical_bonus'):
-                    stat += "(|yPhysical_bonus: {:>2d}|n)".format(item.db.physical_bonus)
+                    stat += "(|yPhysical bonus: {:>2d}|n)".format(item.db.physical_bonus)
                 if item.attributes.has('magical_bonus'):
-                    stat += "(|yMagical_bonus: {:>2d}|n)".format(item.db.magical_bonus)
+                    stat += "(|yMagical bonus: {:>2d}|n)".format(item.db.magical_bonus)
                 if item.attributes.has('range'):
                     stat += "(|G{}|n) ".format(item.db.range.capitalize())
                 data[2].append(stat.strip())
-            table = EvTable(header=False, table=data, border=None, valign='t')
+            table = evtable.EvTable(header=False, table=data, border=None, valign='t')
             string = "|YYou are carrying:|n\n{}".format(table)
         self.caller.msg(string)
 
@@ -111,26 +111,22 @@ class CmdEquip(MuxCommand):
                         caller.msg("You can't equip {}.".format(obj.get_display_name(caller)))
 
                 if not obj.access(caller, 'equip'):
-                    caller.msg("You can't {} {}.".format(action,
-                                                         obj.get_display_name(caller)))
+                    caller.msg("You can't {} {}.".format(action, obj.get_display_name(caller)))
                     return
 
                 if obj in caller.equip:
-                    caller.msg("You're already {}ing {}.".format(action,
-                                                                 obj.get_display_name(caller)))
+                    caller.msg("You're already {}ing {}.".format(action, obj.get_display_name(caller)))
                     return
 
                 # check whether slots are occupied
-                occupied_slots = [caller.equip.get(s) for s in obj.db.slots
-                                  if caller.equip.get(s)]
+                occupied_slots = [caller.equip.get(s) for s in obj.db.slots if caller.equip.get(s)]
                 if obj.db.multi_slot:
                     if len(occupied_slots) > 0:
                         if swap:
                             for item in occupied_slots:
                                 caller.equip.remove(item)
                         else:
-                            caller.msg("You can't {} {}. ".format(action,
-                                                                  obj.get_display_name(caller)) +
+                            caller.msg("You can't {} {}. ".format(action, obj.get_display_name(caller)) +
                                        "You already have something there.")
                             return
                 else:
@@ -172,10 +168,12 @@ class CmdEquip(MuxCommand):
                 if not item or not item.access(caller, 'view'):
                     continue
                 stat = " "
-                if item.attributes.has('damage'):
-                    stat += "(|rDamage: {:>2d}|n) ".format(item.db.damage)
-                if item.attributes.has('toughness'):
-                    stat += "(|yToughness: {:>2d}|n)".format(item.db.toughness)
+                if item.attributes.has('damage_roll'):
+                    stat += "(|rDamage: {:>2d}|n) ".format(item.db.damage_roll)
+                if item.attributes.has('physical_bonus'):
+                    stat += "(|yPhysical bonus: {:>2d}|n)".format(item.db.physical_bonus)
+                if item.attributes.has('magical_bonus'):
+                    stat += "(|yMagical bonus: {:>2d}|n)".format(item.db.magical_bonus)
                 if item.attributes.has('range'):
                     stat += "(|G{}|n) ".format(item.db.range.capitalize())
 
@@ -233,7 +231,7 @@ class CmdWear(MuxCommand):
             caller.execute_cmd('equip',
                                args=' '.join((sw, args)),
                                item=obj,
-                               action='wield')
+                               action='wear')
         else:
             caller.msg("You can't wear {}.".format(
                 obj.get_display_name(caller)))
@@ -287,8 +285,8 @@ class CmdRemove(MuxCommand):
       remove <obj>
     Remove an equipped object and return it to your inventory.
     """
-    key = "remove"
-    aliases = ["rem"]
+    key = "unequip"
+    aliases = ["remove"]
     locks = "cmd:all()"
 
     def func(self):
