@@ -505,6 +505,6 @@ class ChargenRoom(Room):
         "this is called only at first creation"
 
     def at_object_receive(self, obj, source_location):
-        if utils.inherits_from(obj, "typeclasses.character.Character") and self.tags.get("item",category = 'chargen'):
+        if utils.inherits_from(obj, "typeclasses.characters.Character") and self.tags.get("item",category = 'chargen'):
             spawn({"prototype": "DAGGER", "location": self},
                   {"prototype": "SIMPLE_ROBE", "location":self})
