@@ -108,15 +108,15 @@ def apply_race(character, race):
 
     # make sure the race is allowed for the nation
 
-    if character.db.nation == 'kingdom' and race.name not in KINGDOM_RACES:
+    if character.db.nation == 'Kingdom' and race.name not in KINGDOM_RACES:
         character.msg('Race {} is not available to the kingdom.'.format(race.name))
         return
 
-    elif character.db.nation == 'caliphate' and race.name not in CALIPHATE_RACES:
+    elif character.db.nation == 'Caliphate' and race.name not in CALIPHATE_RACES:
         character.msg('Race {} is not available to the caliphate.'.format(race.name))
         return
 
-    elif character.db.nation == 'empire' and race.name not in EMPIRE_RACES:
+    elif character.db.nation == 'Empire' and race.name not in EMPIRE_RACES:
         character.msg('Race {} is not available to the empire.'.format(race.name))
         return
 
