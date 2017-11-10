@@ -55,16 +55,16 @@ class CmdInventory(MuxCommand):
             for item in items:
                 data[0].append("|C{}|n".format(item.name))
                 data[1].append(fill(item.db.desc or "", 50))
-                stat = " "
-                if item.attributes.has('damage_roll'):
-                    stat += "(|rDamage: {:>2d}|n)".format(item.db.damage_roll)
-                if item.attributes.has('physical_bonus'):
-                    stat += "(|yPhysical bonus: {:>2d}|n)".format(item.db.physical_bonus)
-                if item.attributes.has('magical_bonus'):
-                    stat += "(|yMagical bonus: {:>2d}|n)".format(item.db.magical_bonus)
-                if item.attributes.has('range'):
+                #stat = " "
+                #if item.attributes.has('damage_roll'):
+                #    stat += "(|rDamage: {:>2d}|n)".format(item.db.damage_roll)
+                #if item.attributes.has('physical_bonus'):
+                #    stat += "(|yPhysical bonus: {:>2d}|n)".format(item.db.physical_bonus)
+                #if item.attributes.has('magical_bonus'):
+                #    stat += "(|yMagical bonus: {:>2d}|n)".format(item.db.magical_bonus)
+                #if item.attributes.has('range'):
                     stat += "(|G{}|n) ".format(item.db.range.capitalize())
-                data[2].append(stat.strip())
+                #data[2].append(stat.strip())
             table = evtable.EvTable(header=False, table=data, border=None, valign='t')
             string = "|YYou are carrying:|n\n{}".format(table)
         self.caller.msg(string)
