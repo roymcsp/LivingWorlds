@@ -57,7 +57,7 @@ class CmdInventory(MuxCommand):
                 data[1].append(fill(item.db.desc or "", 50))
                 stat = " "
                 if item.attributes.has('damage_roll'):
-                    stat += "(|rDamage: {:>2d}|n) ".format(item.db.damage_roll)
+                    stat += "(|rDamage: {:>2d}|n)".format(item.db.damage_roll)
                 if item.attributes.has('physical_bonus'):
                     stat += "(|yPhysical bonus: {:>2d}|n)".format(item.db.physical_bonus)
                 if item.attributes.has('magical_bonus'):
