@@ -111,4 +111,4 @@ class CmdVitals(MuxCommand):
 
     def func(self):
         tr = self.caller.traits
-        self.caller.msg("HP: %s/%s SP: %s/%s EP: %s/%s" % (tr.HP.actual, tr.HP.max, tr.SP.actual, tr.SP.max, tr.EP.actual,tr.EP.max))
+        self.caller.msg("|RHP: %s/%s |MSP: %s/%s |YEP: %s/%s" % (tr.HP.actual, tr.HP.max, tr.SP.actual, tr.SP.max, tr.EP.actual,tr.EP.max))
