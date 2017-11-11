@@ -16,6 +16,7 @@ class CharTraitCmdSet(CmdSet):
         """Populate CmdSet"""
         self.add(CmdSheet())
         self.add(CmdWealth())
+        self.add(CmdVitals())
 
 class CmdSheet(MuxCommand):
     """
@@ -96,3 +97,18 @@ class CmdWealth(MuxCommand):
         self.caller.msg('You are carrying {}'.format(
             format_coin(self.caller.db.wallet)
 ))
+
+class CmdVitals(MuxCommand):
+    """
+    view the characters current and actual health, spellpower and endurance traits
+    Usage:
+      vitals
+    Displays the characters vital traits
+    """
+    key = "vitals"
+    aliases = ["vp", "hp"]
+    locks = "cmd:all()"
+
+    def func(self):
+        tr = self.caller.traits
+        self.caller.msg("HP: %s/%s SP: %s/%s EP: %s/%s" % (tr.HP.actual, tr.HP.max, tr.SP.actual, tr.SP.max, tr.EP.actual,tr.EP.max))
