@@ -37,12 +37,12 @@ traits = {
     'RAB': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Ranged Attack Bonus'},
     'UAB': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Unarmed Attack Bonus'},
     'PDEF': {'type': 'static', 'base': 10, 'mod': 0, 'name': 'Physical Defense'},
-    'MDEF': {'type': 'counter', 'base': 10, 'mod': 0, 'min': 0, 'name': 'Magical Defense'},
+    'MDEF': {'type': 'static', 'base': 10, 'mod': 0, 'min': 0, 'name': 'Magical Defense'},
     # misc
     'ENC': {'type': 'counter', 'base': 0, 'mod': 0, 'min': 0, 'name': 'Carry Weight'},
     'EP': {'type': 'gauge', 'base': 100, 'mod': 0, 'min': 0, 'name': 'Endurance Points'},
     'LVL': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Level'},
-    'XP': {'type': 'static', 'base': 0, 'mod': 0, 'name': 'Experience',
+    'XP': {'type': 'counter', 'base': 0, 'mod': 0, 'name': 'Experience',
            'extra': {'level_boundaries': (500, 2000, 4500, 'unlimited')}},
     }
 

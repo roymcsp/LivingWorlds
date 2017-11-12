@@ -111,6 +111,21 @@ class Room(ContribRPRoom):
     time. It also allows for "details", together with a slightly modified
     look command.
     """
+    _TERRAINS = {
+        'PAVEDROAD': {'cost': 1,},
+        'DIRTROAD': {'cost': 2,},
+        'FOREST': {'cost': 3,},
+        'MUD': {'cost': 3,},
+        'TUNDRA': {'cost': 3,},
+        'SAND': {'cost': 5,},
+        'SNOW': {'cost': 4,},
+        'PLAINS': {'cost': 2,},
+        'THICKET': {'cost': 2,},
+        'WATER': {'cost': 3,},
+        'DEEPWATER': {'cost': 3, },
+        'MOUNTAIN': {'cost': 3, }
+    }
+
     def at_object_creation(self):
         """Called when room is first created only."""
         self.db.spring_desc = ""
@@ -128,6 +143,24 @@ class Room(ContribRPRoom):
         self.ndb.last_timeslot = None
         # detail storage
         self.db.details = {}
+        self.db.terrain = 'PAVEDROAD'
+
+    # Terrain property, sets self.db.terrain_type, taken from the constants dict
+    @property
+    def terrain(self):
+        return self.db.terrain
+
+    @terrain.setter
+    def terrain(self, value):
+        if value in self._TERRAINS:
+            self.db.terrain = value
+        else:
+            raise ValueError('Invalid terrain type.')
+
+    @property
+    def mv_cost(self):
+        """Returns the movement cost to enter this room."""
+        return self._TERRAINS[self.terrain]['cost']
 
     def get_time_and_season(self):
         """
