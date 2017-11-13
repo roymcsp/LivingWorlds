@@ -4,7 +4,7 @@ from math import floor
 from collections import defaultdict
 from evennia.utils import utils, make_iter
 
-levels = {
+LEVEL = {
     '1': {'xp': 1, 'coins': 0},
     '2': {'xp': 1, 'coins': 0},
     '3': {'xp': 1, 'coins': 0},
@@ -37,7 +37,7 @@ levels = {
     '30': {'xp': 1, 'coins': 0},
 }
 
-skilllevels = {
+SKILLLVL = {
     '1': {'experience': 1, 'coins': 0},
     '2': {'experience': 1, 'coins': 0},
     '3': {'experience': 1, 'coins': 0},
