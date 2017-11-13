@@ -129,7 +129,7 @@ class CmdLevel(MuxCommand):
 
     def func(self):
         tr = self.caller.traits
-        lvl = tr.LVL.actual + 1
+        lvl = str(tr.LVL.actual + 1)
         xp1 = rulebook.LEVEL[lvl]['xp']
         coin1 = rulebook.LEVEL[lvl]['coins']
         xp2 = rulebook.LEVEL[lvl]['xp'] - tr.XP.actual
