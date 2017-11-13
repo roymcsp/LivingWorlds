@@ -1,6 +1,7 @@
 Economy
 
-there needs to be some form of currency, I would like three distinct types representative of the nation, with currency exchange rates that could fluctuate based off of one nations attitudes towards another.
+there needs to be some form of currency, I would like three distinct types representative of the nation, with currency
+exchange rates that could fluctuate based off of one nations attitudes towards another.
 
 Example;
 kingdom 
@@ -11,19 +12,19 @@ platinum piece = 1000 copper or 100 silver or 10 gold
 
 
 caliphate
-Bronze Bit = 1
-Bronze Drachma = 10
-Silver Dirhim = 100
-Gold Dinar = 1000
+brass bit = 1
+bronze drachma = 10 bits
+silver dirhim = 100 bits or 10 Drachma
+gold dinar = 1000 = 1000 Bits or 100 Drachma or 10 Dirhim
  
 empire
-Tsuho  Coin = 1
-Genbo Coin = 10
-Shoho Coin = 100
-Mon  Coin = 1000
+tsuho  Coin = 1
+genbo Coin = 10 tsuho
+shoho Coin = 100 tsuho or 10 genbo
+mon  Coin = 1000 tsuho or 100 genbo or 10 Shoho
 
 need a banking system so that players can store money in the bank 
 need a vault system so that players can store items in a personal vault
-
+need a closet system so that players can store non armor clothing in a closet
 
 

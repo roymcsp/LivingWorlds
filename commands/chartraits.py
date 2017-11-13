@@ -133,7 +133,7 @@ class CmdLevel(MuxCommand):
         xp1 = rulebook.LEVEL[lvl]['xp']
         coin1 = rulebook.LEVEL[lvl]['coins']
         xp2 = rulebook.LEVEL[lvl]['xp'] - tr.XP.actual
-        coin2 = rulebook.LEVEL[lvl]['coins'] - self.caller.wallet
+        coin2 = rulebook.LEVEL[lvl]['coins'] - self.caller.wallet['CP']
         self.caller.msg("|MLEVEL %s ADVANCEMENT"
                         "Advancement will cost %s Experience and %s coins"
                         "|CYou will need %s more Experiance and %s more coins" % (lvl, xp1, coin1, xp2, coin2))
