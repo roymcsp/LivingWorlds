@@ -114,6 +114,7 @@ class CmdVitals(MuxCommand):
         tr = self.caller.traits
         self.caller.msg("|CHP: %s/%s SP: %s/%s EP: %s/%s" % (tr.HP.actual, tr.HP.max, tr.SP.actual, tr.SP.max, tr.EP.actual,tr.EP.max))
 
+
 class CmdLevel(MuxCommand):
     """
     view the experiance points and coin amount required to advance to the next level
@@ -123,14 +124,16 @@ class CmdLevel(MuxCommand):
     """
 
     key = 'level'
-    aliases = ['lvl','lv']
+    aliases = ['lvl', 'lv']
     locks = 'cmd:all()'
 
     def func(self):
         tr = self.caller.traits
         lvl = tr.LVL.actual + 1
+        xp1 = rulebook.LEVEL[lvl]['xp']
+        coin1 = rulebook.LEVEL[lvl]['coins']
+        xp2 = rulebook.LEVEL[lvl]['xp'] - tr.XP.actual
+        coin2 = rulebook.LEVEL[lvl]['coins'] - self.caller.wallet
         self.caller.msg("|MLEVEL %s ADVANCEMENT"
                         "Advancement will cost %s Experience and %s coins"
-                        "|CYou will need %s more Experiance and %s more coins" %(lvl,
-                        rulebook.LEVEL[self.lvl]['xp'],rulebook.LEVEL[self.lvl]['coins'],
-                        rulebook.LEVEL[self.lvl]['xp']- tr.XP.actual, rulebook.LEVEL[self.lvl]['coins'] - self.caller.wallet))
+                        "|CYou will need %s more Experiance and %s more coins" % (lvl, xp1, coin1, xp2, coin2))
