@@ -1,7 +1,7 @@
 """
 Character trait-related commands
 """
-
+from world import rulebook
 from .command import MuxCommand
 from evennia import CmdSet
 from evennia.utils.evform import EvForm, EvTable
@@ -17,6 +17,7 @@ class CharTraitCmdSet(CmdSet):
         self.add(CmdSheet())
         self.add(CmdWealth())
         self.add(CmdVitals())
+        self.add(CmdLevel())
 
 class CmdSheet(MuxCommand):
     """
@@ -112,3 +113,23 @@ class CmdVitals(MuxCommand):
     def func(self):
         tr = self.caller.traits
         self.caller.msg("|CHP: %s/%s SP: %s/%s EP: %s/%s" % (tr.HP.actual, tr.HP.max, tr.SP.actual, tr.SP.max, tr.EP.actual,tr.EP.max))
+
+class CmdLevel(MuxCommand):
+    """
+    view the experiance points and coin amount required to advance to the next level
+    Usage: 
+      Level
+    Displays the requirements for advancing to the next level
+    """
+
+    key = 'level'
+    aliases = ['lvl','lv']
+    locks = 'cmd:all()'
+
+    def func(self):
+        tr = self.caller.traits
+        self.caller.msg("|MLEVEL %s ADVANCEMENT"
+                        "Advancement will cost %s Experience and %s coins"
+                        "|CYou will need %s more Experiance and %s more coins" %(tr.LVL.actual + 1,
+                        rulebook.LEVEL[tr.LVL.actual + 1]['xp'],rulebook.LEVEL[tr.LVL.actual + 1]['coins'],
+                        rulebook.LEVEL[tr.LVL.actual + 1]['xp']- tr.XP.actual, rulebook.LEVEL[tr.LVL.actual + 1]['coins'] - self.caller.wallet))
