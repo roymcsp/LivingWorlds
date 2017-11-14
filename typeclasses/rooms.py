@@ -78,7 +78,6 @@ from evennia import default_cmds
 from evennia import utils
 from evennia.contrib.rpsystem import ContribRPRoom
 from evennia.utils.spawner import spawn
-from evennia.contrib import custom_gametime
 
 # error return function, needed by Extended Look command
 _AT_SEARCH_RESULT = utils.variable_from_module(*settings.SEARCH_AT_RESULT.rsplit('.', 1))
@@ -519,10 +518,7 @@ class CmdGameTime(default_cmds.MuxCommand):
 
     def func(self):
         """Reads time info from current room"""
-        year, month, day, hour, min, sec = custom_gametime.custom_gametime(absolute=True)
-        string = "It's {hour:02}:{min:02}. {month}/{day]/{year]."
-        self.msg(string.format(year=year, month=month, day=day,
-                               hour=hour, min=min, sec=sec))
+
         location = self.caller.location
         if not location or not hasattr(location, "get_time_and_season"):
             self.caller.msg("No location available - you are outside time.")
@@ -531,8 +527,8 @@ class CmdGameTime(default_cmds.MuxCommand):
             prep = "a"
             if season == "autumn":
                 prep = "an"
-            self.caller.msg("It's %s %s day, in the %s." % (prep, season, timeslot,))
-
+            self.caller.msg("It's %s %s day, in the %s. The time is %s:%s on %s, %s, %s" % (prep, season, timeslot,
+                            datetime.hour,datetime.minute,datetime.month,datetime.day,(datetime.year - 700)))
 
 class ChargenRoom(Room):
     """
