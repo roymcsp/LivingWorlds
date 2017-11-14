@@ -213,6 +213,7 @@ class CmdGameTime(default_cmds.MuxCommand):
 
     def func(self):
         """Reads time info from current room"""
+        time = gametime.gametime(absolute = True)
         location = self.caller.location
         if not location or not hasattr(location, "get_time_and_season"):
             self.caller.msg("No location available - you are outside time.")
@@ -221,4 +222,5 @@ class CmdGameTime(default_cmds.MuxCommand):
             prep = "a"
             if season == "autumn":
                 prep = "an"
-            self.caller.msg("It's %s %s day, in the %s." % (prep, season, timeslot))
+                self.caller.msg("It's %s %s day, in the %s. The time is %s:%s on %s, %s, %s"% (prep, season, timeslot,
+                                time.hour, time.minute, time.month, time.day, time.year))
