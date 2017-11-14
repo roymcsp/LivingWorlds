@@ -1,4 +1,5 @@
 from evennia import default_cmds, utils
+from evennia import gametime
 
 class CmdExtendedLook(default_cmds.CmdLook):
     """
