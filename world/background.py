@@ -58,7 +58,7 @@ ALL_BACKGROUNDS = ("Farmer", "Gypsy", "Noble", "Nomad", "Tradesman", "Urchin")
 
 
 def load_background(background):
-    """Returns an instance of the named race class.
+    """Returns an instance of the named background class.
     Args:
         background (str): case-insensitive name of background to load
     Returns:
