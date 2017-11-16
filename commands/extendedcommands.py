@@ -225,7 +225,7 @@ class CmdGameTime(default_cmds.MuxCommand):
                 prep = "an"
                 self.caller.msg("It's %s %s day, in the %s." % (prep, season, timeslot,))
 
-        year, month, day, hour, min, sec = gametime.gametime(absolute=True)
+        year, month, day, hour, min, sec = custom_gametime.custom_gametime(absolute=True)
         string += "\nIt's {hour:02}:{min:02}:{sec:02}."
         string = "\nIt's {month}/{day}/{year}."
         self.caller.msg(string.format(year=year, month=month, day=day,
