@@ -131,7 +131,7 @@ class Urchin(Background):
     def __init__(self):
         super(Urchin, self).__init__()
         self.name = "Urchin"
-        self.cmdset.add(bgpowers.CmdSetUrchin, permanent=True)
+        self.cmdset.add(bgpowers.UrchinCmdSet, permanent=True)
         for key, kwargs in URCHIN_SKILLS.iteritems():
             self.skills.add(key, **kwargs)
 
@@ -141,7 +141,7 @@ class Noble(Background):
     def __init__(self):
         super(Noble, self).__init__()
         self.name = 'Noble'
-        self.cmdset.add(bgpowers.CmdSetNoble, permanent=True)
+        self.cmdset.add(bgpowers.NobleCmdSet, permanent=True)
         for key, kwargs in NOBLE_SKILLS.iteritems():
             self.skills.add(key, **kwargs)
 
@@ -151,7 +151,7 @@ class Nomad(Background):
     def __init__(self):
         super(Nomad, self).__init__()
         self.name = "Nomad"
-        self.cmdset.add(bgpowers.CmdSetNomad, permanent=True)
+        self.cmdset.add(bgpowers.NomadCmdSet, permanent=True)
         for key, kwargs in NOMAD_SKILLS.iteritems():
             self.skills.add(key, **kwargs)
 
@@ -161,7 +161,7 @@ class Gypsy(Background):
     def __init__(self):
         super(Gypsy, self). __init__()
         self.name = 'Gypsy'
-        self.cmdset.add(bgpowers.CmdSetGpysy, permanent=True)
+        self.cmdset.add(bgpowers.GpysyCmdSet, permanent=True)
         for key, kwargs in GYPSY_SKILLS.iteritems():
             self.skills.add(key, **kwargs)
 
@@ -171,7 +171,7 @@ class Farmer(Background):
     def __init__(self):
         super(Farmer, self). __init__()
         self.name = 'Farmer'
-        self.cmdset.add(bgpowers.CmdSetFarmer, permanent=True)
+        self.cmdset.add(bgpowers.FarmerCmdSet, permanent=True)
         for key, kwargs in FARMER_SKILLS.iteritems():
             self.skills.add(key, **kwargs)
 
@@ -181,6 +181,6 @@ class Tradesman(Background):
     def __init__(self):
         super(Tradesman, self). __init__()
         self.name = 'Tradesman'
-        self.cmdset.add(bgpowers.CmdSetTradesman, permanent=True)
+        self.cmdset.add(bgpowers.TradesmanCmdSet, permanent=True)
         for key, kwargs in TRADESMAN_SKILLS.iteritems():
             self.skills.add(key, **kwargs)
