@@ -204,6 +204,10 @@ class Character(GenderCharacter):
         return TraitHandler(self)
 
     @lazy_property
+    def skills(self):
+        return TraitHandler(self)
+
+    @lazy_property
     def equip(self):
         """Handler for equipped items."""
         return EquipHandler(self)
