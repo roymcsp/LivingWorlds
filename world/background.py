@@ -90,7 +90,7 @@ class BackgroundException(Exception):
 ALL_BACKGROUNDS = ("Farmer", "Gypsy", "Noble", "Nomad", "Tradesman", "Urchin")
 
 
-def load_background(background):
+def load_background(background, character):
     """Returns an instance of the named background class.
     Args:
         background (str): case-insensitive name of background to load
@@ -101,7 +101,7 @@ def load_background(background):
     background = background.strip().capitalize()
 
     if background in ALL_BACKGROUNDS:
-        return globals()[background]()
+        return globals()[background](character)
     else:
         raise BackgroundException("Invalid background specified.")
 
