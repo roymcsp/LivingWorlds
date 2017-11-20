@@ -45,7 +45,7 @@ class CmdBackground(Command):
 
     def func(self):
         caller = self.caller
-        args = self.args.strip().lower
+        args = self.args.strip().lower()
         background = caller.db.background
         if background in ALL_BACKGROUNDS:
             bgmsg = "You have aready chosen your background"
