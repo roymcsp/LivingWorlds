@@ -22,15 +22,23 @@ Module Functions
 
     - `apply_background(character, background)`:
         have a character "become" a member of the specified background with
-        the specified background ability
+        the specified background command
     """
 
 from evennia import Command
 from commands.powers import bgpowers
 
 class CmdBackground(Command):
-    """This is the command string that will assign a background onto a character,
-     and the cooresponding command set and skills."""
+    """
+    command for setting the background on the character
+    takes one arg in the form of the background name
+    
+    args:
+    
+    
+    Usage:
+       select <background>
+    """
 
     key = "choose"
     locks = "cmd:all()"
@@ -48,7 +56,7 @@ class CmdBackground(Command):
 
 
 class BackgroundException(Exception):
-    """Base exception class for races module."""
+    """Base exception class for background module."""
 
     def __init__(self, msg):
         self.msg = msg
@@ -65,7 +73,7 @@ def load_background(background):
         (Background): instance of the appropriate subclass of `Background`
     """
 
-    background = background.strip().capitalize()
+    background = background.capitalize()
 
     if background in ALL_BACKGROUNDS:
         return globals()[background]()
@@ -159,5 +167,3 @@ class Tradesman(Background):
         super(Tradesman, self). __init__()
         self.name = 'Tradesman'
         self.cmdset.add(bgpowers.CmdSetTradesman, permanent=True)
-
-
