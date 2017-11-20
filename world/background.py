@@ -73,7 +73,7 @@ def load_background(background):
         (Background): instance of the appropriate subclass of `Background`
     """
 
-    background = background.capitalize()
+    background = background.strip().capitalize()
 
     if background in ALL_BACKGROUNDS:
         return globals()[background]()
