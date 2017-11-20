@@ -115,7 +115,7 @@ def apply_background(character, background):
     if isinstance(background, Background):
         background = background.name
 
-    background = load_background(background)
+    background = load_background(background, character)
 
     character.db.background = background.name
     character.message('Your background has been set to {}.' .format(background.name))
