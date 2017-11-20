@@ -1,6 +1,6 @@
 import time
 from evennia import create_object, utils
-from command import MuxCommand
+from evennia.commands.command import MuxCommand
 
 
 class CmdUrchin(MuxCommand):
