@@ -26,7 +26,7 @@ Module Functions
     """
 
 from evennia import Command
-from powers import bgpowers
+from commands.powers import bgpowers
 
 class CmdBackground(Command):
     """This is the command string that will assign a background onto a character,
