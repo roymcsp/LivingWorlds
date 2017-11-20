@@ -37,7 +37,7 @@ class CmdBackground(Command):
     
     
     Usage:
-       select <background>
+       choose <background>
     """
 
     key = "choose"
