@@ -17,7 +17,7 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 from evennia import default_cmds
 from evennia import CmdSet
 from commands import chargen, movecommands, sensorycommands, extendedcommands, equip, chartraits
-from world import races
+from world import races, background
 
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
@@ -123,3 +123,13 @@ class ChargenRaceGenderCmdset(CmdSet):
     def at_cmdset_creation(self):
         self.add(chargen.CmdGender())
         self.add(races.CmdRace())
+
+class ChargenBackgroundCmdset(CmdSet):
+    """
+    This cmdset is used in character generation to set background 
+    """
+    key = 'Chargen'
+
+    def at_cmdset_creation(self):
+        self.add(background.CmdBackground())
+

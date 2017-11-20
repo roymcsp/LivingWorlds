@@ -30,14 +30,14 @@ class CmdUrchin(MuxCommand):
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL)
+        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
         utils.delay(1, callback=self.fortify_will)
 
     def fortify_will(self):
         caller = self.caller
         mess1 = '{m.You focus your mind on survival{n '
         caller.msg(mess1)
-        caller.db.traits.WILL.mod += (caller.db.skills.focus.current / 5)
+        caller.db.traits.WILL.mod += (caller.db.skills.FOC.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.willpower_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_will)
@@ -46,7 +46,7 @@ class CmdUrchin(MuxCommand):
         caller = self.caller
         mess2 = '{mYou relax your focus.{n '
         caller.msg(mess2)
-        caller.db.traits.WILL.mod -= (caller.db.skills.focus.current / 5)
+        caller.db.traits.WILL.mod -= (caller.db.skills.FOC.current / 5)
 
 
 class UrchinCmdSet(CmdSet):
@@ -86,14 +86,14 @@ class CmdNoble(MuxCommand):
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL)
+        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
         utils.delay(1, callback=self.fortify_defense)
 
     def fortify_defense(self):
         caller = self.caller
         mess1 = '{mYou stand up straight exhibiting an aura of leadership.{n '
         caller.msg(mess1)
-        caller.db.traits.MDEF.mod += (caller.db.skills.leadership.current / 5)
+        caller.db.traits.MDEF.mod += (caller.db.skills.LEA.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.presence_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_defense)
@@ -102,7 +102,7 @@ class CmdNoble(MuxCommand):
         caller = self.caller
         mess2 = '{mYour aura of leadership fades as you relax.{n '
         caller.msg(mess2)
-        caller.db.traits.MDEF.mod -= (caller.db.skills.leadership.current / 5)
+        caller.db.traits.MDEF.mod -= (caller.db.skills.LEA.current / 5)
 
 
 class NobleCmdSet(CmdSet):
@@ -143,14 +143,14 @@ class CmdNomad(MuxCommand):
                 mess = "You cannot cast this again so soon"
                 caller.msg(mess)
                 return
-            caller.db.traits.SP.current -= (10 + caller.db.traits.LVL)
+            caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
             utils.delay(1, callback=self.fortify_fortitude)
 
         def fortify_fortitude(self):
             caller = self.caller
             mess1 = '{mYou take on a defensive stance.{n '
             caller.msg(mess1)
-            caller.db.traits.FORT.mod += (caller.db.skills.martial.current / 5)
+            caller.db.traits.FORT.mod += (caller.db.skills.MAR.current / 5)
             # if the spell was successfully cast, store the casting time
             caller.db.fortitude_lastcast = time.time()
             utils.delay(2 * 60, callback=self.unfortify_fortitude)
@@ -159,7 +159,7 @@ class CmdNomad(MuxCommand):
             caller = self.caller
             mess2 = '{mYou relax your defenses .{n '
             caller.msg(mess2)
-            caller.db.traits.FORT.mod -= (caller.db.skills.martial.current / 5)
+            caller.db.traits.FORT.mod -= (caller.db.skills.MAR.current / 5)
 
 
 class NomadCmdSet(CmdSet):
@@ -200,14 +200,14 @@ class CmdGypsy(MuxCommand):
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL)
+        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
         utils.delay(1, callback=self.fortify_reflex)
 
     def fortify_reflex(self):
         caller = self.caller
         mess1 = '{mYou move lithely as a dancer.{n '
         caller.msg(mess1)
-        caller.db.traits.REFL.mod += (caller.db.skills.dodge.current / 5)
+        caller.db.traits.REFL.mod += (caller.db.skills.DOD.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.reflex_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_reflex)
@@ -216,7 +216,7 @@ class CmdGypsy(MuxCommand):
         caller = self.caller
         mess2 = '{mYou no longer move about lithely.{n '
         caller.msg(mess2)
-        caller.db.traits.REFL.mod -= (caller.db.skills.dodge.current / 5)
+        caller.db.traits.REFL.mod -= (caller.db.skills.DOD.current / 5)
 
 
 class GypsyCmdSet(CmdSet):
@@ -239,9 +239,8 @@ class CmdFarmer(MuxCommand):
 
     Description:
 
-    A simple spell that allows a sorcerer to create
-    a cursed bone that is  a material component for 
-    many of the sorcerers spells. 
+    A simple spell that allows a farmer to create
+    an edible item. 
     """
 
     key = "harvest"
@@ -255,7 +254,7 @@ class CmdFarmer(MuxCommand):
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL)
+        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
         utils.delay(1, callback=self.fortify_armor)
 
     def fortify_armor(self):
@@ -310,14 +309,14 @@ class CmdTradesman(MuxCommand):
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL)
+        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
         utils.delay(1, callback=self.fortify_armor)
 
     def fortify_armor(self):
         caller = self.caller
         mess1 = '{mYou take out a vial of oil and fortify your armor.{n '
         caller.msg(mess1)
-        caller.db.traits.PDEF.mod += (caller.db.skills.forge.current / 5)
+        caller.db.traits.PDEF.mod += (caller.db.skills.ORG.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.fortify_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_armor)
@@ -326,7 +325,7 @@ class CmdTradesman(MuxCommand):
         caller = self.caller
         mess2 = '{mThe fortification wears off of your armor.{n '
         caller.msg(mess2)
-        caller.db.traits.PDEF.mod -= (caller.db.skills.forge.current / 5)
+        caller.db.traits.PDEF.mod -= (caller.db.skills.ORG.current / 5)
 
 
 class TradesmanCmdSet(CmdSet):

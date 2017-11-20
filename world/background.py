@@ -91,9 +91,15 @@ def apply_background(character, background):
 class Background(object):
     def __init__(self):
         self.name = ""
+        for key, kwargs in skills.iteritems():
+            self.skills.add(key, **kwargs)
 
 
 class Urchin(Background):
+    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+              'FOC': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Focus'},}
+
     def __init__(self):
         super(Urchin, self).__init__()
         self.name = "Urchin"
@@ -101,6 +107,10 @@ class Urchin(Background):
 
 
 class Noble(Background):
+    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+              'LEA': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Leadership'},}
+
     def __init__(self):
         super(Noble, self).__init__()
         self.name = 'Noble'
@@ -108,6 +118,10 @@ class Noble(Background):
 
 
 class Nomad(Background):
+    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+              'MAR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Martial'},}
+
     def __init__(self):
         super(Nomad, self).__init__()
         self.name = "Nomad"
@@ -115,6 +129,10 @@ class Nomad(Background):
 
 
 class Gypsy(Background):
+    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+              'DOD': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Dodge'},}
+
     def __init__(self):
         super(Gypsy, self). __init__()
         self.name = 'Gypsy'
@@ -122,6 +140,10 @@ class Gypsy(Background):
 
 
 class Farmer(Background):
+    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+              'ORG': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Organize'},}
+
     def __init__(self):
         super(Farmer, self). __init__()
         self.name = 'Farmer'
@@ -129,6 +151,10 @@ class Farmer(Background):
 
 
 class Tradesman(Background):
+    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+              'FOR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Forge'},}
+
     def __init__(self):
         super(Tradesman, self). __init__()
         self.name = 'Tradesman'
