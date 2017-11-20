@@ -127,7 +127,6 @@ class Background(object):
 
 
 class Urchin(Background):
-
     def __init__(self):
         super(Urchin, self).__init__()
         self.name = "Urchin"
@@ -137,7 +136,6 @@ class Urchin(Background):
 
 
 class Noble(Background):
-
     def __init__(self):
         super(Noble, self).__init__()
         self.name = 'Noble'
@@ -147,7 +145,6 @@ class Noble(Background):
 
 
 class Nomad(Background):
-
     def __init__(self):
         super(Nomad, self).__init__()
         self.name = "Nomad"
@@ -157,7 +154,6 @@ class Nomad(Background):
 
 
 class Gypsy(Background):
-
     def __init__(self):
         super(Gypsy, self). __init__()
         self.name = 'Gypsy'
@@ -167,7 +163,6 @@ class Gypsy(Background):
 
 
 class Farmer(Background):
-
     def __init__(self):
         super(Farmer, self). __init__()
         self.name = 'Farmer'
@@ -177,7 +172,6 @@ class Farmer(Background):
 
 
 class Tradesman(Background):
-
     def __init__(self):
         super(Tradesman, self). __init__()
         self.name = 'Tradesman'
