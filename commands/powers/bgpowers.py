@@ -1,5 +1,5 @@
 import time
-from evennia import create_object, utils
+from evennia import create_object, utils, CmdSet
 from evennia.commands.default.muxcommand import MuxCommand
 
 
