@@ -122,59 +122,59 @@ def apply_background(character, background):
 
 
 class Background(object):
-    def __init__(self):
+    def __init__(self, character):
         self.name = ""
 
 
 class Urchin(Background):
-    def __init__(self):
-        super(Urchin, self).__init__()
+    def __init__(self, character):
+        super(Urchin, self).__init__(character)
         self.name = "Urchin"
-        self.caller.cmdset.add(bgpowers.UrchinCmdSet, permanent=True)
+        character.cmdset.add(bgpowers.UrchinCmdSet, permanent=True)
         for key, kwargs in URCHIN_SKILLS.iteritems():
-            self.caller.skills.add(key, **kwargs)
+            character.skills.add(key, **kwargs)
 
 
 class Noble(Background):
-    def __init__(self):
-        super(Noble, self).__init__()
+    def __init__(self, character):
+        super(Noble, self).__init__(character)
         self.name = 'Noble'
-        self.caller.cmdset.add(bgpowers.NobleCmdSet, permanent=True)
+        character.cmdset.add(bgpowers.NobleCmdSet, permanent=True)
         for key, kwargs in NOBLE_SKILLS.iteritems():
-            self.caller.skills.add(key, **kwargs)
+            character.skills.add(key, **kwargs)
 
 
 class Nomad(Background):
-    def __init__(self):
-        super(Nomad, self).__init__()
+    def __init__(self, character):
+        super(Nomad, self).__init__(character)
         self.name = "Nomad"
-        self.caller.cmdset.add(bgpowers.NomadCmdSet, permanent=True)
+        character.cmdset.add(bgpowers.NomadCmdSet, permanent=True)
         for key, kwargs in NOMAD_SKILLS.iteritems():
-            self.caller.skills.add(key, **kwargs)
+            character.skills.add(key, **kwargs)
 
 
 class Gypsy(Background):
-    def __init__(self):
-        super(Gypsy, self). __init__()
+    def __init__(self, character):
+        super(Gypsy, self). __init__(character)
         self.name = 'Gypsy'
-        self.caller.cmdset.add(bgpowers.GpysyCmdSet, permanent=True)
+        character.cmdset.add(bgpowers.GpysyCmdSet, permanent=True)
         for key, kwargs in GYPSY_SKILLS.iteritems():
-            self.caller.skills.add(key, **kwargs)
+            character.skills.add(key, **kwargs)
 
 
 class Farmer(Background):
-    def __init__(self):
-        super(Farmer, self). __init__()
+    def __init__(self, character):
+        super(Farmer, self). __init__(character)
         self.name = 'Farmer'
-        self.caller.cmdset.add(bgpowers.FarmerCmdSet, permanent=True)
+        character.cmdset.add(bgpowers.FarmerCmdSet, permanent=True)
         for key, kwargs in FARMER_SKILLS.iteritems():
-            self.caller.skills.add(key, **kwargs)
+            character.skills.add(key, **kwargs)
 
 
 class Tradesman(Background):
-    def __init__(self):
-        super(Tradesman, self). __init__()
+    def __init__(self, character):
+        super(Tradesman, self). __init__(character)
         self.name = 'Tradesman'
-        self.caller.cmdset.add(bgpowers.TradesmanCmdSet, permanent=True)
+        character.cmdset.add(bgpowers.TradesmanCmdSet, permanent=True)
         for key, kwargs in TRADESMAN_SKILLS.iteritems():
-            self.caller.skills.add(key, **kwargs)
+            character.skills.add(key, **kwargs)
