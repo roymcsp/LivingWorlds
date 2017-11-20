@@ -38,7 +38,7 @@ class CmdUrchin(MuxCommand):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess1 = '{m.You focus your mind on survival{n '
+        mess1 = '|m.You focus your mind on survival|n '
         caller.msg(mess1)
         tr.WILL.mod += (sk.FOC.current / 5)
         # if the spell was successfully cast, store the casting time
@@ -49,7 +49,7 @@ class CmdUrchin(MuxCommand):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess2 = '{mYou relax your focus.{n '
+        mess2 = '|mYou relax your focus.|n '
         caller.msg(mess2)
         tr.WILL.mod -= (sk.FOC.current / 5)
 
@@ -99,7 +99,7 @@ class CmdNoble(MuxCommand):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess1 = '{mYou stand up straight exhibiting an aura of leadership.{n '
+        mess1 = '|mYou stand up straight exhibiting an aura of leadership.|n '
         caller.msg(mess1)
         tr.MDEF.mod += (sk.LEA.current / 5)
         # if the spell was successfully cast, store the casting time
@@ -110,7 +110,7 @@ class CmdNoble(MuxCommand):
         tr = self.caller.traits
         sk = self.caller.skills
         caller = self.caller
-        mess2 = '{mYour aura of leadership fades as you relax.{n '
+        mess2 = '|mYour aura of leadership fades as you relax.|n '
         caller.msg(mess2)
         tr.MDEF.mod -= (sk.LEA.current / 5)
 
@@ -162,7 +162,7 @@ class CmdNomad(MuxCommand):
             caller = self.caller
             tr = self.caller.traits
             sk = self.caller.skills
-            mess1 = '{mYou take on a defensive stance.{n '
+            mess1 = '|mYou take on a defensive stance.|n '
             caller.msg(mess1)
             tr.FORT.mod += (sk.MAR.current / 5)
             # if the spell was successfully cast, store the casting time
@@ -173,7 +173,7 @@ class CmdNomad(MuxCommand):
             caller = self.caller
             tr = self.caller.traits
             sk = self.caller.skills
-            mess2 = '{mYou relax your defenses .{n '
+            mess2 = '|mYou relax your defenses.|n '
             caller.msg(mess2)
             tr.FORT.mod -= (sk.MAR.current / 5)
 
@@ -224,7 +224,7 @@ class CmdGypsy(MuxCommand):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess1 = '{mYou move lithely as a dancer.{n '
+        mess1 = '|mYou move lithely as a dancer.|n '
         caller.msg(mess1)
         tr.REFL.mod += (sk.DOD.current / 5)
         # if the spell was successfully cast, store the casting time
@@ -235,7 +235,7 @@ class CmdGypsy(MuxCommand):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess2 = '{mYou no longer move about lithely.{n '
+        mess2 = '|mYou no longer move about lithely.|n '
         caller.msg(mess2)
         tr.REFL.mod -= (sk.DOD.current / 5)
 
@@ -283,7 +283,7 @@ class CmdFarmer(MuxCommand):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess1 = '{mYou take out a vial of oil and fortify your armor.{n '
+        mess1 = '|mYou take out a vial of oil and fortify your armor.|n '
         caller.msg(mess1)
         tr.PDEF.mod += (sk.FOR.current / 5)
         # if the spell was successfully cast, store the casting time
@@ -294,7 +294,7 @@ class CmdFarmer(MuxCommand):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess2 = '{mYour armor loses its fortification.{n '
+        mess2 = '|mYour armor loses its fortification.|n '
         caller.msg(mess2)
         tr.PDEF.mod -= (sk.forge.current / 5)
 
@@ -343,7 +343,7 @@ class CmdTradesman(MuxCommand):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess1 = '{mYou take out a vial of oil and fortify your armor.{n '
+        mess1 = '|mYou take out a vial of oil and fortify your armor.|n '
         caller.msg(mess1)
         tr.PDEF.mod += (sk.ORG.current / 5)
         # if the spell was successfully cast, store the casting time
@@ -354,7 +354,7 @@ class CmdTradesman(MuxCommand):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess2 = '{mThe fortification wears off of your armor.{n '
+        mess2 = '|mThe fortification wears off of your armor.|n '
         caller.msg(mess2)
         tr.PDEF.mod -= (sk.ORG.current / 5)
 
