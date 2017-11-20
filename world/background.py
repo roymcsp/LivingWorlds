@@ -28,6 +28,31 @@ Module Functions
 from evennia import Command
 from commands.powers import bgpowers
 
+URCHIN_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+                 'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+                 'FOC': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Focus'},}
+
+NOBLE_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+                'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+                'LEA': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Leadership'},}
+
+NOMAD_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+                'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+                'MAR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Martial'},}
+
+GYPSY_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+              'DOD': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Dodge'},}
+
+FARMER_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+              'ORG': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Organize'},}
+
+TRADESMAN_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+              'FOR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Forge'},}
+
+
 class CmdBackground(Command):
     """
     command for setting the background on the character
@@ -99,71 +124,63 @@ def apply_background(character, background):
 class Background(object):
     def __init__(self):
         self.name = ""
-        for key, kwargs in skills.iteritems():
-            self.skills.add(key, **kwargs)
 
 
 class Urchin(Background):
-    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-              'FOC': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Focus'},}
 
     def __init__(self):
         super(Urchin, self).__init__()
         self.name = "Urchin"
         self.cmdset.add(bgpowers.CmdSetUrchin, permanent=True)
+        for key, kwargs in URCHIN_SKILLS.iteritems():
+            self.skills.add(key, **kwargs)
 
 
 class Noble(Background):
-    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-              'LEA': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Leadership'},}
 
     def __init__(self):
         super(Noble, self).__init__()
         self.name = 'Noble'
         self.cmdset.add(bgpowers.CmdSetNoble, permanent=True)
+        for key, kwargs in NOBLE_SKILLS.iteritems():
+            self.skills.add(key, **kwargs)
 
 
 class Nomad(Background):
-    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-              'MAR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Martial'},}
 
     def __init__(self):
         super(Nomad, self).__init__()
         self.name = "Nomad"
         self.cmdset.add(bgpowers.CmdSetNomad, permanent=True)
+        for key, kwargs in NOMAD_SKILLS.iteritems():
+            self.skills.add(key, **kwargs)
 
 
 class Gypsy(Background):
-    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-              'DOD': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Dodge'},}
 
     def __init__(self):
         super(Gypsy, self). __init__()
         self.name = 'Gypsy'
         self.cmdset.add(bgpowers.CmdSetGpysy, permanent=True)
+        for key, kwargs in GYPSY_SKILLS.iteritems():
+            self.skills.add(key, **kwargs)
 
 
 class Farmer(Background):
-    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-              'ORG': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Organize'},}
 
     def __init__(self):
         super(Farmer, self). __init__()
         self.name = 'Farmer'
         self.cmdset.add(bgpowers.CmdSetFarmer, permanent=True)
+        for key, kwargs in FARMER_SKILLS.iteritems():
+            self.skills.add(key, **kwargs)
 
 
 class Tradesman(Background):
-    skills = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-              'FOR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Forge'},}
 
     def __init__(self):
         super(Tradesman, self). __init__()
         self.name = 'Tradesman'
         self.cmdset.add(bgpowers.CmdSetTradesman, permanent=True)
+        for key, kwargs in TRADESMAN_SKILLS.iteritems():
+            self.skills.add(key, **kwargs)
