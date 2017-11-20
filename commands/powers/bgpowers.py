@@ -25,28 +25,33 @@ class CmdUrchin(MuxCommand):
 
     def func(self):
         caller = self.caller
+        tr = self.caller.traits
         lastcast = caller.db.willpower_lastcast
         if lastcast and time.time() - lastcast < 2 * 60:
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
+        tr.SP.current -= (10 + tr.LVL.actual)
         utils.delay(1, callback=self.fortify_will)
 
     def fortify_will(self):
         caller = self.caller
+        tr = self.caller.traits
+        sk = self.caller.skills
         mess1 = '{m.You focus your mind on survival{n '
         caller.msg(mess1)
-        caller.db.traits.WILL.mod += (caller.db.skills.FOC.current / 5)
+        tr.WILL.mod += (sk.FOC.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.willpower_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_will)
 
     def unfortify_will(self):
         caller = self.caller
+        tr = self.caller.traits
+        sk = self.caller.skills
         mess2 = '{mYou relax your focus.{n '
         caller.msg(mess2)
-        caller.db.traits.WILL.mod -= (caller.db.skills.FOC.current / 5)
+        tr.WILL.mod -= (sk.FOC.current / 5)
 
 
 class UrchinCmdSet(CmdSet):
@@ -81,28 +86,33 @@ class CmdNoble(MuxCommand):
 
     def func(self):
         caller = self.caller
+        tr = self.caller.traits
         lastcast = caller.db.presence_lastcast
         if lastcast and time.time() - lastcast < 2 * 60:
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
+        tr.SP.current -= (10 + tr.LVL.actual)
         utils.delay(1, callback=self.fortify_defense)
 
     def fortify_defense(self):
         caller = self.caller
+        tr = self.caller.traits
+        sk = self.caller.skills
         mess1 = '{mYou stand up straight exhibiting an aura of leadership.{n '
         caller.msg(mess1)
-        caller.db.traits.MDEF.mod += (caller.db.skills.LEA.current / 5)
+        tr.MDEF.mod += (sk.LEA.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.presence_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_defense)
 
     def unfortify_defense(self):
+        tr = self.caller.traits
+        sk = self.caller.skills
         caller = self.caller
         mess2 = '{mYour aura of leadership fades as you relax.{n '
         caller.msg(mess2)
-        caller.db.traits.MDEF.mod -= (caller.db.skills.LEA.current / 5)
+        tr.MDEF.mod -= (sk.LEA.current / 5)
 
 
 class NobleCmdSet(CmdSet):
@@ -138,28 +148,34 @@ class CmdNomad(MuxCommand):
 
         def func(self):
             caller = self.caller
+            tr = self.caller.traits
+            sk = self.caller.skills
             lastcast = caller.db.fortitude_lastcast
             if lastcast and time.time() - lastcast < 2 * 60:
                 mess = "You cannot cast this again so soon"
                 caller.msg(mess)
                 return
-            caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
+            tr.SP.current -= (10 + tr.LVL.actual)
             utils.delay(1, callback=self.fortify_fortitude)
 
         def fortify_fortitude(self):
             caller = self.caller
+            tr = self.caller.traits
+            sk = self.caller.skills
             mess1 = '{mYou take on a defensive stance.{n '
             caller.msg(mess1)
-            caller.db.traits.FORT.mod += (caller.db.skills.MAR.current / 5)
+            tr.FORT.mod += (sk.MAR.current / 5)
             # if the spell was successfully cast, store the casting time
             caller.db.fortitude_lastcast = time.time()
             utils.delay(2 * 60, callback=self.unfortify_fortitude)
 
         def unfortify_fortitude(self):
             caller = self.caller
+            tr = self.caller.traits
+            sk = self.caller.skills
             mess2 = '{mYou relax your defenses .{n '
             caller.msg(mess2)
-            caller.db.traits.FORT.mod -= (caller.db.skills.MAR.current / 5)
+            tr.FORT.mod -= (sk.MAR.current / 5)
 
 
 class NomadCmdSet(CmdSet):
@@ -195,28 +211,33 @@ class CmdGypsy(MuxCommand):
 
     def func(self):
         caller = self.caller
+        tr = self.caller.traits
         lastcast = caller.db.reflex_lastcast
         if lastcast and time.time() - lastcast < 2 * 60:
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
+        tr.SP.current -= (10 + tr.LVL.actual)
         utils.delay(1, callback=self.fortify_reflex)
 
     def fortify_reflex(self):
         caller = self.caller
+        tr = self.caller.traits
+        sk = self.caller.skills
         mess1 = '{mYou move lithely as a dancer.{n '
         caller.msg(mess1)
-        caller.db.traits.REFL.mod += (caller.db.skills.DOD.current / 5)
+        tr.REFL.mod += (sk.DOD.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.reflex_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_reflex)
 
     def unfortify_reflex(self):
         caller = self.caller
+        tr = self.caller.traits
+        sk = self.caller.skills
         mess2 = '{mYou no longer move about lithely.{n '
         caller.msg(mess2)
-        caller.db.traits.REFL.mod -= (caller.db.skills.DOD.current / 5)
+        tr.REFL.mod -= (sk.DOD.current / 5)
 
 
 class GypsyCmdSet(CmdSet):
@@ -249,28 +270,33 @@ class CmdFarmer(MuxCommand):
 
     def func(self):
         caller = self.caller
+        tr = self.caller.traits
         lastcast = caller.db.harvest_lastcast
         if lastcast and time.time() - lastcast < 2 * 60:
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
+        tr.SP.current -= (10 + tr.LVL.actual)
         utils.delay(1, callback=self.fortify_armor)
 
     def fortify_armor(self):
         caller = self.caller
+        tr = self.caller.traits
+        sk = self.caller.skills
         mess1 = '{mYou take out a vial of oil and fortify your armor.{n '
         caller.msg(mess1)
-        caller.db.traits.PDEF.mod += (caller.db.skills.forge.current / 5)
+        tr.PDEF.mod += (sk.FOR.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.harvest_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_armor)
 
     def unfortify_armor(self):
         caller = self.caller
+        tr = self.caller.traits
+        sk = self.caller.skills
         mess2 = '{mYour armor loses its fortification.{n '
         caller.msg(mess2)
-        caller.db.traits.PDEF.mod -= (caller.db.skills.forge.current / 5)
+        tr.PDEF.mod -= (sk.forge.current / 5)
 
 
 class FarmerCmdSet(CmdSet):
@@ -304,28 +330,33 @@ class CmdTradesman(MuxCommand):
 
     def func(self):
         caller = self.caller
+        tr = self.caller.traits
         lastcast = caller.db.fortify_lastcast
         if lastcast and time.time() - lastcast < 2 * 60:
             mess = "You cannot cast this again so soon"
             caller.msg(mess)
             return
-        caller.db.traits.SP.current -= (10 + caller.db.traits.LVL.actual)
+        tr.SP.current -= (10 + tr.LVL.actual)
         utils.delay(1, callback=self.fortify_armor)
 
     def fortify_armor(self):
         caller = self.caller
+        tr = self.caller.traits
+        sk = self.caller.skills
         mess1 = '{mYou take out a vial of oil and fortify your armor.{n '
         caller.msg(mess1)
-        caller.db.traits.PDEF.mod += (caller.db.skills.ORG.current / 5)
+        tr.PDEF.mod += (sk.ORG.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.fortify_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_armor)
 
     def unfortify_armor(self):
         caller = self.caller
+        tr = self.caller.traits
+        sk = self.caller.skills
         mess2 = '{mThe fortification wears off of your armor.{n '
         caller.msg(mess2)
-        caller.db.traits.PDEF.mod -= (caller.db.skills.ORG.current / 5)
+        tr.PDEF.mod -= (sk.ORG.current / 5)
 
 
 class TradesmanCmdSet(CmdSet):
