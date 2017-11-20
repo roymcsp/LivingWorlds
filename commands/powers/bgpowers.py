@@ -76,7 +76,7 @@ class CmdNoble(MuxCommand):
     """
 
     key = "presence"
-    locks = "cmd:attr(background, 'Noble')"
+    locks = "cmd:attr(background, Noble)"
     help_category = "commands"
 
     def func(self):
