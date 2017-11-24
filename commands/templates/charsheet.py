@@ -8,7 +8,7 @@ FORMCHAR = "x"
 TABLECHAR = "o"
 
 FORM = """
-=-=-=-=-=-=-=-=-=-=-=-=-|C[ |rInventory |C]|n-=-=-=-=-=-=-=-=-=-=-=-=-o
+=-=-=-=-=-=-=-=-=-=-=-=-|C[ |rCharacter Sheet |C]|n-=-=-=-=-=-=-=-=-=-=-=-=-o
                                                                     ||
 Name : xAxxxxxxxx                          |CStrength|n     : xLxx      ||
 Race : xBxxxxxxxx                          |CDexterity|n    : xMxx      ||

@@ -157,6 +157,7 @@ class Race(object):
             'wield2': None,
             'helm': None,
             'necklace': None,
+            'cloak': None,
             'torso': None,
             'belt': None,
             'bracers': None,
@@ -167,6 +168,7 @@ class Race(object):
             # clothing slots
             'hat': None,
             'accessory': None,
+            'overtop': None,
             'top': None,
             'bottom': None,
             'belt2': None,
@@ -182,6 +184,7 @@ class Race(object):
             ('l_hand', ('wield2',)),
             ('head', ('helm', 'hat')),
             ('neck', ('necklace', 'accessory',)),
+            ('back', ('cloak', 'overtop')),
             ('body', ('torso', 'top',)),
             ('waist', ('belt', 'belt2', 'bottom',)),
             ('wrists', ('bracers', 'accessory2',)),

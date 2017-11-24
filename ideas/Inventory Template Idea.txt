@@ -1,0 +1,35 @@
+
+=-=-=-=-=-=-=-=-=-=-=-=-|C[ |rInventory |C]|n-=-=-=-=-=-=-=-=-=-=-=-=-o
+        Inventory
+    Weight:  current(max)
+  Number of Items:
+===============================
+Wielding : Weapon/shield.
+           Weapon2/shield
+  Armour : head armor
+           necklace
+           back armor
+           hand armor
+           finger armor1
+           finger armor 2
+           wrist armor
+           body armor
+           waist armor
+           feet armor
+Clothing : head clothing
+           neck accessory
+           back clothing
+           hand clothing
+           finger accessory 1
+           finger accessory 2
+           wrist accessory
+           top clothing
+           waist clothing
+           bottem clothing
+           feet clothing
+Carrying : Backpack.
+           pouch.
+           pouch.
+           items
+You are currently carrying <coin amounts>
+===============================

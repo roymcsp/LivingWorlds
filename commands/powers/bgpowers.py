@@ -139,7 +139,7 @@ class CmdNomad(MuxCommand):
         their training and upbringing in harsh lands to  
         fortify their bodies to shrug off many harmful 
         poisons and debilitating effects.How effective 
-        this is accomplished is based upon the martial skill.
+        this is accomplished  is based upon the martial skill.
         """
 
         key = "fortitude"
@@ -277,26 +277,17 @@ class CmdFarmer(MuxCommand):
             caller.msg(mess)
             return
         tr.SP.current -= (10 + tr.LVL.actual)
-        utils.delay(1, callback=self.fortify_armor)
+        utils.delay(1, callback=self.harvest)
 
-    def fortify_armor(self):
+    def harvest(self):
         caller = self.caller
         tr = self.caller.traits
         sk = self.caller.skills
-        mess1 = '|mYou take out a vial of oil and fortify your armor.|n '
+        mess1 = '|mDrawing upon your skill, you create a vegetable.|n '
         caller.msg(mess1)
-        tr.PDEF.mod += (sk.FOR.current / 5)
+        tr.HP.current += (10 + (sk.ORG.current / 5))
         # if the spell was successfully cast, store the casting time
         caller.db.harvest_lastcast = time.time()
-        utils.delay(2 * 60, callback=self.unfortify_armor)
-
-    def unfortify_armor(self):
-        caller = self.caller
-        tr = self.caller.traits
-        sk = self.caller.skills
-        mess2 = '|mYour armor loses its fortification.|n '
-        caller.msg(mess2)
-        tr.PDEF.mod -= (sk.forge.current / 5)
 
 
 class FarmerCmdSet(CmdSet):
@@ -345,7 +336,7 @@ class CmdTradesman(MuxCommand):
         sk = self.caller.skills
         mess1 = '|mYou take out a vial of oil and fortify your armor.|n '
         caller.msg(mess1)
-        tr.PDEF.mod += (sk.ORG.current / 5)
+        tr.PDEF.mod += (sk.FOR.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.fortify_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_armor)
@@ -356,7 +347,7 @@ class CmdTradesman(MuxCommand):
         sk = self.caller.skills
         mess2 = '|mThe fortification wears off of your armor.|n '
         caller.msg(mess2)
-        tr.PDEF.mod -= (sk.ORG.current / 5)
+        tr.PDEF.mod -= (sk.FOR.current / 5)
 
 
 class TradesmanCmdSet(CmdSet):

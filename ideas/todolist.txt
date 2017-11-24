@@ -1,0 +1,15 @@
+Things that need to be worked on for the game in no particular order.
+
+1. search and multimatch issue
+2. make items stackable
+3. create a combat handler
+4. make a prettier inventory display, that shows wielded weapons/armor worn/clothing worn/objects in inventory
+   (see Inventory Template idea.txt)
+5. when looking at another character displays what the long desc, hair desc, eye desc, piercings/tattoos and what
+   the character is wielding/armor worn/clothing worn. (see return description.text)
+
+
+
+
+
+

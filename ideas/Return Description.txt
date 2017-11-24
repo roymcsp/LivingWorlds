@@ -1,0 +1,32 @@
+You see a <gender) <race>,
+
+<Long Description> text here
+<Hair Description>S/he has text here.
+<Eye Description> S/he has text here.
+S/he is in perfect condition.
+Wielding : Weapon/shield.
+           Weapon2/shield
+  Armour : head armor
+           necklace
+           back armor
+           hand armor
+           finger armor1
+           finger armor 2
+           wrist armor
+           body armor
+           waist armor
+           feet armor
+Clothing : head clothing
+           neck accessory
+           back clothing
+           hand clothing
+           finger accessory 1
+           finger accessory 2
+           wrist accessory
+           top clothing
+           waist clothing
+           bottem clothing
+           feet clothing
+Carrying : Backpack.
+           pouch.
+           pouch.
