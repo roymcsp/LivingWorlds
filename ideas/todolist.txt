@@ -8,6 +8,7 @@ Things that need to be worked on for the game in no particular order.
 5. when looking at another character displays what the long desc, hair desc, eye desc, piercings/tattoos and what
    the character is wielding/armor worn/clothing worn. (see return description.text)
 
+6. HP/SP/EP Regen
 
 
 

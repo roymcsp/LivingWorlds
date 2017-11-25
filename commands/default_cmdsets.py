@@ -38,6 +38,9 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         #
         self.add(extendedcommands.CmdExtendedLook())
         self.add(extendedcommands.CmdExtendedDesc())
+        self.add(extendedcommands.CmdExtendedGet())
+        self.add(extendedcommands.CmdExtendedGive())
+        self.add(extendedcommands.CmdExtendedDrop())
         self.add(extendedcommands.CmdGameTime())
         self.add(sensorycommands.SensesCmdSet)
         self.add(movecommands.ExitErrorCmdSet)
