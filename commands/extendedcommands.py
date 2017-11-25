@@ -248,7 +248,7 @@ class CmdExtendedGet(default_cmds.CmdGet):
         if not self.args:
             caller.msg("Get what?")
             return
-        obj = caller.search(self.args, candidates=caller.location, use_nicks=True, quiet=True)
+        obj = caller.search(self.args, location=caller.location)
         if not obj:
             return
         if caller == obj:
@@ -296,8 +296,9 @@ class CmdExtendedDrop(default_cmds.CmdDrop):
 
         # Because the DROP command by definition looks for items
         # in inventory, call the search function using location = caller
-        obj = caller.search(self.args, location=caller,use_nicks=True,
-                            nofound_string="You aren't carrying %s." % self.args, quiet = True)
+        obj = caller.search(self.args, location=caller,
+                            nofound_string="You aren't carrying %s." % self.args,
+                            multimatch_string="You carry more than one %s:" % self.args)
         if not obj:
             return
 
@@ -315,7 +316,7 @@ class CmdExtendedGive(default_cmds.CmdGive):
     give away something to someone
 
     Usage:
-      give <item> to <target>
+      give <inventory obj> to <target>
 
     Gives an items from your inventory to another character,
     placing it in their inventory.
@@ -326,7 +327,7 @@ class CmdExtendedGive(default_cmds.CmdGive):
 
     def parse(self):
         """Implement an addition parse"""
-        super(CmdExtendedGive, self).parse()
+        super(CmdGive, self).parse()
         if " to " in self.args:
             self.lhs, self.rhs = self.args.split(" to ", 1)
 
@@ -337,8 +338,9 @@ class CmdExtendedGive(default_cmds.CmdGive):
         if not self.args or not self.rhs:
             caller.msg("Usage: give <item> to <target>")
             return
-        to_give = caller.search(self.lhs, location=caller,use_nicks=True,
-                                nofound_string="You aren't carrying %s." % self.lhs, quiet = True,)
+        to_give = caller.search(self.lhs, location=caller,
+                                nofound_string="You aren't carrying %s." % self.lhs,
+                                multimatch_string="You carry more than one %s:" % self.lhs)
         target = caller.search(self.rhs)
         if not (to_give and target):
             return
@@ -354,50 +356,3 @@ class CmdExtendedGive(default_cmds.CmdGive):
         target.msg("%s gives you %s." % (caller.key, to_give.key))
         # Call the object script's at_give() method.
         to_give.at_give(caller, target)
-
-class CmdExtendedWhisper(default_cmds.CmdWhisper):
-    """
-    Speak privately as your character to another
-
-    Usage:
-      whisper <player> = <message>
-
-    Talk privately to those in your current location, without
-    others being informed.
-    """
-
-    key = "whisper"
-    locks = "cmd:all()"
-
-
-    def func(self):
-        """Run the whisper command"""
-
-        caller = self.caller
-
-        if not self.lhs or not self.rhs:
-            caller.msg("Usage: whisper <player> = <message>")
-            return
-
-        receiver = caller.search(self.lhs)
-
-        if not receiver:
-            return
-
-        if caller == receiver:
-            caller.msg("You can't whisper to yourself.")
-            return
-
-        speech = self.rhs
-
-        # Feedback for the object doing the talking.
-        caller.msg('You whisper to %s, "%s|n"' % (receiver.key, speech))
-
-        # Build the string to emit to receiver.
-        emit_string = '%s whispers, "%s|n"' % (caller.name, speech)
-        receiver.msg(text=(emit_string, {"type": "whisper"}), from_obj=caller)
-
-        # build the string to emit to neighbors
-        emit_string = '%s whispers something to %s|n' % (caller.name, receiver.key)
-        caller.location.msg_contents(text=(emit_string, {"type": "say"}),
-                                     exclude=caller, from_obj=caller)
