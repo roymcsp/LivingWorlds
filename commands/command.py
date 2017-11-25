@@ -86,7 +86,7 @@ class MuxCommand(Command):
         "called after self.func()."
         caller = self.caller
         prompt = ">"
-        caller.msg(prompt=prompt)
+        caller.msg("", prompt=prompt)
 
     def parse(self):
         """
