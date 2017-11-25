@@ -77,12 +77,17 @@ class MuxCommand(Command):
         This hook is called before self.parse() on all commands
         """
         pass
+
     def at_post_cmd(self):
         """
         This hook is called after the command has finished executing
         (after self.func()).
         """
-        pass
+        "called after self.func()."
+        caller = self.caller
+        prompt = ">"
+        caller.msg(prompt=prompt)
+
     def parse(self):
         """
         This method is called by the cmdhandler once the command name

@@ -1,72 +1,88 @@
-from evennia import default_cmds, CmdSet
+from evennia import CmdSet
+from commands.command import MuxCommand
 
-class CmdExitError(default_cmds.MuxCommand):
+
+class CmdExitError(MuxCommand):
     """Parent class for all exit errors."""
     locks = "cmd:all()"
     arg_regex = r"\s|$"
     auto_help = False
+
     def func(self):
         """returns the error"""
         self.caller.msg("You cannot move %s." % self.key)
 
-class CmdNationExitError(default_cmds.MuxCommand):
+
+class CmdNationExitError(MuxCommand):
     """Parent class for all exit errors."""
     locks = "cmd:all()"
     arg_regex = r"\s|$"
     auto_help = False
+
     def func(self):
         """returns the error"""
         self.caller.msg("You must first agree to the rules before travelling on.")
-     
-class CmdExitErrorNorth(CmdExitError):
+
+
+class CmdExitErrorNorth(CmdExitError, MuxCommand):
     key = "north"
     aliases = ["n"]
-    
-class CmdExitErrorEast(CmdExitError):
+
+
+class CmdExitErrorEast(CmdExitError, MuxCommand):
     key = "east"
     aliases = ["e"]
-    
-class CmdExitErrorSouth(CmdExitError):
+
+
+class CmdExitErrorSouth(CmdExitError, MuxCommand):
     key = "south"
     aliases = ["s"]
-    
-class CmdExitErrorWest(CmdExitError):
+
+
+class CmdExitErrorWest(CmdExitError, MuxCommand):
     key = "west"
     aliases = ["w"]
 
-class CmdExitErrorNortheast(CmdExitError):
+
+class CmdExitErrorNortheast(CmdExitError, MuxCommand):
     key = "northeast"
     aliases = ["ne"]
-    
-class CmdExitErrorNorthwest(CmdExitError):
+
+
+class CmdExitErrorNorthwest(CmdExitError, MuxCommand):
     key = "northwest"
     aliases = ["nw"]
-    
-class CmdExitErrorSoutheast(CmdExitError):
+
+
+class CmdExitErrorSoutheast(CmdExitError, MuxCommand):
     key = "southeast"
     aliases = ["se"]
-    
-class CmdExitErrorSouthwest(CmdExitError):
+
+
+class CmdExitErrorSouthwest(CmdExitError, MuxCommand):
     key = "southwest"
     aliases = ["sw"]
-    
-class CmdExitErrorUp(CmdExitError):
+
+
+class CmdExitErrorUp(CmdExitError, MuxCommand):
     key = "up"
     aliases = ["u"]
-    
-class CmdExitErrorDown(CmdExitError):
+
+
+class CmdExitErrorDown(CmdExitError, MuxCommand):
     key = "down"
     aliases = ["d"]
 
-class CmdExitErrorIn(CmdExitError):
+
+class CmdExitErrorIn(CmdExitError, MuxCommand):
     key = "in"
 
 
-class CmdExitErrorOut(CmdExitError):
+class CmdExitErrorOut(CmdExitError, MuxCommand):
     key = "out"
 
 
-class ExitErrorCmdSet(CmdSet):
+class ExitErrorCmdSet(CmdSet,):
 
     def at_cmdset_creation(self):
         self.add(CmdExitErrorNorth())

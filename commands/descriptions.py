@@ -1,7 +1,8 @@
-from evennia import Command, CmdSet
+from evennia import CmdSet
+from commands.command import MuxCommand
 
 
-class SetLong(Command):
+class SetLong(MuxCommand):
     """
     allows for the account to set the desc of their character to be be what they want
     
@@ -22,7 +23,7 @@ class SetLong(Command):
         caller.msg('Your long description was set to %s' % args)
 
 
-class SetHair(Command):
+class SetHair(MuxCommand):
     """
     Allows for the account to set the hairdesc of their character to be what they want other to see
     
@@ -44,7 +45,7 @@ class SetHair(Command):
         caller.msg('Your hair description was set to %s' % args)
 
 
-class SetEyes(Command):
+class SetEyes(MuxCommand):
     """
     Allows for the account to set the eyedesc of their character to be what they want other to see
 

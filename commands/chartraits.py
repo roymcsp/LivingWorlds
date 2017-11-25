@@ -2,9 +2,9 @@
 Character trait-related commands
 """
 from world import rulebook
-from .command import MuxCommand
+from commands.command import MuxCommand
 from evennia import CmdSet
-from evennia.utils.evform import EvForm, EvTable
+from evennia.utils.evform import EvForm
 
 
 class CharTraitCmdSet(CmdSet):
@@ -18,6 +18,7 @@ class CharTraitCmdSet(CmdSet):
         self.add(CmdWealth())
         self.add(CmdVitals())
         self.add(CmdLevel())
+
 
 class CmdSheet(MuxCommand):
     """
@@ -76,6 +77,7 @@ class CmdSheet(MuxCommand):
         """Format trait values as bright white."""
         return "|w{}|n".format(val)
 
+
 class CmdWealth(MuxCommand):
     """
     view character skills
@@ -96,8 +98,8 @@ class CmdWealth(MuxCommand):
             return
 
         self.caller.msg('You are carrying {}'.format(
-            format_coin(self.caller.db.wallet)
-))
+            format_coin(self.caller.db.wallet)))
+
 
 class CmdVitals(MuxCommand):
     """
@@ -112,7 +114,8 @@ class CmdVitals(MuxCommand):
 
     def func(self):
         tr = self.caller.traits
-        self.caller.msg("|CHP: %s/%s SP: %s/%s EP: %s/%s" % (tr.HP.actual, tr.HP.max, tr.SP.actual, tr.SP.max, tr.EP.actual,tr.EP.max))
+        self.caller.msg("|CHP: %s/%s SP: %s/%s EP: %s/%s" % (tr.HP.actual, tr.HP.max, tr.SP.actual,
+                                                             tr.SP.max, tr.EP.actual, tr.EP.max))
 
 
 class CmdLevel(MuxCommand):

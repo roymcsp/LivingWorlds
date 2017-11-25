@@ -1,11 +1,13 @@
 from evennia.commands import cmdhandler
 from evennia.utils import logger
 from evennia import Command, CmdSet
+from commands.command import MuxCommand
+
 
 _CMD_NOMATCH = cmdhandler.CMD_NOMATCH
 _CMD_NOINPUT = cmdhandler.CMD_NOINPUT
 
-class CmdRules(Command):
+class CmdRules(MuxCommand):
     """
     Display and agree to rules.
  
@@ -29,7 +31,7 @@ class CmdRules(Command):
             caller.msg('You must read the rules and agree to them before proceeding')
             caller.db.rules = False
 
-class CmdGender(Command):
+class CmdGender(MuxCommand):
     """
     Sets gender on yourself
 

@@ -1,6 +1,8 @@
-from evennia import default_cmds, CmdSet
+from evennia import CmdSet
+from commands.command import MuxCommand
 
-class CmdRead(default_cmds.MuxCommand):
+
+class CmdRead(MuxCommand):
     """
     Usage:
       read [obj]
@@ -32,9 +34,12 @@ class CmdRead(default_cmds.MuxCommand):
             string = "There is nothing to read on %s." % obj.key
         self.caller.msg(string)
         
-#class CmdListen(Command):
+"""
+ class CmdListen(Command):
+"""
 
-class CmdTaste(default_cmds.MuxCommand):
+
+class CmdTaste(MuxCommand):
     key = "taste"
     locks = "cmd:all()"
     help_category = "Senses"
@@ -59,9 +64,12 @@ class CmdTaste(default_cmds.MuxCommand):
             string = "There is nothing to taste on %s." % obj.key
         self.caller.msg(string)
         
-#class CmdSearch(Command):
+"""
+class CmdSearch(Command):
+"""
 
-class CmdFeel(default_cmds.MuxCommand):
+
+class CmdFeel(MuxCommand):
     key = "feel"
     locks = "cmd:all()"
     help_category = "Senses"
@@ -86,7 +94,8 @@ class CmdFeel(default_cmds.MuxCommand):
             string = "There is nothing to feel on %s." % obj.key
         self.caller.msg(string)
 
-class CmdSmell(default_cmds.MuxCommand):
+
+class CmdSmell(MuxCommand):
     key = "smell"
     locks = "cmd:all()"
     help_category = "Senses"

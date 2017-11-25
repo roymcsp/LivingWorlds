@@ -1,7 +1,8 @@
 from evennia import default_cmds, utils
+from commands.command import MuxCommand
 
 
-class CmdExtendedLook(default_cmds.CmdLook):
+class CmdExtendedLook(default_cmds.CmdLook,MuxCommand):
     """
     look
 
@@ -61,7 +62,7 @@ class CmdExtendedLook(default_cmds.CmdLook):
 # Custom build commands for setting seasonal descriptions
 # and detailing extended rooms.
 
-class CmdExtendedDesc(default_cmds.CmdDesc):
+class CmdExtendedDesc(default_cmds.CmdDesc, MuxCommand):
     """
     `@desc` - describe an object or room.
 
@@ -199,7 +200,7 @@ class CmdExtendedDesc(default_cmds.CmdDesc):
 
 # Simple command to view the current time and season
 
-class CmdGameTime(default_cmds.MuxCommand):
+class CmdGameTime(default_cmds.MuxCommand, MuxCommand):
     """
     Check the game time
 
@@ -225,7 +226,8 @@ class CmdGameTime(default_cmds.MuxCommand):
                 prep = "an"
                 self.caller.msg("It's %s %s day, in the %s." % (prep, season, timeslot,))
 
-class CmdExtendedGet(default_cmds.CmdGet):
+
+class CmdExtendedGet(default_cmds.CmdGet, MuxCommand):
     """
     pick up something
 
@@ -271,7 +273,7 @@ class CmdExtendedGet(default_cmds.CmdGet):
         obj.at_get(caller)
 
 
-class CmdExtendedDrop(default_cmds.CmdDrop):
+class CmdExtendedDrop(default_cmds.CmdDrop, MuxCommand):
     """
     drop something
 
@@ -311,7 +313,7 @@ class CmdExtendedDrop(default_cmds.CmdDrop):
         obj.at_drop(caller)
 
 
-class CmdExtendedGive(default_cmds.CmdGive):
+class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
     """
     give away something to someone
 
@@ -327,7 +329,7 @@ class CmdExtendedGive(default_cmds.CmdGive):
 
     def parse(self):
         """Implement an addition parse"""
-        super(CmdGive, self).parse()
+        super(CmdExtendedGive, self).parse()
         if " to " in self.args:
             self.lhs, self.rhs = self.args.split(" to ", 1)
 

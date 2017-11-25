@@ -116,7 +116,6 @@ def show_stats(caller):
         if caller.traits[each] is None:
             caller.traits.add(each, menu.stats[each], "static", rolls[index])
 
-
         else:
             caller.traits[each].base = rolls[index]
 
