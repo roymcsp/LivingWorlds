@@ -227,20 +227,17 @@ class CmdGameTime(default_cmds.MuxCommand, MuxCommand):
                 self.caller.msg("It's %s %s day, in the %s." % (prep, season, timeslot,))
 
 
-class CmdExtendedGet(default_cmds.CmdGet, MuxCommand):
+class CmdExtendedGet(default_cmds.CmdGet):
     """
-    pick up something
-
-    Usage:
-      get <obj>
-
-    Picks up an object from your location and puts it in
-    your inventory.
-    """
+   pick up something
+   Usage:
+     get <obj>
+   Picks up an object from your location and puts it in
+   your inventory.
+   """
     key = "get"
     aliases = "grab"
     locks = "cmd:all()"
-    arg_regex = r"\s|$"
 
     def func(self):
         """implements the command."""
@@ -250,9 +247,14 @@ class CmdExtendedGet(default_cmds.CmdGet, MuxCommand):
         if not self.args:
             caller.msg("Get what?")
             return
-        obj = caller.search(self.args, location=caller.location)
-        if not obj:
+        result = caller.search(self.args,
+                               location=caller.location,
+                               quiet=True)
+        if not result:
+            caller.msg("{} not found".format(self.args))
             return
+        else:
+            obj = result[0]
         if caller == obj:
             caller.msg("You can't get yourself.")
             return
