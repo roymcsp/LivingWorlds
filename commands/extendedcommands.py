@@ -249,8 +249,6 @@ class CmdExtendedGet(default_cmds.CmdGet):
             caller.msg("Get what?")
             return
         obj = caller.search(self.args, candidates=caller.location, use_nicks=True, quiet=True)
-        if obj:
-            obj = utils.make_iter(obj)[0]
         if not obj:
             return
         if caller == obj:
