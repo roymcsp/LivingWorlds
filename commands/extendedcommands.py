@@ -248,7 +248,9 @@ class CmdExtendedGet(default_cmds.CmdGet):
         if not self.args:
             caller.msg("Get what?")
             return
-        obj = caller.search(self.args, location=caller.location,use_nicks=True, quiet=True )
+        obj = caller.search(self.args, candidates=caller.location, use_nicks=True, quiet=True)
+        if obj:
+            obj = obj[0]
         if not obj:
             return
         if caller == obj:
@@ -298,6 +300,8 @@ class CmdExtendedDrop(default_cmds.CmdDrop):
         # in inventory, call the search function using location = caller
         obj = caller.search(self.args, location=caller,use_nicks=True,
                             nofound_string="You aren't carrying %s." % self.args, quiet = True)
+        if obj:
+            obj = obj[0]
         if not obj:
             return
 
@@ -340,6 +344,8 @@ class CmdExtendedGive(default_cmds.CmdGive):
         to_give = caller.search(self.lhs, location=caller,use_nicks=True,
                                 nofound_string="You aren't carrying %s." % self.lhs, quiet = True,)
         target = caller.search(self.rhs)
+        if to_give:
+            to_give = to_give[0]
         if not (to_give and target):
             return
         if target == caller:
