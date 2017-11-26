@@ -349,15 +349,14 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
         target = caller.search(self.rhs)
         if not (to_give and target):
             return
-        if target == caller:
-            caller.msg("You keep %s to yourself." % to_give.key)
-            return
-        if not to_give.location == caller:
-            caller.msg("You are not holding %s." % to_give.key)
-            return
         else:
             obj = to_give[0]
-
+        if target == caller:
+            caller.msg("You keep %s to yourself." % obj.key)
+            return
+        if not to_give.location == caller:
+            caller.msg("You are not holding %s." % obj.key)
+            return
         # give object
         caller.msg("You give %s to %s." % (obj.key, target.key))
         obj.move_to(target, quiet=True)
