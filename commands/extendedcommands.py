@@ -58,7 +58,17 @@ class CmdExtendedLook(default_cmds.CmdLook, MuxCommand):
         # the object's at_desc() method.
         looking_at_obj.at_desc(looker=caller)
 
+    def at_post_cmd(self):
+        """
+        This hook is called after the command has finished executing
+        (after self.func()).
+        """
+        "called after self.func()."
+        caller = self.caller
+        prompt = ">"
+        caller.msg("", prompt=prompt)
 
+        
 # Custom build commands for setting seasonal descriptions
 # and detailing extended rooms.
 
@@ -197,6 +207,15 @@ class CmdExtendedDesc(default_cmds.CmdDesc, MuxCommand):
                     # this is not an ExtendedRoom.
                     caller.msg("The description was set on %s." % obj.key)
 
+    def at_post_cmd(self):
+        """
+        This hook is called after the command has finished executing
+        (after self.func()).
+        """
+        "called after self.func()."
+        caller = self.caller
+        prompt = ">"
+        caller.msg("", prompt=prompt)
 
 # Simple command to view the current time and season
 
@@ -274,6 +293,16 @@ class CmdExtendedGet(default_cmds.CmdGet):
         # calling hook method
         obj.at_get(caller)
 
+    def at_post_cmd(self):
+        """
+        This hook is called after the command has finished executing
+        (after self.func()).
+        """
+        "called after self.func()."
+        caller = self.caller
+        prompt = ">"
+        caller.msg("", prompt=prompt)
+
 
 class CmdExtendedDrop(default_cmds.CmdDrop, MuxCommand):
     """
@@ -315,6 +344,16 @@ class CmdExtendedDrop(default_cmds.CmdDrop, MuxCommand):
                                      exclude=caller)
         # Call the object script's at_drop() method.
         obj.at_drop(caller)
+
+    def at_post_cmd(self):
+        """
+        This hook is called after the command has finished executing
+        (after self.func()).
+        """
+        "called after self.func()."
+        caller = self.caller
+        prompt = ">"
+        caller.msg("", prompt=prompt)
 
 
 class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
@@ -363,3 +402,13 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
         target.msg("%s gives you %s." % (caller.key, obj.key))
         # Call the object script's at_give() method.
         obj.at_give(caller, target)
+
+    def at_post_cmd(self):
+        """
+        This hook is called after the command has finished executing
+        (after self.func()).
+        """
+        "called after self.func()."
+        caller = self.caller
+        prompt = ">"
+        caller.msg("", prompt=prompt)
