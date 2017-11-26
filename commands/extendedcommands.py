@@ -345,8 +345,7 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
             caller.msg("Usage: give <item> to <target>")
             return
         to_give = caller.search(self.lhs, location=caller,
-                                nofound_string="You aren't carrying %s." % self.lhs,
-                                multimatch_string="You carry more than one %s:" % self.lhs)
+                                nofound_string="You aren't carrying %s." % self.lhs, quiet=True)
         target = caller.search(self.rhs)
         if not (to_give and target):
             return
