@@ -294,6 +294,7 @@ class CmdExtendedDrop(default_cmds.CmdDrop, MuxCommand):
         """Implement command"""
 
         caller = self.caller
+
         if not self.args:
             caller.msg("Drop what?")
             return
@@ -301,10 +302,9 @@ class CmdExtendedDrop(default_cmds.CmdDrop, MuxCommand):
         # Because the DROP command by definition looks for items
         # in inventory, call the search function using location = caller
         result = caller.search(self.args, location=caller,
-                            nofound_string="You aren't carrying %s." % self.args)
+                            nofound_string="You aren't carrying %s." % self.args, quiet=True)
         if not result:
             return
-
         else:
             obj = result[0]
 
