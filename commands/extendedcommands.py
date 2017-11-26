@@ -2,7 +2,7 @@ from evennia import default_cmds, utils
 from commands.command import MuxCommand
 
 
-class CmdExtendedLook(default_cmds.CmdLook,MuxCommand):
+class CmdExtendedLook(default_cmds.CmdLook, MuxCommand):
     """
     look
 
@@ -200,7 +200,7 @@ class CmdExtendedDesc(default_cmds.CmdDesc, MuxCommand):
 
 # Simple command to view the current time and season
 
-class CmdGameTime(default_cmds.MuxCommand, MuxCommand):
+class CmdGameTime(MuxCommand):
     """
     Check the game time
 
@@ -300,11 +300,13 @@ class CmdExtendedDrop(default_cmds.CmdDrop, MuxCommand):
 
         # Because the DROP command by definition looks for items
         # in inventory, call the search function using location = caller
-        obj = caller.search(self.args, location=caller,
-                            nofound_string="You aren't carrying %s." % self.args,
-                            multimatch_string="You carry more than one %s:" % self.args)
-        if not obj:
+        result = caller.search(self.args, location=caller,
+                            nofound_string="You aren't carrying %s." % self.args)
+        if not result:
             return
+
+        else:
+            obj = result[0]
 
         obj.move_to(caller.location, quiet=True)
         caller.msg("You drop %s." % (obj.name,))
@@ -354,6 +356,9 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
         if not to_give.location == caller:
             caller.msg("You are not holding %s." % to_give.key)
             return
+        else:
+            to_give = to_give[0]
+
         # give object
         caller.msg("You give %s to %s." % (to_give.key, target.key))
         to_give.move_to(target, quiet=True)
