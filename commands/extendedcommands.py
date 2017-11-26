@@ -356,11 +356,11 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
             caller.msg("You are not holding %s." % to_give.key)
             return
         else:
-            to_give = to_give[0]
+            obj = to_give[0]
 
         # give object
-        caller.msg("You give %s to %s." % (to_give.key, target.key))
-        to_give.move_to(target, quiet=True)
-        target.msg("%s gives you %s." % (caller.key, to_give.key))
+        caller.msg("You give %s to %s." % (obj.key, target.key))
+        obj.move_to(target, quiet=True)
+        target.msg("%s gives you %s." % (caller.key, obj.key))
         # Call the object script's at_give() method.
-        to_give.at_give(caller, target)
+        obj.at_give(caller, target)
