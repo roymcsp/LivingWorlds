@@ -59,14 +59,14 @@ class CharDeathHandler(DeathHandler):
         delay(20, getattr(self, self.db.death_sequence[self.db.death_step]))
 
     def floating(self):
-        self.obj.msg('Your awareness blinks back into existence briefly. you float in the void.')
+        self.obj.msg('')
         self.db.death_step += 1
         delay(12, getattr(self, self.db.death_sequence[self.db.death_step]))
 
     def returning(self):
         if self.obj.db.permadeath is False:
             self.obj.msg(
-                "you feel a quickening in your spirit as you feel pulled towards the |mSpirit Realm|n."
+                "you feel pulled towards the |mSpirit Realm|n."
             )
 
             self.db.death_step += 1
