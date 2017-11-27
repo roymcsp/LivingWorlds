@@ -217,9 +217,9 @@ class Character(GenderCharacter):
 
     def at_regen(self):
         """Hook called by a 12s ticker"""
-        self.traits.HP.current += int(floor(0.1 * self.obj.traits.HP.max))
-        self.traits.SP.current += int(floor(0.1 * self.obj.traits.SP.max))
-        self.traits.EP.current += int(floor(0.1 * self.obj.traits.EP.max))
+        self.traits.HP.current += int(floor(0.1 * self.traits.HP.max))
+        self.traits.SP.current += int(floor(0.1 * self.traits.SP.max))
+        self.traits.EP.current += int(floor(0.1 * self.traits.EP.max))
 
     def at_death(self):
         """Hook called when a character dies"""
