@@ -9,6 +9,7 @@ from commands.command import MuxCommand
 from evennia.utils import delay
 from typeclasses.scripts import Script
 from world.rulebook import d_roll
+from evennia.utils.spawner import spawn
 
 # Scripts
 
@@ -54,8 +55,15 @@ class CharDeathHandler(DeathHandler):
                                        mapping={'character': self.obj},
                                        exclude=self.obj)
         self.obj.traits.XP.current -= int(floor(0.15 * self.obj.traits.XP.current))
+        corpse_name = 'corpse of %s' % self.obj
+        corpse_desc = "A dead body that was once %s in life." % self.obj
+        corpse_proto = {'key': corpse_name, "desc": corpse_desc}
+        corpse = spawn(corpse_proto)[0]
         void = self.obj.search('Void', global_search=True)
         self.obj.move_to(void, quiet=True, move_hooks=False)
+        #create a corpse of the character that died Corpse of {character}
+        #move the equipped,worn and inventory of character that died to corpse
+        #check over each item to see what survives remove destroyed items
         delay(20, getattr(self, self.db.death_sequence[self.db.death_step]))
 
     def floating(self):
@@ -68,12 +76,19 @@ class CharDeathHandler(DeathHandler):
             self.obj.msg(
                 "you feel pulled towards the |mSpirit Realm|n."
             )
-
+            spiritrealm = self.obj.search('Spirit Realm', global_search=True)
+            spiritrealm.msg_contents(
+                ''
+            )
             self.db.death_step += 1
             delay(8, getattr(self, self.db.death_sequence[self.db.death_step]))
         else:
             self.obj.msg(
                 "you feel a rending of your spirit as you are pulled towards the |mRealm of Eternal Death|n.")
+            eternaldeath = self.obj.search('Realm of Eternal Death', global_search=True)
+            eternaldeath.msg_contents(
+                ''
+            )
             self.db.death_step += 1
             delay(8, getattr(self, self.db.death_sequence[self.db.death_step]))
 
@@ -81,10 +96,19 @@ class CharDeathHandler(DeathHandler):
         if self.obj.db.permadeath is False:
             self.obj.msg(
                 '')
+            spiritrealm = self.obj.search('Spirit Realm', global_search=True)
+            spiritrealm.msg_contents(
+                ''
+            )
             delay(10, getattr(self, self.db.death_sequence[self.db.death_step]))
         else:
             self.obj.msg(
-                '')
+                ''
+            )
+            eternaldeath = self.obj.search('Realm of Eternal Death', global_search=True)
+            eternaldeath.msg_contents(
+                ''
+            )
             delay(10, getattr(self, self.db.death_sequence[self.db.death_step]))
 
     def revive(self):
