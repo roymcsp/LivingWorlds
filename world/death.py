@@ -5,7 +5,7 @@ Controls what happens when a character or NPC character dies
 
 from math import floor
 from evennia import CmdSet
-from command.commands import MuxCommand
+from commands.command import MuxCommand
 from evennia.utils import delay
 from typeclasses.scripts import Script
 from world.rulebook import d_roll
