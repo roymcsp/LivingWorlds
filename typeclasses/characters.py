@@ -15,7 +15,7 @@ from world.traits import TraitHandler
 from evennia.contrib.gendersub import GenderCharacter
 from commands import chartraits, equip
 from world.traitcalcs import abilitymodifiers
-from world import CharDeathHandler
+from world.death import CharDeathHandler
 from math import floor
 
 traits = {
