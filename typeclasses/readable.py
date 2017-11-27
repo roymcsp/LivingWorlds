@@ -8,9 +8,10 @@
 # Read command
 #
 from objects import Object
-from evennia import Command, CmdSet
+from commands.command import MuxCommand
 
-class CmdRead(Command):
+
+class CmdRead(MuxCommand):
     """
     Usage:
       read [obj]
@@ -20,7 +21,7 @@ class CmdRead(Command):
 
     key = "read"
     locks = "cmd:all()"
-    help_category = "TutorialWorld"
+    help_category = "Senses"
 
     def func(self):
         """
@@ -42,6 +43,7 @@ class CmdRead(Command):
             string = "There is nothing to read on %s." % obj.key
         self.caller.msg(string)
 
+
 class Readable(Object):
     """
     This simple object defines some attributes and
@@ -49,9 +51,8 @@ class Readable(Object):
     def at_object_creation(self):
         """
         Called when object is created. We make sure to set the needed
-        Attribute and add the readable cmdset.
+        Attribute.
         """
         super(Readable, self).at_object_creation()
         self.db.readable_text = "There is no text written on %s." % self.key
         # define a command on the object.
-        

@@ -68,7 +68,7 @@ class CmdExtendedLook(default_cmds.CmdLook, MuxCommand):
         prompt = ">"
         caller.msg("", prompt=prompt)
 
-        
+
 # Custom build commands for setting seasonal descriptions
 # and detailing extended rooms.
 

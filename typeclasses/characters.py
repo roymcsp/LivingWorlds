@@ -8,14 +8,15 @@ creation commands.
 
 """
 
-
+from evennia import TICKER_HANDLER as tickerhandler
 from evennia.utils import lazy_property
 from world.equip import EquipHandler
 from world.traits import TraitHandler
-#from evennia.contrib.rpsystem import ContribRPCharacter
 from evennia.contrib.gendersub import GenderCharacter
 from commands import chartraits, equip
 from world.traitcalcs import abilitymodifiers
+from world import CharDeathHandler
+from math import floor
 
 traits = {
     # primary
@@ -173,12 +174,14 @@ class Character(GenderCharacter):
         self.db.title = None
         self.db.faith = None
         self.db.devotion = None
+        self.db.permadeath = False
         self.db.desc = "  A small wisp of energy lacking in any discernible features, all that is missing is the " \
                        "spark of creation."
         self.db.smellable_text = "  You don't smell anything special."
         self.db.feelable_text = "  You don't feel anything special."
         self.db.tasteable_text = "  You don't taste anything special."
         self.db.wallet = {'PP': 0, 'GP': 0, 'SP': 0, 'CP': 0}
+        tickerhandler.add(interval=12, callback=self.at_regen())
 
         for key, kwargs in traits.iteritems():
             self.traits.add(key, **kwargs)
@@ -211,3 +214,13 @@ class Character(GenderCharacter):
     def equip(self):
         """Handler for equipped items."""
         return EquipHandler(self)
+
+    def at_regen(self):
+        """Hook called by a 12s ticker"""
+        self.traits.HP.current += int(floor(0.1 * self.obj.traits.HP.max))
+        self.traits.SP.current += int(floor(0.1 * self.obj.traits.SP.max))
+        self.traits.EP.current += int(floor(0.1 * self.obj.traits.EP.max))
+
+    def at_death(self):
+        """Hook called when a character dies"""
+        self.scripts.add(CharDeathHandler)
