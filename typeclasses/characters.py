@@ -181,7 +181,7 @@ class Character(GenderCharacter):
         self.db.feelable_text = "  You don't feel anything special."
         self.db.tasteable_text = "  You don't taste anything special."
         self.db.wallet = {'PP': 0, 'GP': 0, 'SP': 0, 'CP': 0}
-        tickerhandler.add(interval=12, callback=self.at_regen())
+
 
         for key, kwargs in traits.iteritems():
             self.traits.add(key, **kwargs)
@@ -201,7 +201,7 @@ class Character(GenderCharacter):
         self.traits.STR.lift_factor = 20
         self.traits.STR.push_factor = 40
         self.traits.ENC.max = self.traits.STR.lift_factor * self.traits.STR.actual
-
+        tickerhandler.add(interval=12, callback=self.at_regen())
     @lazy_property
     def traits(self):
         return TraitHandler(self)
