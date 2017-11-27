@@ -201,7 +201,7 @@ class Character(GenderCharacter):
         self.traits.STR.lift_factor = 20
         self.traits.STR.push_factor = 40
         self.traits.ENC.max = self.traits.STR.lift_factor * self.traits.STR.actual
-        tickerhandler.add(interval=12, callback=self.at_regen())
+        tickerhandler.add(interval=12, callback=self.at_regen)
     @lazy_property
     def traits(self):
         return TraitHandler(self)
