@@ -2,7 +2,7 @@
 Death Module
 Controls what happens when a character or NPC character dies
 """
-
+from random import randint
 from math import floor
 from evennia import CmdSet
 from commands.command import MuxCommand
@@ -59,6 +59,16 @@ class CharDeathHandler(DeathHandler):
         corpse_desc = "A dead body that was once %s in life." % self.obj
         corpse_proto = {'key': corpse_name, "desc": corpse_desc}
         corpse = spawn(corpse_proto)[0]
+        corpse.location = self.obj.location
+        for i in self.obj.equip:
+            self.obj.equip.remove(i)
+        for i in self.obj.contents:
+            dest_chance = randint(1, 100)
+            if dest_chance <= 15:
+                i.delete
+            else:
+                i.move_to(corpse, quiet=True)
+
         void = self.obj.search('Void', global_search=True)
         self.obj.move_to(void, quiet=True, move_hooks=False)
         #create a corpse of the character that died Corpse of {character}
