@@ -133,7 +133,7 @@ class CmdCursedBone(MuxCommand):
     """
 
     key = "cursedbone"
-    locks = "cmd:attr_ge(Level, '1')"
+    locks = "cmd:attr_ge(traits.LVL.actual, 1)"
     help_category = "Sorcerer"
 
     def func(self):
