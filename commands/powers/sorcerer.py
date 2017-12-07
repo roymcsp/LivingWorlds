@@ -165,7 +165,7 @@ class CmdCursedBone(MuxCommand):
             "|M{actor} finishes chanting and produces some cursed bones.|n",
             mapping=dict(actor=caller),
             exclude=caller)
-        create_object(typeclass='typeclasses.sorcobjects.CursedBone', location=self.caller) * randint(1, 5)
+        create_object(typeclass='typeclasses.sorcobjects.CursedBone', location=self.caller)
         # if the spell was successfully cast, store the casting time
         caller.db.cursedbone_lastcast = time.time()
 
