@@ -4,7 +4,7 @@ from evennia import create_object, utils, CmdSet
 from commands.command import MuxCommand
 from random import randint
 from evennia.utils.evform import EvForm
-from rulebook import d_roll
+from world.rulebook import d_roll
 
 
 class SorcCmdSet(CmdSet):
