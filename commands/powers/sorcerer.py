@@ -146,8 +146,7 @@ class CmdCursedBone(MuxCommand):
             return
 
         if lastcast and time.time() - lastcast < 5 * 60:
-            mess = "You cannot create another cursed bone yet"
-            caller.msg(mess)
+            caller.msg("You cannot create another cursed bone yet")
             return
 
         tr.SP.current -= 10
