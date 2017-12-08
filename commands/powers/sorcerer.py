@@ -164,13 +164,13 @@ class CmdCursedBone(MuxCommand):
             "|M{actor} finishes chanting and produces some cursed bones.|n",
             mapping=dict(actor=caller),
             exclude=caller)
-        bone_key = 'Cursed bone'
+        bone_key = '|xCursed bone|n'
         bone_name = '|xCursed bone|n'
         bone_alias = 'cursed bone'
         bone_desc = "a fragment of bone that has been imbued with the energies of the netherworld"
         bone_weight = 0.1
         bone_proto = {'key': bone_key, "name": bone_name, 'alias': bone_alias, "desc": bone_desc, 'weight': bone_weight}
-        bone = spawn(bone_proto)[0]
+        bone = spawn(bone_proto)[0] * randint(1, 5)
         bone.location = caller
         #create_object(typeclass='typeclasses.sorcobjects.CursedBone')
         # if the spell was successfully cast, store the casting time
