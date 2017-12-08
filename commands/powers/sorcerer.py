@@ -170,8 +170,8 @@ class CmdCursedBone(MuxCommand):
         bone_desc = "a fragment of bone that has been imbued with the energies of the netherworld"
         bone_weight = 0.1
         bone_proto = {'key': bone_key, "name": bone_name, 'alias': bone_alias, "desc": bone_desc, 'weight': bone_weight}
-        bone = spawn(bone_proto)[0] * randint(1, 5)
-        bone.location = caller
+        bone = spawn(bone_proto)[0]
+        bone.location = caller.location
         #create_object(typeclass='typeclasses.sorcobjects.CursedBone')
         # if the spell was successfully cast, store the casting time
         caller.db.cursedbone_lastcast = time.time()
