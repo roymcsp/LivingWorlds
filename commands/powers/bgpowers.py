@@ -101,7 +101,7 @@ class CmdNoble(MuxCommand):
         sk = self.caller.skills
         mess1 = '|mYou stand up straight exhibiting an aura of leadership.|n '
         caller.msg(mess1)
-        tr.MDEF.mod += (sk.LEA.current / 5)
+        tr.MDEF.mod += (sk.LDR.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.presence_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_defense)
@@ -112,7 +112,7 @@ class CmdNoble(MuxCommand):
         caller = self.caller
         mess2 = '|mYour aura of leadership fades as you relax.|n '
         caller.msg(mess2)
-        tr.MDEF.mod -= (sk.LEA.current / 5)
+        tr.MDEF.mod -= (sk.LDR.current / 5)
 
 
 class NobleCmdSet(CmdSet):
@@ -336,7 +336,7 @@ class CmdTradesman(MuxCommand):
         sk = self.caller.skills
         mess1 = '|mYou take out a vial of oil and fortify your armor.|n '
         caller.msg(mess1)
-        tr.PDEF.mod += (sk.FOR.current / 5)
+        tr.PDEF.mod += (sk.FRG.current / 5)
         # if the spell was successfully cast, store the casting time
         caller.db.fortify_lastcast = time.time()
         utils.delay(2 * 60, callback=self.unfortify_armor)
@@ -347,7 +347,7 @@ class CmdTradesman(MuxCommand):
         sk = self.caller.skills
         mess2 = '|mThe fortification wears off of your armor.|n '
         caller.msg(mess2)
-        tr.PDEF.mod -= (sk.FOR.current / 5)
+        tr.PDEF.mod -= (sk.FRG.current / 5)
 
 
 class TradesmanCmdSet(CmdSet):
