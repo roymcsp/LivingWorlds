@@ -108,6 +108,7 @@ class CmdPower(MuxCommand):
             'AB': 'Mass Anchor',
             'AC': 'Death Rain',
             'AD': 'Cursed Army',
+            'AE': 'Sorcerer'
         }
         form.map({k: self._format_trait_val(v) for k, v in fields.iteritems()})
 
