@@ -69,6 +69,13 @@ class Character(GenderCharacter):
 
     """
 
+    def at_before_move(self, destination):
+        "Called just before trying to move"
+        if self.db.immobile:  # replace with condition you want to test
+            self.msg("you are immobilized and cannot move!")
+            return False
+        return True
+
     def announce_move_from(self, destination, msg=None, mapping=None):
         """
         Called if the move is to be announced. This is
@@ -182,7 +189,6 @@ class Character(GenderCharacter):
         self.db.tasteable_text = "  You don't taste anything special."
         self.db.wallet = {'PP': 0, 'GP': 0, 'SP': 0, 'CP': 0}
 
-
         for key, kwargs in traits.iteritems():
             self.traits.add(key, **kwargs)
 
@@ -202,13 +208,14 @@ class Character(GenderCharacter):
         self.traits.STR.push_factor = 40
         self.traits.ENC.max = self.traits.STR.lift_factor * self.traits.STR.actual
         tickerhandler.add(interval=12, callback=self.at_regen)
+
     @lazy_property
     def traits(self):
         return TraitHandler(self)
 
     @lazy_property
     def skills(self,):
-        return TraitHandler(self,db_attribute='skills')
+        return TraitHandler(self, db_attribute='skills')
 
     @lazy_property
     def equip(self):
