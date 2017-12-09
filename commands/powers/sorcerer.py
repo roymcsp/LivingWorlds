@@ -1,6 +1,6 @@
 import time
 from math import floor
-from evennia import create_object, utils, CmdSet
+from evennia import create_object, utils, CmdSet, create_script
 from commands.command import MuxCommand
 from random import randint
 from evennia.utils.evform import EvForm
@@ -15,7 +15,7 @@ class SorcCmdSet(CmdSet):
 
     def at_cmdset_creation(self):
         """called once at creation"""
-        #self.add(CmdPower())
+        self.add(CmdPower())
         self.add(CmdCursedBone())
         #self.add(CmdDeathSpike())
         """
@@ -114,8 +114,8 @@ class CmdPower(MuxCommand):
         self.caller.msg(unicode(form))
 
     def _format_trait_val(self, val):
-        """Format trait values as bright white."""
-        return "|w{}|n".format(val)
+        """Format trait values as bright magenta."""
+        return "|m{}|n".format(val)
 
 
 class CmdCursedBone(MuxCommand):
@@ -164,15 +164,7 @@ class CmdCursedBone(MuxCommand):
             "|M{actor} finishes chanting and produces some cursed bones.|n",
             mapping=dict(actor=caller),
             exclude=caller)
-        bone_key = '|xCursed bone|n'
-        bone_name = '|xCursed bone|n'
-        bone_alias = 'cursed bone'
-        bone_desc = "a fragment of bone that has been imbued with the energies of the netherworld"
-        bone_weight = 0.1
-        bone_proto = {'key': bone_key, "name": bone_name, 'alias': bone_alias, "desc": bone_desc, 'weight': bone_weight}
-        bone = spawn(bone_proto)[0]
-        bone.location = caller.location
-        #create_object(typeclass='typeclasses.sorcobjects.CursedBone')
+        create_object(typeclass='typeclasses.sorcobjects.CursedBone')
         # if the spell was successfully cast, store the casting time
         caller.db.cursedbone_lastcast = time.time()
 
@@ -248,7 +240,18 @@ class CmdDeathSpike(MuxCommand):
             tr.HP.current -= damage
         # if the spell was successfully cast, store the casting time
         caller.db.ds_lc = time.time()
-
+        # set up combat
+        if target.ndb.combat_handler:
+            # target is already in combat - join it
+            target.ndb.combat_handler.add_character(self.caller)
+            target.ndb.combat_handler.msg_all("%s joins combat!" % self.caller)
+        else:
+            # create a new combat handler
+            chandler = create_script("combat_handler.CombatHandler")
+            chandler.add_character(self.caller)
+            chandler.add_character(target)
+            self.caller.msg("Battle with %s begins." % target)
+            target.msg("Battle with %s begins" % self.caller)
 
 class CmdBodyToMind(MuxCommand):
     """
@@ -266,6 +269,7 @@ class CmdBodyToMind(MuxCommand):
 
     key = "bodytomind"
     locks = "cmd:attr_ge(Level, '2')"
+    help_category = "Sorcerer"
 
     def func(self):
         caller = self.caller
@@ -274,13 +278,15 @@ class CmdBodyToMind(MuxCommand):
         lastcast = caller.db.b2m_lastcast
         health = int(floor(0.10 * tr.HP.current))
 
-        if lastcast and time.time() - lastcast < 2 * 60:
+        if lastcast and time.time() - lastcast < 30:
             caller.msg("You cannot perform this spell again so soon.")
             return
 
-        tr.HP.current -= int(floor(0.10 * tr.HP.current))
-        tr.SP += health / 2 + sk.SPL.current
-
+        caller.msg("by channeling necrotic energies through your body, "
+                   "you sacrifice a portion of your life and covert it into power")
+        tr.HP.current -= health
+        tr.SP += health // 2 + sk.SPC.current
+        caller.db.b2m_lastcast = time.time()
 
 '''
 class CmdVampiricTouch():
