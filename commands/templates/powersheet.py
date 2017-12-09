@@ -8,7 +8,7 @@ FORMCHAR = "x"
 TABLECHAR = "o"
 
 FORM = """
-=-=-=-=-=-|C[ |rxAExxxxxxxx Guild Powers |C]|n-=-=-=-=-=-=-=-=-o
+=-=-=-=-=-|C[ |rxAExxxx Guild Powers |C]|n-=-=-=-=-=-=-=-=-o
                                                     ||
       Level                   Power                 ||
         1:      xAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    ||                       
