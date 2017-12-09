@@ -28,29 +28,37 @@ Module Functions
 from evennia import Command
 from commands.powers import bgpowers
 
-URCHIN_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-                 'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-                 'FOC': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Focus'},}
+URCHIN_SKILLS = {
+    'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+    'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+    'FOC': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Focus'},
+}
 
-NOBLE_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-                'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-                'LEA': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Leadership'},}
+NOBLE_SKILLS = {
+    'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+    'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+    'LDR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Leadership'},
+}
 
-NOMAD_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-                'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-                'MAR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Martial'},}
+NOMAD_SKILLS = {
+    'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+    'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+    'MAR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Martial'},}
 
-GYPSY_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-              'DOD': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Dodge'},}
+GYPSY_SKILLS = {
+    'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+    'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+    'DOD': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Dodge'},}
 
-FARMER_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-              'ORG': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Organize'},}
+FARMER_SKILLS = {
+    'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+    'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+    'ORG': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Organize'},}
 
-TRADESMAN_SKILLS = {'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
-              'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
-              'FOR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Forge'},}
+TRADESMAN_SKILLS = {
+    'ATT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+    'DEF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+    'FRG': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Forge'},}
 
 
 class CmdBackground(Command):
