@@ -62,7 +62,7 @@ FLAIL = {
     "typeclass": "typeclasses.weapons.Weapon",
     "desc": "the flail has a single spiked ball connected to a slender wooden "
             "leather wrapped handle with a foot of chain.",
-    "weight": 5,
+    "weight": 5.0,
     "value": 800*CP,
     "damage_roll": "1d8",
     "range": "melee"
@@ -370,30 +370,296 @@ YARI = {
 
 
 # Two-Handed Melee Weapons
-SWORD_BASTARD = {}
-DIE_TSUCHI = {}
-FALCHION = {}
-FLAIL_HEAVY = {}
-GLAIVE = {}
-GREAT_AXE = {}
-GREAT_CLUB = {}
-GREAT_SWORD = {}
-GUISARME = {}
-HALBERD = {}
-KAWANAGA = {}
-KUSARI_GAMA = {}
-LANCE = {}
-SPEAR_LONG = {}
-LUCERNE_HAMMER = {}
-MANRIKI_GUSARI = {}
-MAUL = {}
-NAGIMAKI = {}
-NAGINATA = {}
-NO_DACHI = {}
-ONO = {}
-QUARTERSTAFF = {}
-RANSUER = {}
-TETSUBO = {}
+SWORD_BASTARD = {
+    "key": "Bastard Sword",
+    "aliases": ["sword"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 6,
+    "value": 3500*CP,
+    "damage_roll": "1d10 ",
+    "range": "melee"}
+
+DIE_TSUCHI = {
+    "key": "Die-Tsuchi",
+    "aliases": ["die-tsuchi"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 12,
+    "value": 1200*CP,
+    "damage_roll": "1d8",
+    "range": "melee"
+}
+
+FALCHION = {
+    "key": "Falchion",
+    "aliases": ["falchion"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 8,
+    "value": 7500*CP,
+    "damage_roll": "2d4 ",
+    "range": "melee"
+}
+
+FLAIL_HEAVY = {
+    "key": "Heavy Flail",
+    "aliases": ["flail"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 10,
+    "value": 1500*CP,
+    "damage_roll": "1d10 ",
+    "range": "melee"
+}
+
+GLAIVE = {
+    "key": "Glaive",
+    "aliases": ["glaive"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 10,
+    "value": 800*CP,
+    "damage_roll": "1d10",
+    "range": "melee"
+}
+
+GREAT_AXE = {
+    "key": "Great Axe",
+    "aliases": ["axe"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 12,
+    "value": 2000*CP,
+    "damage_roll": "1d12",
+    "range": "melee"
+}
+
+GREAT_CLUB = {
+    "key": "Great Club",
+    "aliases": ["club"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 8,
+    "value": 500*CP,
+    "damage_roll": "1d10 ",
+    "range": "melee"
+}
+
+GREAT_SWORD = {
+    "key": "Great Sword",
+    "aliases": ["sword"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 8,
+    "value": 5000*CP,
+    "damage_roll": "2d6 ",
+    "range": "melee"
+}
+
+GUISARME = {
+    "key": "Guisarme",
+    "aliases": ["guisarme"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 12,
+    "value": 900*CP,
+    "damage_roll": "2d4 ",
+    "range": "melee"
+}
+
+HALBERD = {
+    "key": "Halberd",
+    "aliases": ["halberd"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 12,
+    "value": 1000*CP,
+    "damage_roll": "1d10",
+    "range": "melee"
+}
+
+KAWANAGA = {
+    "key": "Kawanaga",
+    "aliases": ["kawanaga"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 1,
+    "value": 1000*CP,
+    "damage_roll": "2d4 ",
+    "range": "melee"
+}
+
+KUSARI_GAMA = {
+    "key": "Kusari Gama",
+    "aliases": ["kusari gama"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 3,
+    "value": 1000*CP,
+    "damage_roll": "2d4 ",
+    "range": "melee"
+}
+
+LANCE = {
+    "key": "Lance",
+    "aliases": ["lance"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 10,
+    "value": 1000*CP,
+    "damage_roll": "1d8",
+    "range": "melee"
+}
+SPEAR_LONG = {
+"key": "Long Spear",
+    "aliases": ["long spear"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 9,
+    "value": 500*CP,
+    "damage_roll": "1d8",
+    "range": "melee"
+}
+LUCERNE_HAMMER = {
+"key": "Lucerne Hammer",
+    "aliases": ["hammer"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 10,
+    "value": 1200*CP,
+    "damage_roll": "2d4",
+    "range": "melee"
+}
+MANRIKI_GUSARI = {
+"key": "Manriki Gusari",
+    "aliases": ["mariki gusari"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 5,
+    "value": 500*CP,
+    "damage_roll": "2d6",
+    "range": "melee"
+}
+MAUL = {
+"key": "Maul",
+    "aliases": ["maul"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 20,
+    "value": 1500*CP,
+    "damage_roll": "1d10",
+    "range": "melee"
+}
+NAGIMAKI = {
+"key": "Nagimaki",
+    "aliases": ["nagimaki"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 10,
+    "value": 8000*CP,
+    "damage_roll": "2d4",
+    "range": "melee"
+}
+NAGINATA = {
+"key": "Naginata",
+    "aliases": ["naginata"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 15,
+    "value": 1000*CP,
+    "damage_roll": "1d10",
+    "range": "melee"
+}
+NO_DACHI = {
+"key": "No-Dachi",
+    "aliases": ["no dachi"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 12,
+    "value": 5000*CP,
+    "damage_roll": "2d6",
+    "range": "melee"
+}
+ONO = {
+"key": "Ono",
+    "aliases": ["ono"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 10,
+    "value": 2000*CP,
+    "damage_roll": "1d10",
+    "range": "melee"
+}
+QUARTERSTAFF = {
+"key": "Quarterstaff",
+    "aliases": ["staff"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 4,
+    "value": 100*CP,
+    "damage_roll": "1d6",
+    "range": "melee"
+}
+RANSUER = {
+"key": "Ransuer",
+    "aliases": ["ransuer"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 12,
+    "value": 1000*CP,
+    "damage_roll": "2d4",
+    "range": "melee"
+}
+
+SCYTHE = {
+"key": "Scythe",
+    "aliases": ["scythe"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 10,
+    "value": 1800*CP,
+    "damage_roll": "2d4",
+    "range": "melee"
+}
+
+TETSUBO = {
+"key": "Tetsubo",
+    "aliases": ["tetsubo"],
+    "typeclass": "typeclasses.weapons.Weapon",
+    "desc": " "
+            " ",
+    "weight": 15,
+    "value": 2500*CP,
+    "damage_roll": "1d8",
+    "range": "melee"
+}
+
+
 
 # Ranged Weapons
 
