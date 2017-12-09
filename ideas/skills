@@ -1,0 +1,43 @@
+
+Skills Master List
+Combat Skills
+Attack          'ATT':{'type': 'static', 'base': 1, 'mod': 0, 'name': 'Attack'},
+Defense         'DEF':{'type': 'static', 'base': 1, 'mod': 0, 'name': 'Defense'},
+Dodge           'DOD': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Dodge'},
+Weapons         'WPN': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Weapons'},
+Armors          'ARM': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Armors'},
+Shields         'SHD': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Shields'},
+Martial         'MAR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Martial'},
+
+Arcane Skills
+Spellcasting    'SPC': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Spell Casting'},
+Wands           'WND': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Wands'},
+Scrolls         'SCR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Scrolls'},
+Elemental       'ELE': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Elemental Magic'},
+Wards           'WRD': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Wards'},
+Necro           'NEC': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Necro Magic'},
+Spirit          'SPI': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Spirit Magic'},
+
+Rogue Skills
+Hide            'HID': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Hide'},
+Sneak           'SNK': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Sneak'},
+
+Religion skills
+Divine          'DIV': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Divine Magic'},
+Nature          'NAT': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Nature Magic'},
+Infernal        'INF': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Infernal Magic'},
+Faith           'FAI': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Faith'},
+Preach          'PRE': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Preach'},
+
+Craft Skills
+Repair          'REP': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Repair'},
+Forge           'FRG': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Forge'},
+
+MISC skills
+Focus           'FOC': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Focus'},
+Discipline      'DIS': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Discipline'},
+Leadership      'LDR': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Leadership'},
+Knowledge       'KNO': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Knowledge'},
+Organization    'ORG': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Organization'},
+Negotiation     'NEG': {'type': 'static', 'base': 1, 'mod': 0, 'name': 'Negotiation'},
+
