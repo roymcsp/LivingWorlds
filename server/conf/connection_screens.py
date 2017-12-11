@@ -26,7 +26,7 @@ CONNECTION_SCREEN = """
     follow all the rules.
     
     If you have problems you may contact the administration at:
-    Email Address Needed.
+    admin@lwmercadia.com.
     
     Enter your character name or enter quit to quit.
 """ \
