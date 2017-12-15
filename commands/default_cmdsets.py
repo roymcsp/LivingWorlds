@@ -14,8 +14,8 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 
 """
 
-from evennia import default_cmds
-from evennia import CmdSet
+from evennia import default_cmds, CmdSet
+from evennia.commands.default import general, account, system
 from commands import chargen, movecommands, sensorycommands, extendedcommands, equip, chartraits
 from world import races, background
 
@@ -36,6 +36,9 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
+        self.remove(general.CmdAccess())
+        self.remove(general.CmdHome())
+        self.remove(general.CmdSetDesc())
         self.add(extendedcommands.CmdExtendedLook())
         self.add(extendedcommands.CmdExtendedDesc())
         self.add(extendedcommands.CmdExtendedGet())
@@ -65,6 +68,23 @@ class AccountCmdSet(default_cmds.AccountCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
+        self.remove(account.CmdOOCLook())
+        self.remove(account.CmdIC())
+        self.remove(account.CmdOOC())
+        self.remove(account.CmdCharCreate())
+        self.remove(account.CmdCharDelete())
+        # Comm commands
+        self.add(comms.CmdAddCom())
+        self.add(comms.CmdDelCom())
+        self.add(comms.CmdAllCom())
+        self.add(comms.CmdChannels())
+        self.add(comms.CmdCdestroy())
+        self.add(comms.CmdChannelCreate())
+        self.add(comms.CmdClock())
+        self.add(comms.CmdCBoot())
+        self.add(comms.CmdCemit())
+        self.add(comms.CmdCWho())
+        self.add(comms.CmdCdesc())
 
 
 class UnloggedinCmdSet(default_cmds.UnloggedinCmdSet):
@@ -103,6 +123,7 @@ class SessionCmdSet(default_cmds.SessionCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
+        self.remove(account.CmdSessions())
 
 
 class ChargenWelcomeCmdset(CmdSet):
