@@ -16,7 +16,7 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 
 from evennia import default_cmds, CmdSet
 from evennia.commands.default import general, account, system
-from commands import chargen, movecommands, sensorycommands, extendedcommands, equip, chartraits
+from commands import chargen, movecommands, sensorycommands, extendedcommands, equip, chartraits, comms
 from world import races, background
 
 
