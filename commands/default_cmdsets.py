@@ -16,7 +16,7 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 
 from evennia import default_cmds, CmdSet
 from evennia.commands.default import general, account, system
-from commands import chargen, movecommands, sensorycommands, extendedcommands, equip, chartraits, comms
+from commands import chargen, movecommands, sensorycommands, extendedcommands, equip, chartraits, comm
 from world import races, background
 
 
@@ -74,13 +74,13 @@ class AccountCmdSet(default_cmds.AccountCmdSet):
         self.remove(account.CmdCharCreate())
         self.remove(account.CmdCharDelete())
         # Comm commands
-        self.add(comms.CmdCdestroy())
-        self.add(comms.CmdChannelCreate())
-        self.add(comms.CmdClock())
-        self.add(comms.CmdCBoot())
-        self.add(comms.CmdCemit())
-        self.add(comms.CmdCWho())
-        self.add(comms.CmdCdesc())
+        self.add(comm.CmdCdestroy())
+        self.add(comm.CmdChannelCreate())
+        self.add(comm.CmdClock())
+        self.add(comm.CmdCBoot())
+        self.add(comm.CmdCemit())
+        self.add(comm.CmdCWho())
+        self.add(comm.CmdCdesc())
 
 
 class UnloggedinCmdSet(default_cmds.UnloggedinCmdSet):
