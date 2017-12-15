@@ -74,10 +74,6 @@ class AccountCmdSet(default_cmds.AccountCmdSet):
         self.remove(account.CmdCharCreate())
         self.remove(account.CmdCharDelete())
         # Comm commands
-        self.add(comms.CmdAddCom())
-        self.add(comms.CmdDelCom())
-        self.add(comms.CmdAllCom())
-        self.add(comms.CmdChannels())
         self.add(comms.CmdCdestroy())
         self.add(comms.CmdChannelCreate())
         self.add(comms.CmdClock())
