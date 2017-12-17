@@ -178,6 +178,7 @@ class Character(GenderCharacter):
         self.db.background = None
         self.db.guild = None
         self.db.clan = None
+        self.db.profession = None
         self.db.title = None
         self.db.faith = None
         self.db.devotion = None
@@ -189,8 +190,10 @@ class Character(GenderCharacter):
         self.db.tasteable_text = "  You don't taste anything special."
         self.db.wallet = {'PP': 0, 'GP': 0, 'SP': 0, 'CP': 0}
 
+
         for key, kwargs in traits.iteritems():
             self.traits.add(key, **kwargs)
+
 
         self.traits.HP.mod = abilitymodifiers[self.traits.CON.actual - 1]
         self.traits.SP.mod = abilitymodifiers[self.traits.INT.actual - 1] + abilitymodifiers[self.traits.WIS.actual - 1]
@@ -208,6 +211,7 @@ class Character(GenderCharacter):
         self.traits.STR.push_factor = 40
         self.traits.ENC.max = self.traits.STR.lift_factor * self.traits.STR.actual
         tickerhandler.add(interval=12, callback=self.at_regen)
+
 
     @lazy_property
     def traits(self):
