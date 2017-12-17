@@ -77,25 +77,25 @@ PROTOTYPE_MODULES = {'world.contents.prototypes_weapons',
 
 DEFAULT_CHANNELS = [
                   # public channel
-                  {"key": "|YOOC|n",
-                  "aliases": ('ooc'),
-                  "desc": "Public discussion",
-                  "locks": "control:perm(Wizards);listen:all();send:all()"},
+                  {"key": "OOC",
+                  "aliases": 'ooc',
+                  "desc": "OOC Admin discussion",
+                  "locks": "control:perm(Admin);listen:all();send:all()"},
                   # connection/mud info
                   {"key": "MudInfo",
                    "aliases": "",
                    "desc": "Connection log",
-                   "locks": "control:perm(Immortals);listen:perm(Wizards);send:false()"},
+                   "locks": "control:perm(Admin);listen:perm(Wizards);send:false()"},
                   # Newbie question channel
-                  {"key": "|GQuestion|n",
-                  "aliases": ('question'),
-                  "desc": "Channel for Questions",
-                  "locks": "control:perm(Wizards);listen:all();send:all()"},
-                  #OOC chat channel
-                  {"key": "|MChat|n",
-                  "aliases": ('chat'),
+                  {"key": "Question",
+                  "aliases": 'question',
+                  "desc": "OOC Channel for New player questions",
+                  "locks": "control:perm(Admin);listen:all();send:all()"},
+                  # OOC chat channel
+                  {"key": "Chat",
+                  "aliases": 'chat',
                   "desc": "OOC chat channel",
-                  "locks": "control:perm(Wizards);listen:all();send:all()"}
+                  "locks": "control:perm(Admin);listen:all();send:all()"}
                   ]
 
 SEARCH_MULTIMATCH_TEMPLATE = "{name}{aliases}{info} {number}\n"
