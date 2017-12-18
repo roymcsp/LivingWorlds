@@ -12,7 +12,7 @@ class CmdRead(MuxCommand):
 
     key = "read"
     locks = "cmd:all()"
-    help_category = "Senses"
+    help_category = "General"
 
     def func(self):
         """
@@ -42,7 +42,7 @@ class CmdRead(MuxCommand):
 class CmdTaste(MuxCommand):
     key = "taste"
     locks = "cmd:all()"
-    help_category = "Senses"
+    help_category = "General"
 
     def func(self):
         """
@@ -72,7 +72,7 @@ class CmdSearch(Command):
 class CmdFeel(MuxCommand):
     key = "feel"
     locks = "cmd:all()"
-    help_category = "Senses"
+    help_category = "General"
 
     def func(self):
         """
@@ -98,7 +98,7 @@ class CmdFeel(MuxCommand):
 class CmdSmell(MuxCommand):
     key = "smell"
     locks = "cmd:all()"
-    help_category = "Senses"
+    help_category = "General"
 
     def func(self):
         """
