@@ -20,7 +20,7 @@ CHANNEL_COLORS = {'ooc': '|YOOC|n',
                   'caliphate': '|BCaliphate|n',
                   'empire': '|BEmpire|n',
                   'kingdom': '|BKingdom|n',
-                  'world': '|500World|n',
+                  'world': '|RWorld|n',
                   'fighter': '|CFighter|n',
                   'mage': '|CMage|n',
                   'thief': '|CThief|n',
@@ -102,7 +102,7 @@ class Channel(DefaultChannel):
     def channel_prefix(self, msg, emit=False):
         prefix_string = ""
         if self.key in CHANNEL_COLORS:
-            prefix_string = "[%s] " % CHANNEL_COLORS.get(self.key.lower())
+            self.prefix_string = "[%s] " % CHANNEL_COLORS.get(self.key.lower())
         else:
             prefix_string = "[%s] " % self.key.capitalize()
         return prefix_string
