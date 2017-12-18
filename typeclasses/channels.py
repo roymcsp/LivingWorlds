@@ -54,6 +54,7 @@ CHANNEL_COLORS = {'ooc': '|YOOC|n',
                   'gumi': '|RGumi|n',
                   }
 
+
 class Channel(DefaultChannel):
     """
     Working methods:
@@ -101,7 +102,7 @@ class Channel(DefaultChannel):
     def channel_prefix(self, msg, emit=False):
         prefix_string = ""
         if self.key in CHANNEL_COLORS:
-            prefix_string = "[%s] " % CHANNEL_COLORS.get(self.key.lower())
+            self.prefix_string = "[%s] " % CHANNEL_COLORS.get(self.key.lower())
         else:
             prefix_string = "[%s] " % self.key.capitalize()
         return prefix_string
