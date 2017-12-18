@@ -14,6 +14,46 @@ to be modified.
 
 from evennia import DefaultChannel
 
+CHANNEL_COLORS = {'ooc': '|YOOC|n',
+                  'chat': '|MChat|n',
+                  'question': '|GQuestion|n',
+                  'caliphate': '|BCaliphate|n',
+                  'empire': '|BEmpire|n',
+                  'kingdom': '|BKingdom|n',
+                  'world': '|RWorld|n',
+                  'fighter': '|CFighter|n',
+                  'mage': '|CMage|n',
+                  'thief': '|CThief|n',
+                  'merchant': '|CMerchant|n',
+                  'helotyr': '|cHelotyr|n',
+                  'templar': '|CTemplar|n',
+                  'helotyrim': '|CCleric|n',
+                  'warrior': '|CWarrior|n',
+                  'sorcerer': '|CSorcerer|n',
+                  'assassin': '|CAssassin|n',
+                  'trader': '|CTrader|n',
+                  'sarthoaran': '|CCleric|n',
+                  'harbinger': '|CHarbinger|n',
+                  'sarthoar': '|cSarthoar|n',
+                  'samurai': '|CSamurai|n',
+                  'shaman': '|CShaman|n',
+                  'monk': '|CMonk|n',
+                  'artisan': '|CArtisan|n',
+                  'druid': '|CDruid|n',
+                  'Ranger': '|CRanger|n',
+                  'aphrea': '|cAphrea|n',
+                  'news': '|bNews|n',
+                  'judicial': '|gJudicial|n',
+                  'tribune': '|gTribune|n',
+                  'magistrate': '|gMagistrate|n',
+                  'garrison': '|rGarrison|n',
+                  'medjai': '|rMedjai|n',
+                  'legion': '|rLegion|n',
+                  'sheriff': '|RSheriff|n',
+                  'warden': '|RWarden|n',
+                  'gumi': '|RGumi|n',
+                  }
+
 class Channel(DefaultChannel):
     """
     Working methods:
@@ -57,4 +97,11 @@ class Channel(DefaultChannel):
         post_send_message(msg) - called just after message was sent to channel
 
     """
-    pass
+
+    def channel_prefix(self, msg, emit=False):
+        prefix_string = ""
+        if self.key in CHANNEL_COLORS:
+            prefix_string = "[%s] " % CHANNEL_COLORS.get(self.key.lower())
+        else:
+            prefix_string = "[%s] " % self.key.capitalize()
+        return prefix_string
