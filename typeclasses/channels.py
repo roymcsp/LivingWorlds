@@ -17,7 +17,7 @@ from evennia import DefaultChannel
 CHANNEL_COLORS = {'ooc': '|YOOC|n',
                   'chat': '|MChat|n',
                   'question': '|GQuestion|n',
-                  'caliphate': '|BCaliphate|n',
+                  'caliphate': '|BCaliphate',
                   'empire': '|BEmpire|n',
                   'kingdom': '|BKingdom|n',
                   'world': '|RWorld|n',
@@ -102,7 +102,7 @@ class Channel(DefaultChannel):
     def channel_prefix(self, msg, emit=False):
         prefix_string = ""
         if self.key.lower() in CHANNEL_COLORS.keys():
-            prefix_string = "[%s] " % CHANNEL_COLORS.get(self.key.lower())
+            prefix_string = "%s " % CHANNEL_COLORS.get(self.key.lower())
         else:
-            prefix_string = "[%s] " % self.key.capitalize()
+            prefix_string = "%s " % self.key.capitalize()
         return prefix_string
