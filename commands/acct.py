@@ -646,7 +646,7 @@ class CmdQuit(COMMAND_DEFAULT_CLASS):
     game. Use the /all switch to disconnect from all sessions.
     """
     key = "@quit"
-    locks = "cmd:all()"
+    locks = "cmd:perm(Builder)"
 
     # this is used by the parent
     account_caller = True
