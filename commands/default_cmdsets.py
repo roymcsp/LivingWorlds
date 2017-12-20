@@ -15,8 +15,8 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 """
 
 from evennia import default_cmds, CmdSet
-from evennia.commands.default import general, account, system
-from commands import chargen, movecommands, sensorycommands, extendedcommands, equip, chartraits, comm
+from evennia.commands.default import general, account, system, comms
+from commands import chargen, movecommands, sensorycommands, extendedcommands, equip, chartraits, comm, acct, syst
 from world import races, background
 
 
@@ -36,6 +36,11 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
+
+        self.add(syst.CmdAbout())
+        self.add(syst.CmdTime())
+        self.remove(system.CmdAbout())
+        self.remove(system.CmdTime())
         self.remove(general.CmdAccess())
         self.remove(general.CmdHome())
         self.remove(general.CmdSetDesc())
@@ -68,12 +73,21 @@ class AccountCmdSet(default_cmds.AccountCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
+        # Account specific Commands
         self.remove(account.CmdOOCLook())
         self.remove(account.CmdIC())
         self.remove(account.CmdOOC())
         self.remove(account.CmdCharCreate())
         self.remove(account.CmdCharDelete())
+        self.add(acct.CmdOption())
+        self.add(acct.CmdQuit())
+        self.add(acct.CmdPassword())
+        self.add(acct.CmdColorTest())
+        self.add(acct.CmdQuell())
+
         # Comm commands
+        self.remove(comms.CmdChannels)
+        self.add(comm.CmdChannels)
         self.add(comm.CmdCdestroy())
         self.add(comm.CmdChannelCreate())
         self.add(comm.CmdClock())
@@ -152,4 +166,13 @@ class ChargenBackgroundCmdset(CmdSet):
 
     def at_cmdset_creation(self):
         self.add(background.CmdBackground())
+
+class ChargenPassVeilCmdSet(CmdSet):
+    """
+    This cmdset is used to finalize character creation and enter into the game
+    """
+    key = 'Chargen'
+
+    def at_cmdset_creation(self):
+        self.add(chargen.PassVeil())
 
