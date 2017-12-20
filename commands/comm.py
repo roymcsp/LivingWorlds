@@ -14,6 +14,7 @@ from evennia.comms.channelhandler import CHANNELHANDLER
 from evennia.locks.lockhandler import LockException
 from evennia.utils import create, utils, evtable
 from evennia.utils.utils import make_iter, class_from_module
+from commands.command import MuxCommand
 
 COMMAND_DEFAULT_CLASS = class_from_module(settings.COMMAND_DEFAULT_CLASS)
 
@@ -48,23 +49,18 @@ def find_channel(caller, channelname, silent=False, noaliases=False):
     return channels[0]
 
 
-class CmdAddCom(COMMAND_DEFAULT_CLASS):
-    """
-    add a channel alias and/or subscribe to a channel
+class CmdTune(MuxCommand):
+    """   
     Usage:
-       addcom [alias=] <channel>
-    Joins a given channel. If alias is given, this will allow you to
-    refer to the channel by this alias rather than the full channel
-    name. Subsequent calls of this command can be used to add multiple
-    aliases to an already joined channel.
+       tune <channel>
+    
+    Subscribes to a given channel.
     """
 
-    key = "addcom"
-    aliases = ["aliaschan", "chanalias"]
+    key = "tune"
     help_category = "Comms"
     locks = "cmd:not pperm(channel_banned)"
 
-    # this is used by the COMMAND_DEFAULT_CLASS parent
     account_caller = True
 
     def func(self):
@@ -75,17 +71,10 @@ class CmdAddCom(COMMAND_DEFAULT_CLASS):
         account = caller
 
         if not args:
-            self.msg("Usage: addcom [alias =] channelname.")
+            self.msg("Usage: tune channel.")
             return
 
-        if self.rhs:
-            # rhs holds the channelname
-            channelname = self.rhs
-            alias = self.lhs
-        else:
-            channelname = self.args
-            alias = None
-
+        channelname = self.args
         channel = find_channel(caller, channelname)
         if not channel:
             # we use the custom search method to handle errors.
@@ -93,7 +82,7 @@ class CmdAddCom(COMMAND_DEFAULT_CLASS):
 
         # check permissions
         if not channel.access(account, 'listen'):
-            self.msg("%s: You are not allowed to listen to this channel." % channel.key)
+            self.msg("%s: You are not allowed to tune to this channel." % channel.key)
             return
 
         string = ""
@@ -101,44 +90,39 @@ class CmdAddCom(COMMAND_DEFAULT_CLASS):
             # we want to connect as well.
             if not channel.connect(account):
                 # if this would have returned True, the account is connected
-                self.msg("%s: You are not allowed to join this channel." % channel.key)
+                self.msg("%s: You are not allowed to tune this channel." % channel.key)
                 return
             else:
-                string += "You now listen to the channel %s. " % channel.key
+                string += "You now tune to the channel %s. " % channel.key
         else:
             if channel.unmute(account):
                 string += "You unmute channel %s." % channel.key
             else:
                 string += "You are already connected to channel %s." % channel.key
 
-        if alias:
-            # create a nick and add it to the caller.
-            caller.nicks.add(alias, channel.key, category="channel")
-            string += " You can now refer to the channel %s with the alias '%s'."
-            self.msg(string % (channel.key, alias))
-        else:
-            string += " No alias added."
-            self.msg(string)
+        if channel:
+            # we have given a channel name - unsubscribe
+            if not channel.has_connection(account):
+                self.msg("You are not tuned to that channel.")
+                return
 
+            disconnect = channel.disconnect(account)
+            if disconnect:
+                self.msg("You mute channel '%s'." % channel.key)
+            return
 
-class CmdDelCom(COMMAND_DEFAULT_CLASS):
+class CmdMute(MuxCommand):
     """
-    remove a channel alias and/or unsubscribe from channel
     Usage:
-       delcom <alias or channel>
-       delcom/all <channel>
-    If the full channel name is given, unsubscribe from the
-    channel. If an alias is given, remove the alias but don't
-    unsubscribe. If the 'all' switch is used, remove all aliases
-    for that channel.
+       mute channel
+
+    Unsubscribe from a given channel.
     """
 
-    key = "delcom"
-    aliases = ["delaliaschan", "delchanalias"]
+    key = "mute"
     help_category = "Comms"
     locks = "cmd:not perm(channel_banned)"
 
-    # this is used by the COMMAND_DEFAULT_CLASS parent
     account_caller = True
 
     def func(self):
@@ -148,7 +132,7 @@ class CmdDelCom(COMMAND_DEFAULT_CLASS):
         account = caller
 
         if not self.args:
-            self.msg("Usage: delcom <alias or channel>")
+            self.msg("Usage: mute channel")
             return
         ostring = self.args.lower()
 
@@ -156,35 +140,17 @@ class CmdDelCom(COMMAND_DEFAULT_CLASS):
         if channel:
             # we have given a channel name - unsubscribe
             if not channel.has_connection(account):
-                self.msg("You are not listening to that channel.")
+                self.msg("You are not tuned to that channel.")
                 return
-            chkey = channel.key.lower()
-            delnicks = "all" in self.switches
-            # find all nicks linked to this channel and delete them
-            if delnicks:
-                for nick in [nick for nick in make_iter(caller.nicks.get(category="channel", return_obj=True))
-                             if nick and nick.pk and nick.value[3].lower() == chkey]:
-                    nick.delete()
+
             disconnect = channel.disconnect(account)
             if disconnect:
-                wipednicks = " Eventual aliases were removed." if delnicks else ""
-                self.msg("You stop listening to channel '%s'.%s" % (channel.key, wipednicks))
+                self.msg("You mute channel '%s'." % channel.key)
             return
-        else:
-            # we are removing a channel nick
-            channame = caller.nicks.get(key=ostring, category="channel")
-            channel = find_channel(caller, channame, silent=True)
-            if not channel:
-                self.msg("No channel with alias '%s' was found." % ostring)
-            else:
-                if caller.nicks.get(ostring, category="channel"):
-                    caller.nicks.remove(ostring, category="channel")
-                    self.msg("Your alias '%s' for channel %s was cleared." % (ostring, channel.key))
-                else:
-                    self.msg("You had no such alias defined for this channel.")
 
 
-class CmdAllCom(COMMAND_DEFAULT_CLASS):
+
+class CmdAllCom(MuxCommand):
     """
     perform admin operations on all channels
     Usage:
@@ -208,7 +174,7 @@ class CmdAllCom(COMMAND_DEFAULT_CLASS):
         caller = self.caller
         args = self.args
         if not args:
-            self.execute_cmd("@channels")
+            self.execute_cmd("channels")
             self.msg("(Usage: allcom on | off | who | destroy)")
             return
 
@@ -245,19 +211,19 @@ class CmdAllCom(COMMAND_DEFAULT_CLASS):
             self.msg("Usage: allcom on | off | who | clear")
 
 
-class CmdChannels(COMMAND_DEFAULT_CLASS):
+class CmdChannels(MuxCommand):
     """
     list all channels available to you
     Usage:
-      @channels
-      @clist
+      channels
+      clist
       comlist
     Lists all channels available to you, whether you listen to them or not.
     Use 'comlist' to only view your current channel subscriptions.
     Use addcom/delcom to join and leave channels
     """
-    key = "@channels"
-    aliases = ["@clist", "comlist", "chanlist", "channellist", "all channels"]
+    key = "channels"
+    aliases = ["comlist"]
     help_category = "Comms"
     locks = "cmd: not pperm(channel_banned)"
 
@@ -635,7 +601,7 @@ class CmdCdesc(COMMAND_DEFAULT_CLASS):
                                                                self.rhs))
 
 
-class CmdPage(COMMAND_DEFAULT_CLASS):
+class CmdTell(MuxCommand):
     """
     send a private message to another account
     Usage:
@@ -649,7 +615,7 @@ class CmdPage(COMMAND_DEFAULT_CLASS):
     argument is given, you will get a list of your latest messages.
     """
 
-    key = "page"
+    key = "tell"
     aliases = ['tell']
     locks = "cmd:not pperm(page_banned)"
     help_category = "Comms"
