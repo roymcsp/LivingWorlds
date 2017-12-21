@@ -60,13 +60,13 @@ class CmdInventory(MuxCommand):
         wear_table = evtable.EvTable(border="header")
         for item in items:
             if not item.db.worn:
-                carry_table.add_row("|C%s|n" % item.name, item.db.desc or "")
+                carry_table.add_row("|C%s|n" % item.name)
         if carry_table.nrows == 0:
             carry_table.add_row("|CNothing.|n", "")
         string = "|wYou are carrying:\n%s" % carry_table
         for item in items:
             if item.db.worn:
-                wear_table.add_row("|C%s|n" % item.name, item.db.desc or "")
+                wear_table.add_row("|C%s|n" % item.name)
         if wear_table.nrows == 0:
             wear_table.add_row("|CNothing.|n", "")
         string += "|/|wYou are wearing:\n%s" % wear_table
