@@ -7,17 +7,18 @@ from evennia.utils.evform import EvForm
 from world.rulebook import d_roll
 from evennia.utils.spawner import spawn
 
+
 class SorcCmdSet(CmdSet):
     """
     This stores the input command
     """
-    key = "Sorcerer"
+    key = "commands"
 
     def at_cmdset_creation(self):
         """called once at creation"""
         self.add(CmdPower())
         self.add(CmdCursedBone())
-        #self.add(CmdDeathSpike())
+        # self.add(CmdDeathSpike())
         """
         self.add(CmdAnchor())
         self.add(CmdBloodCloak())
@@ -71,6 +72,7 @@ class CmdPower(MuxCommand):
     key = "power"
     aliases = ["powers"]
     locks = "cmd:all()"
+    help_category = "commands"
 
     def func(self):
         """
@@ -134,8 +136,8 @@ class CmdCursedBone(MuxCommand):
     """
 
     key = "cursedbone"
-    locks = "cmd:attr_ge(traits.LVL.base, '1')"
-    help_category = "Sorcerer"
+    locks = "cmd:attr_ge(level, 1)"
+    help_category = "commands"
 
     def func(self):
         caller = self.caller
@@ -186,7 +188,7 @@ class CmdDeathSpike(MuxCommand):
 
     key = "deathspike"
     locks = "cmd:attr_ge(Level, '1')"
-    help_category = "Sorcerer"
+    help_category = "commands"
 
     def func(self):
         caller = self.caller
@@ -213,8 +215,7 @@ class CmdDeathSpike(MuxCommand):
             caller.msg(mess)
             return
         tr.SP.current -= 30
-        mess1 = '|mYou take a cursed bone and begin chanting.|n '
-        caller.msg(mess1)
+        caller.msg('|mYou take a cursed bone and begin chanting.|n ')
         caller.location.msg_contents(
             "|m{actor} takes a cursed bone and begins chanting.|n",
             mapping=dict(actor=caller),
@@ -224,9 +225,9 @@ class CmdDeathSpike(MuxCommand):
     def death_spike(self):
         caller = self.caller
         target = self.target
-        tr = target.traits
+        ttr = target.traits
         sk = self.caller.skills
-        resist = tr.MDEF.actual - sk.SPC.actual
+        resist = ttr.MDEF.actual - sk.SPC.actual
         damage = d_roll("{}d6".format((sk.NEC.actual//3) + 1))
 
         self.item.delete()
@@ -236,9 +237,9 @@ class CmdDeathSpike(MuxCommand):
             mapping=dict(actor=caller, target=self.target),
             exclude=caller)
         if resist >= 0:
-            tr.HP.current -= damage - resist
+            ttr.HP.current -= damage - resist
         else:
-            tr.HP.current -= damage
+            ttr.HP.current -= damage
         # if the spell was successfully cast, store the casting time
         caller.db.ds_lc = time.time()
         # set up combat
@@ -254,12 +255,13 @@ class CmdDeathSpike(MuxCommand):
             self.caller.msg("Battle with %s begins." % target)
             target.msg("Battle with %s begins" % self.caller)
 
+
 class CmdBodyToMind(MuxCommand):
     """
     Spell Name: Body To Mind
     HP Cost   : varies 
     Syntax    : bodytomind
-    Skills    : 
+    Skills    : spellcraft, focus, discipline
 
     Description:
     By channeling the powers of the underworld in a mystical ritual
@@ -270,7 +272,7 @@ class CmdBodyToMind(MuxCommand):
 
     key = "bodytomind"
     locks = "cmd:attr_ge(Level, '2')"
-    help_category = "Sorcerer"
+    help_category = "commands"
 
     def func(self):
         caller = self.caller
@@ -289,22 +291,101 @@ class CmdBodyToMind(MuxCommand):
         tr.SP += health // 2 + sk.SPC.current
         caller.db.b2m_lastcast = time.time()
 
-'''
-class CmdVampiricTouch():
+
+class CmdVampiricTouch(MuxCommand):
     """
     Spell Name: Vampiric Touch
-    MP Cost   : 
+    MP Cost   : 35
     Syntax    : vampirictouch <target>
-    Skills    : text
+    Skills    : spellcraft, focus, necro magic
 
     Description:
-    text goes here
+    this power allows the sorcerer to draw blood from their 
+    foes from a distance. Focusing your mental skills you can 
+    draw the health and endurance from your enemy. The amount you 
+    drain them is dependant on your skills and level.
     """
 
     key = "vampirictouch"
     locks = "cmd:attr_ge(Level, '3')"
+    help_category = "commands"
+
+    def func(self):
+        caller = self.caller
+        tr = self.caller.traits
+        lastcast = caller.db.vt_lastcast
+
+        if not self.args:
+            self.caller.msg("You dont have a target!")
+            return
+
+        target = self.caller.search(self.args)
+
+        if not target:
+            return
+
+        if tr.SP.current < 35:
+            caller.msg("You don't have enough power to cast this spell")
+            return
+
+        if lastcast and time.time() - lastcast < 5:
+            caller.msg("You cannot cast that again yet")
+            return
+
+        tr.SP.current -= 30
+        caller.msg('|rYou take a cursed bone and begin chanting.|n ')
+        caller.location.msg_contents(
+            "|r{actor} takes a cursed bone and begins chanting.|n",
+            mapping=dict(actor=caller),
+            exclude=caller)
+        utils.delay(3, callback=self.vamptouch)
+
+    def vamptouch(self):
+        caller = self.caller
+        target = self.target
+        tr = caller.traits
+        sk = caller.skills
+        ttr = self.target.traits
+        tsk = self.target.skills
+        resist = ttr.MDEF.actual - sk.SPC.actual
+        damage = d_roll("{}d6".format((sk.NEC.actual//2) + 1))
+
+        caller.msg('|RWith a wave of your hand, you send the spike of bone into {target}.|n ')
+        caller.location.msg_contents(
+            "|RWith a wave of |p hand,{actor} spends a spike of bone into {target}.|n",
+            mapping=dict(actor=caller, target=self.target),
+            exclude=caller)
+
+        if resist >= 0:
+            ttr.HP.current -= damage - resist
+            ttr.EP.current -= damage - resist
+            tr.HP.current += (damage - resist) + sk.FOC.actual
+            tr.EP.current += (damage - resist) + sk.FOC.actual
+        else:
+            ttr.HP.current -= damage
+            ttr.EP.current -= damage
+            tr.HP.current += damage + sk.FOC.actual
+            tr.EP.current += damage + sk.FOC.actual
+
+        # if the spell was successfully cast, store the casting time
+        caller.db.vt_lastcast = time.time()
+
+        # set up combat
+        if target.ndb.combat_handler:
+            # target is already in combat - join it
+            target.ndb.combat_handler.add_character(self.caller)
+            target.ndb.combat_handler.msg_all("%s joins combat!" % self.caller)
+
+        else:
+            # create a new combat handler
+            chandler = create_script("combat_handler.CombatHandler")
+            chandler.add_character(self.caller)
+            chandler.add_character(target)
+            self.caller.msg("Battle with %s begins." % target)
+            target.msg("Battle with %s begins" % self.caller)
 
 
+'''
 class CmdWeakness():
     """
     Spell Name: Curse: Weakness
