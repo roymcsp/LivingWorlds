@@ -33,32 +33,44 @@ class EquipCmdSet(CmdSet):
 class CmdInventory(MuxCommand):
     """
     view inventory
-    
+
     Usage:
       inventory
       inv
-    
+
     Shows your inventory.
     """
+    # Alternate version of the inventory command which separates
+    # worn and carried items.
+
     key = "inventory"
     aliases = ["inv", "i"]
     locks = "cmd:all()"
     arg_regex = r"$"
 
     def func(self):
-        items = [i for i in self.caller.contents
-                 if i not in self.caller.equip]
-        if not items:
-            string = "You are not carrying anything."
-        else:
-            data = [[], [], []]
-            for item in items:
-                data[0].append("|W{}|n".format(item.name))
+        """check inventory"""
+        if not self.caller.contents:
+            self.caller.msg("You are not carrying or wearing anything.")
+            return
 
-            table = evtable.EvTable(header=False, table=data, border=None, valign='t')
-            string = "|YYou are carrying:|n\n{}".format(table)
+        items = self.caller.contents
+
+        carry_table = evtable.EvTable(border="header")
+        wear_table = evtable.EvTable(border="header")
+        for item in items:
+            if not item.db.worn:
+                carry_table.add_row("|C%s|n" % item.name, item.db.desc or "")
+        if carry_table.nrows == 0:
+            carry_table.add_row("|CNothing.|n", "")
+        string = "|wYou are carrying:\n%s" % carry_table
+        for item in items:
+            if item.db.worn:
+                wear_table.add_row("|C%s|n" % item.name, item.db.desc or "")
+        if wear_table.nrows == 0:
+            wear_table.add_row("|CNothing.|n", "")
+        string += "|/|wYou are wearing:\n%s" % wear_table
         self.caller.msg(string)
-
 
 class CmdEquip(MuxCommand):
     """
