@@ -646,7 +646,7 @@ class CmdTime(COMMAND_DEFAULT_CLASS):
     """
     key = "@time"
     aliases = "@uptime"
-    locks = "perm(Builder)"
+    locks = "cmd:perm(time) or perm(Builder)"
     help_category = "System"
 
     def func(self):
