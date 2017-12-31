@@ -66,7 +66,7 @@ except ImportError:
 
 
 TIME_FACTOR = 1.0
-TIME_GAME_EPOCH = 1514728080.0
+TIME_GAME_EPOCH = 1509975421.0
 
 CMDSET_UNLOGGEDIN = "server.conf.menu_login.UnloggedinCmdSet"
 DEFAULT_HOME = "#636"
