@@ -219,16 +219,18 @@ class CmdExtendedDesc(default_cmds.CmdDesc, MuxCommand):
 
 # Simple command to view the current time and season
 
-class CmdGameTime(MuxCommand):
+
+class CmdGameSeason(MuxCommand):
     """
-    Check the game time
+    Check the current season
 
     Usage:
-        time
+        season
 
-    Shows the current in-game time and season.
+    Shows the current in-game season.
     """
-    key = "time"
+
+    key = "Season"
     locks = "cmd:all()"
     help_category = "General"
 
