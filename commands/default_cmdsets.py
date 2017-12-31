@@ -38,9 +38,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         #
 
         self.add(syst.CmdAbout())
-        self.add(syst.CmdTime())
         self.remove(system.CmdAbout())
-        self.remove(system.CmdTime())
         self.remove(general.CmdAccess())
         self.remove(general.CmdHome())
         self.remove(general.CmdSetDesc())
