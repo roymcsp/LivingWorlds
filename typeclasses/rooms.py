@@ -84,18 +84,18 @@ class Room(ExtendedRoom, ContribRPRoom):
     """
     # Define terrain constants
     _TERRAINS = {
-        'PAVEDROAD': {'cost': 1, 'delay': 0},
-        'DIRTROAD': {'cost': 2, 'delay': 0},
-        'FOREST': {'cost': 3, 'delay': 0},
-        'MUD': {'cost': 3, 'delay': 0},
-        'TUNDRA': {'cost': 3, 'delay': 0},
-        'SAND': {'cost': 5, 'delay': 0},
-        'SNOW': {'cost': 4, 'delay': 0},
-        'PLAINS': {'cost': 2, 'delay': 0},
-        'THICKET': {'cost': 2, 'delay': 0},
-        'WATER': {'cost': 3, 'delay': 0},
-        'DEEPWATER': {'cost': 3, 'delay': 0},
-        'MOUNTAIN': {'cost': 3, 'delay': 0}
+        'PAVEDROAD': {'cost': 2, 'delay': 0},
+        'DIRTROAD': {'cost': 3, 'delay': 0},
+        'FOREST': {'cost': 4, 'delay': 0},
+        'MUD': {'cost': 4, 'delay': 0},
+        'TUNDRA': {'cost': 4, 'delay': 0},
+        'SAND': {'cost': 6, 'delay': 0},
+        'SNOW': {'cost': 5, 'delay': 0},
+        'PLAINS': {'cost': 3, 'delay': 0},
+        'THICKET': {'cost': 3, 'delay': 0},
+        'WATER': {'cost': 4, 'delay': 0},
+        'DEEPWATER': {'cost': 5, 'delay': 0},
+        'MOUNTAIN': {'cost': 10, 'delay': 0}
     }
 
     def at_object_creation(self):
