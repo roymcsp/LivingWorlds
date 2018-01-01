@@ -220,6 +220,34 @@ class CmdExtendedDesc(default_cmds.CmdDesc, MuxCommand):
 # Simple command to view the current time and season
 
 
+class CmdGameTime(MuxCommand):
+    """
+    Check the current time
+
+    Usage:
+        season
+
+    Shows the current in-game time.
+    """
+
+    key = "time"
+    locks = "cmd:all()"
+    help_category = "General"
+
+    def func(self):
+        """Reads time info from current room"""
+
+        location = self.caller.location
+        if not location or not hasattr(location, "get_time_and_season"):
+            self.caller.msg("No location available - you are outside time.")
+        else:
+            season, timeslot = location.get_time_and_season()
+            prep = "a"
+            if season == "autumn":
+                prep = "an"
+                self.caller.msg("It's %s %s day, in the %s." % (prep, season, timeslot,))
+
+
 class CmdGameSeason(MuxCommand):
     """
     Check the current season
