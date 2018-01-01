@@ -64,7 +64,9 @@ try:
 except ImportError:
     print "secret_settings.py file not found or failed to import."
 
-
+# Local time zone for this installation. All choices can be found here:
+# http://www.postgresql.org/docs/8.0/interactive/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
+TIME_ZONE = 'PST'
 TIME_FACTOR = 1.0
 TIME_GAME_EPOCH = None
 
