@@ -84,18 +84,18 @@ class Room(ExtendedRoom, ContribRPRoom):
     """
     # Define terrain constants
     _TERRAINS = {
-        'PAVEDROAD': {'cost': 1},
-        'DIRTROAD': {'cost': 2},
-        'FOREST': {'cost': 3},
-        'MUD': {'cost': 3},
-        'TUNDRA': {'cost': 3},
-        'SAND': {'cost': 5,},
-        'SNOW': {'cost': 4,},
-        'PLAINS': {'cost': 2,},
-        'THICKET': {'cost': 2,},
-        'WATER': {'cost': 3},
-        'DEEPWATER': {'cost': 3},
-        'MOUNTAIN': {'cost': 3}
+        'PAVEDROAD': {'cost': 1, 'delay': 0},
+        'DIRTROAD': {'cost': 2, 'delay': 0},
+        'FOREST': {'cost': 3, 'delay': 0},
+        'MUD': {'cost': 3, 'delay': 0},
+        'TUNDRA': {'cost': 3, 'delay': 0},
+        'SAND': {'cost': 5, 'delay': 0},
+        'SNOW': {'cost': 4, 'delay': 0},
+        'PLAINS': {'cost': 2, 'delay': 0},
+        'THICKET': {'cost': 2, 'delay': 0},
+        'WATER': {'cost': 3, 'delay': 0},
+        'DEEPWATER': {'cost': 3, 'delay': 0},
+        'MOUNTAIN': {'cost': 3, 'delay': 0}
     }
 
     def at_object_creation(self):
@@ -125,7 +125,7 @@ class Room(ExtendedRoom, ContribRPRoom):
         """Returns the movement delay for this room."""
         return self._TERRAINS[self.terrain]['delay']
 
-    
+
 class WildernessRoom(Room):
     def at_object_creation(self):
         super(WildernessRoom, self).at_object_creation()
