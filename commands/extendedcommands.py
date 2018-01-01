@@ -245,7 +245,8 @@ class CmdGameTime(MuxCommand):
             prep = "a"
             if season == "autumn":
                 prep = "an"
-                self.caller.msg("It's %s %s day, in the %s." % (prep, season, timeslot,))
+                self.caller.msg("*** The Time is Currently day month  hour:minute year, It is %s %s Day in the %s***"
+                                % (prep, season, timeslot,))
 
 
 class CmdGameSeason(MuxCommand):
