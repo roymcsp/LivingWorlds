@@ -66,7 +66,7 @@ except ImportError:
 
 # Local time zone for this installation. All choices can be found here:
 # http://www.postgresql.org/docs/8.0/interactive/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
-TIME_ZONE = 'PST'
+TIME_ZONE = 'America/Los_Angeles PST8PDT SystemV/PST8PDT US/Pacific US/Pacific-New'
 TIME_FACTOR = 1.0
 TIME_GAME_EPOCH = None
 
