@@ -237,6 +237,10 @@ class CmdGameTime(MuxCommand):
     def func(self):
         """Reads time info from current room"""
 
+        timestamp = gametime.gametime(absolute=True)
+        # note that fromtimestamp includes the effects of server time zone!
+        datestamp = datetime.datetime.fromtimestamp(timestamp)
+
         location = self.caller.location
         if not location or not hasattr(location, "get_time_and_season"):
             self.caller.msg("No location available - you are outside time.")
@@ -245,8 +249,9 @@ class CmdGameTime(MuxCommand):
             prep = "a"
             if season == "autumn":
                 prep = "an"
-                self.caller.msg("*** The Time is Currently day month  hour:minute year, It is %s %s Day in the %s***"
-                                % (prep, season, timeslot,))
+                self.caller.msg("*** The Time is Currently %s %s %s:%s %s, It is %s %s Day in the %s***"
+                                % (datestamp.day, datestamp.month, datestamp.hour, datestamp.minute,
+                                   datestamp.year, prep, season, timeslot,))
 
 
 class CmdGameSeason(MuxCommand):
