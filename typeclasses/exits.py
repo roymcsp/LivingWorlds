@@ -6,6 +6,7 @@ set and has a single command defined on itself with the same name as its key,
 for allowing Characters to traverse the exit to its destination.
 
 """
+from evennia.server.sessionhandler import SESSIONS
 from evennia import DefaultExit
 
 class Exit(DefaultExit):
@@ -33,10 +34,47 @@ class Exit(DefaultExit):
                                         not be called if the attribute `err_traverse` is
                                         defined, in which case that will simply be echoed.
     """
-    pass
+    def at_traverse(self, traversing_object, target_location):
+        """
+        Implements the actual traversal, using utils.delay to delay the move_to.
+        """
+        move_cost = self.destination.mv_cost
+
+        # check the movement cost
+
+        if (hasattr(traversing_object, 'traits') and
+                    'EP' in traversing_object.traits.all):
+            if traversing_object.traits.EP.actual < move_cost:
+                traversing_object.msg('Moving so far so fast has worn you out. '
+                                      'You pause for a moment to gather your '
+                                      'composure.')
+            elif (hasattr(traversing_object, 'traits') and
+                            'EP' in traversing_object.traits.all):
+                    traversing_object.traits.EP.current -= move_cost
     
 class NationExit(DefaultExit):
     
     """ an exit that applies something to the traverser after traversing """
     def at_after_traverse(self,traverser,source_location):
         traverser.db.nation = str(self.db.nation)
+
+        if traverser.db.nation == "Kingdom":
+            message = "************[WORLD CRIER]************" \
+                      " %s joins the game " \
+                      " Starting in the Kingdom of Iusticia " \
+                      "***************************" % (traverser)
+            SESSIONS.announce_all(message)
+
+        if traverser.db.nation == "Caliphate":
+            message = "************[WORLD CRIER]************" \
+                      " %s joins the game " \
+                      " Starting in the Caliphate of Ashran " \
+                      "***************************" % (traverser)
+            SESSIONS.announce_all(message)
+
+        if traverser.db.nation == "Empire":
+            message = "************[WORLD CRIER]************" \
+                      " %s joins the game " \
+                      " Starting in the Empire of Kosun " \
+                      "***************************" % (traverser)
+            SESSIONS.announce_all(message)
