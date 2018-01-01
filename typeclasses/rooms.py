@@ -120,7 +120,12 @@ class Room(ExtendedRoom, ContribRPRoom):
         """Returns the movement cost to enter this room."""
         return self._TERRAINS[self.terrain]['cost']
 
+    @property
+    def mv_delay(self):
+        """Returns the movement delay for this room."""
+        return self._TERRAINS[self.terrain]['delay']
 
+    
 class WildernessRoom(Room):
     def at_object_creation(self):
         super(WildernessRoom, self).at_object_creation()
