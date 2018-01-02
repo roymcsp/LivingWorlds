@@ -501,7 +501,7 @@ class CmdWho(MuxCommand):
                 title = "|510%s|n" % title
             else:
                 title = " "
-            self.caller.msg("%s, %s %s, %s, %s" % (puppet.name, puppet.gender, puppet.race, puppet.guild, title))
+            self.caller.msg("%s, %s %s, %s, %s" % (puppet.name, puppet.db.gender, puppet.db.race, puppet.db.guild, title))
         self.caller.msg("----------------------======]   Online     [======----------------------")
         self.caller.msg("           There are a total of %s Number of Players Online             " % (SESSIONS.account_count()))
         self.caller.msg("----------------------======]**************[======----------------------")
