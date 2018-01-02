@@ -84,6 +84,7 @@ class Room(ExtendedRoom, ContribRPRoom):
     """
     # Define terrain constants
     _TERRAINS = {
+        'CHARGEN':{'cost': 0, 'delay': 0},
         'PAVEDROAD': {'cost': 2, 'delay': 0},
         'DIRTROAD': {'cost': 3, 'delay': 0},
         'FOREST': {'cost': 4, 'delay': 0},
