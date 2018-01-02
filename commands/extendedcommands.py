@@ -482,6 +482,7 @@ class CmdWho(MuxCommand):
         self.caller.msg("----------------------======]   |550Characters|n  [======---------------------")
         for session in session_list:
             puppet = session.get_puppet()
+            title = puppet.db.title
             TITLELIST1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
                           'Mage GM', 'Merchant GM','Monk GM', 'Ranger GM', 'Samurai GM', 'Sarthoar GM', 'Shaman GM',
                           'Sorcerer GM', 'Templar GM', 'Thief GM','Trader GM','Warrior GM', 'Chief Warden',
