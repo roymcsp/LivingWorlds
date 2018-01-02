@@ -2,7 +2,8 @@ import datetime
 from evennia import gametime
 from evennia import default_cmds, utils
 from commands.command import MuxCommand
-
+from evennia.server.sessionhandler import SESSIONS
+from evennia.utils import evtable
 
 class CmdExtendedLook(default_cmds.CmdLook, MuxCommand):
     """
