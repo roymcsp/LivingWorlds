@@ -474,12 +474,12 @@ class CmdWho(MuxCommand):
         self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.gametime()))
         self.caller.msg("----------------------======]    |GAdmin|n     [======----------------------")
         self.caller.msg("    Revrwn, |305Administrator|n ")
-        self.caller.msg("----------------------======]    |115Staff     [======----------------------")
+        self.caller.msg("----------------------======]    |115Staff|n     [======----------------------")
         self.caller.msg("    Jennifer, |335Chief of Staff ")
         self.caller.msg("    Dominic, |045Administrative Staff ")
         self.caller.msg("    Tiffany, |045Administrative Staff ")
         self.caller.msg("    Corry, |045Administrative Staff   ")
-        self.caller.msg("----------------------======]   |550Characters  [======---------------------")
+        self.caller.msg("----------------------======]   |550Characters|n  [======---------------------")
         for session in session_list:
             puppet = session.get_puppet()
             TITLELIST1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
