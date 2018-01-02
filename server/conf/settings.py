@@ -69,6 +69,7 @@ except ImportError:
 TIME_ZONE = 'America/Los_Angeles'
 TIME_FACTOR = 1.0
 TIME_GAME_EPOCH = None
+TIME_IGNORE_DOWMTIMES = True
 
 CMDSET_UNLOGGEDIN = "server.conf.menu_login.UnloggedinCmdSet"
 DEFAULT_HOME = "#636"
