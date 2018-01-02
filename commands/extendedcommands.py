@@ -469,44 +469,39 @@ class CmdWho(MuxCommand):
     def func(self):
         session_list = SESSIONS.get_sessions()
 
-        table = evtable.EvTable(" |wName:|n", "|wIdle:|n", "|wConn:|n", "|wAffiliation:|n", table=None,
-                                border='header', header_line_char='-', width=78)
-
+        self.caller.msg("----------------------======]   |CMercadia|n   [======----------------------")
+        datetime.datetime.now().strftime("                   %a %b %d %H:%M:%S %Y Mercadian Time               ")
+        self.caller.msg("     Mercadia uptime: %s.                                               " % gametime.uptime)
+        self.caller.msg("----------------------======]    |GAdmin|N     [======----------------------")
+        self.caller.msg("    Revrwn, |gAdministrator|n                                           ")
+        self.caller.msg("----------------------======]    Staff     [======----------------------")
+        self.caller.msg("    Jennifer, Chief of Staff                                            ")
+        self.caller.msg("    Dominic, Administrative Staff                                       ")
+        self.caller.msg("    Tiffany, Administrative Staff                                       ")
+        self.caller.msg("    Corry, Administrative Staff                                         ")
+        self.caller.msg("----------------------======]   Characters  [======---------------------")
         for session in session_list:
-            player = session.get_account()
-            idle = time.time() - session.cmd_last_visible
-            conn = time.time() - session.conn_time
-            if session.get_puppet():
-                affiliation = session.get_puppet().db.affiliation
+            puppet = session.get_puppet()
+            TITLELIST1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
+                          'Mage GM', 'Merchant GM','Monk GM', 'Ranger GM', 'Samurai GM', 'Sarthoar GM', 'Shaman GM',
+                          'Sorcerer GM', 'Templar GM', 'Thief GM','Trader GM','Warrior GM', 'Chief Warden',
+                          'Head Marshal', 'Gumi Captain', 'Editor in Chief', 'Chief Justice', 'Tribune Prime',
+                          'Head Magistrate')
+            TITLELIST2 = ('Artisan AGM', 'Assassin AGM', 'Druid AGM', 'Fighter AGM', 'Harbinger AGM', 'Helotyr AGM',
+                          'Mage AGM', 'Merchant AGM','Monk AGM', 'Ranger AGM', 'Samurai AGM', 'Sarthoar AGM',
+                          'Shaman AGM', 'Sorcerer AGM', 'Templar AGM', 'Thief AGM','Trader AGM','Warrior AGM',
+                          'First Warden', 'First Marshal', 'Gumi Lieutenant', 'Editor', 'Justice', 'Tribune',
+                          'Magistrate')
+            TITLELIST3 = ('Warden', 'Gumi', 'Marshal', 'Reporter', 'Barrister', 'Esquire', 'Representative')
+            if puppet.db.title in TITLELIST1:
+                title = "|300%s|n" % title
+            elif puppet.db.title in TITLELIST2:
+                title = "|500%s|n" % title
+            elif puppet.db.title in TITLELIST3:
+                title = "|510%s|n" % title
             else:
-                affiliation = ""
-            flag = None
-            if player.locks.check_lockstring(player, "dummy:perm(Admin)"):
-                flag = "|y!|n"
-            elif player.locks.check_lockstring(player, "dummy:perm(Builder)"):
-                flag = "|g&|n"
-            elif player.locks.check_lockstring(player, "dummy:perm(Helper)"):
-                flag = "|r$|n"
-            else:
-                flag = " "
-            table.add_row(flag + utils.crop(player.name), utils.time_format(idle, 0),
-                          utils.time_format(conn, 0), affiliation)
-
-        table.reformat_column(0, width=24)
-        table.reformat_column(1, width=12)
-        table.reformat_column(2, width=12)
-        table.reformat_column(3, width=30)
-
-        self.caller.msg("|b-|n" * 78)
-        self.caller.msg("|yStar Wars: Centennial|n".center(78))
-        self.caller.msg("|b-|n" * 78)
-        self.caller.msg(table)
-        self.caller.msg("|b-|n" * 78)
-        self.caller.msg("Total Connected: %s" % SESSIONS.account_count())
-        whotable = evtable.EvTable("", "", "", header=False, border=None)
-        whotable.reformat_column(0, width=26)
-        whotable.reformat_column(1, width=26)
-        whotable.reformat_column(2, width=26)
-        whotable.add_row("|y!|n - Administrators", "|g&|n - Storytellers", "|r$|n - Player Helpers")
-        self.caller.msg(whotable)
-        self.caller.msg("|b-|n" * 78)
+                title = " "
+            self.caller.msg("%s, %s %s, %s, %s" % (puppet.name, puppet.gender, puppet.race, puppet.guild, title))
+        self.caller.msg("----------------------======]   Online     [======----------------------")
+        self.caller.msg("           There are a total of %s Number of Players Online             " % (SESSIONS.account_count()))
+        self.caller.msg("----------------------======]**************[======----------------------")
