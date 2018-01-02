@@ -470,16 +470,16 @@ class CmdWho(MuxCommand):
         session_list = SESSIONS.get_sessions()
 
         self.caller.msg("----------------------======]   |CMercadia|n   [======----------------------")
-        self.caller.msg(datetime.datetime.now().strftime("        %a %b %d %H:%M:%S %Y Mercadian Time"))
+        self.caller.msg(datetime.datetime.now().strftime("            %a %b %d %H:%M:%S %Y Mercadian Time"))
         self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.gametime()))
         self.caller.msg("----------------------======]    |GAdmin|n     [======----------------------")
-        self.caller.msg("    Revrwn, |gAdministrator|n ")
-        self.caller.msg("----------------------======]    Staff     [======----------------------")
-        self.caller.msg("    Jennifer, Chief of Staff ")
-        self.caller.msg("    Dominic, Administrative Staff ")
-        self.caller.msg("    Tiffany, Administrative Staff ")
-        self.caller.msg("    Corry, Administrative Staff   ")
-        self.caller.msg("----------------------======]   Characters  [======---------------------")
+        self.caller.msg("    Revrwn, |305Administrator|n ")
+        self.caller.msg("----------------------======]    |115Staff     [======----------------------")
+        self.caller.msg("    Jennifer, |335Chief of Staff ")
+        self.caller.msg("    Dominic, |045Administrative Staff ")
+        self.caller.msg("    Tiffany, |045Administrative Staff ")
+        self.caller.msg("    Corry, |045Administrative Staff   ")
+        self.caller.msg("----------------------======]   |550Characters  [======---------------------")
         for session in session_list:
             puppet = session.get_puppet()
             TITLELIST1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
@@ -503,7 +503,7 @@ class CmdWho(MuxCommand):
                 title = " "
             self.caller.msg("    %s %s %s, %s, %s" % (puppet.name, puppet.db.gender, puppet.db.race,
                                                       puppet.db.guild, title))
-        self.caller.msg("----------------------======]   Online     [======----------------------")
+        self.caller.msg("----------------------======]   |555Online     [======----------------------")
         self.caller.msg("           There are a total of %s Number of Players Online" % (SESSIONS.account_count()))
-        self.caller.msg("----------------------======]**************[======----------------------")
+        self.caller.msg("----------------------======]|C**************|n[======----------------------")
 
