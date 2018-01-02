@@ -471,7 +471,7 @@ class CmdWho(MuxCommand):
 
         self.caller.msg("----------------------======]   |CMercadia|n   [======----------------------")
         self.caller.msg(datetime.datetime.now().strftime("            %a %b %d %H:%M:%S %Y Mercadian Time"))
-        self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.gametime()))
+        self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.uptime()))
         self.caller.msg("----------------------======]    |GAdmin|n     [======----------------------")
         self.caller.msg("    Revrwn, |305Administrator|n ")
         self.caller.msg("----------------------======]    |115Staff|n     [======----------------------")
