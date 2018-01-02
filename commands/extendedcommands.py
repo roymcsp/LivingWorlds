@@ -450,3 +450,61 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
         caller = self.caller
         prompt = ">"
         caller.msg("", prompt=prompt)
+
+class CmdWho(MuxCommand):
+    """
+    Shows the currently connected players.
+    Usage:
+        who
+        +who
+    """
+
+    key = "who"
+    aliases = []
+    locks = "cmd:all()"
+    help_category = "General"
+
+    def func(self):
+        session_list = SESSIONS.get_sessions()
+
+        table = evtable.EvTable(" |wName:|n", "|wIdle:|n", "|wConn:|n", "|wAffiliation:|n", table=None,
+                                border='header', header_line_char='-', width=78)
+
+        for session in session_list:
+            player = session.get_account()
+            idle = time.time() - session.cmd_last_visible
+            conn = time.time() - session.conn_time
+            if session.get_puppet():
+                affiliation = session.get_puppet().db.affiliation
+            else:
+                affiliation = ""
+            flag = None
+            if player.locks.check_lockstring(player, "dummy:perm(Admin)"):
+                flag = "|y!|n"
+            elif player.locks.check_lockstring(player, "dummy:perm(Builder)"):
+                flag = "|g&|n"
+            elif player.locks.check_lockstring(player, "dummy:perm(Helper)"):
+                flag = "|r$|n"
+            else:
+                flag = " "
+            table.add_row(flag + utils.crop(player.name), utils.time_format(idle, 0),
+                          utils.time_format(conn, 0), affiliation)
+
+        table.reformat_column(0, width=24)
+        table.reformat_column(1, width=12)
+        table.reformat_column(2, width=12)
+        table.reformat_column(3, width=30)
+
+        self.caller.msg("|b-|n" * 78)
+        self.caller.msg("|yStar Wars: Centennial|n".center(78))
+        self.caller.msg("|b-|n" * 78)
+        self.caller.msg(table)
+        self.caller.msg("|b-|n" * 78)
+        self.caller.msg("Total Connected: %s" % SESSIONS.account_count())
+        whotable = evtable.EvTable("", "", "", header=False, border=None)
+        whotable.reformat_column(0, width=26)
+        whotable.reformat_column(1, width=26)
+        whotable.reformat_column(2, width=26)
+        whotable.add_row("|y!|n - Administrators", "|g&|n - Storytellers", "|r$|n - Player Helpers")
+        self.caller.msg(whotable)
+        self.caller.msg("|b-|n" * 78)
