@@ -513,7 +513,7 @@ class CmdWho(MuxCommand):
             else:
                 guild = guild
             """
-            self.caller.msg("    %s %s %s, %s, %s" % (name, gender, race, guild, title))
+            self.caller.msg("    %s %s %s, %s, %s" % (puppet.db.name, gender, race, guild, title))
         self.caller.msg("----------------------======]   |555Online|n     [======----------------------")
         self.caller.msg("           There are a total of %s Number of Players Online" % (SESSIONS.account_count()))
         self.caller.msg("----------------------======]|C**************|n[======----------------------")
