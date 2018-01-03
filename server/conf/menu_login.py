@@ -249,7 +249,7 @@ def create_username(caller, string_input):
                 "goto": "create_username",
             },
         )
-        
+
     else:
         # a valid username - continue getting the password
         menutree.accountname = menutree.name
