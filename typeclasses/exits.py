@@ -8,6 +8,7 @@ for allowing Characters to traverse the exit to its destination.
 """
 from evennia.server.sessionhandler import SESSIONS
 from evennia import DefaultExit
+from evennia.utils.utils import pad
 
 class Exit(DefaultExit):
     """
@@ -121,4 +122,4 @@ class NationExit(DefaultExit):
                       "        %s joins the game|/" \
                       "   Starting in the Empire of Kosun|/" \
                       "**************************************" % (traverser)
-            SESSIONS.announce_all(message)
+            SESSIONS.announce_all(pad(message, 40, align='c', fillchar=' '))
