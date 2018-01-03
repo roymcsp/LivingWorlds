@@ -506,7 +506,10 @@ class CmdWho(MuxCommand):
                 title = ", |510%s|n" % title
             else:
                 title = " "
-            if guild is not False:
+            GUILDLIST = ('Artisan', 'Assassin', 'Druid', 'Fighter', 'Harbinger', 'Helotyr','Mage', 'Merchant', 'Monk',
+                         'Ranger', 'Samurai', 'Sarthoar', 'Shaman','Sorcerer', 'Templar', 'Thief', 'Trader', 'Warrior',
+                         'Conscript', 'Peon', 'Peasant', 'Servant', 'Slave', 'Commoner')
+            if guild in GUILDLIST:
                 guild = guildentry
             else:
                 guild = guild
