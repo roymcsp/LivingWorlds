@@ -104,22 +104,22 @@ class NationExit(DefaultExit):
         traverser.db.nation = str(self.db.nation)
 
         if traverser.db.nation == "Kingdom":
-            message = "|/             |y************[|RWORLD CRIER|y]************|/" \
+            message = "|/             |310************[|130WORLD CRIER|310]************|n|/" \
                       "                      %s joins the game|/" \
-                      "               |bStarting in the Kingdom of Iusticia|/ " \
-                      "             |y****************************************" % (traverser)
+                      "               |035Starting in the Kingdom of Iusticia|/ " \
+                      "             |310***************************************" % (traverser)
             SESSIONS.announce_all(message)
 
         if traverser.db.nation == "Caliphate":
-            message = "|/             |y************[|RWORLD CRIER|y]************|/" \
+            message = "|/             |310************[|130WORLD CRIER|310]************|n|/" \
                       "                      %s joins the game|/" \
-                      "               |rStarting in the Caliphate of Ashran|/" \
-                      "             |y****************************************" % (traverser)
+                      "               |500Starting in the Caliphate of Ashran|/" \
+                      "             |310***************************************" % (traverser)
             SESSIONS.announce_all(message)
 
         if traverser.db.nation == "Empire":
-            message = "|/             |y************[|RWORLD CRIER|y]************|/" \
+            message = "|/             |310************[|130WORLD CRIER|310]************|n|/" \
                       "                     %s joins the game|/" \
-                      "                |gStarting in the Empire of Kosun|/" \
-                      "             |y**************************************" % (traverser)
+                      "                |030Starting in the Empire of Kosun|/" \
+                      "             |310*************************************" % (traverser)
             SESSIONS.announce_all(pad(message, 60, align='c', fillchar=' '))
