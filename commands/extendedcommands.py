@@ -507,10 +507,12 @@ class CmdWho(MuxCommand):
                 title = "|510%s|n" % title
             else:
                 title = " "
+            """
             if 'Slave' in guild and not None in owner :
                 guild = "%s of %s" % (guild, owner)
             else:
                 guild = guild
+            """
             self.caller.msg("    %s %s %s, %s, %s" % (name, gender, race, guild, title))
         self.caller.msg("----------------------======]   |555Online|n     [======----------------------")
         self.caller.msg("           There are a total of %s Number of Players Online" % (SESSIONS.account_count()))
