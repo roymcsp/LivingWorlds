@@ -486,6 +486,7 @@ class CmdWho(MuxCommand):
             race = puppet.db.race
             guild = puppet.db.guild
             title = puppet.db.title
+            guildentry = ", %s" % guild
             TITLELIST1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
                           'Mage GM', 'Merchant GM','Monk GM', 'Ranger GM', 'Samurai GM', 'Sarthoar GM', 'Shaman GM',
                           'Sorcerer GM', 'Templar GM', 'Thief GM','Trader GM','Warrior GM', 'Chief Warden',
@@ -505,7 +506,7 @@ class CmdWho(MuxCommand):
                 title = ", |510%s|n" % title
             else:
                 title = " "
-            self.caller.msg("    %s %s %s, %s %s" % (name, gender, race, guild, title))
+            self.caller.msg("    %s %s %s %s %s" % (name, gender, race, guildentry, title))
         self.caller.msg("----------------------======]   |555Online|n     [======----------------------")
         self.caller.msg("           There are currently %s  Players Online" % (SESSIONS.account_count()))
         self.caller.msg("----------------------======]|C**************|n[======----------------------")
