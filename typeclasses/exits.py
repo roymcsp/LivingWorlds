@@ -104,22 +104,22 @@ class NationExit(DefaultExit):
         traverser.db.nation = str(self.db.nation)
 
         if traverser.db.nation == "Kingdom":
-            message = "|/             *************[WORLD CRIER]*************|/" \
+            message = "|/             |y************[|RWORLD CRIER|y]************|/" \
                       "                      %s joins the game|/" \
-                      "               Starting in the Kingdom of Iusticia|/ " \
-                      "             ****************************************" % (traverser)
+                      "               |bStarting in the Kingdom of Iusticia|/ " \
+                      "             |y****************************************" % (traverser)
             SESSIONS.announce_all(message)
 
         if traverser.db.nation == "Caliphate":
-            message = "|/             *************[WORLD CRIER]*************|/" \
+            message = "|/             |y************[|RWORLD CRIER|y]************|/" \
                       "                      %s joins the game|/" \
-                      "               Starting in the Caliphate of Ashran|/" \
-                      "             ****************************************" % (traverser)
+                      "               |rStarting in the Caliphate of Ashran|/" \
+                      "             |y****************************************" % (traverser)
             SESSIONS.announce_all(message)
 
         if traverser.db.nation == "Empire":
-            message = "|/             ************[WORLD CRIER]************|/" \
+            message = "|/             |y************[|RWORLD CRIER|y]************|/" \
                       "                     %s joins the game|/" \
-                      "                Starting in the Empire of Kosun|/" \
-                      "             **************************************" % (traverser)
+                      "                |gStarting in the Empire of Kosun|/" \
+                      "             |y**************************************" % (traverser)
             SESSIONS.announce_all(pad(message, 60, align='c', fillchar=' '))
