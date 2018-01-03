@@ -173,15 +173,15 @@ class Character(GenderCharacter):
     def at_object_creation(self):
         super(Character, self).at_object_creation()
         self.db.gender = 'ambiguous'
-        self.db.nation = None
+        self.db.nation = ""
         self.db.race = 'wisp'
-        self.db.background = None
-        self.db.guild = None
-        self.db.clan = None
-        self.db.profession = None
-        self.db.title = None
-        self.db.faith = None
-        self.db.devotion = None
+        self.db.background = ""
+        self.db.guild = ""
+        self.db.clan = ""
+        self.db.profession = ""
+        self.db.title = ""
+        self.db.faith = ""
+        self.db.devotion = ""
         self.db.permadeath = False
         self.db.desc = "  A small wisp of energy lacking in any discernible features, all that is missing is the " \
                        "spark of creation."
