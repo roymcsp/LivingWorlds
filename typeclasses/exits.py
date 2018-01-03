@@ -104,9 +104,9 @@ class NationExit(DefaultExit):
         traverser.db.nation = str(self.db.nation)
 
         if traverser.db.nation == "Kingdom":
-            message = "|/             |555************[|315WORLD CRIER|555]*************|n|/" \
+            message = "|/             |555************[|315WORLD CRIER|555]*************|n|/|/" \
                       "                      %s joins the game|/" \
-                      "               |035Starting in the Kingdom of Iusticia|/ " \
+                      "               |035Starting in the Kingdom of Iusticia|/|/ " \
                       "             |555****************************************|/" % (traverser)
             SESSIONS.announce_all(message)
 
@@ -118,8 +118,8 @@ class NationExit(DefaultExit):
             SESSIONS.announce_all(message)
 
         if traverser.db.nation == "Empire":
-            message = "|/|555************[|315WORLD CRIER|555]*************|n|/" \
-                      "%s joins the game|/" \
-                      "|030Starting in the Empire of Kosun|/|/" \
-                      "|555*************************************|/" % (traverser)
-            SESSIONS.announce_all(pad(message, 60, align='c', fillchar=' '))
+            message = "             |555************[|315WORLD CRIER|555]*************|n|/|/" \
+                      "                    %s joins the game|/" \
+                      "             |030Starting in the Empire of Kosun|/|/" \
+                      "             |555*************************************|/" % (traverser)
+            SESSIONS.announce_all(message)
