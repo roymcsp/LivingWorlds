@@ -253,9 +253,8 @@ class CmdGameTime(MuxCommand):
             prep = "a"
             if season == "autumn":
                 prep = "an"
-                self.caller.msg("*** The Time is Currently %s %s %s:%s %s, It is %s %s Day in the %s***"
-                                % (datestamp.day, datestamp.month, datestamp.hour, datestamp.minute,
-                                   datestamp.year, prep, season, timeslot,))
+                self.caller.msg(datetime.datetime.now().strftime("*** The time is currently %a %b %d %H:%M:%S %Y" ))
+                self.caller.msg("*** It is %s %s Day in the %s***" % (prep, season, timeslot,))
 
 
 class CmdGameSeason(MuxCommand):
@@ -499,15 +498,15 @@ class CmdWho(MuxCommand):
                           'Magistrate')
             TITLELIST3 = ('Warden', 'Gumi', 'Marshal', 'Reporter', 'Barrister', 'Esquire', 'Representative')
             if puppet.db.title in TITLELIST1:
-                title = "|300%s|n" % title
+                title = ", |300%s|n" % title
             elif puppet.db.title in TITLELIST2:
-                title = "|500%s|n" % title
+                title = ", |500%s|n" % title
             elif puppet.db.title in TITLELIST3:
-                title = "|510%s|n" % title
+                title = ", |510%s|n" % title
             else:
                 title = " "
-            self.caller.msg("    %s %s %s, %s, %s" % (name, gender, race, guild, title))
+            self.caller.msg("    %s %s %s, %s %s" % (name, gender, race, guild, title))
         self.caller.msg("----------------------======]   |555Online|n     [======----------------------")
-        self.caller.msg("           There are a total of %s Number of Players Online" % (SESSIONS.account_count()))
+        self.caller.msg("           There are currently %s  Players Online" % (SESSIONS.account_count()))
         self.caller.msg("----------------------======]|C**************|n[======----------------------")
 
