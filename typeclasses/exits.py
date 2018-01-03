@@ -105,20 +105,20 @@ class NationExit(DefaultExit):
         if traverser.db.nation == "Kingdom":
             message = "|/            ************[WORLD CRIER]************|/" \
                       "                     %s joins the game|/" \
-                      "                Starting in the Kingdom of Iusticia|/ " \
-                      "              **************************************" % (traverser)
+                      "               Starting in the Kingdom of Iusticia|/ " \
+                      "            **************************************" % (traverser)
             SESSIONS.announce_all(message)
 
         if traverser.db.nation == "Caliphate":
             message = "|/           ************[WORLD CRIER]************|/" \
                       "                    %s joins the game|/" \
-                      "              Starting in the Caliphate of Ashran|/" \
-                      "             **************************************" % (traverser)
+                      "             Starting in the Caliphate of Ashran|/" \
+                      "           **************************************" % (traverser)
             SESSIONS.announce_all(message)
 
         if traverser.db.nation == "Empire":
             message = "|/          ************[WORLD CRIER]************|/" \
                       "                   %s joins the game|/" \
-                      "               Starting in the Empire of Kosun|/" \
-                      "            **************************************" % (traverser)
+                      "              Starting in the Empire of Kosun|/" \
+                      "          **************************************" % (traverser)
             SESSIONS.announce_all(message)
