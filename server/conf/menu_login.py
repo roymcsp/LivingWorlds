@@ -249,23 +249,7 @@ def create_username(caller, string_input):
                 "goto": "create_username",
             },
         )
-    elif not RE_VALID_USERNAME.search(string_input):
-        text = dedent("""
-            |rThis username isn't valid.|n
-            Only letters are accepted, without special characters.
-            The username must be at least 3 characters long.
-            Enter another username or leave blank to go back.
-        """.strip("\n"))
-        options = (
-            {
-                "key": "",
-                "goto": "start",
-            },
-            {
-                "key": "_default",
-                "goto": "create_username",
-            },
-        )
+        
     else:
         # a valid username - continue getting the password
         menutree.accountname = menutree.name
