@@ -513,7 +513,7 @@ class CmdWho(MuxCommand):
                 guild = guildentry
             else:
                 guild = guild
-            self.caller.msg("    %s %s %s %s %s" % (name, gender, race, guild, title))
+            self.caller.msg("    %s %s %s%s %s" % (name, gender, race, guild, title))
         self.caller.msg("----------------------======]   |555Online|n     [======----------------------")
         self.caller.msg("           There are currently %s Players Online" % (SESSIONS.account_count()))
         self.caller.msg("----------------------======]|C**************|n[======----------------------")
