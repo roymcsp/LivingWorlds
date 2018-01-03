@@ -487,6 +487,7 @@ class CmdWho(MuxCommand):
             race = puppet.db.race
             guild = puppet.db.guild
             title = puppet.db.title
+            owner = puppet.db.owner
             TITLELIST1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
                           'Mage GM', 'Merchant GM','Monk GM', 'Ranger GM', 'Samurai GM', 'Sarthoar GM', 'Shaman GM',
                           'Sorcerer GM', 'Templar GM', 'Thief GM','Trader GM','Warrior GM', 'Chief Warden',
@@ -498,14 +499,18 @@ class CmdWho(MuxCommand):
                           'First Warden', 'First Marshal', 'Gumi Lieutenant', 'Editor', 'Justice', 'Tribune',
                           'Magistrate')
             TITLELIST3 = ('Warden', 'Gumi', 'Marshal', 'Reporter', 'Barrister', 'Esquire', 'Representative')
-            if puppet.db.title in TITLELIST1:
+            if title in TITLELIST1:
                 title = "|300%s|n" % title
-            elif puppet.db.title in TITLELIST2:
+            elif title in TITLELIST2:
                 title = "|500%s|n" % title
-            elif puppet.db.title in TITLELIST3:
+            elif title in TITLELIST3:
                 title = "|510%s|n" % title
             else:
                 title = " "
+            if 'Slave' in guild and not None in owner :
+                guild = "%s of %s" % (guild, owner)
+            else:
+                guild = guild
             self.caller.msg("    %s %s %s, %s, %s" % (name, gender, race, guild, title))
         self.caller.msg("----------------------======]   |555Online|n     [======----------------------")
         self.caller.msg("           There are a total of %s Number of Players Online" % (SESSIONS.account_count()))
