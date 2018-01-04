@@ -252,7 +252,7 @@ def create_username(caller, string_input):
 
     else:
         # a valid username - continue getting the password
-        menutree.accountname = menutree.name
+        menutree.accountname = menutree.name.capitalize()
         # Disables echo for entering password
         caller.msg("", options={"echo": False})
         # Redirects to the creation of a password
