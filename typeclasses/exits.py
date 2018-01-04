@@ -118,7 +118,7 @@ class NationExit(DefaultExit):
             SESSIONS.announce_all(message)
 
         if traverser.db.nation == "Empire":
-            message = "             |555************[|315WORLD CRIER|555]**************|n|/|/" \
+            message = "              |555************[|315WORLD CRIER|555]**************|n|/|/" \
                       "                    %s joins the game|/" \
                       "                |030Starting in the Empire of Kosun|/|/" \
                       "              |555***************************************|/" % (traverser)
