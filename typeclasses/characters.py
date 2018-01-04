@@ -194,7 +194,6 @@ class Character(GenderCharacter):
         for key, kwargs in traits.iteritems():
             self.traits.add(key, **kwargs)
 
-
         self.traits.HP.mod = abilitymodifiers[self.traits.CON.actual - 1]
         self.traits.SP.mod = abilitymodifiers[self.traits.INT.actual - 1] + abilitymodifiers[self.traits.WIS.actual - 1]
         self.traits.FORT.mod = abilitymodifiers[self.traits.CON.actual - 1]
