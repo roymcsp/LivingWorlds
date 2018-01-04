@@ -91,7 +91,7 @@ def username(caller, string_input):
     string_input = string_input.strip()
     account = managers.accounts.get_account_from_name(string_input)
     if account is None:
-        caller.ndb._menutree.name = string_input
+        caller.ndb._menutree.name = string_input.capitalize()
         text = dedent("""
         |r   Living Worlds is an Intense Roleplaying environment and as such it is
         |_|_expected that your name complies with our genre. The following rules apply:
@@ -252,7 +252,7 @@ def create_username(caller, string_input):
 
     else:
         # a valid username - continue getting the password
-        menutree.accountname = menutree.name.capitalize()
+        menutree.accountname = menutree.name
         # Disables echo for entering password
         caller.msg("", options={"echo": False})
         # Redirects to the creation of a password
