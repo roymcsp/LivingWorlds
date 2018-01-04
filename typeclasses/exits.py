@@ -8,7 +8,6 @@ for allowing Characters to traverse the exit to its destination.
 """
 from evennia.server.sessionhandler import SESSIONS
 from evennia import DefaultExit
-from evennia.utils.utils import pad
 
 class Exit(DefaultExit):
     """

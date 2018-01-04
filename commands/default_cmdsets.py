@@ -163,6 +163,7 @@ class ChargenRaceGenderCmdset(CmdSet):
         self.add(chargen.CmdGender())
         self.add(races.CmdRace())
 
+
 class ChargenBackgroundCmdset(CmdSet):
     """
     This cmdset is used in character generation to set background 
@@ -172,6 +173,7 @@ class ChargenBackgroundCmdset(CmdSet):
     def at_cmdset_creation(self):
         self.add(background.CmdBackground())
 
+
 class ChargenPassVeilCmdSet(CmdSet):
     """
     This cmdset is used to finalize character creation and enter into the game
@@ -179,5 +181,4 @@ class ChargenPassVeilCmdSet(CmdSet):
     key = 'Chargen'
 
     def at_cmdset_creation(self):
-        self.add(chargen.PassVeil())
-
+        self.add(chargen.CmdPassVeil())

@@ -1,10 +1,9 @@
 import datetime
-import time
 from evennia import gametime
 from evennia import default_cmds, utils
 from commands.command import MuxCommand
 from evennia.server.sessionhandler import SESSIONS
-from evennia.utils import evtable
+
 
 class CmdExtendedLook(default_cmds.CmdLook, MuxCommand):
     """
@@ -240,11 +239,6 @@ class CmdGameTime(MuxCommand):
 
     def func(self):
         """Reads time info from current room"""
-
-        timestamp = gametime.gametime(absolute=True)
-        # note that fromtimestamp includes the effects of server time zone!
-        datestamp = datetime.datetime.fromtimestamp(timestamp)
-
         location = self.caller.location
         if not location or not hasattr(location, "get_time_and_season"):
             self.caller.msg("No location available - you are outside time.")
@@ -253,36 +247,8 @@ class CmdGameTime(MuxCommand):
             prep = "a"
             if season == "autumn":
                 prep = "an"
-                self.caller.msg(datetime.datetime.now().strftime("*** The time is currently %a %b %d %H:%M:%S %Y" ))
+                self.caller.msg(datetime.datetime.now().strftime("*** The time is currently %a %b %d %H:%M:%S %Y"))
                 self.caller.msg("*** It is %s %s Day in the %s***" % (prep, season, timeslot,))
-
-
-class CmdGameSeason(MuxCommand):
-    """
-    Check the current season
-
-    Usage:
-        season
-
-    Shows the current in-game season.
-    """
-
-    key = "Season"
-    locks = "cmd:all()"
-    help_category = "General"
-
-    def func(self):
-        """Reads time info from current room"""
-
-        location = self.caller.location
-        if not location or not hasattr(location, "get_time_and_season"):
-            self.caller.msg("No location available - you are outside time.")
-        else:
-            season, timeslot = location.get_time_and_season()
-            prep = "a"
-            if season == "autumn":
-                prep = "an"
-                self.caller.msg("It's %s %s day, in the %s." % (prep, season, timeslot,))
 
 
 class CmdExtendedGet(default_cmds.CmdGet):
@@ -369,8 +335,8 @@ class CmdExtendedDrop(default_cmds.CmdDrop, MuxCommand):
 
         # Because the DROP command by definition looks for items
         # in inventory, call the search function using location = caller
-        result = caller.search(self.args, location=caller,
-                            nofound_string="You aren't carrying %s." % self.args, quiet=True)
+        result = caller.search(self.args, location=caller, nofound_string="You aren't carrying %s." % self.args,
+                               quiet=True)
         if not result:
             return
         else:
@@ -412,7 +378,7 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
     def parse(self):
         """Implement an addition parse"""
         super(CmdExtendedGive, self).parse()
-        if " to " in self.args:
+        if "to" in self.args:
             self.lhs, self.rhs = self.args.split(" to ", 1)
 
     def func(self):
@@ -452,6 +418,7 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
         prompt = ">"
         caller.msg("", prompt=prompt)
 
+
 class CmdWho(MuxCommand):
     """
     Shows the currently connected players.
@@ -468,53 +435,73 @@ class CmdWho(MuxCommand):
     def func(self):
         session_list = SESSIONS.get_sessions()
 
-        self.caller.msg("----------------------======]   |CMercadia|n   [======----------------------")
+        self.caller.msg("----------------------======]    |CMercadia|n   [======----------------------")
         self.caller.msg(datetime.datetime.now().strftime("            %a %b %d %H:%M:%S %Y Mercadian Time"))
         self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.uptime(), 3))
-        self.caller.msg("----------------------======]    |315Admin|n     [======----------------------")
+        self.caller.msg("----------------------======]     |315Admin|n     [======----------------------")
         self.caller.msg("    Revrwn, |305Administrator|n ")
-        self.caller.msg("----------------------======]    |115Staff|n     [======----------------------")
+        self.caller.msg("----------------------======]     |115Staff|n     [======----------------------")
         self.caller.msg("    Jennifer, |405Chief of Staff ")
         self.caller.msg("    Dominic, |045Administrative Staff ")
         self.caller.msg("    Tiffany, |045Administrative Staff ")
         self.caller.msg("    Corry, |045Administrative Staff   ")
-        self.caller.msg("----------------------======]   |550Characters|n  [======---------------------")
+        self.caller.msg("----------------------======]   |550Characters|n  [======----------------------")
         for session in session_list:
             puppet = session.get_puppet()
             name = puppet.name
             gender = puppet.db.gender
             race = puppet.db.race
             guild = puppet.db.guild
+            owner = puppet.db.owner
             title = puppet.db.title
+            slaveentry = ", %s of %s" % (guild, owner)
             guildentry = ", %s" % guild
-            TITLELIST1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
-                          'Mage GM', 'Merchant GM','Monk GM', 'Ranger GM', 'Samurai GM', 'Sarthoar GM', 'Shaman GM',
-                          'Sorcerer GM', 'Templar GM', 'Thief GM','Trader GM','Warrior GM', 'Chief Warden',
-                          'Head Marshal', 'Gumi Captain', 'Editor in Chief', 'Chief Justice', 'Tribune Prime',
-                          'Head Magistrate')
-            TITLELIST2 = ('Artisan AGM', 'Assassin AGM', 'Druid AGM', 'Fighter AGM', 'Harbinger AGM', 'Helotyr AGM',
-                          'Mage AGM', 'Merchant AGM','Monk AGM', 'Ranger AGM', 'Samurai AGM', 'Sarthoar AGM',
-                          'Shaman AGM', 'Sorcerer AGM', 'Templar AGM', 'Thief AGM','Trader AGM','Warrior AGM',
-                          'First Warden', 'First Marshal', 'Gumi Lieutenant', 'Editor', 'Justice', 'Tribune',
-                          'Magistrate')
-            TITLELIST3 = ('Warden', 'Gumi', 'Marshal', 'Reporter', 'Barrister', 'Esquire', 'Representative')
-            if puppet.db.title in TITLELIST1:
+            titles1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
+                       'Mage GM', 'Merchant GM', 'Monk GM', 'Ranger GM', 'Samurai GM', 'Sarthoar GM', 'Shaman GM',
+                       'Sorcerer GM', 'Templar GM', 'Thief GM', 'Trader GM', 'Warrior GM', 'Chief',
+                       'Sherrif', 'Gumi Commander', 'Editor in Chief', 'Chief Justice', 'Tribune Prime',
+                       'Head Magistrate')
+            titles2 = ('Artisan AGM', 'Assassin AGM', 'Druid AGM', 'Fighter AGM', 'Harbinger AGM', 'Helotyr AGM',
+                       'Mage AGM', 'Merchant AGM', 'Monk AGM', 'Ranger AGM', 'Samurai AGM', 'Sarthoar AGM',
+                       'Shaman AGM', 'Sorcerer AGM', 'Templar AGM', 'Thief AGM', 'Trader AGM', 'Warrior AGM',
+                       'Vice Chief', 'Under-Sheriff', 'Gumi Captain', 'Editor', 'Justice', 'Tribune',
+                       'Magistrate')
+            titles3 = ('Medjai', 'Gumi', 'Deputy', 'Reporter', 'Kingdom Attorney', 'Aedile', 'Champion')
+            titles4 = ('Barrister', 'Advocari', 'Counseler')
+            titles5 = ('Field Marshal', 'Legate', 'Gensui')
+            titles6 = ('General', 'Prefect', 'Taisho')
+            titles7 = ('Colonel', 'Captain', 'Lieutenant', 'First Sergeant', 'Sergent', 'Corporal', 'Private',
+                       'Recruit', 'First Centurion', 'Centurion', 'Decurion', 'Optio', 'Tressario', 'Decanus',
+                       'Legionaire', 'Discens', 'Taisa', 'Tai', 'Chui', 'Socho', 'Gunso', 'Heicho', 'Ittohei',
+                       'Nitohei')
+
+            if title in titles1:
                 title = ", |300%s|n" % title
-            elif puppet.db.title in TITLELIST2:
+            elif title in titles2:
                 title = ", |500%s|n" % title
-            elif puppet.db.title in TITLELIST3:
+            elif title in titles3:
                 title = ", |510%s|n" % title
+            elif title in titles4:
+                title = ", |152%s|n" % title
+            elif title in titles5:
+                title = ", |203%s|n" % title
+            elif title in titles6:
+                title = ", |213%s|n" % title
+            elif title in titles7:
+                title = ", |223%s|n" % title
             else:
                 title = " "
-            GUILDLIST = ('Artisan', 'Assassin', 'Druid', 'Fighter', 'Harbinger', 'Helotyr','Mage', 'Merchant', 'Monk',
-                         'Ranger', 'Samurai', 'Sarthoar', 'Shaman','Sorcerer', 'Templar', 'Thief', 'Trader', 'Warrior',
+
+            guildlist = ('Artisan', 'Assassin', 'Druid', 'Fighter', 'Harbinger', 'Helotyr', 'Mage', 'Merchant', 'Monk',
+                         'Ranger', 'Samurai', 'Sarthoar', 'Shaman', 'Sorcerer', 'Templar', 'Thief', 'Trader', 'Warrior',
                          'Conscript', 'Peon', 'Peasant', 'Servant', 'Slave', 'Commoner')
-            if guild in GUILDLIST:
+            if guild in guildlist:
                 guild = guildentry
             else:
                 guild = guild
-            self.caller.msg("    %s %s %s%s %s" % (name, gender, race, guild, title))
-        self.caller.msg("----------------------======]   |555Online|n     [======----------------------")
+            if owner:
+                guild = slaveentry
+            self.caller.msg("    %s %s %s%s %s" % (name.capitalize(), gender, race, guild, title))
+        self.caller.msg("----------------------======]    |555Online|n     [======----------------------")
         self.caller.msg("           There are currently %s Players Online" % (SESSIONS.account_count()))
         self.caller.msg("----------------------======]|C**************|n[======----------------------")
-
