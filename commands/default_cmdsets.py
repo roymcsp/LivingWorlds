@@ -47,7 +47,6 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(extendedcommands.CmdExtendedGet())
         self.add(extendedcommands.CmdExtendedGive())
         self.add(extendedcommands.CmdExtendedDrop())
-        self.add(extendedcommands.CmdGameSeason())
         self.add(extendedcommands.CmdWho())
         self.add(extendedcommands.CmdGameTime())
         self.add(sensorycommands.SensesCmdSet)
