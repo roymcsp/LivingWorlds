@@ -504,4 +504,4 @@ class CmdWho(MuxCommand):
             self.caller.msg("    %s %s %s%s %s" % (name.capitalize(), gender, race, guild, title))
         self.caller.msg("----------------------======]    |555Online|n     [======----------------------")
         self.caller.msg("           There are currently %s Players Online" % (SESSIONS.account_count()))
-        self.caller.msg("----------------------======]|C**************|n[======----------------------")
+        self.caller.msg("----------------------======]|C***************|n[======----------------------")
