@@ -419,6 +419,8 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
         caller.msg("", prompt=prompt)
 
 
+
+
 class CmdWho(MuxCommand):
     """
     Shows the currently connected players.
@@ -435,6 +437,30 @@ class CmdWho(MuxCommand):
     def func(self):
         session_list = SESSIONS.get_sessions()
 
+        slaveentry = ", %s of %s" % (guild, owner)
+        guildentry = ", %s" % guild
+        titles1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
+                   'Mage GM', 'Merchant GM', 'Monk GM', 'Ranger GM', 'Samurai GM', 'Sarthoar GM', 'Shaman GM',
+                   'Sorcerer GM', 'Templar GM', 'Thief GM', 'Trader GM', 'Warrior GM', 'Chief',
+                   'Sherrif', 'Gumi Commander', 'Editor in Chief', 'Chief Justice', 'Tribune Prime',
+                   'Head Magistrate')
+        titles2 = ('Artisan AGM', 'Assassin AGM', 'Druid AGM', 'Fighter AGM', 'Harbinger AGM', 'Helotyr AGM',
+                   'Mage AGM', 'Merchant AGM', 'Monk AGM', 'Ranger AGM', 'Samurai AGM', 'Sarthoar AGM',
+                   'Shaman AGM', 'Sorcerer AGM', 'Templar AGM', 'Thief AGM', 'Trader AGM', 'Warrior AGM',
+                   'Vice Chief', 'Under-Sheriff', 'Gumi Captain', 'Editor', 'Justice', 'Tribune',
+                   'Magistrate')
+        titles3 = ('Medjai', 'Gumi', 'Deputy', 'Reporter', 'Kingdom Attorney', 'Aedile', 'Champion')
+        titles4 = ('Barrister', 'Advocari', 'Counseler')
+        titles5 = ('Field Marshal', 'Legate', 'Gensui')
+        titles6 = ('General', 'Prefect', 'Taisho')
+        titles7 = ('Colonel', 'Captain', 'Lieutenant', 'First Sergeant', 'Sergent', 'Corporal', 'Private',
+                   'Recruit', 'First Centurion', 'Centurion', 'Decurion', 'Optio', 'Tressario', 'Decanus',
+                   'Legionaire', 'Discens', 'Taisa', 'Tai', 'Chui', 'Socho', 'Gunso', 'Heicho', 'Ittohei',
+                   'Nitohei')
+        guildlist = ('Artisan', 'Assassin', 'Druid', 'Fighter', 'Harbinger', 'Helotyr', 'Mage', 'Merchant', 'Monk',
+                     'Ranger', 'Samurai', 'Sarthoar', 'Shaman', 'Sorcerer', 'Templar', 'Thief', 'Trader', 'Warrior',
+                     'Conscript', 'Peon', 'Peasant', 'Servant', 'Slave', 'Commoner')
+
         self.caller.msg("----------------------======]    |CMercadia|n   [======----------------------")
         self.caller.msg(datetime.datetime.now().strftime("            %a %b %d %H:%M:%S %Y Mercadian Time"))
         self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.uptime(), 3))
@@ -446,35 +472,19 @@ class CmdWho(MuxCommand):
         self.caller.msg("    Tiffany, |045Administrative Staff ")
         self.caller.msg("    Corry, |045Administrative Staff   ")
         self.caller.msg("----------------------======]   |550Characters|n  [======----------------------")
+        puppet_list = []
         for session in session_list:
             puppet = session.get_puppet()
+            puppet_list.append(puppet)
+            puppet_list.sort()
+
+        for puppet in puppet_list:
             name = puppet.name
             gender = puppet.db.gender
             race = puppet.db.race
             guild = puppet.db.guild
             owner = puppet.db.owner
             title = puppet.db.title
-            slaveentry = ", %s of %s" % (guild, owner)
-            guildentry = ", %s" % guild
-            titles1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
-                       'Mage GM', 'Merchant GM', 'Monk GM', 'Ranger GM', 'Samurai GM', 'Sarthoar GM', 'Shaman GM',
-                       'Sorcerer GM', 'Templar GM', 'Thief GM', 'Trader GM', 'Warrior GM', 'Chief',
-                       'Sherrif', 'Gumi Commander', 'Editor in Chief', 'Chief Justice', 'Tribune Prime',
-                       'Head Magistrate')
-            titles2 = ('Artisan AGM', 'Assassin AGM', 'Druid AGM', 'Fighter AGM', 'Harbinger AGM', 'Helotyr AGM',
-                       'Mage AGM', 'Merchant AGM', 'Monk AGM', 'Ranger AGM', 'Samurai AGM', 'Sarthoar AGM',
-                       'Shaman AGM', 'Sorcerer AGM', 'Templar AGM', 'Thief AGM', 'Trader AGM', 'Warrior AGM',
-                       'Vice Chief', 'Under-Sheriff', 'Gumi Captain', 'Editor', 'Justice', 'Tribune',
-                       'Magistrate')
-            titles3 = ('Medjai', 'Gumi', 'Deputy', 'Reporter', 'Kingdom Attorney', 'Aedile', 'Champion')
-            titles4 = ('Barrister', 'Advocari', 'Counseler')
-            titles5 = ('Field Marshal', 'Legate', 'Gensui')
-            titles6 = ('General', 'Prefect', 'Taisho')
-            titles7 = ('Colonel', 'Captain', 'Lieutenant', 'First Sergeant', 'Sergent', 'Corporal', 'Private',
-                       'Recruit', 'First Centurion', 'Centurion', 'Decurion', 'Optio', 'Tressario', 'Decanus',
-                       'Legionaire', 'Discens', 'Taisa', 'Tai', 'Chui', 'Socho', 'Gunso', 'Heicho', 'Ittohei',
-                       'Nitohei')
-
             if title in titles1:
                 title = ", |300%s|n" % title
             elif title in titles2:
@@ -492,16 +502,16 @@ class CmdWho(MuxCommand):
             else:
                 title = " "
 
-            guildlist = ('Artisan', 'Assassin', 'Druid', 'Fighter', 'Harbinger', 'Helotyr', 'Mage', 'Merchant', 'Monk',
-                         'Ranger', 'Samurai', 'Sarthoar', 'Shaman', 'Sorcerer', 'Templar', 'Thief', 'Trader', 'Warrior',
-                         'Conscript', 'Peon', 'Peasant', 'Servant', 'Slave', 'Commoner')
             if guild in guildlist:
                 guild = guildentry
             else:
                 guild = guild
             if owner:
                 guild = slaveentry
-            self.caller.msg("    %s %s %s%s %s" % (name.capitalize(), gender, race, guild, title))
+            if ('Roy', 'Jennifer', 'Dominic', 'Tiffany', 'Corry') in name:
+                continue
+            else:
+                self.caller.msg("    %s %s %s%s %s" % (name.capitalize(), gender, race, guild, title))
         self.caller.msg("----------------------======]    |555Online|n     [======----------------------")
         self.caller.msg("           There are currently %s Players Online" % (SESSIONS.account_count()))
         self.caller.msg("----------------------======]|C***************|n[======----------------------")
