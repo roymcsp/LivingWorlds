@@ -465,9 +465,14 @@ class CmdWho(MuxCommand):
         self.caller.msg("    Tiffany, |045Administrative Staff ")
         self.caller.msg("    Corry, |045Administrative Staff   ")
         self.caller.msg("----------------------======]   |550Characters|n  [======----------------------")
-
+        puppet_list = []
         for session in session_list:
             puppet = session.get_puppet()
+            puppet_list.append(puppet)
+
+        puppet_list.sort()
+
+        for puppet in puppet_list:
             name = puppet.name
             gender = puppet.db.gender
             race = puppet.db.race
