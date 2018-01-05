@@ -500,7 +500,7 @@ class CmdWho(MuxCommand):
                 guild = guild
             if owner:
                 guild = slaveentry
-            if ('Roy', 'Jennifer', 'Dominic', 'Tiffany', 'Corry') in name:
+            if name in ('Roy', 'Jennifer', 'Dominic', 'Tiffany', 'Corry'):
                 continue
             else:
                 self.caller.msg("    %s %s %s%s %s" % (name.capitalize(), gender, race, guild, title))
