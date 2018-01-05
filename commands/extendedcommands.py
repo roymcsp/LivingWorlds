@@ -501,7 +501,8 @@ class CmdWho(MuxCommand):
                 title = ", |223%s|n" % title
             else:
                 title = " "
-
+            slaveentry = ", %s of %s" % (guild, owner)
+            guildentry = ", %s" % guild
             if guild in guildlist:
                 guild = guildentry
             else:
