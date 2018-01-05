@@ -569,8 +569,8 @@ class CmdWho(MuxCommand):
             self.caller.msg("           There are currently %s Players Online" % (SESSIONS.account_count()))
             self.caller.msg("----------------------======]|C***************|n[======----------------------")
 
-        if self.args in ('Human', 'Elf', 'Dwarf', 'Gnome', 'Centaur', 'Ogryn', 'Drow', 'Duergar', 'Svirfneblin',
-                         'Wemic', 'Drakkar', 'Ursine', 'Feline', 'Lupine', 'Vulpine', 'Naga'):
+        if self.args in ('human', 'elf', 'dwarf', 'gnome', 'centaur', 'ogryn', 'drow', 'duergar', 'svirfneblin',
+                         'wemic', 'drakkar', 'ursine', 'feline', 'lupine', 'vulpine', 'naga'):
             self.caller.msg("----------------------======]    |CMercadia|n   [======----------------------")
             self.caller.msg(datetime.datetime.now().strftime("            %a %b %d %H:%M:%S %Y Mercadian Time"))
             self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.uptime(), 3))
