@@ -469,8 +469,7 @@ class CmdWho(MuxCommand):
         for session in session_list:
             puppet = session.get_puppet()
             puppet_list.append(puppet)
-
-        puppet_list.sort()
+            puppet_list.sort()
 
         for puppet in puppet_list:
             name = puppet.name
