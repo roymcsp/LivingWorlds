@@ -434,6 +434,7 @@ class CmdWho(MuxCommand):
 
     def func(self):
         session_list = SESSIONS.get_sessions()
+        session_list = sorted(session_list, key=lambda ses: ses.get_puppet().name)
 
         titles1 = ('Artisan GM', 'Assassin GM', 'Druid GM', 'Fighter GM', 'Harbinger GM', 'Helotyr GM',
                    'Mage GM', 'Merchant GM', 'Monk GM', 'Ranger GM', 'Samurai GM', 'Sarthoar GM', 'Shaman GM',
@@ -465,21 +466,16 @@ class CmdWho(MuxCommand):
         self.caller.msg("    Tiffany, |045Administrative Staff ")
         self.caller.msg("    Corry, |045Administrative Staff   ")
         self.caller.msg("----------------------======]   |550Characters|n  [======----------------------")
-        name_list = []
+
         for session in session_list:
             puppet = session.get_puppet()
             name = puppet.name
-            name_list.append(name)
-            name_list.sort()
-
-            for name in name_list:
-                name = name
-
             gender = puppet.db.gender
             race = puppet.db.race
             guild = puppet.db.guild
             owner = puppet.db.owner
             title = puppet.db.title
+
             slaveentry = ", %s of %s" % (guild, owner)
             guildentry = ", %s" % guild
 
