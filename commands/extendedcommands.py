@@ -421,10 +421,24 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
 
 class CmdWho(MuxCommand):
     """
-    Shows the currently connected players.
-    Usage:
-        who
-        +who
+Syntax: who
+        who long
+        who kingdom
+        who caliphate
+        who empire
+        who <race>
+        
+          
+This command will show you the players that are online as follows:
+
+who        - Shows the active players from your broochlist list.
+who long   - Lists all the players online. New players in creation will
+             automatically list who long as a help for name selection.
+who kingdom  - Lists all the players who started in the Kingdom.
+who caliphate  - Lists all the players who started in the Southland.
+who empire  - Lists all active guides. 
+who <race> - Lists all the players with this specific race.
+             Example: who feline
     """
 
     key = "who"
@@ -570,7 +584,7 @@ class CmdWho(MuxCommand):
             self.caller.msg("----------------------======]|C***************|n[======----------------------")
 
         if self.args in ('human', 'elf', 'dwarf', 'gnome', 'centaur', 'ogryn', 'drow', 'duergar', 'svirfneblin',
-                         'wemic', 'drakkar', 'ursine', 'feline', 'lupine', 'vulpine', 'naga'):
+                         'wemic', 'drakkar', 'ursine', 'feline', 'lupine', 'vulpine', 'naga', 'wisp'):
             self.caller.msg("----------------------======]    |CMercadia|n   [======----------------------")
             self.caller.msg(datetime.datetime.now().strftime("            %a %b %d %H:%M:%S %Y Mercadian Time"))
             self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.uptime(), 3))
