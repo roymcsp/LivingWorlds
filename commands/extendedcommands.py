@@ -568,3 +568,121 @@ class CmdWho(MuxCommand):
             self.caller.msg("----------------------======]    |555Online|n     [======----------------------")
             self.caller.msg("           There are currently %s Players Online" % (SESSIONS.account_count()))
             self.caller.msg("----------------------======]|C***************|n[======----------------------")
+
+        if "caliphate" in self.args:
+            self.caller.msg("----------------------======]    |CMercadia|n   [======----------------------")
+            self.caller.msg(datetime.datetime.now().strftime("            %a %b %d %H:%M:%S %Y Mercadian Time"))
+            self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.uptime(), 3))
+            self.caller.msg("----------------------======]     |315Admin|n     [======----------------------")
+            self.caller.msg("    Revrwn, |305Administrator|n ")
+            self.caller.msg("----------------------======]     |115Staff|n     [======----------------------")
+            self.caller.msg("    Jennifer, |405Chief of Staff ")
+            self.caller.msg("    Dominic, |045Administrative Staff ")
+            self.caller.msg("    Tiffany, |045Administrative Staff ")
+            self.caller.msg("    Corry, |045Administrative Staff   ")
+            self.caller.msg("----------------------======]   |550Characters|n  [======----------------------")
+
+            for session in session_list:
+                puppet = session.get_puppet()
+                name = puppet.name
+                gender = puppet.db.gender
+                race = puppet.db.race
+                guild = puppet.db.guild
+                owner = puppet.db.owner
+                title = puppet.db.title
+                nation = puppet.db.nation
+
+                slaveentry = ", %s of %s" % (guild, owner)
+                guildentry = ", %s" % guild
+
+                if title in titles1:
+                    title = ", |300%s|n" % title
+                elif title in titles2:
+                    title = ", |500%s|n" % title
+                elif title in titles3:
+                    title = ", |510%s|n" % title
+                elif title in titles4:
+                    title = ", |152%s|n" % title
+                elif title in titles5:
+                    title = ", |203%s|n" % title
+                elif title in titles6:
+                    title = ", |213%s|n" % title
+                elif title in titles7:
+                    title = ", |223%s|n" % title
+                else:
+                    title = " "
+
+                if guild:
+                    guild = guildentry
+                else:
+                    guild = guild
+                if owner:
+                    guild = slaveentry
+                if name in ('Roy', 'Jennifer', 'Dominic', 'Tiffany', 'Corry'):
+                    continue
+                elif 'Caliphate' not in nation:
+                    continue
+                else:
+                    self.caller.msg("    %s %s %s%s %s" % (name.capitalize(), gender, race, guild, title))
+            self.caller.msg("----------------------======]    |555Online|n     [======----------------------")
+            self.caller.msg("           There are currently %s Players Online" % (SESSIONS.account_count()))
+            self.caller.msg("----------------------======]|C***************|n[======----------------------")
+
+            if "empire" in self.args:
+                self.caller.msg("----------------------======]    |CMercadia|n   [======----------------------")
+                self.caller.msg(datetime.datetime.now().strftime("            %a %b %d %H:%M:%S %Y Mercadian Time"))
+                self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.uptime(), 3))
+                self.caller.msg("----------------------======]     |315Admin|n     [======----------------------")
+                self.caller.msg("    Revrwn, |305Administrator|n ")
+                self.caller.msg("----------------------======]     |115Staff|n     [======----------------------")
+                self.caller.msg("    Jennifer, |405Chief of Staff ")
+                self.caller.msg("    Dominic, |045Administrative Staff ")
+                self.caller.msg("    Tiffany, |045Administrative Staff ")
+                self.caller.msg("    Corry, |045Administrative Staff   ")
+                self.caller.msg("----------------------======]   |550Characters|n  [======----------------------")
+
+                for session in session_list:
+                    puppet = session.get_puppet()
+                    name = puppet.name
+                    gender = puppet.db.gender
+                    race = puppet.db.race
+                    guild = puppet.db.guild
+                    owner = puppet.db.owner
+                    title = puppet.db.title
+                    nation = puppet.db.nation
+
+                    slaveentry = ", %s of %s" % (guild, owner)
+                    guildentry = ", %s" % guild
+
+                    if title in titles1:
+                        title = ", |300%s|n" % title
+                    elif title in titles2:
+                        title = ", |500%s|n" % title
+                    elif title in titles3:
+                        title = ", |510%s|n" % title
+                    elif title in titles4:
+                        title = ", |152%s|n" % title
+                    elif title in titles5:
+                        title = ", |203%s|n" % title
+                    elif title in titles6:
+                        title = ", |213%s|n" % title
+                    elif title in titles7:
+                        title = ", |223%s|n" % title
+                    else:
+                        title = " "
+
+                    if guild:
+                        guild = guildentry
+                    else:
+                        guild = guild
+                    if owner:
+                        guild = slaveentry
+                    if name in ('Roy', 'Jennifer', 'Dominic', 'Tiffany', 'Corry'):
+                        continue
+                    elif 'Empire' not in nation:
+                        continue
+                    else:
+                        self.caller.msg("    %s %s %s%s %s" % (name.capitalize(), gender, race, guild, title))
+                self.caller.msg("----------------------======]    |555Online|n     [======----------------------")
+                self.caller.msg("           There are currently %s Players Online" % (SESSIONS.account_count()))
+                self.caller.msg("----------------------======]|C***************|n[======----------------------")
