@@ -174,7 +174,7 @@ class Character(GenderCharacter):
         super(Character, self).at_object_creation()
         self.db.gender = 'ambiguous'
         self.db.nation = ""
-        self.db.race = 'wisp'
+        self.db.race = 'Wisp'
         self.db.background = ""
         self.db.guild = ""
         self.db.clan = ""
