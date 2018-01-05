@@ -510,7 +510,7 @@ class CmdWho(MuxCommand):
         self.caller.msg("           There are currently %s Players Online" % (SESSIONS.account_count()))
         self.caller.msg("----------------------======]|C***************|n[======----------------------")
 
-        if ("kingdom", 'caliphate', 'empire') in self.args:
+        if  self.args in ("kingdom", 'caliphate', 'empire'):
             self.caller.msg("----------------------======]    |CMercadia|n   [======----------------------")
             self.caller.msg(datetime.datetime.now().strftime("            %a %b %d %H:%M:%S %Y Mercadian Time"))
             self.caller.msg("     Mercadia uptime: %s. " % utils.time_format(gametime.uptime(), 3))
