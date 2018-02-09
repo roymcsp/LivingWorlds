@@ -153,3 +153,42 @@ def d_roll(xdyz, total=True):
     else:
         return rolls
 
+def parse_health(target):
+    current = target.traits.HP.current
+    max_health = target.traits.HP.max
+
+    if max_health > 0:
+        percent = int(current / max_health * 100)
+    else:
+        percent = 0
+
+    if percent > 100:
+        return '|040in perfect condition|n'
+    elif percent > 99:
+        return '|040scratched|n'
+    elif percent > 95:
+        return '|420bleeding lightly|n'
+    elif percent > 90:
+        return '|420bleeding|n'
+    elif percent > 80:
+        return '|420bleeding moderately|n'
+    elif percent > 70:
+        return '|320wounded|n'
+    elif percent > 60:
+        return '|320severly wounded|n'
+    elif percent > 50:
+        return '|320critically wounded|n'
+    elif percent > 40:
+        return '|510gushing blood|n'
+    elif percent > 30:
+        return '|510Critically Damaged|n'
+    elif percent > 20:
+        return '|500Critically Damaged|n'
+    elif percent > 15:
+        return '|500Critically Damaged|n'
+    elif percent > 10:
+        return '|500Critically Damaged|n'
+    elif percent > 5:
+        return '|500near death|n'
+    else:
+        return '|[300Destroyed|n'
