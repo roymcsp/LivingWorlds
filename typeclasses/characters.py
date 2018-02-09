@@ -252,10 +252,10 @@ class Character(GenderCharacter):
         looker.msg("|s has %s.|/" % self.db.eyedesc)
 
         equip_message = "Wielding:\n"
-        equip_message += "\n|_|_|_|_|_|_".join([self.equip.get(slot).key for slot in wield_slots if self.equip.get(slot)])
+        equip_message += "\n\t".join([self.equip.get(slot).key for slot in wield_slots if self.equip.get(slot)])
         equip_message += "\n|_|_Armors:\n"
-        equip_message += "\n|_|_|_|_|_|_".join([self.equip.get(slot).key for slot in armor_slots if self.equip.get(slot)])
+        equip_message += "\n\t".join([self.equip.get(slot).key for slot in armor_slots if self.equip.get(slot)])
         equip_message += "\nClothing:\n"
-        equip_message += "\n|_|_|_|_|_|_".join([self.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)])
+        equip_message += "\n\t".join([self.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)])
 
         looker.msg(equip_message)
