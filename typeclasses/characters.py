@@ -14,6 +14,7 @@ from world.equip import EquipHandler
 from world.traits import TraitHandler
 from evennia.contrib.gendersub import GenderCharacter
 from commands import chartraits, equip
+from world.rulebook import parse_health
 from world.traitcalcs import abilitymodifiers
 from world.death import CharDeathHandler
 from math import floor
@@ -239,7 +240,8 @@ class Character(GenderCharacter):
         if not looker:
             return
 
-        looker.msg("You see a %s %s," %(self.db.gender, self.db.race))
+        looker.msg("|s is %s.|/" % parse_health(self))
+        looker.msg("You see a %s %s,|/" %(self.db.gender, self.db.race))
         looker.msg("%s" % self.db.desc)
-        looker.msg("|s has %s." % self.db.eyedesc)
         looker.msg("|s has %s." % self.db.hairdesc)
+        looker.msg("|s has %s." % self.db.eyedesc)
