@@ -239,7 +239,7 @@ class Character(GenderCharacter):
         if not looker:
             return
 
-        self.db.desc
+        looker.msg("You see a %s %s," %(self.db.gender, self.db.race))
+        looker.msg("%s" % self.db.desc)
         looker.msg("|s has %s." % self.db.eyedesc)
         looker.msg("|s has %s." % self.db.hairdesc)
-        
