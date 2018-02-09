@@ -162,7 +162,7 @@ def parse_health(target):
     else:
         percent = 0
 
-    if percent > 100:
+    if percent == 100:
         return '|040in perfect condition|n'
     elif percent > 99:
         return '|040scratched|n'
