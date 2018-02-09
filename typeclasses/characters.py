@@ -234,3 +234,12 @@ class Character(GenderCharacter):
     def at_death(self):
         """Hook called when a character dies"""
         self.scripts.add(CharDeathHandler)
+
+    def return_appearance(self,looker):
+        if not looker:
+            return
+
+        self.db.desc
+        looker.msg("|s has %s." % self.db.eyedesc)
+        looker.msg("|s has %s." % self.db.hairdesc)
+        
