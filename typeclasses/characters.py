@@ -252,7 +252,7 @@ class Character(GenderCharacter):
         looker.msg("|s has %s.|/" % self.db.eyedesc)
 
         equip_message = """Wielding: {wielding}
-Armors: {armor}
+  Armors: {armor}
 Clothing: {clothing}""".format(
             wielding="\n\t".join([self.equip.get(slot).key for slot in wield_slots if self.equip.get(slot)]),
             armor="\n\t".join([self.equip.get(slot).key for slot in armor_slots if self.equip.get(slot)]),
