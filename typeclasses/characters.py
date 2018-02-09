@@ -48,6 +48,11 @@ traits = {
            'extra': {'level_boundaries': (500, 2000, 4500, 'unlimited')}},
     }
 
+wield_slots = ['wield1', 'wield2']
+armor_slots = ['helm', 'necklace', 'cloak', 'torso',
+               'belt', 'bracers', 'gloves', 'ring1', 'ring2', 'boots']
+clothing_slots = ['hat', 'accessory', 'overtop', 'bottom', 'belt2', 'accessory2',
+                  'gloves2', 'accessory3', 'accessory4', 'shoes']
 
 class Character(GenderCharacter):
     """
@@ -246,16 +251,11 @@ class Character(GenderCharacter):
         looker.msg("|s has %s." % self.db.hairdesc)
         looker.msg("|s has %s.|/" % self.db.eyedesc)
 
-        wield_slots = ['wield1', 'wield2']
-        armor_slots = ['helm', 'necklace', 'cloak', 'torso',
-                       'belt', 'bracers', 'gloves', 'ring1', 'ring2', 'boots']
-        clothing_slots = ['hat', 'accessory', 'overtop', 'bottom', 'belt2', 'accessory2',
-                          'gloves2', 'accessory3', 'accessory4', 'shoes']
-
         equip_message = "Wielding:/n"
         equip_message += "/n".join([self.equip.get(slot) for slot in wield_slots if self.equip.get(slot)])
         equip_message += "Armors:/n"
         equip_message += "/n".join([self.equip.get(slot) for slot in armor_slots if self.equip.get(slot)])
         equip_message += "Clothing:/n"
         equip_message += "/n".join([self.equip.get(slot) for slot in clothing_slots if self.equip.get(slot)])
+
         looker.msg(equip_message)
