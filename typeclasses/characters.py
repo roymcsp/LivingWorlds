@@ -258,3 +258,4 @@ class Character(GenderCharacter):
         equip_message += "/n".join([self.equip.get(slot) for slot in armor_slots if self.equip.get(slot)])
         equip_message += "Clothing:/n"
         equip_message += "/n".join([self.equip.get(slot) for slot in clothing_slots if self.equip.get(slot)])
+        looker.msg(equip_message)
