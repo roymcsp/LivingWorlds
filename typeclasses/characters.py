@@ -244,27 +244,17 @@ class Character(GenderCharacter):
         looker.msg("You see a %s %s,|/" %(self.db.gender, self.db.race))
         looker.msg("%s" % self.db.desc)
         looker.msg("|s has %s." % self.db.hairdesc)
-        looker.msg("|s has %s." % self.db.eyedesc)
-        looker.msg("Wielding: %s" % self.equip.get('wield1'))
-        looker.msg("          %s" % self.equip.get('wield2'))
-        looker.msg("  Armors: %s" % self.equip.get('helm'))
-        looker.msg("          %s" % self.equip.get('necklace'))
-        looker.msg("          %s" % self.equip.get('cloak'))
-        looker.msg("          %s" % self.equip.get('torso'))
-        looker.msg("          %s" % self.equip.get('belt'))
-        looker.msg("          %s" % self.equip.get('bracers'))
-        looker.msg("          %s" % self.equip.get('gloves'))
-        looker.msg("          %s" % self.equip.get('ring1'))
-        looker.msg("          %s" % self.equip.get('ring2'))
-        looker.msg("          %s" % self.equip.get('boots'))
-        looker.msg("Clothing: %s" % self.equip.get('hat'))
-        looker.msg("          %s" % self.equip.get('accessory'))
-        looker.msg("          %s" % self.equip.get('overtop'))
-        looker.msg("          %s" % self.equip.get('top'))
-        looker.msg("          %s" % self.equip.get('bottom'))
-        looker.msg("          %s" % self.equip.get('belt2'))
-        looker.msg("          %s" % self.equip.get('accessory2'))
-        looker.msg("          %s" % self.equip.get('gloves2'))
-        looker.msg("          %s" % self.equip.get('accessory3'))
-        looker.msg("          %s" % self.equip.get('accessory4'))
-        looker.msg("          %s" % self.equip.get('shoes'))
+        looker.msg("|s has %s.|/" % self.db.eyedesc)
+
+        wield_slots = ['wield1', 'wield2']
+        armor_slots = ['helm', 'necklace', 'cloak', 'torso',
+                       'belt', 'bracers', 'gloves', 'ring1', 'ring2', 'boots']
+        clothing_slots = ['hat', 'accessory', 'overtop', 'bottom', 'belt2', 'accessory2',
+                          'gloves2', 'accessory3', 'accessory4', 'shoes']
+
+        equip_message = "Wielding:/n"
+        equip_message += "/n".join([self.equip.get(slot) for slot in wield_slots if self.equip.get(slot)])
+        equip_message += "Armors:/n"
+        equip_message += "/n".join([self.equip.get(slot) for slot in armor_slots if self.equip.get(slot)])
+        equip_message += "Clothing:/n"
+        equip_message += "/n".join([self.equip.get(slot) for slot in clothing_slots if self.equip.get(slot)])
