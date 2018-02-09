@@ -164,31 +164,23 @@ def parse_health(target):
 
     if percent == 100:
         return '|040in perfect condition|n'
-    elif percent > 99:
-        return '|040scratched|n'
     elif percent > 95:
+        return '|040scratched|n'
+    elif percent > 91:
         return '|420bleeding lightly|n'
-    elif percent > 90:
+    elif percent > 78:
         return '|420bleeding|n'
-    elif percent > 80:
+    elif percent > 65:
         return '|420bleeding moderately|n'
-    elif percent > 70:
+    elif percent > 52:
         return '|320wounded|n'
-    elif percent > 60:
+    elif percent > 39:
         return '|320severly wounded|n'
-    elif percent > 50:
+    elif percent > 26:
         return '|320critically wounded|n'
-    elif percent > 40:
+    elif percent > 13:
         return '|510gushing blood|n'
-    elif percent > 30:
-        return '|510Critically Damaged|n'
-    elif percent > 20:
-        return '|500Critically Damaged|n'
-    elif percent > 15:
-        return '|500Critically Damaged|n'
-    elif percent > 10:
-        return '|500Critically Damaged|n'
     elif percent > 5:
         return '|500near death|n'
     else:
-        return '|[300Destroyed|n'
+        return '|[300Dead|n'
