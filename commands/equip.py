@@ -73,10 +73,10 @@ Clothing: {clothing}
 Carrying: {carrying}""".format(
             current_weight="".join(str([tr.ENC.actual])),
             max_weight="".join(str([tr.ENC.max])),
-            wielding="\n\t".join([caller.equip.get(slot).key for slot in wield_slots if self.equip.get(slot)]),
-            armor="\n\t".join([caller.equip.get(slot).key for slot in armor_slots if self.equip.get(slot)]),
-            clothing="\n\t".join([caller.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)]),
-            carrying="\n\t".join([item for item in items if not item in self.equip]))
+            wielding="\n\t".join([caller.equip.get(slot).key for slot in wield_slots if caller.equip.get(slot)]),
+            armor="\n\t".join([caller.equip.get(slot).key for slot in armor_slots if caller.equip.get(slot)]),
+            clothing="\n\t".join([caller.equip.get(slot).key for slot in clothing_slots if caller.equip.get(slot)]),
+            carrying="\n\t".join([item for item in items if not item in caller.equip]))
 
         caller.msg(equip_message)
 
