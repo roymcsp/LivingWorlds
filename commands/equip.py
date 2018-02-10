@@ -63,10 +63,10 @@ class CmdInventory(MuxCommand):
         items = caller.contents
         tr = caller.traits
         equip_message = """
-========================================
+|015====================================|n
             Inventory
         Weight {current_weight}/{max_weight}   
-========================================
+|015====================================|n
 Wielding: {wielding}
   Armors: {armor}
 Clothing: {clothing}
