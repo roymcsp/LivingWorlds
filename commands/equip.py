@@ -67,10 +67,14 @@ class CmdInventory(MuxCommand):
             |035Inventory
         Weight {current_weight}/{max_weight}|n   
 |015=================================|n
-Wielding: {wielding}
-  Armors: {armor}
-Clothing: {clothing}
-Carrying: {carrying}""".format(
+Wielding: 
+          {wielding}
+  Armors:
+          {armor}
+Clothing: 
+          {clothing}
+Carrying: 
+          {carrying}""".format(
             current_weight="".join(str([tr.ENC.actual])),
             max_weight="".join(str([tr.ENC.max])),
             wielding="\n\t".join([caller.equip.get(slot).key for slot in wield_slots if caller.equip.get(slot)]),
@@ -79,6 +83,7 @@ Carrying: {carrying}""".format(
             carrying="\n\t".join([item.key for item in items if not item in caller.equip]))
 
         caller.msg(equip_message)
+
 
 class CmdEquip(MuxCommand):
     """
