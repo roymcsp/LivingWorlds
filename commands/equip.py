@@ -64,8 +64,8 @@ class CmdInventory(MuxCommand):
         tr = caller.traits
         equip_message = """
 |015====================================|n
-            Inventory
-        Weight {current_weight}/{max_weight}   
+            |035Inventory
+        Weight {current_weight}/{max_weight}|n   
 |015====================================|n
 Wielding: {wielding}
   Armors: {armor}
