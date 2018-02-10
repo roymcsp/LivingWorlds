@@ -71,8 +71,8 @@ Wielding: {wielding}
   Armors: {armor}
 Clothing: {clothing}
 Carrying: {carrying}""".format(
-            current_weight="".join(tr.ENC.actual),
-            max_weight="".join(tr.ENC.max),
+            current_weight="".join([tr.ENC.actual]),
+            max_weight="".join([tr.ENC.max]),
             wielding="\n\t".join([caller.equip.get(slot).key for slot in wield_slots if self.equip.get(slot)]),
             armor="\n\t".join([caller.equip.get(slot).key for slot in armor_slots if self.equip.get(slot)]),
             clothing="\n\t".join([caller.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)]),
