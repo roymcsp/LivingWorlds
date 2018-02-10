@@ -76,7 +76,7 @@ Carrying: {carrying}""".format(
             wielding="\n\t".join([caller.equip.get(slot).key for slot in wield_slots if caller.equip.get(slot)]),
             armor="\n\t".join([caller.equip.get(slot).key for slot in armor_slots if caller.equip.get(slot)]),
             clothing="\n\t".join([caller.equip.get(slot).key for slot in clothing_slots if caller.equip.get(slot)]),
-            carrying="\n\t".join([item for item in items if not item in caller.equip]))
+            carrying="\n\t".join([item.key for item in items if not item in caller.equip]))
 
         caller.msg(equip_message)
 
