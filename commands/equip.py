@@ -70,7 +70,8 @@ class CmdInventory(MuxCommand):
 Wielding: {wielding}
   Armors: {armor}
 Clothing: {clothing}
-Carrying: {carrying}""".format(
+Carrying: {carrying}
+|015=================================|n""".format(
             current_weight="".join(str([tr.ENC.actual])),
             max_weight="".join(str([tr.ENC.max])),
             wielding="\n\t".join([caller.equip.get(slot).key for slot in wield_slots if caller.equip.get(slot)]),
