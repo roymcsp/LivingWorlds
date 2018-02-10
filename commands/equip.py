@@ -3,8 +3,7 @@ Item and equipment-related command module.
 """
 from evennia import CmdSet
 from commands.command import MuxCommand
-from evennia.utils.evtable import fill
-from evennia.utils import evtable
+from evennia.utils.evtable import EvTable, fill
 from typeclasses.weapons import Weapon
 from typeclasses.armors import *
 
@@ -15,6 +14,12 @@ __all__ = ('CmdInventory', 'CmdEquip',
 
 _INVENTORY_ERRMSG = "You don't have '{}' in your inventory."
 _EQUIP_ERRMSG = "You do not have '{}' equipped."
+
+wield_slots = ['wield1', 'wield2']
+armor_slots = ['helm', 'necklace', 'cloak', 'torso',
+               'belt', 'bracers', 'gloves', 'ring1', 'ring2', 'boots']
+clothing_slots = ['hat', 'accessory', 'overtop', 'bottom', 'belt2', 'accessory2',
+                  'gloves2', 'accessory3', 'accessory4', 'shoes']
 
 
 class EquipCmdSet(CmdSet):
@@ -50,27 +55,30 @@ class CmdInventory(MuxCommand):
 
     def func(self):
         """check inventory"""
-        if not self.caller.contents:
-            self.caller.msg("You are not carrying or wearing anything.")
+        caller = self.caller
+        if not caller.contents:
+            caller.msg("You are not carrying or wearing anything.")
             return
 
-        items = self.caller.contents
+        items = caller.contents
+        tr = caller.traits
+        equip_message = """
+========================================
+            Inventory
+        Weight {current_weight}/{max_weight}   
+========================================
+Wielding: {wielding}
+  Armors: {armor}
+Clothing: {clothing}
+Carrying: {carrying}""".format(
+            current_weight="".join(tr.ENC.actual),
+            max_weight="".join(tr.ENC.max),
+            wielding="\n\t".join([caller.equip.get(slot).key for slot in wield_slots if self.equip.get(slot)]),
+            armor="\n\t".join([caller.equip.get(slot).key for slot in armor_slots if self.equip.get(slot)]),
+            clothing="\n\t".join([caller.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)]),
+            carrying="\n\t".join([item for item in items if not item in self.equip]))
 
-        carry_table = evtable.EvTable(border="header")
-        wear_table = evtable.EvTable(border="header")
-        for item in items:
-            if not item.db.worn:
-                carry_table.add_row("|C%s|n" % item.name)
-        if carry_table.nrows == 0:
-            carry_table.add_row("|CNothing.|n", "")
-        string = "|wYou are carrying:\n%s" % carry_table
-        for item in items:
-            if item.db.worn:
-                wear_table.add_row("|C%s|n" % item.name)
-        if wear_table.nrows == 0:
-            wear_table.add_row("|CNothing.|n", "")
-        string += "|/|wYou are wearing:\n%s" % wear_table
-        self.caller.msg(string)
+        caller.msg(equip_message)
 
 class CmdEquip(MuxCommand):
     """
