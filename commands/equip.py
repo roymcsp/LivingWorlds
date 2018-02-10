@@ -71,6 +71,7 @@ Wielding: {wielding}
   Armors: {armor}
 Clothing: {clothing}
 Carrying: {carrying}
+
 |015=================================|n""".format(
             current_weight="".join(str([tr.ENC.actual])),
             max_weight="".join(str([tr.ENC.max])),
