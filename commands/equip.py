@@ -75,7 +75,7 @@ Carrying: {carrying}
 |015=================================|n""".format(
             current_weight="".join(str([tr.ENC.actual])),
             max_weight="".join(str([tr.ENC.max])),
-            wielding="\n\t".join([caller.equip.get(slot).key for slot in wield_slots if caller.equip.get(slot)]),
+            wielding="\n\t  ".join([caller.equip.get(slot).key for slot in wield_slots if caller.equip.get(slot)]),
             armor="\n\t".join([caller.equip.get(slot).key for slot in armor_slots if caller.equip.get(slot)]),
             clothing="\n\t".join([caller.equip.get(slot).key for slot in clothing_slots if caller.equip.get(slot)]),
             carrying="\n\t  ".join([item.key for item in items if not item in caller.equip]))

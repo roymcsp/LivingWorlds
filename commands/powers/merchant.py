@@ -43,7 +43,7 @@ class CmdForge(MuxCommand):
             caller.msg("That is not a valid recipe.")
             return
 
-        item_name = "%s %s" % (material, recipe)
+        item_name = "%s %s" % (material.capitalize(), recipe)
         item_aliases = RECIPES.get(recipe).get("aliases")
         item_desc = RECIPES.get(recipe).get("desc")
         item_weight = RECIPES.get(recipe).get("weight") * MATERIALS.get(material).get("weight_mod")
@@ -68,6 +68,7 @@ class CmdForge(MuxCommand):
         }
 
         spawn(weapon_proto)
+        caller.msg("You succeed in forging a %s %s" % (material.capitalize(), recipe))
 
 """    
 class CmdForgeWeapon(MuxCommand):
