@@ -33,14 +33,10 @@ class Item(Object):
         self.db.durability = self.durability
 
     def at_get(self, getter):
-        getter.traits.ENC.current += self.db.weight
-        getter.traits.EP.mod = \
-            int(-(getter.traits.ENC.actual // (2 * getter.traits.STR.actual)))
+        pass
 
     def at_drop(self, dropper):
-        dropper.traits.ENC.current -= self.db.weight
-        dropper.traits.EP.mod = \
-            int(-(dropper.traits.ENC.actual // (2 * dropper.traits.STR.actual)))
+        pass
 
 
 class Bundlable(Item):
@@ -107,7 +103,6 @@ class Equippable(Item):
         self.db.slots = self.slots
         self.db.multi_slot = self.multi_slot
         self.db.used_by = None
-
 
     def at_equip(self, character):
         """
