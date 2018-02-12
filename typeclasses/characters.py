@@ -251,11 +251,21 @@ class Character(GenderCharacter):
         looker.msg("|s has %s." % self.db.hairdesc)
         looker.msg("|s has %s.|/" % self.db.eyedesc)
 
-        equip_message = """Wielding: {wielding}
+        equip_message = """
+Wielding: {wielding}
   Armors: {armor}
 Clothing: {clothing}""".format(
-            wielding="\n\t".join([self.equip.get(slot).key for slot in wield_slots if self.equip.get(slot)]),
-            armor="\n\t".join([self.equip.get(slot).key for slot in armor_slots if self.equip.get(slot)]),
-            clothing="\n\t".join([self.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)]))
+            wielding="\n\t  ".join([self.equip.get(slot).key for slot in wield_slots if self.equip.get(slot)]),
+            armor="\n\t  ".join([self.equip.get(slot).key for slot in armor_slots if self.equip.get(slot)]),
+            clothing="\n\t  ".join([self.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)]))
         looker.msg(equip_message)
 
+    def at_object_recieve(self,obj):
+        self.traits.ENC.current += obj.db.weight
+        self.traits.EP.mod = \
+            int(-(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
+
+    def at_object_leave(self,obj):
+        self.traits.ENC.current -= obj.db.weight
+        self.traits.EP.mod = \
+            int(+(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
