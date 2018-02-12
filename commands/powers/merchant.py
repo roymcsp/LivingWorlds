@@ -23,6 +23,7 @@ class CmdForge(MuxCommand):
    """
 
     key = "forge"
+    locks = "cmd:all()"
     help_category = "commands"
 
     def func(self):

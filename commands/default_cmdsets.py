@@ -54,7 +54,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(movecommands.ExitErrorCmdSet)
         self.add(equip.EquipCmdSet)
         self.add(chartraits.CharTraitCmdSet)
-        self.add(merchant.CmdForge)
+        self.add(merchant.CmdForge())
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):
