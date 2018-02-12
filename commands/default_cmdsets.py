@@ -17,6 +17,7 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 from evennia import default_cmds, CmdSet
 from evennia.commands.default import general, account, system, comms
 from commands import chargen, movecommands, sensorycommands, extendedcommands, equip, chartraits, comm, acct, syst
+from commands.powers import merchant
 from world import races, background
 
 
@@ -53,6 +54,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(movecommands.ExitErrorCmdSet)
         self.add(equip.EquipCmdSet)
         self.add(chartraits.CharTraitCmdSet)
+        self.add(merchant.CmdForge)
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):
