@@ -24,13 +24,6 @@ class Weapon(Equippable):
         self.db.range = self.range
         self.db.damage_roll = self.damage_roll
         self.db.handedness = self.handedness
-        #self.db.combat_cmdset = 'commands.combat.MeleeWeaponCmdSet'
-        #self.db.messages = {
-        #    'dmg_hp': "{actor} attacks {target} with {weapon}, striking a painful blow.",
-        #    'dmg_sp': "{actor} stuns {target} with {weapon}.",
-        #    'dodged': "{weapon} fails to meet its target as {target} dodges {actor}'s attack.",
-        #    'missed': "{actor} attacks {target} with {weapon} and misses."
-        #}
 
     def at_equip(self, character):
         """character.traits.MAB.mod += self.db.damage"""

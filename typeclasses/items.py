@@ -13,9 +13,13 @@ class Item(Object):
     Attributes:
         value (int): monetary value of the item in CP
         weight (float): weight of the item
+        hardness (int): how susceptible to damage a object is
+        durability (int): how much damage an item can sustain before being destroyed
     """
     value = 0
     weight = 0.0
+    hardness = 0
+    durability = 0
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -25,6 +29,8 @@ class Item(Object):
                                  )))
         self.db.value = self.value
         self.db.weight = float(self.weight)
+        self.db.hardness = self.hardness
+        self.db.durability = self.durability
 
     def at_get(self, getter):
         getter.traits.ENC.current += self.db.weight
