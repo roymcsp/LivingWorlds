@@ -64,7 +64,7 @@ class CmdForge(MuxCommand):
             "range": item_range,
             "durability": item_durability,
             "hardness": item_hardness,
-            "location": caller.contents
+            "location": caller.location
         }
 
         spawn(weapon_proto)
