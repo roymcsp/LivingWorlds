@@ -256,8 +256,13 @@ class CmdExtendedGet(default_cmds.CmdGet):
    pick up something
    Usage:
      get <obj>
+     get all
+     
    Picks up an object from your location and puts it in
-   your inventory.
+   your inventory. Alternatively if all is used will pick 
+   up everything in the room that can be picked up  and 
+   placed into your inventory.
+   
    """
     key = "get"
     aliases = "grab"
@@ -268,9 +273,25 @@ class CmdExtendedGet(default_cmds.CmdGet):
 
         caller = self.caller
 
+        if 'all' in self.args:
+            for obj in caller.location.contents:
+                if not obj.access(caller, 'get'):
+                    if obj.db.get_err_msg:
+                        caller.msg(obj.db.get_err_msg)
+                    else:
+                        caller.msg("You can't get that.")
+                    return
+
+                obj.move_to(caller, quiet=True)
+                caller.msg("You pick up %s." % obj.name)
+                caller.location.msg_contents("%s picks up %s." % (caller.name, obj.name), exclude=caller)
+
+                obj.at_get(caller)
+
         if not self.args:
             caller.msg("Get what?")
             return
+
         result = caller.search(self.args,
                                location=caller.location,
                                quiet=True)
@@ -279,9 +300,11 @@ class CmdExtendedGet(default_cmds.CmdGet):
             return
         else:
             obj = result[0]
+
         if caller == obj:
             caller.msg("You can't get yourself.")
             return
+
         if not obj.access(caller, 'get'):
             if obj.db.get_err_msg:
                 caller.msg(obj.db.get_err_msg)
@@ -296,7 +319,7 @@ class CmdExtendedGet(default_cmds.CmdGet):
                                       obj.name),
                                      exclude=caller)
         # calling hook method
-        obj.at_get(caller)
+        # obj.at_get(caller)
 
     def at_post_cmd(self):
         """
@@ -329,6 +352,13 @@ class CmdExtendedDrop(default_cmds.CmdDrop, MuxCommand):
 
         caller = self.caller
 
+        if 'all' in self.args:
+            for obj in caller.contents:
+                obj.move_to(caller.location, quiet=True)
+                caller.msg('you drop %s' % (obj.name,))
+                caller.location.msg_contents("%s drops %s." % (caller.name, obj.name), exclude=caller)
+                obj.at_drop(caller)
+
         if not self.args:
             caller.msg("Drop what?")
             return
@@ -348,7 +378,7 @@ class CmdExtendedDrop(default_cmds.CmdDrop, MuxCommand):
                                      (caller.name, obj.name),
                                      exclude=caller)
         # Call the object script's at_drop() method.
-        obj.at_drop(caller)
+        # obj.at_drop(caller)
 
     def at_post_cmd(self):
         """
@@ -405,6 +435,9 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
         caller.msg("You give %s to %s." % (obj.key, target.key))
         obj.move_to(target, quiet=True)
         target.msg("%s gives you %s." % (caller.key, obj.key))
+        caller.location.msg_contents("%s gives %s to %s." %
+                                     (caller.name, obj.name, target.name),
+                                     exclude=caller)
         # Call the object script's at_give() method.
         obj.at_give(caller, target)
 
@@ -417,6 +450,55 @@ class CmdExtendedGive(default_cmds.CmdGive, MuxCommand):
         caller = self.caller
         prompt = ">"
         caller.msg("", prompt=prompt)
+
+
+class CmdExtendedPut(MuxCommand):
+    """
+    Put an object into another object
+    Usage:
+      put <obj> in <container>
+      put all in <container>
+
+      puts an object from from your inventory into a container
+      such as a pouch or backpack that you also have in your 
+      inventory.
+    """
+
+    key = 'put'
+    aliases = 'place'
+    locks = 'cmd:all()'
+
+    def parse(self):
+        """Implement an addition parse"""
+        super(CmdExtendedPut, self).parse()
+        if "in" in self.args:
+            self.lhs, self.rhs = self.args.split(" in ", 1)
+
+    def func(self):
+
+        caller = self.caller
+        if not self.args or not self.rhs:
+            caller.msg("Usage: put <item> in <container>")
+            return
+
+        to_put = caller.search(self.lhs, location=caller,
+                                nofound_string="You aren't carrying %s." % self.lhs, quiet=True)
+
+        container = caller.search(self.rhs, location=caller,
+                               nofound_string="I can't find any %s to put that in" % self.rhs, quiet=True)
+
+        if not (to_put and container):
+            return
+        else:
+            obj = to_put[0]
+
+        caller.msg("You put %s in %s." % (obj.key, container.key))
+        obj.move_to(container, quiet=True)
+        caller.location.msg_contents("%s puts %s in %s." %
+                                     (caller.name, obj.name, container.name),
+                                     exclude=caller)
+        # Call the object script's at_give() method.
+        obj.at_give(caller, container)
 
 
 class CmdWho(MuxCommand):
