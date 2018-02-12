@@ -34,6 +34,7 @@ class CmdForge(MuxCommand):
 
         if not args:
             caller.msg("Forge What?")
+            return
 
         if " " in args:
             material, recipe = self.args.split(" ", 1)
@@ -62,7 +63,8 @@ class CmdForge(MuxCommand):
             "damage_roll": item_damage,
             "range": item_range,
             "durability": item_durability,
-            "hardness": item_hardness
+            "hardness": item_hardness,
+            "location": caller.contents
         }
 
         spawn(weapon_proto)
