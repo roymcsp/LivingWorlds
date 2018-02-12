@@ -260,12 +260,12 @@ Clothing: {clothing}""".format(
             clothing="\n\t  ".join([self.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)]))
         looker.msg(equip_message)
 
-    def at_object_recieve(self,obj):
+    def at_object_recieve(self,obj,source):
         self.traits.ENC.current += obj.db.weight
         self.traits.EP.mod = \
             int(-(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
 
-    def at_object_leave(self,obj):
+    def at_object_leave(self,obj,source):
         self.traits.ENC.current -= obj.db.weight
         self.traits.EP.mod = \
             int(+(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
