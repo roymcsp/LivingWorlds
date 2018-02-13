@@ -54,6 +54,7 @@ armor_slots = ['helm', 'necklace', 'cloak', 'torso',
 clothing_slots = ['hat', 'accessory', 'overtop', 'bottom', 'belt2', 'accessory2',
                   'gloves2', 'accessory3', 'accessory4', 'shoes']
 
+
 class Character(GenderCharacter):
     """
     The Character defaults to reimplementing some of base Object's hook methods with the
@@ -196,7 +197,6 @@ class Character(GenderCharacter):
         self.db.tasteable_text = "  You don't taste anything special."
         self.db.wallet = {'PP': 0, 'GP': 0, 'SP': 0, 'CP': 0}
 
-
         for key, kwargs in traits.iteritems():
             self.traits.add(key, **kwargs)
 
@@ -216,7 +216,6 @@ class Character(GenderCharacter):
         self.traits.STR.push_factor = 40
         self.traits.ENC.max = self.traits.STR.lift_factor * self.traits.STR.actual
         tickerhandler.add(interval=12, callback=self.at_regen)
-
 
     @lazy_property
     def traits(self):
@@ -241,12 +240,12 @@ class Character(GenderCharacter):
         """Hook called when a character dies"""
         self.scripts.add(CharDeathHandler)
 
-    def return_appearance(self,looker):
+    def return_appearance(self, looker):
         if not looker:
             return
 
         looker.msg("|s is %s.|/" % parse_health(self))
-        looker.msg("You see a %s %s,|/" %(self.db.gender, self.db.race))
+        looker.msg("You see a %s %s,|/" % (self.db.gender, self.db.race))
         looker.msg("%s" % self.db.desc)
         looker.msg("|s has %s." % self.db.hairdesc)
         looker.msg("|s has %s.|/" % self.db.eyedesc)
@@ -260,12 +259,12 @@ Clothing: {clothing}""".format(
             clothing="\n\t  ".join([self.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)]))
         looker.msg(equip_message)
 
-    def at_object_recieve(self,obj,source):
+    def at_object_receive(self, obj, source):
         self.traits.ENC.current += obj.db.weight
         self.traits.EP.mod = \
             int(-(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
 
-    def at_object_leave(self,obj,source):
+    def at_object_leave(self, obj, source):
         self.traits.ENC.current -= obj.db.weight
         self.traits.EP.mod = \
             int(+(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
