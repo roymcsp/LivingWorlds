@@ -167,7 +167,7 @@ class Object(DefaultObject):
     def get_display_name(self, looker, **kwargs):
         # grab the color code stored in db.color_code,
         # or default to "|w"
-        color = self.db.color_code or "|w"
+        color = self.db.color_code or "|W"
         # use the original get_display_name hook to get our name
         name = super(Object, self).get_display_name(looker, **kwargs)
         # either create a string based on self.db.modifiers, or default to an
