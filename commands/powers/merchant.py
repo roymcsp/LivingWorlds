@@ -67,9 +67,11 @@ class CmdForge(MuxCommand):
         item_hardness = RECIPES.get(self.recipe).get("hardness") * MATERIALS.get(self.material).get("hardness_mod")
         armor_pbonus = RECIPES.get(self.recipe).get("physical_bonus")
         armor_mbonus = RECIPES.get(self.recipe).get("magical_bonus")
+        item_color = MATERIALS.get(self.material).get("color_code")
 
         self.weapon_proto = {
             "key": item_name,
+            "color_code": item_color,
             "aliases": item_aliases,
             "typeclass": item_typeclass,
             "desc": item_desc,
@@ -84,6 +86,7 @@ class CmdForge(MuxCommand):
 
         self.armor_proto = {
             "key": item_name,
+            "color_code": item_color,
             "aliases": item_aliases,
             "typeclass": item_typeclass,
             "desc": item_desc,
