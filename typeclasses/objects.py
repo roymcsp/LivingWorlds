@@ -172,6 +172,6 @@ class Object(DefaultObject):
         name = super(Object, self).get_display_name(looker, **kwargs)
         # either create a string based on self.db.modifiers, or default to an
         # empty string
-        modifiers = " " + " ".join(self.db.modifiers) or ""
+        modifiers = " ".join(self.db.modifiers or [])
         return("{color}{name}|n{modifiers}".format(color=color, name=name, modifiers=modifiers))
 
