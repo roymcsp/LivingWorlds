@@ -8,11 +8,23 @@ from evennia.utils.spawner import spawn
 empire_list = ()
 caliphate_list = ()
 kingdom_list = ()
+weapon_list = ("battleaxe", "club", "dagger", "flail", "handaxe", "heavymace", "heavypick", "kama", "katana",
+               "longsword", "lighthammer", "lightmace", "lightpick", "morningstar", "nageyari", "nunchaku", "rapier",
+               "sai", "scimitar", "sickle", "spear", "shortspear", "shortsword", "tanto", "trident", "wakazashi",
+               "warfan", "warhammer", "whip", "yari", "bastardsword", "dietsuchi", "falchion", "heavyflail", "glaive",
+               "greataxe", "greatclub", "greatsword", "guisarme", "halberd", "kawanaga", "kusarigama", "lance",
+               "longspear", "lucernehammer", "manrikigusari", "maul", "nagimaki", "naginata", "nodachi", "ono",
+               "quarterstaff", "ransuer", "scythe", "tetsubo")
+
+armor_list = ("robe", "paddedarmor", "leatherarmor", "studdedleather", "chainshirt", "hidearmor", "scalemail",
+              "chainmail", "breastplate", "splintmail", "bandedmail", "halfplate", "fullplate", "leatherscale",
+              "brigandine", "lamellar", "oyoroi", "ringmail", "helm", "shield", "gloves", "boots", "bracers", "belt")
+
 
 class CmdForge(MuxCommand):
     """
     Spell Name: Forge
-       MP Cost: 10
+       SP Cost: 10
         Syntax: forge material recipe
    Skills used: none
 
@@ -29,34 +41,37 @@ class CmdForge(MuxCommand):
     def func(self):
         args = self.args
         caller = self.caller
-        recipe = ""
-        material = ""
+        self.recipe = ""
+        self.material = ""
 
         if not args:
             caller.msg("Forge What?")
             return
 
         if " " in args:
-            material, recipe = self.args.split(" ", 1)
+            self.material, self.recipe = self.args.split(" ", 1)
 
-        if recipe not in RECIPES.keys():
+        if self.recipe not in RECIPES.keys():
             caller.msg("That is not a valid recipe.")
             return
 
-        item_name = "%s %s" % (material.capitalize(), recipe)
-        item_aliases = RECIPES.get(recipe).get("aliases")
-        item_desc = RECIPES.get(recipe).get("desc")
-        item_weight = RECIPES.get(recipe).get("weight") * MATERIALS.get(material).get("weight_mod")
-        item_value = RECIPES.get(recipe).get("value") * MATERIALS.get(material).get("value_mod")
-        item_damage = RECIPES.get(recipe).get("damage_roll")
-        item_range = RECIPES.get(recipe).get("range")
-        item_durability = RECIPES.get(recipe).get("durability") * MATERIALS.get(material).get("durability_mod")
-        item_hardness = RECIPES.get(recipe).get("hardness") * MATERIALS.get(material).get("hardness_mod")
+        item_name = "%s %s" % (self.material.capitalize(), RECIPES.get(self.recipe).get("key"))
+        item_aliases = RECIPES.get(self.recipe).get("aliases")
+        item_typeclass = RECIPES.get(self.recipe).get("typeclass")
+        item_desc = RECIPES.get(self.recipe).get("desc")
+        item_weight = RECIPES.get(self.recipe).get("weight") * MATERIALS.get(self.material).get("weight_mod")
+        item_value = RECIPES.get(self.recipe).get("value") + MATERIALS.get(self.material).get("value_mod")
+        item_damage = RECIPES.get(self.recipe).get("damage_roll")
+        item_range = RECIPES.get(self.recipe).get("range")
+        item_durability = RECIPES.get(self.recipe).get("durability") * MATERIALS.get(self.material).get("dura_mod")
+        item_hardness = RECIPES.get(self.recipe).get("hardness") * MATERIALS.get(self.material).get("hardness_mod")
+        armor_pbonus = RECIPES.get(self.recipe).get("physical_bonus")
+        armor_mbonus = RECIPES.get(self.recipe).get("magical_bonus")
 
-        weapon_proto = {
+        self.weapon_proto = {
             "key": item_name,
             "aliases": item_aliases,
-            "typeclass": "typeclasses.weapons.Weapon",
+            "typeclass": item_typeclass,
             "desc": item_desc,
             "weight": item_weight,
             "value": item_value,
@@ -67,175 +82,120 @@ class CmdForge(MuxCommand):
             "location": caller
         }
 
-        spawn(weapon_proto)
-        caller.msg("You succeed in forging a %s %s" % (material.capitalize(), recipe))
-
-"""    
-class CmdForgeWeapon(MuxCommand):
-
-     Spell Name: Forge Weapon
-        MP Cost: 10
-         Syntax: forgeweapon <recipe>
-                
-    Skills used: forge, weapons
-
-    Description:
-
-    A simple spell that allows a merchant/artisan/trader
-     to create weapons from resource components.
-
-
-    key = "forge"
-    locks = "cmd:attr_ge(level, 1)"
-    help_category = "commands"
-
-    def func(self):
-        args = self.args
-        caller = self.caller
-        tr = self.caller.traits
-        lastcast = caller.db.forge_lastcast
-
-        if not args:
-            caller.msg("Forge What?")
-
-        if tr.SP.current < 10:
-            caller.msg("You don't have enough power to cast this spell")
-            return
-
-        if lastcast and time.time() - lastcast < 3 * 60:
-            caller.msg("You cannot forge another item yet")
-            return
-
-        if "Kingdom" in caller.db.nation:
-            forge = self.obj.search('Forge', global_search=True)
-            weapon_list = kingdom_list
-            if not forge:
-                caller.msg("You must be in the forge to use this power")
-                return
-            if self.recipe not in weapon_list:
-                caller.msg("This is not a valid recipe.")
-                return
-
-        elif "Caliphate" in  caller.db.nation:
-            forge = self.obj.search('Forge', global_search=True)
-            weapon_list = caliphate_list
-            if not forge:
-                caller.msg("You must be in the forge to use this power")
-                return
-            if self.recipe not in weapon_list:
-                caller.msg("This is not a valid recipe.")
-                return
-
-        elif "Empire" in caller.db.nation:
-            forge = self.obj.search('Forge', global_search=True)
-            weapon_list = empire_list
-
-            if not forge:
-                caller.msg("You must be in the forge to use this power")
-                return
-            if self.recipe not in weapon_list:
-                caller.msg("This is not a valid recipe.")
-                return
-
-        tr.SP.current -= 10
-
-        item_name = "%s %s" % (material, recipe),
-        item_aliases = recipe.aliases
-        item_desc = recipe.desc
-        item_weight = recipe.weight
-        item_value = recipe.value
-        item_damage = recipe.roll
-        item_range = recipe.range
-        item_durability = material.durability
-        item_hardness = material.hardness
-
-        weapon_proto = {
+        self.armor_proto = {
             "key": item_name,
             "aliases": item_aliases,
-            "typeclass": "typeclasses.weapons.Weapon",
+            "typeclass": item_typeclass,
             "desc": item_desc,
             "weight": item_weight,
             "value": item_value,
-            "damage_roll": item_damage,
-            "range": item_range,
             "durability": item_durability,
-            "hardness": item_hardness
+            "hardness": item_hardness,
+            "physical_bonus": armor_pbonus,
+            "magical_bonus": armor_mbonus,
+            "location": caller
         }
 
-        caller.msg('You fire up the forge in preparation to forge an item.')
-        caller.location.msg_contents(
-            "{actor} fires up the forge in preperation to forge an item.",
-            mapping=dict(actor=caller),
-            exclude=caller)
-        utils.delay(5, callback=self.forgeone)
+        caller.msg('You fire up the forge in preparation to forge a {material} {recipe}.',
+                   mapping=dict(material=self.material.capitalize(),
+                                recipe=RECIPES.get(self.recipe).get("key")))
 
-    def forgeone(self):
+        caller.location.msg_contents(
+            "{actor} fires up the forge in preperation to forge a {material} {recipe}.",
+            mapping=dict(actor=caller,
+                         material=self.material,
+                         recipe=RECIPES.get(self.recipe).get("key")),
+            exclude=caller)
+
+        utils.delay(5, callback=self.forge_one)
+
+    def forge_one(self):
+        caller = self.caller
+        metal = ("iron", "steel", "mithril", "adamantine", "copper", "bronze", "brass", "silver", "gold")
+
+        wood = ("cedar", "cypress", "fir", "yew", "larch", "pine", "spruce", "acacia", "aldar", "ash", "beech",
+                "birch", "cherry", "ebony", "elm", "ironwood", "mahogany", "maple", "oak", "poplar", "walnut",
+                "willow", "zingana", "leafweave")
+
+        if self.material in metal:
+            caller.msg('You begin smelting the {material} ore into a usable bar for forging at the smelter.',
+                       mapping=dict(material=self.material))
+
+            caller.location.msg_contents(
+                "{actor} begins smelting the {material} ore into a usable bar for forging at the smelter.",
+                mapping=dict(actor=caller,
+                             material=self.material),
+                exclude=caller)
+
+        elif self.material in wood:
+            caller.msg('You begin milling the {material} log into a usable board at the mill table.',
+                       mapping=dict(material=self.material))
+
+            caller.location.msg_contents(
+                "{actor} begins milling a {material} log into a usable board at the mill table.",
+                mapping=dict(actor=caller,
+                             material=self.material),
+                exclude=caller)
+
+        utils.delay(5, callback=self.forge_two)
+
+    def forge_two(self):
+        caller = self.caller
+        metal = ("iron", "steel", "mithril", "adamantine", "copper", "bronze", "brass", "silver", "gold")
+
+        wood = ("cedar", "cypress", "fir", "yew", "larch", "pine", "spruce", "acacia", "aldar", "ash", "beech",
+                "birch", "cherry", "ebony", "elm", "ironwood", "mahogany", "maple", "oak", "poplar", "walnut",
+                "willow", "zingana", "leafweave")
+
+        if self.material in metal:
+            caller.msg('You take the {material} bar and starts forging a {recipe} at the anvil.',
+                       mapping=dict(material=self.material,
+                                    recipe=RECIPES.get(self.recipe).get("key")))
+
+            caller.location.msg_contents(
+                "{actor} takes the {material} bar and starts forging it into a {recipe} at the anvil.",
+                mapping=dict(actor=caller,
+                             material=self.material,
+                             recipe=RECIPES.get(self.recipe).get("key")),
+                exclude=caller)
+
+        elif self.material in wood:
+            caller.msg('You begin carving the {material} board into a {recipe} at the workbench.',
+                       mapping=dict(material=self.material,
+                                    recipe=RECIPES.get(self.recipe).get("key")))
+
+            caller.location.msg_contents(
+                "{actor} begins carving a {material} board into a {recipe} at the workbench.",
+                mapping=dict(actor=caller,
+                             material=self.material,
+                             recipe=RECIPES.get(self.recipe).get("key")),
+                exclude=caller)
+
+        utils.delay(5, callback=self.forge_three)
+
+    def forge_three(self):
+
+        if self.recipe in weapon_list:
+            spawn(self.weapon_proto)
+        elif self.recipe in armor_list:
+            spawn(self.armor_proto)
 
         caller = self.caller
-        caller.msg('')
+        caller.msg("You succeed in forging a {material} {recipe}",
+                   mapping=dict(material=self.material.capitalize(),
+                                recipe=RECIPES.get(self.recipe).get("key")),
+                   exclude=caller)
         caller.location.msg_contents(
-            "",
-            mapping=dict(actor=caller),
-            exclude=caller)
-        utils.delay(5, callback=self.forgetwo)
-
-    def forgetwo(self):
-        caller = self.caller
-        caller.msg("")
-        caller.location.msg_contents(
-            "",
-            mapping=dict(actor=caller),
-            exclude=caller)
-        utils.delay(5, callback=self.forgethree)
-
-    def forgethree(self):
-        spawn(self.weapon_proto)
-
-        caller = self.caller
-        caller.msg("")
-        caller.location.msg_contents(
-            "",
-            mapping=dict(actor=caller),
+            "{actor} succeeds in forging a {material}{recipe}",
+            mapping=dict(actor=caller,
+                         material=self.material.capitalize(),
+                         recipe=RECIPES.get(self.recipe).get("key")),
             exclude=caller)
 
-        caller.db.forge_lastcast = time.time()
-
-class ForgeArmor(MuxCommand):
-    armor_proto = {
-        "key": item_name,
-        "aliases": item_aliases,
-        "typeclass": armor_type,
-        "desc": item_desc,
-        "weight": item_weight,
-        "value": item_value,
-        "physical_bonus": item_pbonus,
-        "magical_bonus": item_mbonus
-    }
+        # caller.db.forge_lastcast = time.time()
 
 
-item_name = "%s %s" % (material, recipe),
-item_aliases = recipe.aliases
-item_desc = recipe.desc
-item_weight = recipe.weight
-item_value = recipe.value
-item_damage = recipe.roll
-item_range = recipe.range
-item_durability = material.durability
-item_hardness = material.hardness
-
-weapon_proto = {
-    "key": item_name,
-    "aliases": item_aliases,
-    "typeclass": "typeclasses.weapons.Weapon",
-    "desc": item_desc,
-    "weight": item_weight,
-    "value": item_value,
-    "damage_roll": item_damage,
-    "range": item_range,
-    "durability": item_durability,
-    "hardness": item_hardness
-}
-
+"""
 if tr.SP.current < 10:
     caller.msg("You don't have enough power to cast this spell")
     return
@@ -245,9 +205,4 @@ if lastcast and time.time() - lastcast < 3 * 60:
     return
 
 tr.SP.current -= 10
-caller.msg('You fire up the forge in preparation to forge an item.')
-caller.location.msg_contents(
-    "{actor} fires up the forge in preperation to forge an item.",
-    mapping=dict(actor=caller),
-    exclude=caller)
 """

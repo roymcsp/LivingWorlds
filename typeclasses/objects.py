@@ -159,6 +159,19 @@ class Object(DefaultObject):
                                  object speaks
 
      """
+    def at_object_creation(self):
+        super(Object, self).at_object_creation()
+        self.db.color_code = ""
+        self.db.modifiers = []
 
-    pass
+    def get_display_name(self, looker, **kwargs):
+        # grab the color code stored in db.color_code,
+        # or default to "|w"
+        color = self.db.color_code or "|w"
+        # use the original get_display_name hook to get our name
+        name = super(Object, self).get_display_name(looker, **kwargs)
+        # either create a string based on self.db.modifiers, or default to an
+        # empty string
+        modifiers = " " + " ".join(self.db.modifiers) or ""
+        return("{color}{name}|n{modifiers}".format(color=color, name=name, modifiers=modifiers))
 
