@@ -55,6 +55,7 @@ clothing_slots = ['hat', 'accessory', 'overtop', 'bottom', 'belt2', 'accessory2'
                   'gloves2', 'accessory3', 'accessory4', 'shoes']
 
 
+
 class Character(GenderCharacter):
     """
     The Character defaults to reimplementing some of base Object's hook methods with the
@@ -254,9 +255,9 @@ class Character(GenderCharacter):
 Wielding: {wielding}
   Armors: {armor}
 Clothing: {clothing}""".format(
-            wielding="\n\t  ".join([self.equip.get(slot).key for slot in wield_slots if self.equip.get(slot)]),
-            armor="\n\t  ".join([self.equip.get(slot).key for slot in armor_slots if self.equip.get(slot)]),
-            clothing="\n\t  ".join([self.equip.get(slot).key for slot in clothing_slots if self.equip.get(slot)]))
+            wielding="\n\t  ".join([self.equip.get(slot).get_display_name(looker) for slot in wield_slots if self.equip.get(slot)]),
+            armor="\n\t  ".join([self.equip.get(slot).get_display_name(looker) for slot in armor_slots if self.equip.get(slot)]),
+            clothing="\n\t  ".join([self.equip.get(slot).get_display_name(looker) for slot in clothing_slots if self.equip.get(slot)]))
         looker.msg(equip_message)
 
     def at_object_receive(self, obj, source):
