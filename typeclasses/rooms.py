@@ -73,7 +73,7 @@ from evennia import utils
 from evennia.contrib.extended_room import ExtendedRoom
 from evennia.contrib.rpsystem import ContribRPRoom
 from evennia.utils.spawner import spawn
-
+from world.economy import transfer_funds
 
 class Room(ExtendedRoom, ContribRPRoom):
     """Base Mercadia Room typeclass.
@@ -103,6 +103,7 @@ class Room(ExtendedRoom, ContribRPRoom):
         """Called when room is first created only."""
         super(Room, self).at_object_creation()
         self.db.terrain = 'PAVEDROAD'
+        self.db.color_code = ""
 
     # Terrain property, sets self.db.terrain_type, taken from the constants dict
     @property
@@ -126,6 +127,15 @@ class Room(ExtendedRoom, ContribRPRoom):
         """Returns the movement delay for this room."""
         return self._TERRAINS[self.terrain]['delay']
 
+    def get_display_name(self, looker, **kwargs):
+        # grab the color code stored in db.color_code,
+        # or default to "|w"
+        color = self.db.color_code or "|c"
+        # use the original get_display_name hook to get our name
+        name = super(Room, self).get_display_name(looker, **kwargs)
+        return("{color}{name}|n".format(color=color, name=name))
+
+
 class WildernessRoom(Room):
     def at_object_creation(self):
         super(WildernessRoom, self).at_object_creation()
@@ -146,3 +156,5 @@ class ChargenRoom(Room):
         if utils.inherits_from(obj, "typeclasses.characters.Character") and self.tags.get("item",category = 'chargen'):
             spawn({"prototype": "DAGGER", "location": self},
                   {"prototype": "SIMPLE_ROBE", "location":self})
+        if utils.inherits_from(obj,"typeclasses.characters.Character") and self.tags.get("coins", category = 'chargen'):
+            transfer_funds(obj, 1000)
