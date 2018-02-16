@@ -81,7 +81,7 @@ class CmdForge(MuxCommand):
             "range": item_range,
             "durability": item_durability,
             "hardness": item_hardness,
-            "location": caller
+            "location": caller.location
         }
 
         self.armor_proto = {
@@ -96,12 +96,12 @@ class CmdForge(MuxCommand):
             "hardness": item_hardness,
             "physical_bonus": armor_pbonus,
             "magical_bonus": armor_mbonus,
-            "location": caller
+            "location": caller.location
         }
 
-        caller.msg('You fire up the forge in preparation to forge a {material} {recipe}.',
-                   mapping=dict(material=self.material.capitalize(),
-                                recipe=RECIPES.get(self.recipe).get("key")))
+        caller.msg('You fire up the forge in preparation to forge a {material} {recipe}.'.format(
+            material=self.material.capitalize(),
+            recipe=RECIPES.get(self.recipe).get("key")))
 
         caller.location.msg_contents(
             "{actor} fires up the forge in preperation to forge a {material} {recipe}.",
@@ -121,8 +121,8 @@ class CmdForge(MuxCommand):
                 "willow", "zingana", "leafweave")
 
         if self.material in metal:
-            caller.msg('You begin smelting the {material} ore into a usable bar for forging at the smelter.',
-                       mapping=dict(material=self.material))
+            caller.msg('You begin smelting the {material} ore into a usable bar for forging at the smelter.'.format(
+                material=self.material.capitalize()))
 
             caller.location.msg_contents(
                 "{actor} begins smelting the {material} ore into a usable bar for forging at the smelter.",
@@ -131,8 +131,8 @@ class CmdForge(MuxCommand):
                 exclude=caller)
 
         elif self.material in wood:
-            caller.msg('You begin milling the {material} log into a usable board at the mill table.',
-                       mapping=dict(material=self.material))
+            caller.msg('You begin milling the {material} log into a usable board at the mill table.'.format(
+                material=self.material.capitalize()))
 
             caller.location.msg_contents(
                 "{actor} begins milling a {material} log into a usable board at the mill table.",
@@ -151,9 +151,9 @@ class CmdForge(MuxCommand):
                 "willow", "zingana", "leafweave")
 
         if self.material in metal:
-            caller.msg('You take the {material} bar and starts forging a {recipe} at the anvil.',
-                       mapping=dict(material=self.material,
-                                    recipe=RECIPES.get(self.recipe).get("key")))
+            caller.msg('You take the {material} bar and start forging a {recipe} at the anvil.'.format(
+                material=self.material.capitalize(),
+                recipe=RECIPES.get(self.recipe).get("key")))
 
             caller.location.msg_contents(
                 "{actor} takes the {material} bar and starts forging it into a {recipe} at the anvil.",
@@ -163,9 +163,9 @@ class CmdForge(MuxCommand):
                 exclude=caller)
 
         elif self.material in wood:
-            caller.msg('You begin carving the {material} board into a {recipe} at the workbench.',
-                       mapping=dict(material=self.material,
-                                    recipe=RECIPES.get(self.recipe).get("key")))
+            caller.msg('You begin carving the {material} board into a {recipe} at the workbench.'.format(
+                material=self.material.capitalize(),
+                recipe=RECIPES.get(self.recipe).get("key")))
 
             caller.location.msg_contents(
                 "{actor} begins carving a {material} board into a {recipe} at the workbench.",
@@ -184,10 +184,10 @@ class CmdForge(MuxCommand):
             spawn(self.armor_proto)
 
         caller = self.caller
-        caller.msg("You succeed in forging a {material} {recipe}",
-                   mapping=dict(material=self.material.capitalize(),
-                                recipe=RECIPES.get(self.recipe).get("key")),
-                   exclude=caller)
+        caller.msg("You succeed in forging a {material} {recipe}".format(
+            material=self.material.capitalize(),
+            recipe=RECIPES.get(self.recipe).get("key")))
+
         caller.location.msg_contents(
             "{actor} succeeds in forging a {material}{recipe}",
             mapping=dict(actor=caller,
