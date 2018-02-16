@@ -99,12 +99,12 @@ class CmdForge(MuxCommand):
             "location": caller.location
         }
 
-        caller.msg('You fire up the forge in preparation to forge a {material} {recipe}.'.format(
-            material=self.material.capitalize(),
+        caller.msg('|511You fire up the forge in preparation to forge a {material} {recipe}.|n'.format(
+            material=self.material,
             recipe=RECIPES.get(self.recipe).get("key")))
 
         caller.location.msg_contents(
-            "{actor} fires up the forge in preperation to forge a {material} {recipe}.",
+            "|511{actor} fires up the forge in preperation to forge a {material} {recipe}.|n",
             mapping=dict(actor=caller,
                          material=self.material,
                          recipe=RECIPES.get(self.recipe).get("key")),
@@ -121,21 +121,21 @@ class CmdForge(MuxCommand):
                 "willow", "zingana", "leafweave")
 
         if self.material in metal:
-            caller.msg('You begin smelting the {material} ore into a usable bar for forging at the smelter.'.format(
-                material=self.material.capitalize()))
+            caller.msg('|511You begin smelting the {material} ore into a usable bar for forging at the smelter.|n'.format(
+                material=self.material))
 
             caller.location.msg_contents(
-                "{actor} begins smelting the {material} ore into a usable bar for forging at the smelter.",
+                "|511{actor} begins smelting the {material} ore into a usable bar for forging at the smelter.|n",
                 mapping=dict(actor=caller,
                              material=self.material),
                 exclude=caller)
 
         elif self.material in wood:
-            caller.msg('You begin milling the {material} log into a usable board at the mill table.'.format(
-                material=self.material.capitalize()))
+            caller.msg('|511You begin milling the {material} log into a usable board at the mill table.|n'.format(
+                material=self.material))
 
             caller.location.msg_contents(
-                "{actor} begins milling a {material} log into a usable board at the mill table.",
+                "|511{actor} begins milling a {material} log into a usable board at the mill table.|n",
                 mapping=dict(actor=caller,
                              material=self.material),
                 exclude=caller)
@@ -151,24 +151,24 @@ class CmdForge(MuxCommand):
                 "willow", "zingana", "leafweave")
 
         if self.material in metal:
-            caller.msg('You take the {material} bar and start forging a {recipe} at the anvil.'.format(
-                material=self.material.capitalize(),
+            caller.msg('|511You take the {material} bar and start forging a {recipe} at the anvil.|n'.format(
+                material=self.material,
                 recipe=RECIPES.get(self.recipe).get("key")))
 
             caller.location.msg_contents(
-                "{actor} takes the {material} bar and starts forging it into a {recipe} at the anvil.",
+                "|511{actor} takes the {material} bar and starts forging it into a {recipe} at the anvil.|n",
                 mapping=dict(actor=caller,
                              material=self.material,
                              recipe=RECIPES.get(self.recipe).get("key")),
                 exclude=caller)
 
         elif self.material in wood:
-            caller.msg('You begin carving the {material} board into a {recipe} at the workbench.'.format(
-                material=self.material.capitalize(),
+            caller.msg('|511You begin carving the {material} board into a {recipe} at the workbench.|n'.format(
+                material=self.material,
                 recipe=RECIPES.get(self.recipe).get("key")))
 
             caller.location.msg_contents(
-                "{actor} begins carving a {material} board into a {recipe} at the workbench.",
+                "|511{actor} begins carving a {material} board into a {recipe} at the workbench.|n",
                 mapping=dict(actor=caller,
                              material=self.material,
                              recipe=RECIPES.get(self.recipe).get("key")),
@@ -184,12 +184,12 @@ class CmdForge(MuxCommand):
             spawn(self.armor_proto)
 
         caller = self.caller
-        caller.msg("You succeed in forging a {material} {recipe}".format(
+        caller.msg("|511You succeed in forging a {material} {recipe}|n".format(
             material=self.material.capitalize(),
             recipe=RECIPES.get(self.recipe).get("key")))
 
         caller.location.msg_contents(
-            "{actor} succeeds in forging a {material}{recipe}",
+            "|511{actor} succeeds in forging a {material}{recipe}|n",
             mapping=dict(actor=caller,
                          material=self.material.capitalize(),
                          recipe=RECIPES.get(self.recipe).get("key")),
