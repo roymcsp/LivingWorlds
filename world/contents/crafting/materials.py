@@ -232,7 +232,7 @@ MATERIALS = {
         "weight_mod": 1,
         "dura_mod": 10,
         "hardness_mod": 6,
-        "color_code": "|310", },
+        "color_code": "|510", },
 
     "bronze": {
         "value_mod": 1,
