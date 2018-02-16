@@ -727,7 +727,9 @@ RECIPES = {
         "weight": 2.0,
         "value": 0 * CP,
         "physical_bonus": 1,
-        "magical_bonus": 1},
+        "magical_bonus": 1,
+        "hardness": 1,
+        "durability": 1},
 
     "paddedarmor": {
         "key": "padded armor",
@@ -737,7 +739,10 @@ RECIPES = {
         "weight": 10.0,
         "value": 500*CP,
         "physical_bonus": 1,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
+
 
     "leatherarmor": {
         "key": "leather armor",
@@ -747,7 +752,10 @@ RECIPES = {
         "weight": 15.0,
         "value": 1000 * CP,
         "physical_bonus": 2,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
+
 
     "studdedleather": {
         "key": "robe",
@@ -757,7 +765,10 @@ RECIPES = {
         "weight": 20.0,
         "value": 2500 * CP,
         "physical_bonus": 3,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
+
 
     "chainshirt": {
         "key": "chain shirt",
@@ -767,7 +778,9 @@ RECIPES = {
         "weight": 25.0,
         "value": 10000 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
 
     "hidearmor": {
         "key": "hide armor",
@@ -777,7 +790,10 @@ RECIPES = {
         "weight": 25.0,
         "value": 1500 * CP,
         "physical_bonus": 3,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
+
 
     "scalemail": {
         "key": "scale mail",
@@ -787,7 +803,10 @@ RECIPES = {
         "weight": 30.0,
         "value": 5000 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
+
 
     "chainmail": {
         "key": "chainmail",
@@ -797,7 +816,10 @@ RECIPES = {
         "weight": 40.0,
         "value": 15000 * CP,
         "physical_bonus": 5,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
+
 
     "breastplate": {
         "key": "breastplate",
@@ -807,7 +829,10 @@ RECIPES = {
         "weight": 30.0,
         "value": 20000 * CP,
         "physical_bonus": 5,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
+
 
     "splintmail": {
         "key": "splint mail",
@@ -817,7 +842,9 @@ RECIPES = {
         "weight": 45.0,
         "value": 20000 * CP,
         "physical_bonus": 6,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
 
     "bandedmail": {
         "key": "banded mail",
@@ -827,7 +854,9 @@ RECIPES = {
         "weight": 35.0,
         "value": 25000 * CP,
         "physical_bonus": 6,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
 
     "halfplate": {
         "key": "half plate",
@@ -837,7 +866,9 @@ RECIPES = {
         "weight": 50.0,
         "value": 60000 * CP,
         "physical_bonus": 7,
-        "magical_bonus": 1},
+        "magical_bonus": 1,
+        "hardness": 1,
+        "durability": 1},
 
     "fullplate": {
         "key": "platemail",
@@ -847,7 +878,9 @@ RECIPES = {
         "weight": 50.0,
         "value": 150000 * CP,
         "physical_bonus": 8,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
 
     "leatherscale": {
         "key": "leather scale",
@@ -857,7 +890,9 @@ RECIPES = {
         "weight": 20.0,
         "value": 3500 * CP,
         "physical_bonus": 3,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
 
     "brigandine": {
         "key": "brigandine",
@@ -867,7 +902,9 @@ RECIPES = {
         "weight": 40.0,
         "value": 3000 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
 
     "lamellar": {
         "key": "lamellar",
@@ -877,7 +914,9 @@ RECIPES = {
         "weight": 35.0,
         "value": 15000 * CP,
         "physical_bonus": 5,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
 
     "oyoroi": {
         "key": "o-yoroi",
@@ -887,7 +926,9 @@ RECIPES = {
         "weight": 45.0,
         "value": 100000*CP,
         "physical_bonus": 7,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
 
     "ringmail": {
         "key": "robe",
@@ -897,7 +938,9 @@ RECIPES = {
         "weight": 35.0,
         "value": 75 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1},
 
     # helms
     "helm": {
@@ -908,7 +951,10 @@ RECIPES = {
         "weight": 35.0,
         "value": 75 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1, },
+
 
     # Shields
 
@@ -920,7 +966,10 @@ RECIPES = {
         "weight": 35.0,
         "value": 75 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1, },
+
 
     # gloves
 
@@ -932,7 +981,10 @@ RECIPES = {
         "weight": 35.0,
         "value": 75 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1, },
+
 
     # boots
 
@@ -944,7 +996,10 @@ RECIPES = {
         "weight": 35.0,
         "value": 75 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1, },
+
 
     # bracers
 
@@ -956,7 +1011,10 @@ RECIPES = {
         "weight": 35.0,
         "value": 75 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1, },
+
 
     # belts
 
@@ -968,5 +1026,8 @@ RECIPES = {
         "weight": 35.0,
         "value": 75 * CP,
         "physical_bonus": 4,
-        "magical_bonus": 0},
+        "magical_bonus": 0,
+        "hardness": 1,
+        "durability": 1, },
+
 }
