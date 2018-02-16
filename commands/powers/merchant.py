@@ -126,7 +126,7 @@ class CmdForge(MuxCommand):
                 caller.msg("|511You begin smelting a usable {material} bar from iron ore and some coal.|n".format(
                     material=self.material))
                 caller.location.msg_contents(
-                    "|511{actor begins smelting a usable {material} bar from iron ore and coal.|n",
+                    "|511{actor} begins smelting a usable {material} bar from iron ore and coal.|n",
                                              mapping=dict(actor=caller,
                                                           material=self.material),
                                              exclude=caller)
@@ -134,7 +134,7 @@ class CmdForge(MuxCommand):
                 caller.msg("|511You begin smelting a usable {material} bar from copper and zinc ores.|n".format(
                     material=self.material))
                 caller.location.msg_contents(
-                    "|511{actor begins smelting a usable {material} bar from copper and zinc ores.|n",
+                    "|511{actor} begins smelting a usable {material} bar from copper and zinc ores.|n",
                     mapping=dict(actor=caller,
                                  material=self.material),
                     exclude=caller)
@@ -142,21 +142,20 @@ class CmdForge(MuxCommand):
                 caller.msg("|511You begin smelting a usable {material} bar from copper and tin ores.|n".format(
                     material=self.material))
                 caller.location.msg_contents(
-                    "|511{actor begins smelting a usable {material} bar from copper and tin ores.|n",
+                    "|511{actor} begins smelting a usable {material} bar from copper and tin ores.|n",
                     mapping=dict(actor=caller,
                                  material=self.material),
                     exclude=caller)
             else:
-                return
 
-            caller.msg('|511You begin smelting the {material} ore into a usable bar for forging at the smelter.|n'
-                .format(material=self.material))
+                caller.msg('|511You begin smelting the {material} ore into a usable bar for forging at the smelter.|n'
+                    .format(material=self.material))
 
-            caller.location.msg_contents(
-                "|511{actor} begins smelting the {material} ore into a usable bar for forging at the smelter.|n",
-                mapping=dict(actor=caller,
-                             material=self.material),
-                exclude=caller)
+                caller.location.msg_contents(
+                    "|511{actor} begins smelting the {material} ore into a usable bar for forging at the smelter.|n",
+                    mapping=dict(actor=caller,
+                                 material=self.material),
+                    exclude=caller)
 
         elif self.material in wood:
             caller.msg('|511You begin milling the {material} log into a usable board at the mill table.|n'.format(
