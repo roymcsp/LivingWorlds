@@ -944,8 +944,8 @@ RECIPES = {
 
     # helms
     "helm": {
-        "key": "robe",
-        "aliases": ["robe"],
+        "key": "helm",
+        "aliases": ["helm"],
         "typeclass": "typeclasses.armors.Helm",
         "desc": "Made of soft cloth, this robe provides minimal protection.",
         "weight": 35.0,
@@ -959,8 +959,8 @@ RECIPES = {
     # Shields
 
     "shield": {
-        "key": "robe",
-        "aliases": ["robe"],
+        "key": "shield",
+        "aliases": ["shield"],
         "typeclass": "typeclasses.armors.Shield",
         "desc": "Made of soft cloth, this robe provides minimal protection.",
         "weight": 35.0,
@@ -974,8 +974,8 @@ RECIPES = {
     # gloves
 
     "gloves": {
-        "key": "robe",
-        "aliases": ["robe"],
+        "key": "gloves",
+        "aliases": ["gloves"],
         "typeclass": "typeclasses.armors.Gloves",
         "desc": "Made of soft cloth, this robe provides minimal protection.",
         "weight": 35.0,
@@ -989,8 +989,8 @@ RECIPES = {
     # boots
 
     "boots": {
-        "key": "robe",
-        "aliases": ["robe"],
+        "key": "boots",
+        "aliases": ["boots"],
         "typeclass": "typeclasses.armors.Boots",
         "desc": "Made of soft cloth, this robe provides minimal protection.",
         "weight": 35.0,
@@ -1004,8 +1004,8 @@ RECIPES = {
     # bracers
 
     "bracers": {
-        "key": "robe",
-        "aliases": ["robe"],
+        "key": "bracers",
+        "aliases": ["bracers"],
         "typeclass": "typeclasses.armors.Bracers",
         "desc": "Made of soft cloth, this robe provides minimal protection.",
         "weight": 35.0,
@@ -1019,8 +1019,8 @@ RECIPES = {
     # belts
 
     "belt": {
-        "key": "robe",
-        "aliases": ["robe"],
+        "key": "belt",
+        "aliases": ["belt"],
         "typeclass": "typeclasses.armors.Belts",
         "desc": "Made of soft cloth, this robe provides minimal protection.",
         "weight": 35.0,
