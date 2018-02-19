@@ -33,9 +33,9 @@ RECIPES = {
         "key": "dagger",
         "aliases": ["dagger"],
         "typeclass": "typeclasses.weapons.Weapon",
-        "desc": "This {material} dagger consists of a double edged and razor sharp blade"
-                "mounted onto a simple leather-wrapped hilt. This item has been forged by {crafter}"
-            .format(material=self.material, crafter=caller),
+        "desc": "This small {material} double edged blade has been forged to |/"
+                "a sharp point with a metal tang inserted into the the leather|/"
+                " wrapped hilt for strength. Finely crafted by {crafter} at the forge.",
         "weight": 1.0,
         "value": 200 * CP,
         "damage_roll": "1d4",
