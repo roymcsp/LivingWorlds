@@ -25,13 +25,14 @@ class CmdForge(MuxCommand):
     """
     Spell Name: Forge
        SP Cost: 10
-        Syntax: forge material recipe
-   Skills used: none
+    Coins Cost: Varies depending on recipe
+        Syntax: forge <material> <recipe>
+   Skills used: forge, weapons, armor
 
    Description:
 
-   A simple spell that allows a merchant/artisan/trader
-    to create either weapons or armor from material components.
+     A simple spell that allows a merchant/artisan/trader
+   to create either weapons or armor from material components.
    """
 
     key = "forge"
@@ -60,7 +61,7 @@ class CmdForge(MuxCommand):
         item_typeclass = RECIPES.get(self.recipe).get("typeclass")
         item_desc = RECIPES.get(self.recipe).get("desc")
         item_weight = RECIPES.get(self.recipe).get("weight") * MATERIALS.get(self.material).get("weight_mod")
-        item_value = RECIPES.get(self.recipe).get("value") + MATERIALS.get(self.material).get("value_mod")
+        item_value = RECIPES.get(self.recipe).get("value") * MATERIALS.get(self.material).get("value_mod")
         item_damage = RECIPES.get(self.recipe).get("damage_roll")
         item_range = RECIPES.get(self.recipe).get("range")
         item_durability = RECIPES.get(self.recipe).get("durability") * MATERIALS.get(self.material).get("dura_mod")
@@ -74,7 +75,7 @@ class CmdForge(MuxCommand):
             "color_code": item_color,
             "aliases": item_aliases,
             "typeclass": item_typeclass,
-            "desc": item_desc,
+            "desc": item_desc + "".format(material=self.material, crafter=caller),
             "weight": item_weight,
             "value": item_value,
             "damage_roll": item_damage,
@@ -110,7 +111,7 @@ class CmdForge(MuxCommand):
                          recipe=RECIPES.get(self.recipe).get("key")),
             exclude=caller)
 
-        utils.delay(5, callback=self.forge_one)
+        utils.delay(20, callback=self.forge_one)
 
     def forge_one(self):
         caller = self.caller
@@ -158,6 +159,7 @@ class CmdForge(MuxCommand):
                     exclude=caller)
 
         elif self.material in wood:
+
             caller.msg('|511You begin milling the {material} log into a usable board at the mill table.|n'.format(
                 material=self.material))
 
@@ -167,7 +169,7 @@ class CmdForge(MuxCommand):
                              material=self.material),
                 exclude=caller)
 
-        utils.delay(5, callback=self.forge_two)
+        utils.delay(20, callback=self.forge_two)
 
     def forge_two(self):
         caller = self.caller
@@ -201,7 +203,7 @@ class CmdForge(MuxCommand):
                              recipe=RECIPES.get(self.recipe).get("key")),
                 exclude=caller)
 
-        utils.delay(5, callback=self.forge_three)
+        utils.delay(20, callback=self.forge_three)
 
     def forge_three(self):
 
@@ -212,13 +214,13 @@ class CmdForge(MuxCommand):
 
         caller = self.caller
         caller.msg("|511You succeed in forging a {material} {recipe}|n".format(
-            material=self.material.capitalize(),
+            material=self.material,
             recipe=RECIPES.get(self.recipe).get("key")))
 
         caller.location.msg_contents(
             "|511{actor} succeeds in forging a {material}{recipe}|n",
             mapping=dict(actor=caller,
-                         material=self.material.capitalize(),
+                         material=self.material,
                          recipe=RECIPES.get(self.recipe).get("key")),
             exclude=caller)
 
