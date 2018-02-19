@@ -35,7 +35,7 @@ RECIPES = {
         "typeclass": "typeclasses.weapons.Weapon",
         "desc": "This small {material} double edged blade has been forged to |/"
                 "a sharp point with a metal tang inserted into the the leather|/"
-                " wrapped hilt for strength. Finely crafted by {crafter} at the forge.",
+                "wrapped hilt for strength. Finely crafted by {crafter} at the forge",
         "weight": 1.0,
         "value": 200 * CP,
         "damage_roll": "1d4",

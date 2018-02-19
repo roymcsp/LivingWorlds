@@ -59,7 +59,7 @@ class CmdForge(MuxCommand):
         item_name = "%s %s" % (self.material.capitalize(), RECIPES.get(self.recipe).get("key"))
         item_aliases = RECIPES.get(self.recipe).get("aliases")
         item_typeclass = RECIPES.get(self.recipe).get("typeclass")
-        item_desc = RECIPES.get(self.recipe).get("desc")
+        item_desc = RECIPES.get(self.recipe).get("desc") + ".".format(material=self.material, crafter=caller)
         item_weight = RECIPES.get(self.recipe).get("weight") * MATERIALS.get(self.material).get("weight_mod")
         item_value = RECIPES.get(self.recipe).get("value") * MATERIALS.get(self.material).get("value_mod")
         item_damage = RECIPES.get(self.recipe).get("damage_roll")
@@ -75,7 +75,7 @@ class CmdForge(MuxCommand):
             "color_code": item_color,
             "aliases": item_aliases,
             "typeclass": item_typeclass,
-            "desc": item_desc + "".format(material=self.material, crafter=caller),
+            "desc": item_desc,
             "weight": item_weight,
             "value": item_value,
             "damage_roll": item_damage,
