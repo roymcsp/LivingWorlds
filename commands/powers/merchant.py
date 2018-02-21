@@ -65,6 +65,7 @@ class CmdForge(MuxCommand):
         item_damage = RECIPES.get(self.recipe).get("damage_roll")
         item_range = RECIPES.get(self.recipe).get("range")
         item_durability = RECIPES.get(self.recipe).get("durability") * MATERIALS.get(self.material).get("dura_mod")
+        item_current = item_durability
         item_hardness = RECIPES.get(self.recipe).get("hardness") * MATERIALS.get(self.material).get("hardness_mod")
         armor_pbonus = RECIPES.get(self.recipe).get("physical_bonus")
         armor_mbonus = RECIPES.get(self.recipe).get("magical_bonus")
@@ -81,6 +82,7 @@ class CmdForge(MuxCommand):
             "damage_roll": item_damage,
             "range": item_range,
             "durability": item_durability,
+            "current": item_current,
             "hardness": item_hardness,
             "location": caller.location
         }
@@ -94,6 +96,7 @@ class CmdForge(MuxCommand):
             "weight": item_weight,
             "value": item_value,
             "durability": item_durability,
+            "current": item_current,
             "hardness": item_hardness,
             "physical_bonus": armor_pbonus,
             "magical_bonus": armor_mbonus,
