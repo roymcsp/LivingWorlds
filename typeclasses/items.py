@@ -5,7 +5,7 @@ Generic Item typeclasses
 from typeclasses.objects import Object
 from evennia import create_object
 from evennia.utils.spawner import spawn
-
+from world.rulebook import item_dura
 
 class Item(Object):
     """
@@ -15,11 +15,15 @@ class Item(Object):
         weight (float): weight of the item
         hardness (int): how susceptible to damage a object is
         durability (int): how much damage an item can sustain before being destroyed
+        current (int): how much durability an item currently has remaining
     """
+
     value = 0
     weight = 0.0
     hardness = 0
+    current = 0
     durability = 0
+
 
     def at_object_creation(self):
         super(Item, self).at_object_creation()
@@ -31,6 +35,14 @@ class Item(Object):
         self.db.weight = float(self.weight)
         self.db.hardness = self.hardness
         self.db.durability = self.durability
+        self.db.current = self.current
+
+    def return_appearance(self,looker):
+        if not looker:
+            return
+
+        looker.msg("%s|/" % self.db.desc)
+        looker.msg("%s %s." % (self.key, item_dura(self)))
 
     def at_get(self, getter):
         pass
@@ -125,3 +137,8 @@ class Equippable(Item):
         if self in dropper.equip:
             dropper.equip.remove(self)
             self.at_remove(dropper)
+
+class Consumable(Item):
+    """
+    
+    """
