@@ -153,6 +153,28 @@ def d_roll(xdyz, total=True):
     else:
         return rolls
 
+
+def parse_damage(value):
+
+    if value >= 40:
+        return ""
+    elif value >= 35:
+        return ""
+    elif value >= 30:
+        return ""
+    elif value >= 25:
+        return ""
+    elif value >= 20:
+        return ""
+    elif value >= 15:
+        return ""
+    else:
+        return ""
+
+
+
+
+
 def parse_health(target):
     current = target.traits.HP.current
     max_health = target.traits.HP.max
@@ -175,7 +197,7 @@ def parse_health(target):
     elif percent > 52:
         return '|320wounded|n'
     elif percent > 39:
-        return '|320severly wounded|n'
+        return '|320severely wounded|n'
     elif percent > 26:
         return '|320critically wounded|n'
     elif percent > 13:
@@ -184,3 +206,25 @@ def parse_health(target):
         return '|500near death|n'
     else:
         return '|[300Dead|n'
+
+def item_dura(item):
+    current =  item.db.current
+    max_durability = item.db.durability
+
+    if max_durability > 0:
+        percent = int(current / max_durability * 100)
+    else:
+        percent = 0
+
+    if percent == 100:
+        return 'is in |040perfect condition|n'
+    elif percent > 75:
+        return 'is |530damaged|n'
+    elif percent > 50:
+        return 'is |520moderatly damaged|n'
+    elif percent > 25:
+        return 'is |510severely damaged|n'
+    elif percent > 10:
+        return '|500needs repair!|n'
+    else:
+        return ''
