@@ -7,7 +7,7 @@ is setup to be the "default" character type created by the default
 creation commands.
 
 """
-
+from random import randint
 from evennia import TICKER_HANDLER as tickerhandler
 from evennia.utils import lazy_property
 from world.equip import EquipHandler
@@ -18,6 +18,7 @@ from world.rulebook import parse_health
 from world.traitcalcs import abilitymodifiers
 from world.death import CharDeathHandler
 from math import floor
+from evennia.server.sessionhandler import SESSIONS
 
 traits = {
     # primary
@@ -216,7 +217,16 @@ class Character(GenderCharacter):
         self.traits.STR.lift_factor = 20
         self.traits.STR.push_factor = 40
         self.traits.ENC.max = self.traits.STR.lift_factor * self.traits.STR.actual
-        tickerhandler.add(interval=12, callback=self.at_regen)
+        tickerhandler.add(interval=randint(10,15), callback=self.at_regen, persistent=True)
+
+    def at_post_puppet(self):
+        self.location.msg_contents("%s has connected" % self.key)
+        loginmsg = "[************--Rumour Monger--************]" \
+                   "%s arrives in Mercadia." \
+                   "[*****************************************]" % self.key
+        SESSIONS.announce_all(loginmsg)
+        tickerhandler.add(interval=randint(10, 15), callback=self.at_regen, persistent=True)
+        self.execute_cmd("look")
 
     @lazy_property
     def traits(self):
@@ -261,11 +271,17 @@ Clothing: {clothing}""".format(
         looker.msg(equip_message)
 
     def at_object_receive(self, obj, source):
-        self.traits.ENC.current += obj.db.weight
-        self.traits.EP.mod = \
-            int(-(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
+        if not obj.db.weight:
+            return
+        else:
+            self.traits.ENC.current += obj.db.weight
+            self.traits.EP.mod = \
+                int(-(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
 
     def at_object_leave(self, obj, source):
-        self.traits.ENC.current -= obj.db.weight
-        self.traits.EP.mod = \
-            int(+(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
+        if not obj.db.weight:
+            return
+        else:
+            self.traits.ENC.current -= obj.db.weight
+            self.traits.EP.mod = \
+                int(+(self.traits.ENC.actual // (2 * self.traits.STR.actual)))
