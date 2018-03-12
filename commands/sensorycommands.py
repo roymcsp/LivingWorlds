@@ -29,9 +29,9 @@ class CmdRead(MuxCommand):
         # we want an attribute read_text to be defined.
         readtext = obj.db.readable_text
         if readtext:
-            string = "You read |C%s|n:\n  %s" % (obj.key, readtext)
+            string = "You read the |C%s|n:\n  %s" % (obj.key, readtext)
         else:
-            string = "There is nothing to read on %s." % obj.key
+            string = "There is nothing to read on the %s." % obj.key
         self.caller.msg(string)
         
 """
