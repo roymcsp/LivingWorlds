@@ -36,9 +36,9 @@ class CmdRead(MuxCommand):
         if not obj:
             return
         # we want an attribute read_text to be defined.
-        readtext = obj.db.readable_text
-        if readtext:
-            string = "You read the |C%s|n:\n  %s" % (obj.key, readtext)
+        read_text = obj.db.readable_text
+        if read_text:
+            string = "You read the |C%s|n:\n  %s" % (obj.key, read_text)
         else:
             string = "There is nothing to read on %s." % obj.key
         self.caller.msg(string)
