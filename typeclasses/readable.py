@@ -38,7 +38,7 @@ class CmdRead(MuxCommand):
         # we want an attribute read_text to be defined.
         readtext = obj.db.readable_text
         if readtext:
-            string = "You read |C%s|n:\n  %s" % (obj.key, readtext)
+            string = "You read the |C%s|n:\n  %s" % (obj.key, readtext)
         else:
             string = "There is nothing to read on %s." % obj.key
         self.caller.msg(string)
@@ -54,5 +54,5 @@ class Readable(Object):
         Attribute.
         """
         super(Readable, self).at_object_creation()
-        self.db.readable_text = "There is no text written on %s." % self.key
+        self.db.readable_text = "There is no text written on the %s." % self.key
         # define a command on the object.
