@@ -2,6 +2,7 @@ import time
 from math import floor
 from evennia import create_object, utils, CmdSet, create_script
 from commands.command import MuxCommand
+from commands import power
 from random import randint
 from evennia.utils.evform import EvForm
 from world.rulebook import d_roll
@@ -16,7 +17,7 @@ class SorcCmdSet(CmdSet):
 
     def at_cmdset_creation(self):
         """called once at creation"""
-        self.add(CmdPower())
+        self.add(power.CmdPower())
         self.add(CmdCursedBone())
         # self.add(CmdDeathSpike())
         """
@@ -60,65 +61,6 @@ class SorcCmdSet(CmdSet):
         self.add(CmdVampiricTouch())
         self.add(CmdWeakness())
         """
-
-
-class CmdPower(MuxCommand):
-    """
-    view character status
-    Usage:
-      sheet
-
-    """
-    key = "power"
-    aliases = ["powers"]
-    locks = "cmd:all()"
-    help_category = "commands"
-
-    def func(self):
-        """
-        Handle displaying power list.
-        """
-        form = EvForm('commands.templates.powersheet', align='l')
-        fields = {
-            'A': 'Cursed bone, Death spike',
-            'B': 'Body to Mind, Gloom',
-            'C': 'Vampiric touch',
-            'D': 'Weakness',
-            'E': 'Corpse drain',
-            'F': 'Poison',
-            'G': 'Corrupted Man',
-            'H': 'Transfer Pain, Anchor',
-            'I': 'Blood Cloak',
-            'J': 'Corpse Burst, Bone dust',
-            'K': 'Sleep, Disease',
-            'L': 'Silence, Poison cloud',
-            'M': 'Spectral Hunter, Blood Gem',
-            'N': 'Reanimated man',
-            'O': 'Teleport, Vampire Claw',
-            'P': 'Bone Scythe',
-            'Q': 'Curse Death Link',
-            'R': 'Blood shield',
-            'S': 'Circle of Death',
-            'T': 'Imbue Blood, Imbue Death',
-            'U': 'Cursed Man',
-            'V': 'Mass Sleep',
-            'W': 'Mass Silence',
-            'X': 'Plague',
-            'Y': 'Teleport Other, Summon',
-            'Z': 'Mass Weakness',
-            'AA': 'Blood Ward',
-            'AB': 'Mass Anchor',
-            'AC': 'Death Rain',
-            'AD': 'Cursed Army',
-            'AE': 'Sorcerer'
-        }
-        form.map({k: self._format_trait_val(v) for k, v in fields.iteritems()})
-
-        self.caller.msg(unicode(form))
-
-    def _format_trait_val(self, val):
-        """Format trait values as bright magenta."""
-        return "|m{}|n".format(val)
 
 
 class CmdCursedBone(MuxCommand):
@@ -167,7 +109,10 @@ class CmdCursedBone(MuxCommand):
             "|M{actor} finishes chanting and produces some cursed bones.|n",
             mapping=dict(actor=caller),
             exclude=caller)
-        create_object(typeclass='typeclasses.sorcobjects.CursedBone')
+
+        boneshard = {"key":"Cursed bone", "name":"|xCursed bone|n", "aliases": ["Cursed bone","bone"], "typeclass":"typeclasses.sorcobjects.CursedObject.","desc": "a fragment of bone that has been imbued with the energies of the netherworld","weight": 0.1,"value": 0,}
+        for _ in range():
+            create_object(typeclass='typeclasses.sorcobjects.CursedBone')
         # if the spell was successfully cast, store the casting time
         caller.db.cursedbone_lastcast = time.time()
 
