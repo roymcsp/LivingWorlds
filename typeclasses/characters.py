@@ -221,9 +221,9 @@ class Character(GenderCharacter):
 
     def at_post_puppet(self):
         self.location.msg_contents("%s has connected" % self.key)
-        loginmsg = "[************--Rumour Monger--************]" \
-                   "%s arrives in Mercadia." \
-                   "[*****************************************]" % self.key
+        loginmsg = "[************--Rumour Monger--************]|/" \
+                   "%s arrives in Mercadia.|/" \
+                   "[*****************************************]|/" % self.key
         SESSIONS.announce_all(loginmsg)
         tickerhandler.add(interval=randint(10, 15), callback=self.at_regen, persistent=True)
         self.execute_cmd("look")
