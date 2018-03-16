@@ -19,15 +19,26 @@ class CmdRead(MuxCommand):
         Implements the read command. This simply looks for an
         Attribute "readable_text" on the object and displays that.
         """
+        caller=self.caller
 
-        if self.args:
-            obj = self.caller.search(self.args.strip())
-        else:
-            obj = self.obj
-        if not obj:
+        if not self.args:
+            caller.msg("Read what?")
             return
+
+        result = caller.search(self.args.strip(),
+                               location=caller.location,
+                               quiet=True)
+
+        if not result:
+            caller.msg("{} not found".format(self.args))
+            return
+
+        else:
+            obj = result[0]
+
         # we want an attribute read_text to be defined.
         readtext = obj.db.readable_text
+
         if readtext:
             string = "You read the |C%s|n:\n  %s" % (obj.key, readtext)
         else:
