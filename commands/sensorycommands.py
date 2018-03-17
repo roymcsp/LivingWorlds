@@ -45,9 +45,28 @@ class CmdRead(MuxCommand):
             string = "There is nothing to read on the %s." % obj.key
         self.caller.msg(string)
         
-"""
- class CmdListen(Command):
-"""
+
+class CmdListen(MuxCommand):
+    """
+    Usage: listen
+    
+    listen for sounds in the given area
+    """
+
+    key = "listen"
+    locks = "cmd:all()"
+    help_category = "General"
+
+    def func(self):
+        caller = self.caller
+        listentext = caller.location.db.listen_text
+
+        if listentext:
+            string = "taking some time to listen to sounds in %s you hear\n %s" % (caller.location.key, listentext)
+        else:
+            string = "You dont hear anything in the area."
+
+        caller.msg(string)
 
 
 class CmdTaste(MuxCommand):
@@ -144,3 +163,4 @@ class SensesCmdSet(CmdSet):
         self.add(CmdTaste())
         self.add(CmdFeel())
         self.add(CmdSmell())
+        self.add(CmdListen())
