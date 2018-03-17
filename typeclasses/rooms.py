@@ -164,9 +164,9 @@ class Room(ExtendedRoom, ContribRPRoom):
             string += "%s" % desc
         if not exits:
             string += "\n|wThere are no obvious exits|n"
-        if exits == 1:
+        if len(exits) == 1:
             string += "\n|wThere is one obvious exit:|n ".join(exits)
-        if exits > 1:
+        if len(exits) > 1:
             string += "\n|wObvious Exits:|n " + ", ".join(exits)
         if users or things:
             string += "\n\n" + "\n".join(users + things)
