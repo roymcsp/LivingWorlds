@@ -162,10 +162,14 @@ class Room(ExtendedRoom, ContribRPRoom):
         desc = self.db.desc
         if desc:
             string += "%s" % desc
-        if exits:
+        if not exits:
+            string += "\n|wThere are no obvious exits|n"
+        if exits == 1:
+            string += "\n|wThere is one obvious exit:|n ".join(exits)
+        if exits > 1:
             string += "\n|wObvious Exits:|n " + ", ".join(exits)
         if users or things:
-            string += "\n" + "\n".join(users + things)
+            string += "\n\n" + "\n".join(users + things)
         return string
 
 class WildernessRoom(Room):
