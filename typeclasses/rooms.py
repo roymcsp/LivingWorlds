@@ -135,6 +135,38 @@ class Room(ExtendedRoom, ContribRPRoom):
         name = super(Room, self).get_display_name(looker, **kwargs)
         return("{color}{name}|n".format(color=color, name=name))
 
+    def return_appearance(self, looker):
+        """
+         This formats a description. It is the hook a 'look' command
+         should call.
+
+         Args:
+             looker (Object): Object doing the looking.
+         """
+        if not looker:
+            return ""
+        # get and identify all objects
+        visible = (con for con in self.contents if con != looker and
+                   con.access(looker, "view"))
+        exits, users, things = [], [], []
+        for con in visible:
+            key = con.get_display_name(looker, pose=True)
+            if con.destination:
+                exits.append(key)
+            elif con.has_account:
+                users.append(key)
+            else:
+                things.append(key)
+        # get description, build string
+        string = "|c%s|n\n" % self.get_display_name(looker, pose=True)
+        desc = self.db.desc
+        if desc:
+            string += "%s" % desc
+        if exits:
+            string += "\n|wObvious Exits:|n " + ", ".join(exits)
+        if users or things:
+            string += "\n\n " + "\n\n ".join(users + things)
+        return string
 
 class WildernessRoom(Room):
     def at_object_creation(self):
