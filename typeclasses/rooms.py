@@ -165,7 +165,7 @@ class Room(ExtendedRoom, ContribRPRoom):
         if exits:
             string += "\n|wObvious Exits:|n " + ", ".join(exits)
         if users or things:
-            string += "\n\n " + "\n\n ".join(users + things)
+            string += "\n" + "\n".join(users + things)
         return string
 
 class WildernessRoom(Room):
