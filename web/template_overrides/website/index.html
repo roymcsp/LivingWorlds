@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Living Worlds: Mercadia</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       <a class="navbar-brand" href="#">Navbar</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+             <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+             </li>
+             
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Player's Guide
+               </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">History</a>
+				  <a class="dropdown-item" href="#">World</a>
+                   <div class="dro"</div>
+				  <a class="dropdown-item" href="#">Nations</a>
+				  <a class="dropdown-item" href="#">Races</a>
+				  <a class="dropdown-item" href="#">Guilds</a>
+				  <a class="dropdown-item" href="#">Professions</a>
+				  <a class="dropdown-item" href="#">Religions</a>
+				  <a class="dropdown-item" href="#">placeholder</a>
+				  <a class="dropdown-item" href="#">placeholder</a>
+               </div>
+             </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="#">Forums</a>
+             </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'webclient:index' %}">Play Online</a>
+             </li>
+		    <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index' %}">Admin Interface</a>
+            </li>
+      </ul>
+          <form class="form-inline my-2 my-lg-0">
+             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+       </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid text-center"><img src="../../../../../Desktop/from fb/19705_543227249032386_697924474_n.jpg" alt="" width="1223" height="460" class="img-fluid"/>
+      <h1 class="display-4"> Living Worlds: Mercadia</h1>
+      <p class="lead">lwmercadia.com port 4000</p>
+      <hr class="my-4">
+      <p class="lead">Living Worlds: Merecadia is an online text based roleplaying fantasy game in which players jointly inhabit a dynamic medieval world. The game features three different medieval settings; european, arabic and asian. The game requires roleplay; while conflict abounds, the game is not about killing things. Rather, it is about living out a characters life in the world, Mercadia. It is a world where nations vie for power and control of the realm. The theme of the game involves a variety of styles of role playing and includes player controlled , clans, religions, politics, guilds, justice, and economy.</p>
+  </div>
+    <div class="container">
+      <p>{% if webclient_enabled %} You can connect using your favorite client using  <strong style="color: #1A3497">lwmercadia.com port 4000 </strong> or you can connect to the game directly from your browser using our <a href="{% url 'webclient:index' %}">online client</a>! {% endif %} </p>
+      <br>
+       <hr>
+       <br>
+      <div class="row">
+        <div class="card text-center col-md-4">
+            <div class="card-header"> Accounts</div>
+            <div class="card-body">
+              <p class="card-text">There's currently {{num_accounts_connected}} connected out of a total of {{num_accounts_registered}} account{{num_accounts_registered|pluralize}} registered. Of these, {{num_accounts_registered_recent}} were created this week, and {{num_accounts_connected_recent}} have connected within the last seven days. </p>
+           </div>
+</div>
+          <div class="card text-center col-md-4">
+            <div class="card-header"> Recently Connected</div>
+            <div class="card-body">
+              <p class="card-text">{% for account in accounts_connected_recent %} {{account.username}}—{{account.last_login|timesince}} ago {% endfor %} </p>
+            </div>
+</div>
+          <div class="card text-center col-md-4">
+            <div class="card-header">Database Statistics </div>
+            <div class="card-body">
+              <p class="card-text">&nbsp;</p>
+              <ul class="list-group">
+                {% for account in accounts_connected_recent %}
+                <li class="list-group-item">{{account.username}}&mdash;<em>{{account.last_login|timesince}} ago</em></li>
+                {% endfor %}
+              </ul>
+            </div>
+</div>
+</div>
+       <br/>
+       <br/>
+<br/>
+       <br/>
+<br>
+       <hr>
+       <div class="row">
+          <div class="text-center col-lg-6 offset-lg-3">
+             <h4>Footer </h4>
+             <p>Copyright &copy; 2015 &middot; All Rights Reserved &middot; <a href="lwmercadia.com:4001" >lwmercadia.com</a></p>
+          </div>
+       </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script src="js/jquery-3.2.1.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap-4.0.0.js"></script>
+  </body>
+</html>
