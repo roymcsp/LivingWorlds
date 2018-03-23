@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-<link href="{% static "website/css/custom.css" %}" rel="stylesheet" type="text/css">
+<link href="{% static "website/css/bootstrap-4.0.0.css" %}" rel="stylesheet" type="text/css">
 
 {% block titleblock %}Home{% endblock %}
  
@@ -68,8 +68,9 @@
     <div class="card text-center col-md-4">
         <div class="card-header"> Accounts</div>
         <div class="card-body">
-          <p class="card-text">There's currently {{num_accounts_connected}} connected out of a total of {{num_accounts_registered}} account{{num_accounts_registered|pluralize}} registered. Of these, {{num_accounts_registered_recent}} were created this week, and {{num_accounts_connected_recent}} have connected within the last seven days. </p>
-       </div>
+          <p class="card-text">There's currently {{num_accounts_connected}} connected out of a total of {{num_accounts_registered}} account{{num_accounts_registered|pluralize}} registered. </p>
+          <p class="card-text">Of these, {{num_accounts_registered_recent}} were created this week, and {{num_accounts_connected_recent}} have connected within the last seven days. </p>
+        </div>
 </div>
       <div class="card text-center col-md-4">
         <div class="card-header"> Recently Connected</div>
@@ -106,7 +107,7 @@
     <script src="{% static "website/js/jquery-3.2.1.min.js" %}" ></script>
  
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static "website/js/popper.min.js" %}"</script>
-  <script src="{% static "website/js/bootstrap-4.0.0.js" %}"></script>
+    <script src="{% static "website/js/popper.min.js" %}"> </script>
+  <script src="{% static "website/js/bootstrap-4.0.0.js" %}"> </script>
 
 {% endblock %}
