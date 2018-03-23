@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-<link href="{% static "website/css/bootstrap-4.0.0.css" %}" rel="stylesheet" type="text/css">
 
 {% block titleblock %}Home{% endblock %}
  
@@ -45,11 +44,9 @@
     <li class="nav-item">
             <a class="nav-link" href="{% url 'admin:index' %}">Admin Interface</a>
         </li>
-		  {% block navbar_right %}
-            {% endblock %}
             {% block navbar_user %}
             {% if user.is_authenticated %}
-		  <li class="nav-item">
+	    <li class="nav-item">
             <a class="nav-link">Logged in as {{user.username}}</a>
         </li>
 	<li>
