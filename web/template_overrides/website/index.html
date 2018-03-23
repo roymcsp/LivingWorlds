@@ -1,3 +1,5 @@
+<link href="css/bootstrap-4.0.0.css" rel="stylesheet" type="text/css">
+
 {% extends "base.html" %}
 {% load staticfiles %}
 <link href="{% static "website/css/bootstrap-4.0.0.css" %}" rel="stylesheet" type="text/css">
@@ -45,12 +47,20 @@
     <li class="nav-item">
             <a class="nav-link" href="{% url 'admin:index' %}">Admin Interface</a>
         </li>
+    {% if user.is_authenticated %}
+		  <li class="nav-item">
+            <a class="nav-link">Logged in as {{user.username}}</a>
+        </li>
+	<li>
+                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+            </li>
+            {% else %}
+            <li>
+                <a class="nav-link" href="{% url 'login' %}">Log In</a>
+			</li>
+	{% endif %}
   </ul>
-      <form class="form-inline my-2 my-lg-0">
-         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-   </div>
+</div>
 </nav>
  
 <div class="jumbotron jumbotron-fluid text-center"><img src="{% static "website/images/19705_543227249032386_697924474_n.jpg" %}" alt="" width="1223" height="460" class="img-fluid"/>
@@ -75,19 +85,24 @@
       <div class="card text-center col-md-4">
         <div class="card-header"> Recently Connected</div>
         <div class="card-body">
-          <p class="card-text">{% for account in accounts_connected_recent %} {{account.username}}—{{account.last_login|timesince}} ago {% endfor %} </p>
-        </div>
-</div>
-      <div class="card text-center col-md-4">
-        <div class="card-header">Database Statistics </div>
-        <div class="card-body">
-          <p class="card-text">&nbsp;</p>
           <ul class="list-group">
             {% for account in accounts_connected_recent %}
             <li class="list-group-item">{{account.username}}&mdash;<em>{{account.last_login|timesince}} ago</em></li>
             {% endfor %}
           </ul>
+          <p class="card-text">&nbsp;</p>
         </div>
+</div>
+      <div class="card text-center col-md-4">
+        <div class="card-header">Database Statistics </div>
+        <div class="card-body">
+			<ul class="list-group">
+          <li class="list-group-item">{{num_accounts_registered}} account{{num_accounts_registered|pluralize}} (+ {{num_characters}} character{{num_characters|pluralize}})</li>
+          <li class="list-group-item">{{num_rooms}} room{{num_rooms|pluralize}} (+ {{num_exits}} exits)</li>
+          <li class="list-group-item">{{num_others}} other objects</li>
+        </ul>
+          <p class="card-text">&nbsp;</p>
+</div>
 </div>
 </div>
    <br/>
