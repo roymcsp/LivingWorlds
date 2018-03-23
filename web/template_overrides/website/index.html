@@ -47,7 +47,10 @@
     <li class="nav-item">
             <a class="nav-link" href="{% url 'admin:index' %}">Admin Interface</a>
         </li>
-    {% if user.is_authenticated %}
+		  {% block navbar_right %}
+            {% endblock %}
+            {% block navbar_user %}
+            {% if user.is_authenticated %}
 		  <li class="nav-item">
             <a class="nav-link">Logged in as {{user.username}}</a>
         </li>
