@@ -1,3 +1,4 @@
+<link href="css/bootstrap-4.0.0.css" rel="stylesheet" type="text/css">
 {% comment %}
 Allow to customize the menu that appears at the top of every Evennia
 webpage. Copy this file to your game dir's web/template_overrides/website
@@ -14,24 +15,11 @@ folder and edit it to add/remove links to the menu.
          <li class="nav-item active">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
          </li>
-         
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Player's Guide
-           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">History</a>
-      <a class="dropdown-item" href="#">World</a>
-               <div class="dro"></div>
-      <a class="dropdown-item" href="#">Nations</a>
-      <a class="dropdown-item" href="#">Races</a>
-      <a class="dropdown-item" href="#">Guilds</a>
-      <a class="dropdown-item" href="#">Professions</a>
-      <a class="dropdown-item" href="#">Religions</a>
-      <a class="dropdown-item" href="#">placeholder</a>
-      <a class="dropdown-item" href="#">placeholder</a>
-           </div>
+          <li class="nav-item">
+            <a href="{% url 'wiki:index' %}">Players Guide</a>
          </li>
+		  
+      
      <li class="nav-item">
             <a class="nav-link" href="#">Forums</a>
          </li>
