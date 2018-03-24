@@ -119,7 +119,6 @@ INSTALLED_APPS += (
     'django.contrib.humanize',
     'django_nyt',
     'mptt',
-    'sekizai',
     'sorl.thumbnail',
     'wiki',
     'wiki.plugins.attachments',
