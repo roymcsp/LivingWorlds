@@ -104,3 +104,21 @@ DEFAULT_CHANNELS = [
 SEARCH_MULTIMATCH_TEMPLATE = "{name}{aliases}{info} {number}\n"
 SEARCH_MULTIMATCH_REGEX = r"(?P<name>.*) (?P<number>[0-9]+)"
 
+INSTALLED_APPS += (
+	'django.contrib.humanize',
+	'django_nyt',
+	'mptt',
+	'sorl.thumbnail',
+	'wiki',
+	'wiki.plugins.attachments',
+	'wiki.plugins.notifications',
+	'wiki.plugins.images',
+	'wiki.plugins.macros',
+)
+
+SITE_ID = 1
+
+#DISABLE CREATING NEW ACCOUNTS FROM THE WIKI
+WIKI_ACCOUNT_HANDLING = False
+WIKI_ACCOUNT_SIGNUP_ALLOWED = False
+TEMPLATES[0]['OPTIONS']['context_processors'] += ['sekizai.context_processors.sekizai']
