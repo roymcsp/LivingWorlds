@@ -105,6 +105,7 @@ SEARCH_MULTIMATCH_TEMPLATE = "{name}{aliases}{info} {number}\n"
 SEARCH_MULTIMATCH_REGEX = r"(?P<name>.*) (?P<number>[0-9]+)"
 
 INSTALLED_APPS += (
+<<<<<<< HEAD
 	'django.contrib.humanize',
 	'django_nyt',
 	'mptt',
@@ -114,11 +115,31 @@ INSTALLED_APPS += (
 	'wiki.plugins.notifications',
 	'wiki.plugins.images',
 	'wiki.plugins.macros',
+=======
+    'django.contrib.humanize',
+    'django_nyt',
+    'mptt',
+    'sekizai',
+    'sorl.thumbnail',
+    'wiki',
+    'wiki.plugins.attachments',
+    'wiki.plugins.notifications',
+    'wiki.plugins.images',
+    'wiki.plugins.macros',
+>>>>>>> 2b5fac999f52516b9071fd5c440dc6da3f5bd39f
 )
 
 SITE_ID = 1
 
+<<<<<<< HEAD
 #DISABLE CREATING NEW ACCOUNTS FROM THE WIKI
 WIKI_ACCOUNT_HANDLING = False
 WIKI_ACCOUNT_SIGNUP_ALLOWED = False
 TEMPLATES[0]['OPTIONS']['context_processors'] += ['sekizai.context_processors.sekizai']
+=======
+#Disable creating new accounts from the wiki
+WIKI_ACCOUNT_HANDLING = False
+WIKI_ACCOUNT_SIGNUP_ALLOWED = False
+TEMPLATES[0]['OPTIONS']['context_processors'] += ['sekizai.context_processors.sekizai']
+
+>>>>>>> 2b5fac999f52516b9071fd5c440dc6da3f5bd39f
