@@ -75,6 +75,7 @@ from evennia.contrib.rpsystem import ContribRPRoom
 from evennia.utils.spawner import spawn
 from world.economy import transfer_funds
 
+
 class Room(ExtendedRoom, ContribRPRoom):
     """Base Mercadia Room typeclass.
     Properties:
@@ -84,7 +85,7 @@ class Room(ExtendedRoom, ContribRPRoom):
     """
     # Define terrain constants
     _TERRAINS = {
-        'CHARGEN':{'cost': 0, 'delay': 0},
+        'CHARGEN': {'cost': 0, 'delay': 0},
         'PAVEDROAD': {'cost': 2, 'delay': 0},
         'DIRTROAD': {'cost': 3, 'delay': 0},
         'FOREST': {'cost': 4, 'delay': 0},
@@ -103,6 +104,7 @@ class Room(ExtendedRoom, ContribRPRoom):
         """Called when room is first created only."""
         super(Room, self).at_object_creation()
         self.db.terrain = 'PAVEDROAD'
+        self.db.wilderness = False
         self.db.color_code = ""
 
     # Terrain property, sets self.db.terrain_type, taken from the constants dict
@@ -172,6 +174,7 @@ class Room(ExtendedRoom, ContribRPRoom):
             string += "\n\n" + "\n".join(users + things)
         return string
 
+
 class WildernessRoom(Room):
     def at_object_creation(self):
         super(WildernessRoom, self).at_object_creation()
@@ -189,8 +192,8 @@ class ChargenRoom(Room):
         "this is called only at first creation"
 
     def at_object_receive(self, obj, source_location):
-        if utils.inherits_from(obj, "typeclasses.characters.Character") and self.tags.get("item",category = 'chargen'):
+        if utils.inherits_from(obj, "typeclasses.characters.Character") and self.tags.get("item", category='chargen'):
             spawn({"prototype": "DAGGER", "location": self},
-                  {"prototype": "SIMPLE_ROBE", "location":self})
-        if utils.inherits_from(obj,"typeclasses.characters.Character") and self.tags.get("coins", category = 'chargen'):
-            transfer_funds(obj, 1000)
+                  {"prototype": "SIMPLE_ROBE", "location": self})
+        if utils.inherits_from(obj, "typeclasses.characters.Character") and self.tags.get("coins", category='chargen'):
+            transfer_funds(None, obj, 1000)
