@@ -196,4 +196,4 @@ class ChargenRoom(Room):
             spawn({"prototype": "DAGGER", "location": self},
                   {"prototype": "SIMPLE_ROBE", "location": self})
         if utils.inherits_from(obj, "typeclasses.characters.Character") and self.tags.get("coins", category='chargen'):
-            transfer_funds(None, obj, 1000)
+            transfer_funds(1000, obj, None)
