@@ -73,7 +73,7 @@ from evennia import utils
 from evennia.contrib.extended_room import ExtendedRoom
 from evennia.contrib.rpsystem import ContribRPRoom
 from evennia.utils.spawner import spawn
-from world.economy import transfer_funds
+from world.economy import transfer_funds, InsufficientFunds, value_to_coin, format_coin
 
 
 class Room(ExtendedRoom, ContribRPRoom):
@@ -196,4 +196,5 @@ class ChargenRoom(Room):
             spawn({"prototype": "DAGGER", "location": self},
                   {"prototype": "SIMPLE_ROBE", "location": self})
         if utils.inherits_from(obj, "typeclasses.characters.Character") and self.tags.get("coins", category='chargen'):
-            transfer_funds(1000, obj, None)
+            coins = 1000
+            transfer_funds(None, obj, coins)
