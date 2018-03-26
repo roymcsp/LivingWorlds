@@ -9,13 +9,13 @@ from evennia.utils.dbserialize import _SaverDict
 CP = 1
 
 #: (int) silver coins
-SP = 100
+SP = 10
 
 #: (int) gold coins
-GP = 10000
+GP = 1000
 
 #: (int) platinum coins
-PP = 100000
+PP = 10000
 
 _WALLET_KEYS = ('PP', 'GP', 'SP', 'CP')
 
