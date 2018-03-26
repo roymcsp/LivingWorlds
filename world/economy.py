@@ -41,16 +41,16 @@ def value_to_coin(value):
     return None
 
 def coin_to_value(coins):
-    """Given a dict of coin: value pairs, return the total value in CC.
+    """Given a dict of coin: value pairs, return the total value in CP.
     Args:
-        coins (int, dict): dict of coin names and values; assumes CC if an int
+        coins (int, dict): dict of coin names and values; assumes CP if an int
     """
     if coins is None:
         return None
     if not isinstance(coins, (int, dict, _SaverDict)):
         raise TypeError("'coins' must be a dict of 'coin': count pairs.")
     if isinstance(coins, int):
-        coins = {'CC': coins}
+        coins = {'CP': coins}
     return (coins.get('PP', 0) * PP +
             coins.get('GP', 0) * GP +
             coins.get('SP', 0) * SP +
